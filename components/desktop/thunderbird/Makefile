@@ -240,6 +240,7 @@ REQUIRED_PACKAGES += library/desktop/gtk2
 REQUIRED_PACKAGES += library/desktop/pango
 REQUIRED_PACKAGES += library/desktop/startup-notification
 REQUIRED_PACKAGES += library/glib2
+REQUIRED_PACKAGES += library/gnome/gnome-libs
 REQUIRED_PACKAGES += library/graphics/pixman
 REQUIRED_PACKAGES += library/libevent
 REQUIRED_PACKAGES += library/libffi

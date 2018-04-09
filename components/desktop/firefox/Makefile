@@ -183,6 +183,7 @@ COMPONENT_TEST_TRANSFORMS = \
 
 REQUIRED_PACKAGES += codec/libogg
 REQUIRED_PACKAGES += codec/libvorbis
+REQUIRED_PACKAGES += codec/ogg-vorbis
 REQUIRED_PACKAGES += database/sqlite-3
 REQUIRED_PACKAGES += developer/build/autoconf-213
 REQUIRED_PACKAGES += developer/gcc
@@ -193,6 +194,7 @@ REQUIRED_PACKAGES += library/desktop/gtk2
 REQUIRED_PACKAGES += library/desktop/pango
 REQUIRED_PACKAGES += library/desktop/startup-notification
 REQUIRED_PACKAGES += library/glib2
+REQUIRED_PACKAGES += library/gnome/gnome-libs
 REQUIRED_PACKAGES += library/graphics/pixman
 REQUIRED_PACKAGES += library/libevent
 REQUIRED_PACKAGES += library/libffi
