@@ -1,0 +1,31 @@
+--- a/mozilla/gfx/angle/src/compiler/translator/ExpandIntegerPowExpressions.cpp	2018-03-22 21:53:02.000000000 +0000
++++ b/mozilla/gfx/angle/src/compiler/translator/ExpandIntegerPowExpressions.cpp	2018-03-27 12:42:16.472442462 +0100
+@@ -96,7 +96,7 @@
+ 
+     // Test 3: value is integer or pretty close to an integer.
+     float absval = std::abs(value);
+-    float frac   = absval - std::round(absval);
++    float frac   = absval - round(absval);
+     if (frac > 0.0001f)
+     {
+         return true;
+--- a/ldap/c-sdk/include/portable.h	2018-04-09 13:14:04.861119794 +0100
++++ b/ldap/c-sdk/include/portable.h	2018-04-09 13:29:56.424932245 +0100
+@@ -257,7 +257,7 @@
+ #define STRTOK( s1, s2, l )		strtok( s1, s2 )
+ #elif defined(XP_BEOS)
+ #define GETHOSTBYNAME( n, r, b, l, e )  gethostbyname( n )
+-#define NSLDAPI_CTIME( c, b, l )                ctime_r( c, b )
++#define NSLDAPI_CTIME( c, b, l )                ctime_r( c, b, l )
+ #define STRTOK( s1, s2, l )		strtok_r( s1, s2, l )
+ #define HAVE_STRTOK_R
+ #else /* UNIX */
+@@ -313,7 +313,7 @@
+         || defined(IRIX6) || defined(FREEBSD) || defined(VMS) \
+         || defined(NTO) || defined(OPENBSD) || defined(DRAGONFLY) \
+ 	|| defined(SOLARIS)
+-#define NSLDAPI_CTIME( c, b, l )        ctime_r( c, b )
++#define NSLDAPI_CTIME( c, b, l )        ctime_r( c, b, l )
+ #elif defined( OSF1V3 )
+ #define NSLDAPI_CTIME( c, b, l )	(ctime_r( c, b, l ) ? NULL : b)
+ #else

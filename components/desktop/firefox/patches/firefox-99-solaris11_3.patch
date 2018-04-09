@@ -1,0 +1,40 @@
+--- a/js/src/jsnativestack.cpp	2017-04-11 03:13:16.000000000 +0100
++++ b/js/src/jsnativestack.cpp	2018-04-04 17:59:48.022314499 +0100
+@@ -6,6 +6,8 @@
+ 
+ #include "jsnativestack.h"
+ 
++#define SOLARIS
++
+ #ifdef XP_WIN
+ # include "jswin.h"
+ 
+--- a/gfx/skia/skia/src/gpu/GrAutoLocaleSetter.h	2017-04-11 03:13:07.000000000 +0100
++++ b/gfx/skia/skia/src/gpu/GrAutoLocaleSetter.h	2018-04-04 18:34:43.362091750 +0100
+@@ -22,7 +22,7 @@
+ #include <xlocale.h>
+ #endif
+ 
+-#if defined(SK_BUILD_FOR_ANDROID) || defined(__UCLIBC__) || defined(_NEWLIB_VERSION)
++#if defined(SK_BUILD_FOR_ANDROID) || defined(__UCLIBC__) || defined(_NEWLIB_VERSION) || defined(__sun__)
+ #define HAVE_LOCALE_T 0
+ #else
+ #define HAVE_LOCALE_T 1
+--- a/media/libpng/pngrutil.c	2017-04-11 03:13:12.000000000 +0100
++++ b/media/libpng/pngrutil.c	2018-04-04 18:36:14.176075735 +0100
+@@ -417,13 +417,13 @@
+          if (ret == Z_OK)
+             png_ptr->flags |= PNG_FLAG_ZSTREAM_INITIALIZED;
+       }
+-
++#ifdef OLDWAY
+ #if ZLIB_VERNUM >= 0x1281
+       /* Turn off validation of the ADLER32 checksum */
+       if ((png_ptr->flags & PNG_FLAG_CRC_CRITICAL_IGNORE) != 0)
+          ret = inflateValidate(&png_ptr->zstream, 0);
+ #endif
+-
++#endif
+       if (ret == Z_OK)
+          png_ptr->zowner = owner;
+ 
