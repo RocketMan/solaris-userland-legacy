@@ -30,7 +30,7 @@ include ../../../make-rules/shared-macros.mk
 COMPONENT_NAME=		seahorse
 COMPONENT_VERSION=	3.1.1
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Apps/Seahorse
-COMPONENT_ARCHIVE=	seahorse-3.1.1.tar.gz
+COMPONENT_ARCHIVE=	$(COMPONENT_NAME)-$(COMPONENT_VERSION).tar.gz
 COMPONENT_ARCHIVE_HASH= \
 	sha256:ffe33e9f16a184eda194f3f37295e741a2f69d27b23197dc0c00b49384b0990e
 COMPONENT_BUGDB=	gnome/security
