@@ -33,5 +33,5 @@ userland.manifest002.allowed_pubs = nightly solaris userland-localizable
 # turn off reporting of 'pkg.linted*' attributes in manifests.  We already
 # get a pkglint001.5 INFO message with the WARNING or ERROR that we have
 # deemed acceptable by adding the pkg.linted...=true attribute.
-pkglint.exclude = pkg.lint.pkglint_manifest.PkgManifestChecker.linted pkg.lint.pkglint_action.PkgActionChecker.linted
+pkglint.exclude = pkg.lint.pkglint_action.PkgActionChecker.dep_obsolete pkg.lint.pkglint_manifest.PkgManifestChecker.linted pkg.lint.pkglint_action.PkgActionChecker.linted
 
