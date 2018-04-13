@@ -121,3 +121,4 @@ REQUIRED_PACKAGES += security/kerberos-5
 REQUIRED_PACKAGES += shell/ksh93
 REQUIRED_PACKAGES += system/library
 REQUIRED_PACKAGES += system/network/ldap/openldap
+REQUIRED_PACKAGES += library/openldap
