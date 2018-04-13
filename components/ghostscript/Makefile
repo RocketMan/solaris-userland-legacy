@@ -144,3 +144,5 @@ REQUIRED_PACKAGES += system/library/fontconfig
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += x11/library/libx11
 REQUIRED_PACKAGES += x11/library/toolkit/libxt
+REQUIRED_PACKAGES += library/desktop/gtk2
+REQUIRED_PACKAGES += image/library/libpng
