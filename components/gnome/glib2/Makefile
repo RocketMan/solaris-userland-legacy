@@ -38,7 +38,8 @@ COMPONENT_ANITYA_ID=	10024
 TPNO=			34480
 
 # No need to build for older versions.
-PYTHON_VERSIONS= 3.4
+PYTHON_VERSIONS= 3.5
+PYTHON.3.5= /usr/bin/python3.5
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
@@ -64,7 +65,7 @@ CONFIGURE_OPTIONS += --disable-dtrace
 # The build process modifies the shebang line to use the version of Python
 # automatically found; to avoid using the current system default, one is
 # explicitly specified here.
-CONFIGURE_OPTIONS += --with-python=$(PYTHON.3.4)
+CONFIGURE_OPTIONS += --with-python=$(PYTHON.3.5)
 
 # Configure doesn't find this since it's not in $PATH
 CONFIGURE_OPTIONS += DBUS_DAEMON=/usr/lib/dbus-daemon
@@ -124,11 +125,12 @@ REQUIRED_PACKAGES += data/sgml-common
 REQUIRED_PACKAGES += data/xml-common
 REQUIRED_PACKAGES += desktop/xdg/desktop-file-utils
 REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
+REQUIRED_PACKAGES += gnome/preferences/control-center
 REQUIRED_PACKAGES += library/file-monitor/gamin
 REQUIRED_PACKAGES += library/libffi
 REQUIRED_PACKAGES += library/pcre
 REQUIRED_PACKAGES += library/zlib
-REQUIRED_PACKAGES += runtime/python-34
+REQUIRED_PACKAGES += runtime/python-35
 REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/library/dbus
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
