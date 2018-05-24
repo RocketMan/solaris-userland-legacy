@@ -1,0 +1,11 @@
+--- a/lisp/term/xterm.el	2018-05-24 14:43:38.715965730 +0000
++++ b/lisp/term/xterm.el	2018-05-24 14:44:01.572402431 +0000
+@@ -791,7 +791,7 @@
+ 
+   ;; Unconditionally enable bracketed paste mode: terminals that don't
+   ;; support it just ignore the sequence.
+-  (xterm--init-bracketed-paste-mode)
++  ;; (xterm--init-bracketed-paste-mode)
+ 
+   (run-hooks 'terminal-init-xterm-hook))
+ 
