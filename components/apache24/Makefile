@@ -33,7 +33,7 @@ COMPONENT_SRC_NAME=	httpd
 COMPONENT_ARCHIVE_HASH=	\
     sha256:cd34636caf03c9a897ddfc928fc866c965f23d909b9612880563a7ad0d1a7e5b
 COMPONENT_ARCHIVE_URL=	https://archive.apache.org/dist/httpd/$(COMPONENT_ARCHIVE)
-COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
+#COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_BUGDB=	utility/apache
 COMPONENT_ANITYA_ID=	1335
 
@@ -71,10 +71,11 @@ CONFIGURE_OPTIONS +=	--enable-proxy-fdpass
 CONFIGURE_OPTIONS +=	--enable-exception-hook
 CONFIGURE_OPTIONS +=	--enable-cgi
 CONFIGURE_OPTIONS +=	--enable-suexec
+CONFIGURE_OPTIONS +=	--enable-http2
 CONFIGURE_OPTIONS +=	--with-suexec-caller=webservd
-CONFIGURE_OPTIONS +=	--with-apr=$(USRDIR)/apr/1.6/bin/$(MACH64)/apr-1-config
-CONFIGURE_OPTIONS +=	--with-apr-util=$(USRDIR)/apr-util/1.6/bin/$(MACH64)/apu-1-config
-CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS)"
+CONFIGURE_OPTIONS +=	--with-apr=$(USRDIR)/apr/1.5/bin/$(MACH64)/apr-1-config
+CONFIGURE_OPTIONS +=	--with-apr-util=$(USRDIR)/apr-util/1.5/bin/$(MACH64)/apu-1-config
+CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS) -D__EXTENSIONS__ -D_XOPEN_SOURCE=1 -D_XOPEN_SOURCE_EXTENDED=1"
 CONFIGURE_OPTIONS +=	LTFLAGS="--silent --tag=CC"
 
 ifeq   ($(strip $(PARFAIT_BUILD)),yes)
@@ -85,16 +86,17 @@ endif
 
 COMPONENT_POST_INSTALL_ACTION += ($(KSH93) Solaris/customization.sh $(PROTO_DIR))
 
-REQUIRED_PACKAGES += library/apr-16
-REQUIRED_PACKAGES += library/apr-util-16
-REQUIRED_PACKAGES += library/apr-util-16/apr-ldap
-REQUIRED_PACKAGES += library/apr-util-16/dbd-mysql
-REQUIRED_PACKAGES += library/apr-util-16/dbd-sqlite
+REQUIRED_PACKAGES += library/apr-15
+REQUIRED_PACKAGES += library/apr-util-15
+REQUIRED_PACKAGES += library/apr-util-15/apr-ldap
+REQUIRED_PACKAGES += library/apr-util-15/dbd-mysql
+REQUIRED_PACKAGES += library/apr-util-15/dbd-sqlite
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/nghttp2
+REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/pcre
 REQUIRED_PACKAGES += library/security/openssl
-REQUIRED_PACKAGES += library/security/openssl/openssl-fips-140
+#REQUIRED_PACKAGES += library/security/openssl/openssl-fips-140
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += runtime/lua
 REQUIRED_PACKAGES += $(PERL_PKG)
@@ -103,4 +105,3 @@ REQUIRED_PACKAGES += shell/ksh93
 REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += system/network
-REQUIRED_PACKAGES += system/network/ldap/openldap
