@@ -150,12 +150,13 @@ CLEAN_PATHS += proto-scripts
 $(SKIP_TEST_AT_TOP_LEVEL)
 
 REQUIRED_PACKAGES += developer/icu
+REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += library/libxml2
+REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/security/openssl
 REQUIRED_PACKAGES += system/dtrace
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += system/management/snmp/net-snmp
-REQUIRED_PACKAGES += system/network/ldap/openldap
 REQUIRED_PACKAGES += text/gnu-sed
