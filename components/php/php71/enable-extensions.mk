@@ -162,6 +162,9 @@ REQUIRED_PACKAGES += library/libxslt
 CONFIGURE_OPTIONS += --enable-zip=shared
 
 # Special cases
+# IMAP: using imap from package library/libc-client
+CONFIGURE_OPTIONS += --with-imap=shared
+CONFIGURE_OPTIONS += --with-imap-ssl=shared
 
 # IMAP: commented out until IMAP library itself is approved
 #CONFIGURE_OPTIONS += --with-imap=shared,$(PHP_TOP_DIR)/uw-imap/build/$(MACH64)

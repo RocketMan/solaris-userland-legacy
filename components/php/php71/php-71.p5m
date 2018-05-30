@@ -413,6 +413,7 @@ file path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/ftp.so
 file path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/gd.so
 file path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/gettext.so
 file path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/gmp.so
+file path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/imap.so
 file path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/intl.so
 file path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/ldap.so
 file path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/mbstring.so

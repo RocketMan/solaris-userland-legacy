@@ -17,15 +17,3 @@ gcc 7 build issue
  /* Identify Bison output.  */
  #define YYBISON 1
  
---- a/aclocal.m4	2018-05-29 19:03:22.061223379 +0000
-+++ b/aclocal.m4	2018-05-29 19:03:35.766611671 +0000
-@@ -2249,8 +2249,7 @@
-     PHP_EVAL_INCLINE($ICU_INCS)
-     PHP_EVAL_LIBLINE($ICU_LIBS, $1)
- 
--    ICU_CXXFLAGS=`$ICU_CONFIG --cxxflags`
--    ICU_CXXFLAGS="$ICU_CXXFLAGS -DU_USING_ICU_NAMESPACE=1"
-+    ICU_CXXFLAGS="-DU_USING_ICU_NAMESPACE=1"
-   fi
- ])
- 

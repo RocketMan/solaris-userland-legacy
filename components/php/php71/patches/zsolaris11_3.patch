@@ -10,8 +10,8 @@
    fi
  ])
  
---- a/php-7.1.17/sapi/apache2handler/config.m4	2018-04-24 17:18:01.000000000 +0000
-+++ b/php-7.1.17/sapi/apache2handler/config.m4	2018-05-29 18:11:24.374547783 +0000
+--- a/sapi/apache2handler/config.m4	2018-04-24 17:18:01.000000000 +0000
++++ b/sapi/apache2handler/config.m4	2018-05-29 18:11:24.374547783 +0000
 @@ -56,7 +56,7 @@
      esac
    done

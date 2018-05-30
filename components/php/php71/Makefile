@@ -151,6 +151,7 @@ $(SKIP_TEST_AT_TOP_LEVEL)
 
 REQUIRED_PACKAGES += developer/icu
 REQUIRED_PACKAGES += image/library/libpng
+REQUIRED_PACKAGES += library/libc-client
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/security/openssl
