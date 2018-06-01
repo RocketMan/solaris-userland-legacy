@@ -60,6 +60,8 @@ COMPONENT_PREP_ACTION += (cd $(SOURCE_DIR) ; autoreconf) ;
 
 include enable-extensions.mk
 
+CONFIGURE_ENV += ICU_CONFIG=/usr/bin/icu-config_gcc
+
 CONFIGURE_OPTIONS += --enable-dtrace
 
 # Without this, the build seems to interrogate GCC for potential library
@@ -149,13 +151,14 @@ CLEAN_PATHS += proto-scripts
 # test results are unstable between runs but still useful for humans.
 $(SKIP_TEST_AT_TOP_LEVEL)
 
-REQUIRED_PACKAGES += developer/icu
 REQUIRED_PACKAGES += image/library/libpng
+REQUIRED_PACKAGES += library/icu-gcc
 REQUIRED_PACKAGES += library/libc-client
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/security/openssl
 REQUIRED_PACKAGES += system/dtrace
+REQUIRED_PACKAGES += system/library/c++-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
 REQUIRED_PACKAGES += system/library/math
