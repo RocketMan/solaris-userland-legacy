@@ -1,0 +1,24 @@
+--- php-7.1.17/ext/hash/hash.c.orig	2018-04-24 17:17:57.000000000 +0000
++++ php-7.1.17/ext/hash/hash.c	2018-06-04 15:23:36.879560459 +0000
+@@ -69,7 +69,11 @@
+ 	{"RIPEMD320", "ripemd320", 25},
+ 	{NULL, NULL, 26}, /* support needs to be added for snefru 128 */
+ 	{"SNEFRU256", "snefru256", 27},
++#ifdef ENABLE_MD2
+ 	{"MD2", "md2", 28},
++#else
++	{NULL, NULL, 28},
++#endif
+ 	{"FNV132", "fnv132", 29},
+ 	{"FNV1A32", "fnv1a32", 30},
+ 	{"FNV164", "fnv164", 31},
+@@ -1117,7 +1121,9 @@
+ 
+ 	zend_hash_init(&php_hash_hashtable, 35, NULL, NULL, 1);
+ 
++#ifdef ENABLE_MD2
+ 	php_hash_register_algo("md2",			&php_hash_md2_ops);
++#endif
+ 	php_hash_register_algo("md4",			&php_hash_md4_ops);
+ 	php_hash_register_algo("md5",			&php_hash_md5_ops);
+ 	php_hash_register_algo("sha1",			&php_hash_sha1_ops);
