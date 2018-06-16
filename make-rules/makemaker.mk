@@ -201,3 +201,6 @@ endif
 ifneq ($(findstring 5.22, $(PERL_VERSIONS)),)
 REQUIRED_PACKAGES += runtime/perl-522
 endif
+ifneq ($(findstring 5.26, $(PERL_VERSIONS)),)
+REQUIRED_PACKAGES += runtime/perl-526
+endif
