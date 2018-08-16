@@ -1,0 +1,11 @@
+--- config-top.h	2018-06-15 10:51:44.916972274 +0000
++++ config-top.h	2018-08-16 10:33:04.611679737 +0000
+@@ -29,7 +29,7 @@
+ 
+ /* Define CD_COMPLAINS if you want the non-standard, but sometimes-desired
+    error messages about multiple directory arguments to `cd'. */
+-#define CD_COMPLAINS
++/* #define CD_COMPLAINS */
+ 
+ /* Define BUFFERED_INPUT if you want the shell to do its own input
+    buffering, rather than using stdio.  Do not undefine this; it's
