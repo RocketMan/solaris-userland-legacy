@@ -56,6 +56,7 @@ CMAKE_OPTIONS += -DCMAKE_VERBOSE_MAKEFILE=ON
 CMAKE_OPTIONS += -DLCMS2_INCLUDE_DIR=$(USRINCDIR)/lcms
 
 REQUIRED_PACKAGES += developer/build/cmake
+REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libtiff
 REQUIRED_PACKAGES += library/lcms2
