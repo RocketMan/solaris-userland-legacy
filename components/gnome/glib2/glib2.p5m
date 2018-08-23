@@ -547,4 +547,5 @@ depend type=require fmri=__TBD \
     pkg.debug.depend.file=usr/bin/update-desktop-database \
     pkg.debug.depend.reason=gio/gdesktopappinfo.c
 # shared-mime-info data files are required by libgio code
-depend type=require fmri=pkg:/data/shared-mime-info
+# in 11.3, this is supplied by library/gnome/gnome-vfs
+#depend type=require fmri=pkg:/data/shared-mime-info

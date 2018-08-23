@@ -56,5 +56,6 @@ depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/automake
 depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/autoreconf
 depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/glib-gettextize
 depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/gtkdocize
-depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/intltoolize
 depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/pkg-config
+depend type=require fmri=pkg:/developer/intltool \
+    pkg.debug.depend.file=usr/bin/intltoolize
