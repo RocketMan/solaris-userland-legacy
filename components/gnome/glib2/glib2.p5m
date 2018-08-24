@@ -334,7 +334,7 @@ file path=usr/include/glib-2.0/gobject/gvaluearray.h
 file path=usr/include/glib-2.0/gobject/gvaluecollector.h
 file path=usr/include/glib-2.0/gobject/gvaluetypes.h
 link path=usr/lib/$(MACH64)/charset.alias target=../charset.alias
-#file path=usr/lib/$(MACH64)/gio/modules/libgiofam.so
+file path=usr/lib/$(MACH64)/gio/modules/libgiofam.so
 file path=usr/lib/$(MACH64)/glib-2.0/include/glibconfig.h
 link path=usr/lib/$(MACH64)/libgio-2.0.so target=libgio-2.0.so.0.5200.0
 link path=usr/lib/$(MACH64)/libgio-2.0.so.0 target=libgio-2.0.so.0.5200.0
