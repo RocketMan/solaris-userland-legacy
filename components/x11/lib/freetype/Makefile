@@ -34,7 +34,7 @@ COMPONENT_PROJECT_URL=	https://www.freetype.org/
 COMPONENT_ARCHIVE_URL=	https://download.savannah.gnu.org/releases/freetype/$(COMPONENT_ARCHIVE)
 COMPONENT_ARCHIVE_HASH= \
 	sha256:db8d87ea720ea9d5edc5388fc7a0497bb11ba9fe972245e0f7f4c7e8b1e1e84d
-COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
+#COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
 COMPONENT_BUGDB=        x11/font
 COMPONENT_ANITYA_ID=	854
 TPNO=			42908
@@ -74,5 +74,6 @@ $(PROTOUSRSHAREDOCDIR)/$(COMPONENT_NAME)/index.html: $(INSTALL_TARGET)
 		$(PROTOUSRSHAREMANDIR)/man3lib/libfreetype.3lib
 
 REQUIRED_PACKAGES += compress/bzip2
+REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += library/zlib
