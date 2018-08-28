@@ -245,7 +245,13 @@ out:
   if (res != -1) {
     /* That's it!  Disable all further id switching */
     session.disable_id_switching = TRUE;
-
+    /*
+     * unfortunately there are some proftpd modules (e.g. mod_auth_pam.c),
+     * which just override 'disable_id_switching' above. This is of course
+     * very futile on Solaris. Hence we just introduce our own solaris
+     * specific flag
+     */
+    session.priv_aware = TRUE;
   } else {
     pr_log_pri(PR_LOG_NOTICE, MOD_SOLARIS_PRIV_VERSION ": attempt to configure "
       "privileges failed, reverting to normal operation");
@@ -381,6 +387,7 @@ static conftable solaris_priv_conftab[] = {
 
 static cmdtable solaris_priv_cmdtab[] = {
   { POST_CMD, C_PASS, G_NONE, solaris_priv_post_pass, FALSE, FALSE },
+  { POST_CMD_ERR, C_PASS, G_NONE, solaris_priv_post_pass, FALSE, FALSE },
   { 0, NULL }
 };
 
