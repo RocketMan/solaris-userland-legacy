@@ -32,7 +32,7 @@ COMPONENT_VERSION=	13.0.6
 COMPONENT_PROJECT_URL=  https://www.mesa3d.org
 COMPONENT_ARCHIVE=	$(COMPONENT_NAME)-$(COMPONENT_VERSION).tar.gz
 COMPONENT_ARCHIVE_URL=  https://mesa.freedesktop.org/archive/older-versions/13.x/$(COMPONENT_VERSION)/$(COMPONENT_ARCHIVE)
-COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
+#COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
 COMPONENT_ARCHIVE_HASH= \
 	sha256:1076590f29103f022a2cd87e6dff6ae77072013745603d06b0410c373ab2bb1a
 COMPONENT_BUGDB=        x11/libraries
@@ -61,8 +61,9 @@ COMPONENT_POST_UNPACK_ACTION += \
 	fi; \
 	$(CP) $(LIBDRM_BASE)/intel/intel_aub.h $(SOURCE_DIR)/src/mesa/drivers/dri/i965; \
 
-CONFIGURE_OPTIONS.32 += --disable-gallium-llvm
-CONFIGURE_OPTIONS.64 += --enable-gallium-llvm --disable-llvm-shared-libs
+CONFIGURE_OPTIONS += --disable-gallium-llvm
+#CONFIGURE_OPTIONS.32 += --disable-gallium-llvm
+#CONFIGURE_OPTIONS.64 += --enable-gallium-llvm --disable-llvm-shared-libs
 CONFIGURE_OPTIONS += --enable-shared
 ifneq ($(MACH), sparc)
 CONFIGURE_OPTIONS += --with-dri-drivers='i915 i965 radeon r200 swrast'
@@ -80,7 +81,7 @@ CFLAGS += -D__EXTENSIONS__
 CPPFLAGS += -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS
 LDFLAGS += -Wl,-z,rescan-now
 CFLAGS.64 += -Wstack-protector -fdata-sections -fstack-protector-all
-LD_OPTIONS.64+=	-z nodefs -z ignore -lLLVM -lssp
+#LD_OPTIONS.64+=	-z nodefs -z ignore -lLLVM -lssp
 LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 LD_OPTIONS += -z discard-unused=dependencies
 LD_OPTIONS += -M $(COMPONENT_DIR)/mapfile.externs
