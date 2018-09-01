@@ -46,6 +46,7 @@ file files/glib-compile-schemas.xml \
 file files/gio-module-cache.sh path=lib/svc/method/gio-module-cache
 file files/glib-compile-schemas.sh path=lib/svc/method/glib-compile-schemas
 file path=usr/bin/$(MACH64)/gio-querymodules
+link path=usr/bin/64 target=amd64
 file usr/bin/$(MACH64)/gapplication path=usr/bin/gapplication
 file usr/bin/$(MACH64)/gdbus path=usr/bin/gdbus
 # The bypass is necessary as glib uses a non-standard location for its
