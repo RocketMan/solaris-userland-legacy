@@ -36,8 +36,36 @@ COMPONENT_ANITYA_ID=	1738
 
 TPNO=			39615
 
+# Build the old version for 11.3 compatibility.  We extract only the
+# libtiff.so.3 libraries
+COMPONENT_VERSION_1=	3.9.5
+COMPONENT_SRC_1=	tiff-$(COMPONENT_VERSION_1)
+COMPONENT_ARCHIVE_1=	$(COMPONENT_SRC_1).tar.gz
+COMPONENT_ARCHIVE_HASH_1= \
+    sha256:ecf2e30582698dbc61d269203bbd1e701a1a50fb26c87d709e10d89669badb33
+COMPONENT_ARCHIVE_URL_1= \
+    http://download.osgeo.org/libtiff/old/$(COMPONENT_ARCHIVE_1)
+
+BUILD_OLD_DIR_32 = $(COMPONENT_DIR)/build/$(COMPONENT_VERSION_1)-$(MACH32)
+BUILD_OLD_DIR_64 = $(COMPONENT_DIR)/build/$(COMPONENT_VERSION_1)-$(MACH64)
+INSTALL_OLD_DIR = $(PROTO_DIR)/$(COMPONENT_VERSION_1)
+
+$(BUILD_OLD_DIR_32)/.configured: CONFIGURE_SCRIPT = $(SOURCE_DIR_1)/configure
+$(BUILD_OLD_DIR_64)/.configured: CONFIGURE_SCRIPT = $(SOURCE_DIR_1)/configure
+$(BUILD_OLD_DIR_32)/.configured: BITS=32
+$(BUILD_OLD_DIR_64)/.configured: BITS=64
+$(BUILD_OLD_DIR_32)/.installed: COMPONENT_INSTALL_ARGS = DESTDIR=$(INSTALL_OLD_DIR)
+$(BUILD_OLD_DIR_64)/.installed: COMPONENT_INSTALL_ARGS = DESTDIR=$(INSTALL_OLD_DIR)
+
+BUILD_32 += $(BUILD_OLD_DIR_32)/.built
+BUILD_64 += $(BUILD_OLD_DIR_64)/.built
+
+INSTALL_32 += $(BUILD_OLD_DIR_32)/.installed
+INSTALL_64 += $(BUILD_OLD_DIR_64)/.installed
+
 # Added to find the *.3tiff that go into /usr/share/man/man3tiff
 PKG_PROTO_DIRS += $(COMPONENT_SRC)/man
+PKG_PROTO_DIRS += $(INSTALL_OLD_DIR)
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
