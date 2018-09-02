@@ -77,7 +77,7 @@ file path=usr/share/xmlto/xmlto.mak
 license COPYING license=GPLv2
 
 # xmlto script dependencies that aren't automatically found:
-depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/lynx
+#depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/lynx
 depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/xmllint
 depend type=require fmri=__TBD pkg.debug.depend.file=usr/bin/xsltproc
 depend type=require fmri=__TBD pkg.debug.depend.file=usr/gnu/bin/find
