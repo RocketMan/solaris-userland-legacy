@@ -23,6 +23,7 @@
 # Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
 #
 BUILD_BITS= 64_and_32
+COMPILER=gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		poppler
@@ -46,6 +47,42 @@ COMPONENT_ARCHIVE_URL_1= $(COMPONENT_PROJECT_URL)$(COMPONENT_ARCHIVE_1)
 COMPONENT_ANITYA_ID_1=	3687
 TPNO_POPPLER_DATA=	25618
 
+# Build the old version for 11.3 compatibility.  We extract only the
+# libpoppler-glib.so.5 and libpoppler.so.7 libraries.
+COMPONENT_VERSION_2=	0.14.5
+COMPONENT_SRC_2=	poppler-$(COMPONENT_VERSION_2)
+COMPONENT_ARCHIVE_2=	$(COMPONENT_SRC_2).tar.gz
+COMPONENT_ARCHIVE_HASH_2= \
+    sha256:c805317c4c1a7080098ae8c7c2a1c1b8e2c784858fc2e04941878eeb8164814c
+COMPONENT_ARCHIVE_URL_2= \
+    https://poppler.freedesktop.org/$(COMPONENT_ARCHIVE_2)
+
+SOURCE_DIR_2 = $(COMPONENT_DIR)/$(COMPONENT_SRC_2)
+BUILD_OLD_DIR_32 = $(COMPONENT_DIR)/build/$(COMPONENT_VERSION_2)-$(MACH32)
+INSTALL_OLD_DIR = $(PROTO_DIR)/$(COMPONENT_VERSION_2)
+PATCH_OLD_DIR = patches_$(COMPONENT_VERSION_2)
+
+PATCHES_OLD := $(wildcard $(PATCH_OLD_DIR)/*.patch)
+PATCHES_OLD_STAMPS = $(PATCHES_OLD:$(PATCH_OLD_DIR)/%=$(SOURCE_DIR_2)/.patched-%)
+
+$(SOURCE_DIR_2)/.patched-%:	$(PATCH_OLD_DIR)/%
+	$(GPATCH) -d $(@D) $(GPATCH_FLAGS) < $<
+	$(TOUCH) $(@)
+
+$(SOURCE_DIR_2)/.patched:	$(SOURCE_DIR_2)/.unpacked $(PATCHES_OLD_STAMPS)
+	$(TOUCH) $(@)
+
+$(BUILD_OLD_DIR_32)/.configured: CONFIGURE_SCRIPT=$(SOURCE_DIR_2)/configure
+$(BUILD_OLD_DIR_32)/.configured: COMPILER=studio
+$(BUILD_OLD_DIR_32)/.configured: BITS=32
+$(BUILD_OLD_DIR_32)/.configured: CXX+=$(studio_NORUNPATH)
+$(BUILD_OLD_DIR_32)/.configured: CXXFLAGS=$(CXXFLAGS.studio)
+$(BUILD_OLD_DIR_32)/.installed: COMPONENT_INSTALL_ARGS=DESTDIR=$(INSTALL_OLD_DIR)
+
+BUILD_32 += $(SOURCE_DIR_2)/.patched $(BUILD_OLD_DIR_32)/.built
+
+INSTALL_32 += $(BUILD_OLD_DIR_32)/.installed
+
 TEST_TARGET= $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/common.mk
@@ -60,7 +97,6 @@ COMPONENT_PREP_ACTION = \
 
 # For now, all things built for C++11 require gcc.
 # (Poppler provides a C++ wrapper.)
-COMPILER=gcc
 # Uses strcpy_s, etc. c11 functions.
 CFLAGS += -std=c11
 CXXFLAGS += -std=c++11 -D__STDC_WANT_LIB_EXT1__=1
@@ -108,6 +144,7 @@ COMPONENT_POST_BUILD_ACTION = \
 COMPONENT_BUILD_ARGS += V=1
 
 REQUIRED_PACKAGES += image/library/libjpeg
+REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libtiff
 REQUIRED_PACKAGES += image/library/openjpeg2

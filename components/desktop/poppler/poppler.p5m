@@ -225,6 +225,9 @@ link path=usr/lib/libpoppler-cpp.so target=libpoppler-cpp.so.0.3.0
 link path=usr/lib/libpoppler-cpp.so.0 target=libpoppler-cpp.so.0.3.0
 file path=usr/lib/libpoppler-cpp.so.0.3.0
 link path=usr/lib/libpoppler-glib.so target=libpoppler-glib.so.8.9.0
+link path=usr/lib/libpoppler-glib.so.5 target=libpoppler-glib.so.5.0.0
+file 0.14.5/usr/lib/libpoppler-glib.so.5.0.0 \
+    path=usr/lib/libpoppler-glib.so.5.0.0
 link path=usr/lib/libpoppler-glib.so.8 target=libpoppler-glib.so.8.9.0
 file path=usr/lib/libpoppler-glib.so.8.9.0
 link path=usr/lib/libpoppler.so target=libpoppler.so.68.0.0
@@ -233,6 +236,8 @@ link path=usr/lib/libpoppler.so target=libpoppler.so.68.0.0
 link path=usr/lib/libpoppler.so.67 target=libpoppler.so.68
 link path=usr/lib/libpoppler.so.68 target=libpoppler.so.68.0.0
 file path=usr/lib/libpoppler.so.68.0.0
+link path=usr/lib/libpoppler.so.7 target=libpoppler.so.7.0.0
+file 0.14.5/usr/lib/libpoppler.so.7.0.0 path=usr/lib/libpoppler.so.7.0.0
 file path=usr/lib/pkgconfig/poppler-cairo.pc
 file path=usr/lib/pkgconfig/poppler-cpp.pc
 file path=usr/lib/pkgconfig/poppler-glib.pc
