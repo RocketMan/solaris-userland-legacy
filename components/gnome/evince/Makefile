@@ -77,8 +77,8 @@ CONFIGURE_OPTIONS +=	--enable-comics
 CONFIGURE_OPTIONS +=	--enable-dbus
 # Required for other components.
 CONFIGURE_OPTIONS +=	--enable-introspection
-CONFIGURE_OPTIONS +=	--enable-libgnome-desktop
-CONFIGURE_OPTIONS +=	--enable-nautilus
+CONFIGURE_OPTIONS +=	--disable-libgnome-desktop
+CONFIGURE_OPTIONS +=	--disable-nautilus
 CONFIGURE_OPTIONS +=	--enable-pdf
 CONFIGURE_OPTIONS +=	--enable-previewer
 CONFIGURE_OPTIONS +=	--enable-ps
@@ -88,6 +88,7 @@ CONFIGURE_OPTIONS +=	--enable-thumbnailer
 CONFIGURE_OPTIONS +=	--enable-tiff
 CONFIGURE_OPTIONS +=	--enable-viewer
 CONFIGURE_OPTIONS +=	--enable-xps
+CONFIGURE_OPTIONS +=	--disable-gtk-doc-html
 
 # Always show the build and link lines for easier debugging.
 COMPONENT_BUILD_ARGS += V=1

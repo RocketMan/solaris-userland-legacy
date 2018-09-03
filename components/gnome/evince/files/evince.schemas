@@ -1,0 +1,380 @@
+<gconfschemafile>
+  <schemalist>
+    <schema>
+      <key>/schemas/apps/evince/override_restrictions</key>
+      <applyto>/apps/evince/override_restrictions</applyto>
+      <owner>evince</owner>
+      <type>bool</type>
+      <default>true</default>
+      <locale name="C">
+        <short>Override document restrictions</short>
+        <long>Override document restrictions, like restriction to copy or to print.</long>
+      </locale>
+
+      <locale name="af">
+        <short>Oorheers dokumentbeperkings</short>
+        <long>Oorheers dokumentbeperkings soos beperkings op kopiëring en druk.</long>
+      </locale>
+
+      <locale name="ar">
+        <short>تجاوز قيود المستند</short>
+        <long>تجاوز قيود المستند، مثل قيود النسخ أو إمكانية الطباعة.</long>
+      </locale>
+
+      <locale name="as">
+        <short>ডকুমেন্টৰ ক্ষেত্ৰ ধাৰ্য নিষেধাজ্ঞা অগ্ৰাহ্য কৰা হ&apos;ব</short>
+        <long>ডকুমেন্টৰ ক্ষেত্ৰ ধাৰ্য নিষেধাজ্ঞা যেমন কপি অথবা প্ৰিন্ট সংক্ৰান্ত, অগ্ৰাহ্য কৰা হ&apos;ব  ।</long>
+      </locale>
+
+      <locale name="ast">
+        <short>Saltase les restricciones del documentu</short>
+        <long>Saltase les restricciones del documentu, como restricción pa copiar o imprentar.</long>
+      </locale>
+
+      <locale name="be">
+        <short>Не зважаць на абмежаваньні дакумэнта</short>
+        <long>Не зважаць на абмежаваньні дакумэнта, напр., забарону на друк альбо капіяваньне.</long>
+      </locale>
+
+      <locale name="be@latin">
+        <short>Nie zvažaj na abmiežavańni dakumentu</short>
+        <long>Nie zvažaj na abmiežavańni dakumentu, napr., na abmiežavańni mahčymaści kapijavańnia albo druku.</long>
+      </locale>
+
+      <locale name="bg">
+        <short>Пренебрегване ограниченията на документа</short>
+        <long>Пренебрегване на ограниченията на документа, като ограничения за копиране и печат.</long>
+      </locale>
+
+      <locale name="bn">
+        <short>নথিতে আরোপিত নিষেধাজ্ঞা অগ্রাহ্য করুন</short>
+        <long>নথিতে আরোপিত নিষেধাজ্ঞা, যেমন কপি বা মুদ্রণের উপর, অগ্রাহ্য করুন</long>
+      </locale>
+
+      <locale name="bn_IN">
+        <short>ডকুমেন্টের ক্ষেত্র ধার্য নিষেধাজ্ঞা অগ্রাহ্য করা হবে</short>
+        <long>ডকুমেন্টের ক্ষেত্র ধার্য নিষেধাজ্ঞা যেমন কপি অথবা প্রিন্ট সংক্রান্ত, অগ্রাহ্য করা হবে।</long>
+      </locale>
+
+      <locale name="ca">
+        <short>No facis cas de les restriccions del document</short>
+        <long>No facis cas de les restriccions del document, com les de còpia o d&apos;impressió.</long>
+      </locale>
+
+      <locale name="ca@valencia">
+        <short>No faces cas de les restriccions del document</short>
+        <long>No faces cas de les restriccions del document, com les de còpia o d&apos;impressió.</long>
+      </locale>
+
+      <locale name="cs">
+        <short>Ignorovat omezení dokumentu</short>
+        <long>Ignorovat omezení dokumentu, například zákaz kopírování nebo tisku.</long>
+      </locale>
+
+      <locale name="cy">
+        <short>Gwrthwneud cyfyngiadau&apos;r ddogfen</short>
+        <long>Gwrthwneud cyfyngiadau&apos;r ddogfen, er enghraifft, cyfyngiad rhag copïo neu brintio.</long>
+      </locale>
+
+      <locale name="da">
+        <short>Ignorér dokumentbegrænsninger</short>
+        <long>Ignorér dokumentbegrænsninger såsom begrænsninger på at kopiere eller udskrive.</long>
+      </locale>
+
+      <locale name="de">
+        <short>Restriktionen des Dokuments übergehen</short>
+        <long>Restriktionen des Dokuments, wie das Verbot zum Kopieren oder Drucken, übergehen.</long>
+      </locale>
+
+      <locale name="dz">
+        <short>ཡིག་ཆའི་དཀག་དམ་ཟུར་ཁར་བཞག</short>
+        <long>ཡིག་ཆའི་དཀག་དམ་ དཔེར་ན་འདྲ་བཤུས་བརྐྱབ་ནི་དང་ དཔར་བསྐྲུན་འབད་ནིའི་དཀག་དམ་ཚུ་ ཟུར་ཁར་བཞག</long>
+      </locale>
+
+      <locale name="el">
+        <short>Παράκαμψη των περιορισμών του εγγράφου</short>
+        <long>Παράκαμψη των περιορισμών του εγγράφου, όπως περιορισμών εκτύπωσης ή αντιγραφής.</long>
+      </locale>
+
+      <locale name="en@shaw">
+        <short>𐑴𐑝𐑼𐑮𐑲𐑛 𐑛𐑪𐑒𐑿𐑥𐑩𐑯𐑑 𐑮𐑰𐑕𐑑𐑮𐑦𐑒𐑖𐑩𐑯𐑟</short>
+        <long>𐑴𐑝𐑼𐑮𐑲𐑛 𐑛𐑪𐑒𐑿𐑥𐑩𐑯𐑑 𐑮𐑰𐑕𐑑𐑮𐑦𐑒𐑖𐑩𐑯𐑟, 𐑤𐑲𐑒 𐑮𐑰𐑕𐑑𐑮𐑦𐑒𐑖𐑩𐑯 𐑑 𐑒𐑪𐑐𐑦 𐑹 𐑑 𐑐𐑮𐑦𐑯𐑑.</long>
+      </locale>
+
+      <locale name="en_CA">
+        <short>Override document restrictions</short>
+        <long>Override document restrictions, such as restriction to copy or to print.</long>
+      </locale>
+
+      <locale name="en_GB">
+        <short>Override document restrictions</short>
+        <long>Override document restrictions, like restriction to copy or to print.</long>
+      </locale>
+
+      <locale name="es">
+        <short>Saltarse las restricciones del documento</short>
+        <long>Saltarse las restricciones del documento, como restricción para copiar o imprimir.</long>
+      </locale>
+
+      <locale name="et">
+        <short>Dokumendi piirangute eiramine</short>
+        <long>Dokumendi piirangute (näiteks kopeerimis- ja printimispiirangud) eiramine.</long>
+      </locale>
+
+      <locale name="eu">
+        <short>Jaramonik ez egin dokumentuaren murriztapenei</short>
+        <long>Jaramonik ez egin dokumentuaren kopiatzeko edo inprimatzeko bezalako murriztapenei</long>
+      </locale>
+
+      <locale name="fa">
+        <short>نادیده گرفتن محدودیت‌های نوشتار</short>
+        <long>نادیده گرفتن محدودیت‌های نوشتار، مثل محدودیت نسخه‌برداری یا چاپ.</long>
+      </locale>
+
+      <locale name="fi">
+        <short>Ohita asiakirjan rajoitukset</short>
+        <long>Ohita asiakirjan rajoitukset, kuten kopioinnin tai tulostuksen rajoitus.</long>
+      </locale>
+
+      <locale name="fr">
+        <short>Passer outre les restrictions du document</short>
+        <long>Passer outre les restrictions du document, par exemple sur la copie ou l&apos;impression.</long>
+      </locale>
+
+      <locale name="gl">
+        <short>Ignorar as restricións do documento</short>
+        <long>Ignorar as restricións do documento, como a restrición para copiar ou imprimir.</long>
+      </locale>
+
+      <locale name="gu">
+        <short>દસ્તાવેજના બંધનો પર ફરીથી લખો</short>
+        <long>દસ્તાવેજના બંધનો પર ફરીથી લખો, જેમ કે નકલ કરવા માટે અથવા છાપન કરવા માટેના બંધનો.</long>
+      </locale>
+
+      <locale name="he">
+        <short>Override document restrictions</short>
+        <long>Override document restrictions, like restriction to copy or to print.</long>
+      </locale>
+
+      <locale name="hi">
+        <short>दस्तावेज प्रतिबंध पर लिखें</short>
+        <long>दस्तावेज प्रतिबंध अध्यारोहित करें, कॉपी करने या छापने के प्रतिबंध की तरह.</long>
+      </locale>
+
+      <locale name="hu">
+        <short>A dokumentum korlátozásainak felülbírálása</short>
+        <long>Dokumentum (például a másolásra vagy nyomtatásra vonatkozó) korlátozásainak felülbírálása.</long>
+      </locale>
+
+      <locale name="id">
+        <short>Timpa batasan dokumen</short>
+        <long>Timpa batasan dokumen, seperti batasan untuk menyalin ataupun untuk pencetakan.</long>
+      </locale>
+
+      <locale name="it">
+        <short>Scavalca restrizioni documento</short>
+        <long>Scavalca le restrizioni del documento, come la restrizione di copiare o di stampare.</long>
+      </locale>
+
+      <locale name="ja">
+        <short>ドキュメントの制限を上書きします</short>
+        <long>コピーや印刷を制限するようなドキュメントの制限を上書きします</long>
+      </locale>
+
+      <locale name="ka">
+        <short>დოკუმენტის შეზღუდვების უგულვებელყოფა</short>
+        <long>დოკუმენტის შეზღუდვების უგულებელყოფა, მაგალითად ბეჭდვის აკრძალვის.</long>
+      </locale>
+
+      <locale name="kn">
+        <short>ದಸ್ತಾವೇಜು ನಿರ್ಬಂಧಗಳನ್ನು ಅತಿಕ್ರಮಿಸು</short>
+        <long>ಕಾಪಿ ಮಾಡುವ ಅಥವ ಮುದ್ರಿಸುವಂತಹ ದಸ್ತಾವೇಜು ನಿರ್ಬಂಧಗಳನ್ನು ಅತಿಕ್ರಮಿಸು.</long>
+      </locale>
+
+      <locale name="ko">
+        <short>문서 제한 무시하기</short>
+        <long>복사하기나 인쇄 같은 문서제한을 무시합니다.</long>
+      </locale>
+
+      <locale name="ks">
+        <short>कागजात लिखव बिना रुकावटि</short>
+        <long>कागजात लिखव बिना रुकावटि यिथकंय कापी करुन या परंट</long>
+      </locale>
+
+      <locale name="ku">
+        <short>Zorê bide sînorkirinên Belgeyan</short>
+        <long>Sînorkirinên belgeyê yên wekî jibergirtin û nivîsînê diguherîne.</long>
+      </locale>
+
+      <locale name="lt">
+        <short>Nepaisyti dokumento apribojimų</short>
+        <long>Nepaisyti dokumento apribojimų, pvz., apsaugojimo nuo kopijavimo ar spausdinimo.</long>
+      </locale>
+
+      <locale name="lv">
+        <short>Ignorēt dokumenta ierobežojumus</short>
+        <long>Ignorēt dokumenta (piemēram, kopēšanas vai drukāšanas) ierobežojumus.</long>
+      </locale>
+
+      <locale name="mai">
+        <short>दस्ताबेज प्रतिबंध पर लिखू</short>
+        <long>दस्ताबेज प्रतिबंध अध्यारोहित करू, कापी करै अथवा छापै क&apos; प्रतिबंध क&apos; जहिना.</long>
+      </locale>
+
+      <locale name="mg">
+        <short>Dingano ireo fameperana amin&apos;ilay tahirin-kevitra</short>
+        <long>Dingano ireo fameperana amin&apos;ilay tahirin-kevitra, toy ny famerana ny fandikana na fanontana.</long>
+      </locale>
+
+      <locale name="mk">
+        <short>Отстрани ги рестрикциите на документот</short>
+        <long>Отстрани ги рестрикциите на документите, како рестрикциите за копирање или печатење</long>
+      </locale>
+
+      <locale name="ml">
+        <short>രേഖയിലുള്ള പരിമിതികളെ മാറ്റി എഴുതുക</short>
+        <long>രേഖയിലുള്ള പരിമിതികളെ മാറ്റി എഴുതുക, പകര്‍ത്തുവാനോ പ്രിന്റ് ചെയ്യുവാനോ ഉള്ള പരിമിതി പോലെ.</long>
+      </locale>
+
+      <locale name="mn">
+        <short>Баримт бичгийн хязгаарлалтыг үл хайхрах</short>
+        <long>Хуулах, хэвлэхийг хориглох гэх мэт баримт бичгийн хязгаарлалтыг үл хайхрана.</long>
+      </locale>
+
+      <locale name="mr">
+        <short>दस्तऐवजावरील निर्बंध झुगारुन टाका</short>
+        <long>प्रत तयार करणे अथवा मुद्रण करण्याप्रमाणेच दस्तऐवजावरील निर्बंध झुगारुन टाका.</long>
+      </locale>
+
+      <locale name="nb">
+        <short>Overstyr begrensninger satt for dokumentet</short>
+        <long>Overstyr begrensninger satt for dokumentet slik som mulighet til å kopiere fra det eller skrive det ut.</long>
+      </locale>
+
+      <locale name="ne">
+        <short>कागजात निषेधहरू मिच्नुहोस्</short>
+        <long>कागजात अवरोधहरू अधिलेखन गर्नुहोस्, जस्तै प्रतिलिपी गर्नुमा अवरोध वा मुद्रन गर्नमा अवरोध । </long>
+      </locale>
+
+      <locale name="nl">
+        <short>Documentrestricties negeren</short>
+        <long>Documentrestricties, zoals een beperking op kopiëren of afdrukken, negeren.</long>
+      </locale>
+
+      <locale name="nn">
+        <short>Overstyr dokumentavgrensingar</short>
+        <long>Overstyr dokumentavgrensingar, slik som avgrensingar på utskrift og kopiering.</long>
+      </locale>
+
+      <locale name="or">
+        <short>ଦଲିଲ ନିଷେଧତାକୁ ବ୍ଯର୍ଥ କରିଦିଅନ୍ତୁ</short>
+        <long>ନକଲ କରିବା କିମ୍ବା ମୂଦ୍ରଣ କରିବା ନିଷେଧତା ଭଳି, ଦଲିଲ ନିଷେଧତାକୁ ବ୍ଯର୍ଥ କରିଦିଅନ୍ତୁ।</long>
+      </locale>
+
+      <locale name="pa">
+        <short>ਡੌਕੂਮੈਂਟ ਪਾਬੰਦੀਆਂ ਨੂੰ ਅਣਡਿੱਠਾ ਕਰੋ</short>
+        <long>ਡੌਕੂਮੈਂਟ ਪਾਬੰਦੀਆਂ, ਜਿਵੇਂ ਕਿ ਕਾਪੀ ਜਾਂ ਪਰਿੰਟ ਆਦਿ ਲਈ ਪਾਬੰਦੀ, ਨੂੰ ਅਣਡਿੱਠਾ ਕਰੋ।</long>
+      </locale>
+
+      <locale name="pl">
+        <short>Bez uwzględniania ograniczeń dokumentu</short>
+        <long>Bez uwzględniania ograniczeń dokumentu, takich jak ograniczenie kopiowania lub drukowania.</long>
+      </locale>
+
+      <locale name="pt">
+        <short>Ignorar as restrições do documento</short>
+        <long>Ignorar as restrições do documento tais como restrição à cópia ou impressão.</long>
+      </locale>
+
+      <locale name="pt_BR">
+        <short>Sobrescrever restrições do documento</short>
+        <long>Ignora restrições do documento original, como restrição a cópia ou impressão.</long>
+      </locale>
+
+      <locale name="ro">
+        <short>Ignoră restricțiile documentului</short>
+        <long>Ignoră restricțiile documentului, precum cele referitoare la tipărire sau copiere.</long>
+      </locale>
+
+      <locale name="ru">
+        <short>Игнорировать ограничения</short>
+        <long>Игнорировать ограничения документа, например, ограничение на копирование и печать.</long>
+      </locale>
+
+      <locale name="sk">
+        <short>Prekonať obmedzenia dokumentu</short>
+        <long>Prekonať obmedzenia dokumentu, napríklad obmedzenia na kopírovanie alebo tlač.</long>
+      </locale>
+
+      <locale name="sl">
+        <short>Preglasi omejitve dokumenta</short>
+        <long>Prezri omejitve dokumenta, kot sta omejitev kopiranja ali tiskanja.</long>
+      </locale>
+
+      <locale name="sq">
+        <short>Mbishkruaj kufizimet në dokument</short>
+        <long>Mbishkruaj kufizimet në dokument, si p.sh. kufizimin e kopjes apo shtypjes.</long>
+      </locale>
+
+      <locale name="sr">
+        <short>Превазиђи ограничења документа</short>
+        <long>Превазилази ограничења која документ уграђено садржи, као што је забрана умножавања или штампе </long>
+      </locale>
+
+      <locale name="sr@latin">
+        <short>Prevaziđi ograničenja dokumenta</short>
+        <long>Prevazilazi ograničenja koja dokument ugrađeno sadrži, kao što je zabrana umnožavanja ili štampe </long>
+      </locale>
+
+      <locale name="sv">
+        <short>Åsidosätt dokumentbegränsningar</short>
+        <long>Åsidosätt dokumentbegränsningar, som till exempel begränsning i att kopiera eller att skriva ut.</long>
+      </locale>
+
+      <locale name="ta">
+        <short>மேலெழுதும் ஆவண தடைகள்</short>
+        <long>மேலெழுதும் ஆவண தடைகள், நகலெடுக்க அல்லது அச்சிடுவதற்கான தடை போல.</long>
+      </locale>
+
+      <locale name="te">
+        <short>పత్రము నిభందనలను తిరిగివ్రాయుము</short>
+        <long>నకలుతీయి లేదా ముద్రించు నిభందనవంటి, పత్రము నిభందనలను తిరిగివ్రాయుము</long>
+      </locale>
+
+      <locale name="th">
+        <short>ละเลยข้อห้ามของเอกสาร</short>
+        <long>ละเลยข้อห้ามของเอกสาร เช่น การห้ามทำสำเนาหรือห้ามจัดพิมพ์</long>
+      </locale>
+
+      <locale name="tr">
+        <short>Belge sınırlamalarını değiştir</short>
+        <long>Kopyalama ya da yazdırma gibi belge sınırlarlamalarını değiştir.</long>
+      </locale>
+
+      <locale name="uk">
+        <short>Ігнорувати обмеження</short>
+        <long>Ігнорувати обмеження документу, наприклад обмеження на друк чи копіювання.</long>
+      </locale>
+
+      <locale name="vi">
+        <short>Bỏ hạn chế tài liệu</short>
+        <long>Bỏ qua những hạn chế của tài liệu, như hạn chế sao chép hay in.</long>
+      </locale>
+
+      <locale name="zh_CN">
+        <short>忽略文档限制</short>
+        <long>忽略文档限制，比如限制复制或打印。</long>
+      </locale>
+
+      <locale name="zh_HK">
+        <short>不理會文件的限制</short>
+        <long>不理會文件的限制，例如不准複製或打印</long>
+      </locale>
+
+      <locale name="zh_TW">
+        <short>不理會文件的限制</short>
+        <long>不理會文件的限制，例如不准複製或列印</long>
+      </locale>
+    </schema>
+  </schemalist>
+</gconfschemafile>
