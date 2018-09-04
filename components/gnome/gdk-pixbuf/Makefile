@@ -46,7 +46,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fiv);
 
 #CONFIGURE_OPTIONS += --enable-gtk-doc
-CONFIGURE_OPTIONS += --without-libtiff
+#CONFIGURE_OPTIONS += --without-libtiff
 CONFIGURE_OPTIONS += --disable-gtk-doc
 
 # Required for other components.
