@@ -1,0 +1,19 @@
+--- a/gdk/x11/gdkdevicemanager-core-x11.c	2016-10-22 05:14:09.000000000 +0000
++++ b/gdk/x11/gdkdevicemanager-core-x11.c	2018-09-05 14:17:53.150669165 +0000
+@@ -918,6 +918,16 @@
+ 
+       gdk_event_put (event);
+       gdk_event_free (event);
++
++      /*
++       * synthesize window state change if window manager does not
++       * support _NET_WM_STATE_FOCUSED
++       */
++      if (!gdk_x11_screen_supports_net_wm_hint (GDK_WINDOW_SCREEN(window),
++                  gdk_atom_intern_static_string ("_NET_WM_STATE_FOCUSED")))
++        gdk_synthesize_window_state (window,
++                                     focus_in?0:GDK_WINDOW_STATE_FOCUSED,
++                                     focus_in?GDK_WINDOW_STATE_FOCUSED:0);
+     }
+ }
+ 
