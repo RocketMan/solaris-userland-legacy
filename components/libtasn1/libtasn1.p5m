@@ -45,6 +45,8 @@ link path=usr/lib/$(MACH64)/libtasn1.so.6 target=libtasn1.so.6.5.5
 file path=usr/lib/$(MACH64)/libtasn1.so.6.5.5
 file path=usr/lib/$(MACH64)/pkgconfig/libtasn1.pc
 link path=usr/lib/libtasn1.so target=libtasn1.so.6.5.5
+link path=usr/lib/libtasn1.so.3 target=libtasn1.so.3.1.10
+file 2.8/usr/lib/libtasn1.so.3.1.10 path=usr/lib/libtasn1.so.3.1.10
 link path=usr/lib/libtasn1.so.6 target=libtasn1.so.6.5.5
 file path=usr/lib/libtasn1.so.6.5.5
 file path=usr/lib/pkgconfig/libtasn1.pc
