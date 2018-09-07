@@ -39,7 +39,7 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file path=usr/bin/file-roller
 file path=usr/lib/$(MACH64)/file-roller/isoinfo.sh mode=0555
 file path=usr/lib/$(MACH64)/file-roller/rpm2cpio mode=0555
-file path=usr/lib/$(MACH64)/nautilus/extensions-3.0/libnautilus-fileroller.so
+#file path=usr/lib/$(MACH64)/nautilus/extensions-3.0/libnautilus-fileroller.so
 file path=usr/share/GConf/gsettings/file-roller.convert
 file path=usr/share/appdata/org.gnome.FileRoller.appdata.xml
 file path=usr/share/applications/org.gnome.FileRoller.desktop
@@ -565,5 +565,4 @@ file files/file-roller.1 path=usr/share/man/man1/file-roller.1
 license COPYING license=GPLv2
 depend type=require fmri=__TBD pkg.debug.depend.reason=src/preferences.h \
     pkg.tmp.gsettings-schema=org.gnome.FileRoller
-depend type=require fmri=__TBD pkg.debug.depend.reason=src/preferences.h \
-    pkg.tmp.gsettings-schema=org.gnome.nautilus
+#depend type=require fmri=__TBD pkg.debug.depend.reason=src/preferences.h #    pkg.tmp.gsettings-schema=org.gnome.nautilus

@@ -43,6 +43,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 CONFIGURE_OPTIONS += --enable-libarchive
 CONFIGURE_OPTIONS += --disable-static
+CONFIGURE_OPTIONS += --disable-nautilus-actions
 
 # Assumes GNU xgettext in PATH
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
@@ -54,6 +55,7 @@ REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/desktop/gtk3
 REQUIRED_PACKAGES += library/desktop/libnotify
 REQUIRED_PACKAGES += library/desktop/pango
+REQUIRED_PACKAGES += library/libnotify
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/json-glib
 REQUIRED_PACKAGES += library/libarchive

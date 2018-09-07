@@ -1,0 +1,81 @@
+--- a/src/fr-archive-libarchive.c	2017-02-18 08:26:39.000000000 +0000
++++ b/src/fr-archive-libarchive.c	2018-09-07 19:54:38.329323152 +0000
+@@ -79,10 +79,14 @@
+ 		"application/x-cpio",
+ 		"application/x-deb",
+ 		"application/x-lha",
++#ifdef NOTYET
+ 		"application/x-lrzip-compressed-tar",
++#endif
+ 		"application/x-lzip-compressed-tar",
+ 		"application/x-lzma-compressed-tar",
++#ifdef NOTYET
+ 		"application/x-lzop-compressed-tar",
++#endif
+ 		"application/x-rar",
+ 		"application/x-rpm",
+ 		"application/x-tar",
+@@ -148,12 +152,13 @@
+ 			return capabilities;
+ 		}
+ 	}
+-
++#ifdef NOTYET
+ 	/* tar.lrz format requires external lrzip */
+ 	if (strcmp (mime_type, "application/x-lrzip-compressed-tar") == 0) {
+ 		if (!_g_program_is_available ("lrzip", check_command))
+ 			return capabilities;
+ 	}
++#endif
+ 
+ 	capabilities |= FR_ARCHIVE_CAN_READ;
+ 
+@@ -1149,10 +1154,12 @@
+ 		archive_write_set_format_pax_restricted (a);
+ 		archive_filter = ARCHIVE_FILTER_GZIP;
+ 	}
++#ifdef NOTYET
+ 	else if (_g_str_equal (mime_type, "application/x-lrzip-compressed-tar")) {
+ 		archive_write_set_format_pax_restricted (a);
+ 		archive_filter = ARCHIVE_FILTER_LRZIP;
+ 	}
++#endif
+ 	else if (_g_str_equal (mime_type, "application/x-lzip-compressed-tar")) {
+ 		archive_write_set_format_pax_restricted (a);
+ 		archive_filter = ARCHIVE_FILTER_LZIP;
+@@ -1161,10 +1168,12 @@
+ 		archive_write_set_format_pax_restricted (a);
+ 		archive_filter = ARCHIVE_FILTER_LZMA;
+ 	}
++#ifdef NOTYET
+ 	else if (_g_str_equal (mime_type, "application/x-lzop-compressed-tar")) {
+ 		archive_write_set_format_pax_restricted (a);
+ 		archive_filter = ARCHIVE_FILTER_LZOP;
+ 	}
++#endif
+ 	else if (_g_str_equal (mime_type, "application/x-xz-compressed-tar")) {
+ 		archive_write_set_format_pax_restricted (a);
+ 		archive_filter = ARCHIVE_FILTER_XZ;
+@@ -1208,18 +1217,22 @@
+ 		case ARCHIVE_FILTER_GZIP:
+ 			archive_write_add_filter_gzip (a);
+ 			break;
++#ifdef NOTYET
+ 		case ARCHIVE_FILTER_LRZIP:
+ 			archive_write_add_filter_lrzip (a);
+ 			break;
++#endif
+ 		case ARCHIVE_FILTER_LZIP:
+ 			archive_write_add_filter_lzip (a);
+ 			break;
+ 		case ARCHIVE_FILTER_LZMA:
+ 			archive_write_add_filter_lzma (a);
+ 			break;
++#ifdef NOTYET
+ 		case ARCHIVE_FILTER_LZOP:
+ 			archive_write_add_filter_lzop (a);
+ 			break;
++#endif
+ 		case ARCHIVE_FILTER_XZ:
+ 			archive_write_add_filter_xz (a);
+ 			break;
