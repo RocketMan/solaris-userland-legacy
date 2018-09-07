@@ -1,0 +1,11 @@
+--- a/common/path.c	2016-12-20 10:04:25.000000000 +0000
++++ b/common/path.c	2018-09-07 18:35:41.467732632 +0000
+@@ -138,7 +138,7 @@
+ 		int ret;
+ 
+ 		errno = 0;
+-		ret = getpwuid_r (getuid (), &pws, buf, sizeof (buf), &pwd);
++		pwd = getpwuid_r (getuid (), &pws, buf, sizeof (buf));
+ 		if (pwd == NULL) {
+ 			if (ret == 0)
+ 				error = ESRCH;

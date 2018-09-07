@@ -24,15 +24,18 @@
 #
 
 BUILD_BITS =            64_and_32
+COMPILER=gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		p11-kit
 COMPONENT_VERSION=	0.23.2
 COMPONENT_PROJECT_URL=	https://p11-glue.github.io/p11-glue/p11-kit.html
-COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
-COMPONENT_ARCHIVE_HASH= \
-    sha256:ba726ea8303c97467a33fca50ee79b7b35212964be808ecf9b145e9042fdfaf0
-COMPONENT_ARCHIVE_URL=	https://github.com/p11-glue/p11-kit/archive/$(COMPONENT_ARCHIVE)
+GIT_REPO=		https://github.com/p11-glue/$(COMPONENT_NAME)
+GIT_COMMIT_ID=		794385d
+#COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
+#COMPONENT_ARCHIVE_HASH= \
+#    sha256:ba726ea8303c97467a33fca50ee79b7b35212964be808ecf9b145e9042fdfaf0
+#COMPONENT_ARCHIVE_URL=	https://github.com/p11-glue/p11-kit/archive/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	gnome/security
 COMPONENT_ANITYA_ID=	2582
 
@@ -40,13 +43,16 @@ TPNO=			32885
 
 include $(WS_MAKE_RULES)/common.mk
 
-studio_C99MODE=$(studio_C99_ENABLE)
+#studio_C99MODE=$(studio_C99_ENABLE)
+CFLAGS += -D_XPG6
+LDFLAGS += -lsocket -lnsl
 
 # Needed due to patch to automake-related files.
 COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fiv);
 
 CONFIGURE_ENV += CFLAGS="$(CFLAGS)"
-CONFIGURE_OPTIONS += --enable-doc
+#CONFIGURE_OPTIONS += --enable-doc
+CONFIGURE_OPTIONS += --disable-doc-html
 CONFIGURE_OPTIONS += --localstatedir=$(VARDIR)
 CONFIGURE_OPTIONS += --sysconfdir=$(ETCDIR)
 CONFIGURE_OPTIONS.32 += --with-module-path=/usr/lib/security
