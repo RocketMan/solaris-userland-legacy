@@ -44,6 +44,14 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 # Assumes GNU xgettext in PATH
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 
+# Force use of gnutls-3 pkgconfig during 2.x->3.x transition
+PKG_CONFIG_PATHS.32 += /usr/lib/pkgconfig/gnutls-3
+PKG_CONFIG_PATHS.64 += /usr/lib/$(MACH64)/pkgconfig/gnutls-3
+PKG_CONFIG_PATHS += $(PKG_CONFIG_PATHS.$(BITS))
+LD_OPTIONS.32 += -L /usr/lib/gnutls-3
+LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
+LD_OPTIONS += $(LD_OPTIONS.$(BITS))
+
 CONFIGURE_OPTIONS += --disable-static
 # Required for other components.
 CONFIGURE_OPTIONS += --enable-introspection
@@ -70,4 +78,5 @@ REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/gnome/gnome-common
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += security/kerberos-5
+REQUIRED_PACKAGES += system/library/security/gss
 REQUIRED_PACKAGES += text/gnu-gettext
