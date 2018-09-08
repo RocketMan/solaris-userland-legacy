@@ -46,6 +46,13 @@
     path=.*/locale/([^/@\.]+)(.+){0,1}(/.+){0,1}$ -> \
     default facet.locale.%<\1> true>
 
+# JM: add locale specific facets from locale name encoded in
+# the pathname.  We don't need the portion after the '@' or '.', only
+# usr/share/help/{locale-name}[@.]*.
+<transform dir file link hardlink \
+    path=usr/share/help/([^/@\.]+)(.+){0,1}(/.+){0,1}$ -> \
+    default facet.locale.%<\1> true>
+
 # but remove invalid facet.locale.common facet added by previous rule
 <transform dir file link hardlink \
     facet.locale.common=true -> delete facet.locale.common .*>
