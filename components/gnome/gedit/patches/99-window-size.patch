@@ -1,0 +1,30 @@
+--- a/gedit/gedit-window.c	2015-10-06 20:40:04.000000000 +0000
++++ a/gedit/gedit-window.c	2018-09-08 19:19:03.916649202 +0000
+@@ -169,12 +169,21 @@
+ 	if ((window->priv->window_state &
+ 	    (GDK_WINDOW_STATE_MAXIMIZED | GDK_WINDOW_STATE_FULLSCREEN)) == 0)
+ 	{
+-		GtkAllocation allocation;
+-
+-		gtk_widget_get_allocation (widget, &allocation);
+-
+-		window->priv->width = allocation.width;
+-		window->priv->height = allocation.height;
++		/*
++		 * previous implementation was incorrectly using the window
++		 * allocation, which resulted in a growing window.
++		 *
++		 * per https://developer.gnome.org/gtk3/stable/GtkWindow.html
++		 * gtk_window_set_default_size:
++		 *
++		 *    If you use this function to reestablish a previously
++		 *    saved window size, note that the appropriate size to
++		 *    save is the one returned by gtk_window_get_size().
++		 *    Using the window allocation directly will not work in
++		 *    all circumstances and can lead to growing or shrinking
++		 *    windows.
++		 */
++		gtk_window_get_size (GTK_WINDOW (window), &window->priv->width, &window->priv->height);
+ 
+ 		g_settings_set (window->priv->window_settings, GEDIT_SETTINGS_WINDOW_SIZE,
+ 				"(ii)", window->priv->width, window->priv->height);
