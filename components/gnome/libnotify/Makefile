@@ -37,6 +37,32 @@ COMPONENT_ANITYA_ID=	13149
 
 TPNO=			34499
 
+# Build the old version for 11.3 compatibility.  We extract only the
+# libnotify.so.1 libraries.
+COMPONENT_VERSION_1=    0.5.2
+COMPONENT_SRC_1=        $(COMPONENT_NAME)-$(COMPONENT_VERSION_1)
+COMPONENT_MAJOR_MINOR_1=$(basename $(COMPONENT_VERSION_1))
+COMPONENT_ARCHIVE_1=    $(COMPONENT_SRC_1).tar.gz
+COMPONENT_ARCHIVE_HASH_1= \
+    sha256:ab6833e98c816ae96800de07c43c3a44015be64eb3f7f8117cdd0a0889e1f41d
+COMPONENT_ARCHIVE_URL_1= \
+    https://download.gnome.org/sources/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_MINOR_1)/$(COMPONENT_ARCHIVE_1)
+
+BUILD_OLD_DIR_32 = $(COMPONENT_DIR)/build/$(COMPONENT_VERSION_1)-$(MACH32)
+BUILD_OLD_DIR_64 = $(COMPONENT_DIR)/build/$(COMPONENT_VERSION_1)-$(MACH64)
+INSTALL_OLD_DIR = $(PROTO_DIR)/$(COMPONENT_VERSION_1)
+$(BUILD_OLD_DIR_32)/.configured: CONFIGURE_SCRIPT=$(SOURCE_DIR_1)/configure
+$(BUILD_OLD_DIR_64)/.configured: CONFIGURE_SCRIPT=$(SOURCE_DIR_1)/configure
+$(BUILD_OLD_DIR_32)/.configured: BITS=32
+$(BUILD_OLD_DIR_64)/.configured: BITS=64
+$(BUILD_OLD_DIR_32)/.installed: COMPONENT_INSTALL_ARGS=DESTDIR=$(INSTALL_OLD_DIR)
+$(BUILD_OLD_DIR_64)/.installed: COMPONENT_INSTALL_ARGS=DESTDIR=$(INSTALL_OLD_DIR)
+
+BUILD_32 += $(BUILD_OLD_DIR_32)/.built
+BUILD_64 += $(BUILD_OLD_DIR_64)/.built
+INSTALL_32 += $(BUILD_OLD_DIR_32)/.installed
+INSTALL_64 += $(BUILD_OLD_DIR_64)/.installed
+
 # Tests do not work on Solaris yet
 TEST_TARGET= $(SKIP_TEST)
 
@@ -56,4 +82,6 @@ REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += developer/documentation-tool/xmlto
 REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/desktop/gobject/gobject-introspection
+REQUIRED_PACKAGES += library/desktop/gtk2
 REQUIRED_PACKAGES += library/glib2
+REQUIRED_PACKAGES += system/library/libdbus-glib
