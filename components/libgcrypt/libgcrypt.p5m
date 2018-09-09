@@ -45,9 +45,14 @@ file usr/bin/$(MACH32)/libgcrypt-config path=usr/bin/libgcrypt-config
 file path=usr/bin/mpicalc
 file path=usr/include/gcrypt.h
 link path=usr/lib/$(MACH64)/libgcrypt.so target=libgcrypt.so.20.2.3
+link path=usr/lib/$(MACH64)/libgcrypt.so.11 target=libgcrypt.so.11.8.2
+file 1.5.3/usr/lib/$(MACH64)/libgcrypt.so.11.8.2 \
+    path=usr/lib/$(MACH64)/libgcrypt.so.11.8.2
 link path=usr/lib/$(MACH64)/libgcrypt.so.20 target=libgcrypt.so.20.2.3
 file path=usr/lib/$(MACH64)/libgcrypt.so.20.2.3
 link path=usr/lib/libgcrypt.so target=libgcrypt.so.20.2.3
+link path=usr/lib/libgcrypt.so.11 target=libgcrypt.so.11.8.2
+file 1.5.3/usr/lib/libgcrypt.so.11.8.2 path=usr/lib/libgcrypt.so.11.8.2
 link path=usr/lib/libgcrypt.so.20 target=libgcrypt.so.20.2.3
 file path=usr/lib/libgcrypt.so.20.2.3
 file path=usr/share/aclocal/libgcrypt.m4
