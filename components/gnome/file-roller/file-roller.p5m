@@ -42,7 +42,8 @@ file path=usr/lib/$(MACH64)/file-roller/rpm2cpio mode=0555
 #file path=usr/lib/$(MACH64)/nautilus/extensions-3.0/libnautilus-fileroller.so
 file path=usr/share/GConf/gsettings/file-roller.convert
 file path=usr/share/appdata/org.gnome.FileRoller.appdata.xml
-file path=usr/share/applications/org.gnome.FileRoller.desktop
+#file path=usr/share/applications/org.gnome.FileRoller.desktop
+file files/file-roller.desktop path=usr/share/applications/file-roller.desktop
 file path=usr/share/dbus-1/services/org.gnome.FileRoller.ArchiveManager1.service
 file path=usr/share/dbus-1/services/org.gnome.FileRoller.service
 file path=usr/share/file-roller/packages.match
