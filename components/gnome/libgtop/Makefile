@@ -39,6 +39,42 @@ COMPONENT_ANITYA_ID=	13146
 
 TPNO=			34656
 
+# Build the old version for 11.3 compatibility.  We extract only the
+# libgtop-2.0.so.7 libraries
+COMPONENT_VERSION_1=	2.28.2
+COMPONENT_MAJOR_MINOR=  $(basename $(COMPONENT_VERSION_1))
+COMPONENT_SRC_1=	libgtop-$(COMPONENT_VERSION_1)
+COMPONENT_ARCHIVE_1=	$(COMPONENT_SRC_1).tar.gz
+COMPONENT_ARCHIVE_HASH_1= \
+    sha256:f32d65d5e18976439479fef51e94972dd849ce4b8aed8f7ac14a8f43bb094bf1
+COMPONENT_ARCHIVE_URL_1= \
+    https://download.gnome.org/sources/$(COMPONENT_NAME)/$(COMPONENT_MAJOR_MINOR)/$(COMPONENT_ARCHIVE_1)
+
+SOURCE_DIR_1 = $(COMPONENT_DIR)/$(COMPONENT_SRC_1)
+BUILD_OLD_DIR_32 = $(COMPONENT_DIR)/build/$(COMPONENT_VERSION_1)-$(MACH32)
+INSTALL_OLD_DIR = $(PROTO_DIR)/$(COMPONENT_VERSION_1)
+PATCH_DIR_1 = patches_1
+PATCHES_1 := $(wildcard $(PATCH_DIR_1)/*.patch)
+PATCH_STAMPS_1 = $(PATCHES_1:$(PATCH_DIR_1)/%=$(SOURCE_DIR_1)/.patched-%)
+
+$(SOURCE_DIR_1)/.patched-%: $(PATCH_DIR_1)/%
+	$(GPATCH) -d $(@D) $(GPATCH_FLAGS) < $<
+	$(TOUCH) $(@)
+
+$(SOURCE_DIR_1)/.patched: $(SOURCE_DIR_1)/.unpacked $(PATCH_STAMPS_1)
+	$(TOUCH) $(@)
+
+$(SOURCE_DIR_1)/.prep: $(SOURCE_DIR_1)/.patched
+	$(COMPONENT_PREP_ACTION)
+	$(TOUCH) $@
+
+$(BUILD_OLD_DIR_32)/.configured: CONFIGURE_SCRIPT = $(SOURCE_DIR_1)/configure
+$(BUILD_OLD_DIR_32)/.configured: BITS=32
+$(BUILD_OLD_DIR_32)/.installed: COMPONENT_INSTALL_ARGS = DESTDIR=$(INSTALL_OLD_DIR)
+
+BUILD_32 += $(SOURCE_DIR_1)/.prep $(BUILD_OLD_DIR_32)/.built
+INSTALL_32 += $(BUILD_OLD_DIR_32)/.installed
+
 TEST_TARGET = $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/gnome-component.mk

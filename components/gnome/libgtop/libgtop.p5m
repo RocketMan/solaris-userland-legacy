@@ -83,11 +83,13 @@ file path=usr/lib/girepository-1.0/GTop-2.0.typelib
 link path=usr/lib/libgtop-2.0.so target=libgtop-2.0.so.10.0.0
 link path=usr/lib/libgtop-2.0.so.10 target=libgtop-2.0.so.10.0.0
 file path=usr/lib/libgtop-2.0.so.10.0.0
+link path=usr/lib/libgtop-2.0.so.7 target=libgtop-2.0.so.7.2.0
+file 2.28.2/usr/lib/libgtop-2.0.so.7.2.0 path=usr/lib/libgtop-2.0.so.7.2.0
 file path=usr/lib/pkgconfig/libgtop-2.0.pc
 file path=usr/share/gir-1.0/GTop-2.0.gir
 file path=usr/share/gtk-doc/html/libgtop/home.png
 file path=usr/share/gtk-doc/html/libgtop/index.html
-file path=usr/share/gtk-doc/html/libgtop/left-insensitive.png
+#file path=usr/share/gtk-doc/html/libgtop/left-insensitive.png
 file path=usr/share/gtk-doc/html/libgtop/left.png
 file path=usr/share/gtk-doc/html/libgtop/libgtop-Close.html
 file path=usr/share/gtk-doc/html/libgtop/libgtop-Command.html
@@ -128,10 +130,10 @@ file path=usr/share/gtk-doc/html/libgtop/libgtop-version.html
 file path=usr/share/gtk-doc/html/libgtop/libgtop-white-paper-overview.html
 file path=usr/share/gtk-doc/html/libgtop/libgtop-white-paper.html
 file path=usr/share/gtk-doc/html/libgtop/libgtop.devhelp2
-file path=usr/share/gtk-doc/html/libgtop/right-insensitive.png
+#file path=usr/share/gtk-doc/html/libgtop/right-insensitive.png
 file path=usr/share/gtk-doc/html/libgtop/right.png
 file path=usr/share/gtk-doc/html/libgtop/style.css
-file path=usr/share/gtk-doc/html/libgtop/up-insensitive.png
+#file path=usr/share/gtk-doc/html/libgtop/up-insensitive.png
 file path=usr/share/gtk-doc/html/libgtop/up.png
 file path=usr/share/info/libgtop2.info
 file path=usr/share/locale/am/LC_MESSAGES/libgtop.mo
