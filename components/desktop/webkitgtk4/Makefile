@@ -39,7 +39,7 @@ COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH= \
 	sha256:93912cc2f40f12e452be1ca4babdbdaac0ec4f828d441257a6b06c2963bbac3c
 COMPONENT_ARCHIVE_URL=	https://webkitgtk.org/releases/$(COMPONENT_ARCHIVE)
-COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
+#COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_BUGDB=	library/webkitgtk
 COMPONENT_ANITYA_ID=	5355
 
@@ -48,10 +48,14 @@ TPNO=			43759
 # Use project's own optimization flags instead.
 gcc_OPT=
 
+LDFLAGS += -lsocket  -lnsl  -licuuc_gcc
+
 # We don't have JHbuild needed for tests
 TEST_TARGET= $(NO_TESTS)
 
 BUILD_STYLE= cmake
+
+CMAKE_OPTIONS += -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
 
 # Once 27639813 is figured out this can be removed along with the change
 # in prep-patch.mk for ADDITIONAL_PATCHES
@@ -71,7 +75,7 @@ LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 
 # This should have avoided the need for mapfile.$(MACH) above
 # why its not working needs to be eventually figured out (27639813)
-LD_OPTIONS+=-zgnu-version-script-compat
+#LD_OPTIONS+=-zgnu-version-script-compat
 
 # Required to ensure expected defines are set; also, ensures project's
 # optimisation level set appropriately.  Would prefer RelWithDebInfo, but that
@@ -113,6 +117,7 @@ REQUIRED_PACKAGES += developer/build/pkg-config
 REQUIRED_PACKAGES += developer/gperf
 REQUIRED_PACKAGES += developer/parser/bison
 REQUIRED_PACKAGES += image/library/libjpeg
+REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libwebp
 REQUIRED_PACKAGES += library/desktop/atk
@@ -128,6 +133,7 @@ REQUIRED_PACKAGES += library/gnome/libsecret
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/gnutls-3
 REQUIRED_PACKAGES += library/icu
+REQUIRED_PACKAGES += library/icu-gcc
 REQUIRED_PACKAGES += library/desktop/libnotify
 REQUIRED_PACKAGES += library/libsoup
 REQUIRED_PACKAGES += library/libxml2
@@ -148,3 +154,4 @@ REQUIRED_PACKAGES += x11/library/libx11
 REQUIRED_PACKAGES += x11/library/libxcomposite
 REQUIRED_PACKAGES += x11/library/libxdamage
 REQUIRED_PACKAGES += x11/library/mesa
+REQUIRED_PACKAGES += x11/library/mesa-egl
