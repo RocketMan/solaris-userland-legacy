@@ -55,6 +55,9 @@ CONFIGURE_OPTIONS += --enable-bz2
 CONFIGURE_OPTIONS += --enable-lzma
 CONFIGURE_OPTIONS += --enable-shared
 CONFIGURE_OPTIONS += --with-pic
+CONFIGURE_OPTIONS += --enable-compile-warnings=no
+
+COMPONENT_BUILD_ARGS += V=1
 
 REQUIRED_PACKAGES += database/sqlite-3
 REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
