@@ -1,0 +1,13 @@
+--- a/Source/WebCore/platform/graphics/opengl/GraphicsContext3DOpenGL.cpp	2017-10-27 09:54:16.000000000 +0000
++++ b/Source/WebCore/platform/graphics/opengl/GraphicsContext3DOpenGL.cpp	2018-09-13 10:55:04.802624947 +0000
+@@ -62,6 +62,10 @@
+ #include "OpenGLShims.h"
+ #endif
+ 
++#ifndef GL_MAX_VARYING_VECTORS
++#define GL_MAX_VARYING_VECTORS            0x8DFC
++#endif
++
+ namespace WebCore {
+ 
+ void GraphicsContext3D::releaseShaderCompiler()
