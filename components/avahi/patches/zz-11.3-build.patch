@@ -1,0 +1,11 @@
+--- a/configure.ac	2018-09-14 15:51:47.518575087 +0000
++++ b/configure.ac	2018-09-14 16:57:45.242155599 +0000
+@@ -368,7 +368,7 @@
+  # Solaris stuff
+  AC_SEARCH_LIBS([inet_ntop],[nsl])
+  AC_SEARCH_LIBS([recv],[socket])
+- AC_CHECK_DECL([CMSG_SPACE],,CFLAGS="$CFLAGS -D_XOPEN_SOURCE=500 -D__EXTENSIONS__", [[#include <sys/socket.h>]])
++ AC_CHECK_DECL([CMSG_SPACE],,CFLAGS="$CFLAGS -D_XOPEN_SOURCE=500 -D__EXTENSIONS__ -D_XPG6", [[#include <sys/socket.h>]])
+ 
+ # Checks for library functions.
+ AC_FUNC_MEMCMP
