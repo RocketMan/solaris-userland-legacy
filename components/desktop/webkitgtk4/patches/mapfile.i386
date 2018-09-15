@@ -32,7 +32,7 @@ file upstream bug after resolving issues documented above
 
 --- a/Source/cmake/gtksymbols.filter	2018-02-22 19:50:51.871416050 -0800
 +++ b/Source/cmake/gtksymbols.filter	2018-02-22 19:53:01.188465200 -0800
-@@ -1,6 +1,14276 @@
+@@ -1,6 +1,14285 @@
  {
  global:
 -  webkit_*;
@@ -12271,6 +12271,15 @@ file upstream bug after resolving issues documented above
 +  webkit_context_menu_get_type        ;
 +  webkit_favicon_database_error_get_type ;
 +  webkit_security_origin_get_type     ;
++  webkit_security_origin_get_host     ;
++  webkit_security_origin_get_port     ;
++  webkit_security_origin_get_protocol ;
++  webkit_security_origin_is_opaque    ;
++  webkit_security_origin_new          ;
++  webkit_security_origin_new_for_uri  ;
++  webkit_security_origin_ref          ;
++  webkit_security_origin_to_string    ;
++  webkit_security_origin_unref        ;
 +  webkit_permission_request_get_type  ;
 +  webkit_uri_scheme_request_get_type  ;
 +  webkit_application_info_get_type    ;
