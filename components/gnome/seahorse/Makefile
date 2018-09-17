@@ -43,6 +43,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 CONFIGURE_OPTIONS += --disable-hkp
+CONFIGURE_OPTIONS += --disable-ldap
 
 REQUIRED_PACKAGES += gnome/gsettings-desktop-schemas
 REQUIRED_PACKAGES += library/desktop/atk
