@@ -43,8 +43,8 @@ TPNO=			35414
 TEST_TARGET = $(SKIP_TEST)
 
 # Contains a single Python script written for Python 2.x/3.x; prefer 3.4.
-PYTHON=3.4
-PYTHON_VERSIONS=3.4
+PYTHON=3.5
+PYTHON_VERSIONS=3.5
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
@@ -70,4 +70,4 @@ REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/desktop/gssdp
 REQUIRED_PACKAGES += library/libsoup
 REQUIRED_PACKAGES += library/libxml2
-REQUIRED_PACKAGES += runtime/python-34
+REQUIRED_PACKAGES += runtime/python-35
