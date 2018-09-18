@@ -43,6 +43,12 @@ TEST_TARGET = $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
+$(SOURCE_DIR)/.patched: $(SOURCE_DIR)/.patched-thumbnails
+
+$(SOURCE_DIR)/.patched-thumbnails:
+	$(CP) $(COMPONENT_DIR)/files-11.3/* $(SOURCE_DIR)/src
+	$(TOUCH) $(SOURCE_DIR)/.patched-thumbnails
+
 # The build process modifies the shebang line to use the version of Python
 # automatically found; to avoid using the current system default, one is
 # explicitly specified here.
@@ -61,7 +67,8 @@ CONFIGURE_OPTIONS += --disable-static
 CONFIGURE_OPTIONS += --disable-schemas-compile
 # Required for other components.
 CONFIGURE_OPTIONS += --enable-introspection
-CONFIGURE_OPTIONS += --enable-nautilus
+#CONFIGURE_OPTIONS += --enable-nautilus
+CONFIGURE_OPTIONS += --disable-nautilus
 # Required for other components.
 CONFIGURE_OPTIONS += --enable-python
 CONFIGURE_OPTIONS += --enable-shared
