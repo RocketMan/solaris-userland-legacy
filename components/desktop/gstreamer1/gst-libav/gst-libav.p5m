@@ -40,4 +40,8 @@ file usr/lib/amd64/gstreamer-1.0/libgstlibav.la \
     path=usr/lib/amd64/gstreamer-1.0/libgstlibav.la
 file usr/lib/amd64/gstreamer-1.0/libgstlibav.so \
     path=usr/lib/amd64/gstreamer-1.0/libgstlibav.so
+file usr/lib/gstreamer-1.0/libgstlibav.la \
+    path=usr/lib/gstreamer-1.0/libgstlibav.la
+file usr/lib/gstreamer-1.0/libgstlibav.so \
+    path=usr/lib/gstreamer-1.0/libgstlibav.so
 license COPYING license=GPLv2
