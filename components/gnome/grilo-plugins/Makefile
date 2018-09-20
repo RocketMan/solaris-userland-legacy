@@ -48,8 +48,10 @@ CFLAGS += -D__EXTENSIONS__
 # Solaris doesn't have libdmap.
 CONFIGURE_OPTIONS += --disable-dmap
 CONFIGURE_OPTIONS += --disable-static
-CONFIGURE_OPTIONS += --enable-goa
+#CONFIGURE_OPTIONS += --enable-goa
+CONFIGURE_OPTIONS += --enable-bookmarks
 CONFIGURE_OPTIONS += --enable-shared
+CONFIGURE_OPTIONS += --disable-raitv
 CONFIGURE_OPTIONS += --with-pic
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 
