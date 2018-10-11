@@ -1,0 +1,29 @@
+--- a/src/screenshot-interactive-dialog.c	2016-07-11 15:55:18.000000000 +0000
++++ b/src/screenshot-interactive-dialog.c	2018-10-12 09:49:56.632795611 +0000
+@@ -448,6 +448,15 @@
+ 
+   dialog = gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
+ 
++  settings = gtk_settings_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (dialog)));
++  g_object_get (settings,
++                "gtk-shell-shows-app-menu", &shows_app_menu,
++                NULL);
++
++  /* suppress the application menu if it is not shown by the shell */
++  if (!shows_app_menu)
++    gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW (dialog), FALSE);
++
+   header_bar = gtk_header_bar_new ();
+   gtk_window_set_titlebar (GTK_WINDOW (dialog), header_bar);
+ 
+@@ -469,10 +478,6 @@
+   gtk_container_add (GTK_CONTAINER (main_vbox), button_box);
+ 
+   /* add help as a dialog button if we're not showing the application menu */
+-  settings = gtk_settings_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (dialog)));
+-  g_object_get (settings,
+-                "gtk-shell-shows-app-menu", &shows_app_menu,
+-                NULL);
+   if (!shows_app_menu)
+     {
+       button = gtk_button_new_with_mnemonic (_("_Help"));

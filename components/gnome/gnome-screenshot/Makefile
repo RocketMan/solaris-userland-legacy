@@ -41,6 +41,8 @@ TEST_TARGET= $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
+$(SOLARIS_11_3_ONLY)CFLAGS += -DSOLARIS_11_3
+
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 
 REQUIRED_PACKAGES += library/desktop/cairo

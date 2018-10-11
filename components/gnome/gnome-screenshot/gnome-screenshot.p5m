@@ -36,9 +36,15 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file path=usr/bin/gnome-screenshot
 file path=usr/share/GConf/gsettings/gnome-screenshot.convert
 file path=usr/share/appdata/org.gnome.Screenshot.appdata.xml
-file path=usr/share/applications/org.gnome.Screenshot.desktop
+$(SOLARIS_11_3_ONLY)file files/gnome-screenshot.desktop \
+    path=usr/share/applications/gnome-screenshot.desktop
+$(SOLARIS_11_4_5_ONLY)file path=usr/share/applications/org.gnome.Screenshot.desktop
 file path=usr/share/dbus-1/services/org.gnome.Screenshot.service
 file path=usr/share/glib-2.0/schemas/org.gnome.gnome-screenshot.gschema.xml
+$(SOLARIS_11_3_ONLY)file files/index.page \
+    path=usr/share/help/C/screen-shot/index.page
+$(SOLARIS_11_3_ONLY)file files/legal.xml \
+    path=usr/share/help/C/screen-shot/legal.xml
 file path=usr/share/locale/af/LC_MESSAGES/gnome-screenshot.mo
 file path=usr/share/locale/am/LC_MESSAGES/gnome-screenshot.mo
 file path=usr/share/locale/an/LC_MESSAGES/gnome-screenshot.mo
