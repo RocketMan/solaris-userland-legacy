@@ -36,8 +36,8 @@ set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2016/396
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-#file path=usr/bin/wnck-urgency-monitor
-#file path=usr/bin/wnckprop
+$(SOLARIS_11_4_5_ONLY)file path=usr/bin/wnck-urgency-monitor
+$(SOLARIS_11_4_5_ONLY)file path=usr/bin/wnckprop
 file path=usr/include/libwnck-3.0/libwnck/application.h
 file path=usr/include/libwnck-3.0/libwnck/class-group.h
 file path=usr/include/libwnck-3.0/libwnck/libwnck.h

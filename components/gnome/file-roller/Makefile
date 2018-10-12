@@ -39,11 +39,13 @@ TPNO=			36275
 
 TEST_TARGET = $(NO_TESTS)
 
+$(SOLARIS_11_3_ONLY)CFLAGS += -DSOLARIS_11_3
+
 include $(WS_MAKE_RULES)/gnome-component.mk
 
 CONFIGURE_OPTIONS += --enable-libarchive
 CONFIGURE_OPTIONS += --disable-static
-CONFIGURE_OPTIONS += --disable-nautilus-actions
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS += --disable-nautilus-actions
 
 # Assumes GNU xgettext in PATH
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)

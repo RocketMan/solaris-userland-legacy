@@ -41,9 +41,11 @@ TPNO=			35135
 
 TEST_TARGET = $(NO_TESTS)
 
+$(SOLARIS_11_3_ONLY)CFLAGS += -DSOLARIS_11_3
+
 include $(WS_MAKE_RULES)/gnome-component.mk
 
-$(SOURCE_DIR)/.patched: $(SOURCE_DIR)/.patched-thumbnails
+$(SOLARIS_11_3_ONLY)$(SOURCE_DIR)/.patched: $(SOURCE_DIR)/.patched-thumbnails
 
 $(SOURCE_DIR)/.patched-thumbnails:
 	$(CP) $(COMPONENT_DIR)/files-11.3/* $(SOURCE_DIR)/src

@@ -4,12 +4,12 @@
  		"application/x-cpio",
  		"application/x-deb",
  		"application/x-lha",
-+#ifdef NOTYET
++#ifndef SOLARIS_11_3
  		"application/x-lrzip-compressed-tar",
 +#endif
  		"application/x-lzip-compressed-tar",
  		"application/x-lzma-compressed-tar",
-+#ifdef NOTYET
++#ifndef SOLARIS_11_3
  		"application/x-lzop-compressed-tar",
 +#endif
  		"application/x-rar",
@@ -20,7 +20,7 @@
  		}
  	}
 -
-+#ifdef NOTYET
++#ifndef SOLARIS_11_3
  	/* tar.lrz format requires external lrzip */
  	if (strcmp (mime_type, "application/x-lrzip-compressed-tar") == 0) {
  		if (!_g_program_is_available ("lrzip", check_command))
@@ -34,7 +34,7 @@
  		archive_write_set_format_pax_restricted (a);
  		archive_filter = ARCHIVE_FILTER_GZIP;
  	}
-+#ifdef NOTYET
++#ifndef SOLARIS_11_3
  	else if (_g_str_equal (mime_type, "application/x-lrzip-compressed-tar")) {
  		archive_write_set_format_pax_restricted (a);
  		archive_filter = ARCHIVE_FILTER_LRZIP;
@@ -47,7 +47,7 @@
  		archive_write_set_format_pax_restricted (a);
  		archive_filter = ARCHIVE_FILTER_LZMA;
  	}
-+#ifdef NOTYET
++#ifndef SOLARIS_11_3
  	else if (_g_str_equal (mime_type, "application/x-lzop-compressed-tar")) {
  		archive_write_set_format_pax_restricted (a);
  		archive_filter = ARCHIVE_FILTER_LZOP;
@@ -60,7 +60,7 @@
  		case ARCHIVE_FILTER_GZIP:
  			archive_write_add_filter_gzip (a);
  			break;
-+#ifdef NOTYET
++#ifndef SOLARIS_11_3
  		case ARCHIVE_FILTER_LRZIP:
  			archive_write_add_filter_lrzip (a);
  			break;
@@ -71,7 +71,7 @@
  		case ARCHIVE_FILTER_LZMA:
  			archive_write_add_filter_lzma (a);
  			break;
-+#ifdef NOTYET
++#ifndef SOLARIS_11_3
  		case ARCHIVE_FILTER_LZOP:
  			archive_write_add_filter_lzop (a);
  			break;

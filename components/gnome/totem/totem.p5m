@@ -48,7 +48,7 @@ file path=usr/lib/$(MACH64)/girepository-1.0/Totem-1.0.typelib
 link path=usr/lib/$(MACH64)/libtotem.so target=libtotem.so.0.0.0
 link path=usr/lib/$(MACH64)/libtotem.so.0 target=libtotem.so.0.0.0
 file path=usr/lib/$(MACH64)/libtotem.so.0.0.0
-#file path=usr/lib/$(MACH64)/nautilus/extensions-3.0/libtotem-properties-page.so
+$(SOLARIS_11_4_5_ONLY)file path=usr/lib/$(MACH64)/nautilus/extensions-3.0/libtotem-properties-page.so
 file path=usr/lib/$(MACH64)/pkgconfig/totem.pc
 file path=usr/lib/$(MACH64)/totem/plugins/apple-trailers/apple-trailers.plugin
 file path=usr/lib/$(MACH64)/totem/plugins/apple-trailers/libapple-trailers.so
@@ -89,8 +89,8 @@ file path=usr/lib/$(MACH64)/totem/plugins/recent/librecent.so
 file path=usr/lib/$(MACH64)/totem/plugins/recent/recent.plugin
 file path=usr/lib/$(MACH64)/totem/plugins/rotation/librotation.so
 file path=usr/lib/$(MACH64)/totem/plugins/rotation/rotation.plugin
-#file path=usr/lib/$(MACH64)/totem/plugins/save-file/libsave-file.so
-#file path=usr/lib/$(MACH64)/totem/plugins/save-file/save-file.plugin
+$(SOLARIS_11_4_5_ONLY)file path=usr/lib/$(MACH64)/totem/plugins/save-file/libsave-file.so
+$(SOLARIS_11_4_5_ONLY)file path=usr/lib/$(MACH64)/totem/plugins/save-file/save-file.plugin
 file path=usr/lib/$(MACH64)/totem/plugins/screensaver/libscreensaver.so
 file path=usr/lib/$(MACH64)/totem/plugins/screensaver/screensaver.plugin
 file path=usr/lib/$(MACH64)/totem/plugins/screenshot/gallery.ui
@@ -107,7 +107,7 @@ file path=usr/lib/girepository-1.0/Totem-1.0.typelib
 link path=usr/lib/libtotem.so target=libtotem.so.0.0.0
 link path=usr/lib/libtotem.so.0 target=libtotem.so.0.0.0
 file path=usr/lib/libtotem.so.0.0.0
-#file path=usr/lib/nautilus/extensions-3.0/libtotem-properties-page.so
+$(SOLARIS_11_4_5_ONLY)file path=usr/lib/nautilus/extensions-3.0/libtotem-properties-page.so
 file path=usr/lib/pkgconfig/totem.pc
 file path=usr/lib/totem/plugins/apple-trailers/apple-trailers.plugin
 file path=usr/lib/totem/plugins/apple-trailers/libapple-trailers.so
@@ -148,8 +148,8 @@ file path=usr/lib/totem/plugins/recent/librecent.so
 file path=usr/lib/totem/plugins/recent/recent.plugin
 file path=usr/lib/totem/plugins/rotation/librotation.so
 file path=usr/lib/totem/plugins/rotation/rotation.plugin
-#file path=usr/lib/totem/plugins/save-file/libsave-file.so
-#file path=usr/lib/totem/plugins/save-file/save-file.plugin
+$(SOLARIS_11_4_5_ONLY)file path=usr/lib/totem/plugins/save-file/libsave-file.so
+$(SOLARIS_11_4_5_ONLY)file path=usr/lib/totem/plugins/save-file/save-file.plugin
 file path=usr/lib/totem/plugins/screensaver/libscreensaver.so
 file path=usr/lib/totem/plugins/screensaver/screensaver.plugin
 file path=usr/lib/totem/plugins/screenshot/gallery.ui
@@ -166,7 +166,9 @@ file path=usr/share/GConf/gsettings/opensubtitles.convert
 file path=usr/share/GConf/gsettings/pythonconsole.convert
 file path=usr/share/GConf/gsettings/totem.convert
 file path=usr/share/appdata/org.gnome.Totem.appdata.xml
-file files/totem.desktop path=usr/share/applications/totem.desktop
+$(SOLARIS_11_4_5_ONLY)file path=usr/share/applications/org.gnome.Totem.desktop
+$(SOLARIS_11_3_ONLY)file files/totem.desktop \
+    path=usr/share/applications/totem.desktop
 file path=usr/share/dbus-1/services/org.gnome.Totem.service
 file path=usr/share/gir-1.0/Totem-1.0.gir
 file path=usr/share/glib-2.0/schemas/org.gnome.totem.enums.xml

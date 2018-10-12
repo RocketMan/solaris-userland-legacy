@@ -52,13 +52,16 @@
  
 --- a/src/icon-helpers.c	2017-01-16 13:17:20.000000000 +0000
 +++ b/src/icon-helpers.c	2018-09-18 11:40:23.353449727 +0000
-@@ -28,7 +28,8 @@
+@@ -28,7 +28,12 @@
  #include <icon-helpers.h>
  
  #define GNOME_DESKTOP_USE_UNSTABLE_API 1
--#include <libgnome-desktop/gnome-desktop-thumbnail.h>
++#ifdef SOLARIS_11_3
 +#include "gnome-desktop-thumbnail.c"
 +#include "gnome-thumbnail-pixbuf-utils.c"
++#else
+ #include <libgnome-desktop/gnome-desktop-thumbnail.h>
++#endif
  
  #define DEFAULT_MAX_THREADS   1
  #define THUMB_SEARCH_SIZE     256
