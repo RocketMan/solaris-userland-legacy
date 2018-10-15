@@ -29,15 +29,15 @@ COMPILER= gcc
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=         nmap
-COMPONENT_VERSION=      7.60
+COMPONENT_VERSION=      7.70
 COMPONENT_PROJECT_URL=  https://nmap.org/
 COMPONENT_ARCHIVE=      $(COMPONENT_SRC).tgz
 COMPONENT_ARCHIVE_HASH= \
-    sha256:330d94228f3196dc7481990435703ba1ab67bb95016ea073a11a361aa76f65ef
+    sha256:78aafb025e3d93f58a61b9e3956371e2e8829b26f8edbd5ae14641076d5ce1bd
 COMPONENT_ARCHIVE_URL=  $(COMPONENT_PROJECT_URL)dist/$(COMPONENT_ARCHIVE)
 COMPONENT_ANITYA_ID=	2096
 
-TPNO=			37398
+TPNO=			44852
 
 TEST_TARGET= $(NO_TESTS)
 include $(WS_MAKE_RULES)/common.mk
@@ -63,6 +63,7 @@ CONFIGURE_OPTIONS  +=   --with-libpcre
 CONFIGURE_OPTIONS  +=   --with-liblua 
 CONFIGURE_OPTIONS  +=   --with-ncat 
 CONFIGURE_OPTIONS  +=   --with-ndiff
+CONFIGURE_OPTIONS  +=   --with-system-ssl-certs=/etc/certs
 
 # The nmap libdnet-stripped configure script can't properly handle
 # finding / using three Solaris network header files. We override this.
@@ -76,6 +77,7 @@ REQUIRED_PACKAGES += library/pcre
 REQUIRED_PACKAGES += library/python/pygobject-27
 REQUIRED_PACKAGES += library/python/pygtk2-27
 REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += runtime/lua
 REQUIRED_PACKAGES += runtime/python-27
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
