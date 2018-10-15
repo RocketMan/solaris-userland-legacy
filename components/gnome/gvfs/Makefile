@@ -45,6 +45,9 @@ CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 # Requires a reconf due to 01-major-minor.patch changing configure.ac.
 COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -iv);
 
+CONFIGURE_ENV += SMBCLIENT_CFLAGS=-I/usr/include/samba
+CONFIGURE_ENV += SMBCLIENT_LIBS=-lsmbclient
+
 # Assumes GNU xgettext is first in $PATH.
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 
@@ -58,6 +61,7 @@ CONFIGURE_OPTIONS += --enable-gtk
 CONFIGURE_OPTIONS += --enable-http
 CONFIGURE_OPTIONS += --enable-keyring
 CONFIGURE_OPTIONS += --enable-shared
+CONFIGURE_OPTIONS += --enable-samba
 # admin requires libcap
 CONFIGURE_OPTIONS += --disable-admin
 CONFIGURE_OPTIONS += --with-pic
@@ -72,6 +76,7 @@ REQUIRED_PACKAGES += library/gnome/libsecret
 REQUIRED_PACKAGES += library/libarchive
 REQUIRED_PACKAGES += library/libsoup
 REQUIRED_PACKAGES += library/libxml2
+REQUIRED_PACKAGES += library/samba/libsmbclient
 REQUIRED_PACKAGES += system/library/security/libgcrypt
 REQUIRED_PACKAGES += system/network/avahi
 REQUIRED_PACKAGES += library/gnome/gcr
