@@ -113,7 +113,7 @@ $(WB_ONLY_CONF):	CONFIGURE_OPTIONS += \
 CONFIGURE_OPTIONS +=	--with-ads
 CONFIGURE_OPTIONS +=	--with-winbind
 CONFIGURE_OPTIONS +=	--with-ldap
-CONFIGURE_OPTIONS +=	--with-system-mitkrb5
+#CONFIGURE_OPTIONS +=	--with-system-mitkrb5
 CONFIGURE_OPTIONS +=	--without-ad-dc
 
 CONFIGURE_OPTIONS +=	--nocache
@@ -211,6 +211,7 @@ system-test:    $(NO_TESTS)
 REQUIRED_PACKAGES += library/file-monitor/gamin
 REQUIRED_PACKAGES += library/jansson
 REQUIRED_PACKAGES += library/libarchive
+REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/print/cups-libs
 REQUIRED_PACKAGES += library/samba/libsmbclient
 REQUIRED_PACKAGES += $(PERL_PKG)

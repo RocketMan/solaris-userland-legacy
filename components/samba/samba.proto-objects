@@ -395,6 +395,8 @@ file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_forwarder.p
 dir  path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_forwarder_helpers
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_forwarder_helpers/server.py
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_forwarder_helpers/server.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_invalid.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_invalid.pyc
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_tkey.py
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_tkey.pyc
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/dns_wildcard.py
@@ -557,6 +559,177 @@ file path=usr/lib/python2.7/vendor-packages/64/samba/samba/tests/xattr.pyc
 dir  path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/__init__.py
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/__init__.pyc
+dir  path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/__init__.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/__init__.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/dnssec.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/dnssec.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/e164.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/e164.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/edns.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/edns.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/entropy.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/entropy.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/exception.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/exception.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/flags.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/flags.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/hash.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/hash.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/inet.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/inet.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/ipv4.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/ipv4.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/ipv6.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/ipv6.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/message.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/message.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/name.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/name.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/namedict.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/namedict.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/node.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/node.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/opcode.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/opcode.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/query.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/query.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rcode.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rcode.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdata.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdata.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdataclass.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdataclass.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdataset.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdataset.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdatatype.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdatatype.pyc
+dir  path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes
+dir  path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/AFSDB.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/AFSDB.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/CERT.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/CERT.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/CNAME.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/CNAME.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/DLV.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/DLV.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/DNAME.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/DNAME.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/DNSKEY.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/DNSKEY.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/DS.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/DS.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/GPOS.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/GPOS.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/HINFO.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/HINFO.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/HIP.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/HIP.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/ISDN.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/ISDN.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/LOC.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/LOC.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/MX.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/MX.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/NS.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/NS.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/NSEC.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/NSEC.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/NSEC3.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/NSEC3.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/NSEC3PARAM.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/NSEC3PARAM.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/PTR.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/PTR.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/RP.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/RP.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/RRSIG.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/RRSIG.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/RT.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/RT.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/SOA.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/SOA.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/SPF.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/SPF.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/SSHFP.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/SSHFP.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/TXT.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/TXT.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/X25.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/X25.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/__init__.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/ANY/__init__.pyc
+dir  path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/A.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/A.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/AAAA.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/AAAA.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/APL.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/APL.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/DHCID.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/DHCID.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/IPSECKEY.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/IPSECKEY.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/KX.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/KX.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/NAPTR.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/NAPTR.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/NSAP.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/NSAP.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/NSAP_PTR.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/NSAP_PTR.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/PX.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/PX.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/SRV.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/SRV.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/WKS.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/WKS.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/__init__.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/IN/__init__.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/__init__.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/__init__.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/dsbase.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/dsbase.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/mxbase.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/mxbase.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/nsbase.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/nsbase.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/txtbase.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rdtypes/txtbase.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/renderer.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/renderer.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/resolver.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/resolver.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/reversename.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/reversename.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rrset.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/rrset.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/set.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/set.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/tokenizer.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/tokenizer.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/tsig.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/tsig.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/tsigkeyring.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/tsigkeyring.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/ttl.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/ttl.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/update.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/update.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/version.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/version.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/wiredata.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/wiredata.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/zone.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/dns/zone.pyc
+dir  path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/iso8601
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/iso8601/__init__.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/iso8601/__init__.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/iso8601/iso8601.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/iso8601/iso8601.pyc
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/iso8601/test_iso8601.py
+file path=usr/lib/python2.7/vendor-packages/64/samba/samba/third_party/iso8601/test_iso8601.pyc
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/upgrade.py
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/upgrade.pyc
 file path=usr/lib/python2.7/vendor-packages/64/samba/samba/upgradehelpers.py
@@ -597,45 +770,62 @@ file path=usr/lib/samba/$(MACH64)/ldb/sample.so
 file path=usr/lib/samba/$(MACH64)/ldb/server_sort.so
 file path=usr/lib/samba/$(MACH64)/ldb/skel.so
 file path=usr/lib/samba/$(MACH64)/ldb/tdb.so
-link path=usr/lib/samba/$(MACH64)/libdcerpc-binding.so     target=libdcerpc-binding.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libdcerpc-binding.so.0     target=libdcerpc-binding.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libdcerpc-binding.so \
+    target=libdcerpc-binding.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libdcerpc-binding.so.0 \
+    target=libdcerpc-binding.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libdcerpc-binding.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libdcerpc-samr.so     target=libdcerpc-samr.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libdcerpc-samr.so.0     target=libdcerpc-samr.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libdcerpc-samr.so \
+    target=libdcerpc-samr.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libdcerpc-samr.so.0 \
+    target=libdcerpc-samr.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libdcerpc-samr.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libdcerpc.so target=libdcerpc.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libdcerpc.so.0 target=libdcerpc.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libdcerpc.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libndr-krb5pac.so     target=libndr-krb5pac.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libndr-krb5pac.so.0     target=libndr-krb5pac.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libndr-krb5pac.so \
+    target=libndr-krb5pac.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libndr-krb5pac.so.0 \
+    target=libndr-krb5pac.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libndr-krb5pac.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libndr-nbt.so target=libndr-nbt.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libndr-nbt.so.0 target=libndr-nbt.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libndr-nbt.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libndr-standard.so     target=libndr-standard.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libndr-standard.so.0     target=libndr-standard.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libndr-standard.so \
+    target=libndr-standard.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libndr-standard.so.0 \
+    target=libndr-standard.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libndr-standard.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libndr.so target=libndr.so.0.1.0
 link path=usr/lib/samba/$(MACH64)/libndr.so.0 target=libndr.so.0.1.0
 file path=usr/lib/samba/$(MACH64)/libndr.so.0.1.0
 link path=usr/lib/samba/$(MACH64)/libnetapi.so target=libnetapi.so.0
 file path=usr/lib/samba/$(MACH64)/libnetapi.so.0
-link path=usr/lib/samba/$(MACH64)/libsamba-credentials.so     target=libsamba-credentials.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libsamba-credentials.so.0     target=libsamba-credentials.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libsamba-credentials.so \
+    target=libsamba-credentials.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libsamba-credentials.so.0 \
+    target=libsamba-credentials.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libsamba-credentials.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libsamba-errors.so target=libsamba-errors.so.1
 file path=usr/lib/samba/$(MACH64)/libsamba-errors.so.1
-link path=usr/lib/samba/$(MACH64)/libsamba-hostconfig.so     target=libsamba-hostconfig.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libsamba-hostconfig.so.0     target=libsamba-hostconfig.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libsamba-hostconfig.so \
+    target=libsamba-hostconfig.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libsamba-hostconfig.so.0 \
+    target=libsamba-hostconfig.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libsamba-hostconfig.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libsamba-passdb.so     target=libsamba-passdb.so.0.27.0
-link path=usr/lib/samba/$(MACH64)/libsamba-passdb.so.0     target=libsamba-passdb.so.0.27.0
+link path=usr/lib/samba/$(MACH64)/libsamba-passdb.so \
+    target=libsamba-passdb.so.0.27.0
+link path=usr/lib/samba/$(MACH64)/libsamba-passdb.so.0 \
+    target=libsamba-passdb.so.0.27.0
 file path=usr/lib/samba/$(MACH64)/libsamba-passdb.so.0.27.0
-link path=usr/lib/samba/$(MACH64)/libsamba-policy.so     target=libsamba-policy.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libsamba-policy.so.0     target=libsamba-policy.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libsamba-policy.so \
+    target=libsamba-policy.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libsamba-policy.so.0 \
+    target=libsamba-policy.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libsamba-policy.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libsamba-util.so target=libsamba-util.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libsamba-util.so.0     target=libsamba-util.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libsamba-util.so.0 \
+    target=libsamba-util.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libsamba-util.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libsamdb.so target=libsamdb.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libsamdb.so.0 target=libsamdb.so.0.0.1
@@ -647,8 +837,10 @@ link path=usr/lib/samba/$(MACH64)/libsmbconf.so target=libsmbconf.so.0
 file path=usr/lib/samba/$(MACH64)/libsmbconf.so.0
 link path=usr/lib/samba/$(MACH64)/libsmbldap.so target=libsmbldap.so.2
 file path=usr/lib/samba/$(MACH64)/libsmbldap.so.2
-link path=usr/lib/samba/$(MACH64)/libtevent-util.so     target=libtevent-util.so.0.0.1
-link path=usr/lib/samba/$(MACH64)/libtevent-util.so.0     target=libtevent-util.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libtevent-util.so \
+    target=libtevent-util.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libtevent-util.so.0 \
+    target=libtevent-util.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libtevent-util.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libwbclient.so target=libwbclient.so.0.14
 link path=usr/lib/samba/$(MACH64)/libwbclient.so.0 target=libwbclient.so.0.14
@@ -715,7 +907,6 @@ file path=usr/lib/samba/$(MACH64)/vfs/virusfilter.so
 file path=usr/lib/samba/$(MACH64)/vfs/worm.so
 file path=usr/lib/samba/$(MACH64)/vfs/xattr_tdb.so
 file path=usr/lib/samba/$(MACH64)/vfs/zfsacl.so
-file path=usr/lib/samba/$(MACH64)/winbind-krb5-localauth.so
 file path=usr/lib/samba/$(MACH64)/winbind_krb5_locator.so
 dir  path=usr/lib/samba/bin
 file path=usr/lib/samba/bin/cifsdd
@@ -808,6 +999,9 @@ file path=usr/lib/samba/private/$(MACH64)/libMESSAGING-SEND-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libMESSAGING-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libaddns-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libads-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libasn1-samba4.so.8 \
+    target=libasn1-samba4.so.8.0.0
+file path=usr/lib/samba/private/$(MACH64)/libasn1-samba4.so.8.0.0
 file path=usr/lib/samba/private/$(MACH64)/libasn1util-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libauth-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libauth-unix-token-samba4.so
@@ -823,6 +1017,9 @@ file path=usr/lib/samba/private/$(MACH64)/libcliauth-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libcluster-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libcmdline-credentials-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libcmocka-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libcom_err-samba4.so.0 \
+    target=libcom_err-samba4.so.0.25
+file path=usr/lib/samba/private/$(MACH64)/libcom_err-samba4.so.0.25
 file path=usr/lib/samba/private/$(MACH64)/libcommon-auth-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libdbwrap-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libdcerpc-samba-samba4.so
@@ -835,10 +1032,34 @@ file path=usr/lib/samba/private/$(MACH64)/libgenrand-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libgensec-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libgpext-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libgse-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libgssapi-samba4.so.2 \
+    target=libgssapi-samba4.so.2.0.0
+file path=usr/lib/samba/private/$(MACH64)/libgssapi-samba4.so.2.0.0
+link path=usr/lib/samba/private/$(MACH64)/libhcrypto-samba4.so.5 \
+    target=libhcrypto-samba4.so.5.0.1
+file path=usr/lib/samba/private/$(MACH64)/libhcrypto-samba4.so.5.0.1
+link path=usr/lib/samba/private/$(MACH64)/libhdb-samba4.so.11 \
+    target=libhdb-samba4.so.11.0.2
+file path=usr/lib/samba/private/$(MACH64)/libhdb-samba4.so.11.0.2
+link path=usr/lib/samba/private/$(MACH64)/libheimbase-samba4.so.1 \
+    target=libheimbase-samba4.so.1.0.0
+file path=usr/lib/samba/private/$(MACH64)/libheimbase-samba4.so.1.0.0
+link path=usr/lib/samba/private/$(MACH64)/libheimntlm-samba4.so.1 \
+    target=libheimntlm-samba4.so.1.0.1
+file path=usr/lib/samba/private/$(MACH64)/libheimntlm-samba4.so.1.0.1
 file path=usr/lib/samba/private/$(MACH64)/libhttp-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libhx509-samba4.so.5 \
+    target=libhx509-samba4.so.5.0.0
+file path=usr/lib/samba/private/$(MACH64)/libhx509-samba4.so.5.0.0
 file path=usr/lib/samba/private/$(MACH64)/libidmap-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libinterfaces-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libiov-buf-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libkdc-samba4.so.2 \
+    target=libkdc-samba4.so.2.0.0
+file path=usr/lib/samba/private/$(MACH64)/libkdc-samba4.so.2.0.0
+link path=usr/lib/samba/private/$(MACH64)/libkrb5-samba4.so.26 \
+    target=libkrb5-samba4.so.26.0.0
+file path=usr/lib/samba/private/$(MACH64)/libkrb5-samba4.so.26.0.0
 file path=usr/lib/samba/private/$(MACH64)/libkrb5samba-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libldb-cmdline-samba4.so
 link path=usr/lib/samba/private/$(MACH64)/libldb.so.1 target=libldb.so.1.3.5
@@ -862,12 +1083,17 @@ file path=usr/lib/samba/private/$(MACH64)/libpopt-samba3-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libpopt-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libposix-eadb-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libprinting-migrate-samba4.so
-link path=usr/lib/samba/private/$(MACH64)/libpyldb-util.so.1     target=libpyldb-util.so.1.3.5
+link path=usr/lib/samba/private/$(MACH64)/libpyldb-util.so.1 \
+    target=libpyldb-util.so.1.3.5
 file path=usr/lib/samba/private/$(MACH64)/libpyldb-util.so.1.3.5
-link path=usr/lib/samba/private/$(MACH64)/libpytalloc-util.so.2     target=libpytalloc-util.so.2.1.11
+link path=usr/lib/samba/private/$(MACH64)/libpytalloc-util.so.2 \
+    target=libpytalloc-util.so.2.1.11
 file path=usr/lib/samba/private/$(MACH64)/libpytalloc-util.so.2.1.11
 file path=usr/lib/samba/private/$(MACH64)/libregistry-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libreplace-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libroken-samba4.so.19 \
+    target=libroken-samba4.so.19.0.1
+file path=usr/lib/samba/private/$(MACH64)/libroken-samba4.so.19.0.1
 file path=usr/lib/samba/private/$(MACH64)/libsamba-cluster-support-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libsamba-debug-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libsamba-modules-samba4.so
@@ -891,12 +1117,14 @@ file path=usr/lib/samba/private/$(MACH64)/libsmbpasswdparser-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libsocket-blocking-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libsys-rw-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libtalloc-report-samba4.so
-link path=usr/lib/samba/private/$(MACH64)/libtalloc.so.2     target=libtalloc.so.2.1.11
+link path=usr/lib/samba/private/$(MACH64)/libtalloc.so.2 \
+    target=libtalloc.so.2.1.11
 file path=usr/lib/samba/private/$(MACH64)/libtalloc.so.2.1.11
 file path=usr/lib/samba/private/$(MACH64)/libtdb-wrap-samba4.so
 link path=usr/lib/samba/private/$(MACH64)/libtdb.so.1 target=libtdb.so.1.3.15
 file path=usr/lib/samba/private/$(MACH64)/libtdb.so.1.3.15
-link path=usr/lib/samba/private/$(MACH64)/libtevent.so.0     target=libtevent.so.0.9.36
+link path=usr/lib/samba/private/$(MACH64)/libtevent.so.0 \
+    target=libtevent.so.0.9.36
 file path=usr/lib/samba/private/$(MACH64)/libtevent.so.0.9.36
 file path=usr/lib/samba/private/$(MACH64)/libtime-basic-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libtorture-samba4.so
@@ -906,6 +1134,9 @@ file path=usr/lib/samba/private/$(MACH64)/libutil-reg-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libutil-setid-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libutil-tdb-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libwinbind-client-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libwind-samba4.so.0 \
+    target=libwind-samba4.so.0.0.0
+file path=usr/lib/samba/private/$(MACH64)/libwind-samba4.so.0.0.0
 file path=usr/lib/samba/private/$(MACH64)/libxattr-tdb-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libz-samba4.so
 file path=usr/lib/samba/private/libreplace-samba4.so

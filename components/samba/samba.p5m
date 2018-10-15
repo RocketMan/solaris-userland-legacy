@@ -218,4 +218,4 @@ dir  path=var/spool/samba mode=1777
 license samba.license license=GPLv3
 
 # Samba can be used in Asian multibyte language envs. so we need this
-depend type=require fmri=pkg:/system/library/iconv
+$(SOLARIS_11_4_5_ONLY)depend type=require fmri=pkg:/system/library/iconv
