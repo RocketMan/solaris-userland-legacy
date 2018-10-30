@@ -29,12 +29,12 @@ include ../../make-rules/shared-macros.mk
 PATH=$(dir $(CC)):$(SPRO_VROOT)/bin:$(USRBINDIR):$(GNUBIN)
 
 COMPONENT_NAME=		subversion
-COMPONENT_VERSION=	1.9.7
+COMPONENT_VERSION=	1.9.9
 COMPONENT_PROJECT_URL=	https://subversion.apache.org/
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:c72a209c883e20245f14c4e644803f50ae83ae24652e385ff5e82300a0d06c3c
+    sha256:28d3021819b07c57faf1f3eb1d0df086df86a5fe0129a33aad37cb6a36dc1138
 COMPONENT_ARCHIVE_URL=	https://www.apache.org/dist/$(COMPONENT_NAME)/$(COMPONENT_ARCHIVE)
-COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
+#COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_BUGDB=	utility/svn
 COMPONENT_ANITYA_ID=	4905
 
@@ -96,8 +96,8 @@ PERL_ARCH_22_i386 = i86pc-solaris-thread-multi-64
 PERL_ARCH_22_sparc = sun4-solaris-thread-multi-64
 PERL_ARCH_22 = $(PERL_ARCH_22_$(MACH))
 
-APR_VERSION = 1.6
-APR_UTIL_VERSION = 1.6
+APR_VERSION = 1.5
+APR_UTIL_VERSION = 1.5
 
 # Use the libraries just built plus the svn test harness library.
 LD_TEST_PATH_32 := \
@@ -176,7 +176,7 @@ CONFIGURE_OPTIONS += --disable-mod-activation
 CONFIGURE_OPTIONS += --enable-javahl
 CONFIGURE_OPTIONS += --with-swig
 CONFIGURE_OPTIONS += --with-expat=$(EXPAT_INCLUDE):$(EXPAT_LIBDIR):$(EXPAT_LIB)
-CONFIGURE_OPTIONS += --with-serf=$(CONFIGURE_PREFIIX)
+#CONFIGURE_OPTIONS += --with-serf=$(CONFIGURE_PREFIIX)
 CONFIGURE_OPTIONS += --with-apr=$(APR-CONFIG.$(BITS))
 CONFIGURE_OPTIONS += --with-apr-util=$(APU-CONFIG.$(BITS))
 CONFIGURE_OPTIONS += --with-apache-libexecdir=$(APACHE_LIBEXECDIR)
@@ -222,6 +222,8 @@ COMPONENT_POST_INSTALL_ACTION += \
 REQUIRED_PACKAGES += database/sqlite-3
 REQUIRED_PACKAGES += developer/versioning/subversion
 REQUIRED_PACKAGES += developer/build/scons
+REQUIRED_PACKAGES += library/apr-15
+REQUIRED_PACKAGES += library/apr-util-15
 REQUIRED_PACKAGES += library/apr-16
 REQUIRED_PACKAGES += library/apr-util-16
 REQUIRED_PACKAGES += library/expat

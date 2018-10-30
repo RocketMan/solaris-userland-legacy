@@ -126,8 +126,7 @@ file usr/lib/svn/$(MACH64)/pkgconfig/libsvn_ra.pc \
     path=usr/lib/$(MACH64)/pkgconfig/libsvn_ra.pc
 file usr/lib/svn/$(MACH64)/pkgconfig/libsvn_ra_local.pc \
     path=usr/lib/$(MACH64)/pkgconfig/libsvn_ra_local.pc
-file usr/lib/svn/$(MACH64)/pkgconfig/libsvn_ra_serf.pc \
-    path=usr/lib/$(MACH64)/pkgconfig/libsvn_ra_serf.pc
+#file usr/lib/svn/$(MACH64)/pkgconfig/libsvn_ra_serf.pc #    path=usr/lib/$(MACH64)/pkgconfig/libsvn_ra_serf.pc
 file usr/lib/svn/$(MACH64)/pkgconfig/libsvn_ra_svn.pc \
     path=usr/lib/$(MACH64)/pkgconfig/libsvn_ra_svn.pc
 file usr/lib/svn/$(MACH64)/pkgconfig/libsvn_repos.pc \
@@ -151,8 +150,7 @@ file usr/lib/svn/pkgconfig/libsvn_fs_x.pc path=usr/lib/pkgconfig/libsvn_fs_x.pc
 file usr/lib/svn/pkgconfig/libsvn_ra.pc path=usr/lib/pkgconfig/libsvn_ra.pc
 file usr/lib/svn/pkgconfig/libsvn_ra_local.pc \
     path=usr/lib/pkgconfig/libsvn_ra_local.pc
-file usr/lib/svn/pkgconfig/libsvn_ra_serf.pc \
-    path=usr/lib/pkgconfig/libsvn_ra_serf.pc
+#file usr/lib/svn/pkgconfig/libsvn_ra_serf.pc #    path=usr/lib/pkgconfig/libsvn_ra_serf.pc
 file usr/lib/svn/pkgconfig/libsvn_ra_svn.pc \
     path=usr/lib/pkgconfig/libsvn_ra_svn.pc
 file usr/lib/svn/pkgconfig/libsvn_repos.pc \
@@ -195,11 +193,9 @@ link path=usr/lib/svn/$(MACH64)/libsvn_ra_local-1.so \
 link path=usr/lib/svn/$(MACH64)/libsvn_ra_local-1.so.0 \
     target=libsvn_ra_local-1.so.0.0.0
 file path=usr/lib/svn/$(MACH64)/libsvn_ra_local-1.so.0.0.0
-link path=usr/lib/svn/$(MACH64)/libsvn_ra_serf-1.so \
-    target=libsvn_ra_serf-1.so.0.0.0
-link path=usr/lib/svn/$(MACH64)/libsvn_ra_serf-1.so.0 \
-    target=libsvn_ra_serf-1.so.0.0.0
-file path=usr/lib/svn/$(MACH64)/libsvn_ra_serf-1.so.0.0.0
+#link path=usr/lib/svn/$(MACH64)/libsvn_ra_serf-1.so #    target=libsvn_ra_serf-1.so.0.0.0
+#link path=usr/lib/svn/$(MACH64)/libsvn_ra_serf-1.so.0 #    target=libsvn_ra_serf-1.so.0.0.0
+#file path=usr/lib/svn/$(MACH64)/libsvn_ra_serf-1.so.0.0.0
 link path=usr/lib/svn/$(MACH64)/libsvn_ra_svn-1.so \
     target=libsvn_ra_svn-1.so.0.0.0
 link path=usr/lib/svn/$(MACH64)/libsvn_ra_svn-1.so.0 \
@@ -243,9 +239,9 @@ file path=usr/lib/svn/libsvn_ra-1.so.0.0.0
 link path=usr/lib/svn/libsvn_ra_local-1.so target=libsvn_ra_local-1.so.0.0.0
 link path=usr/lib/svn/libsvn_ra_local-1.so.0 target=libsvn_ra_local-1.so.0.0.0
 file path=usr/lib/svn/libsvn_ra_local-1.so.0.0.0
-link path=usr/lib/svn/libsvn_ra_serf-1.so target=libsvn_ra_serf-1.so.0.0.0
-link path=usr/lib/svn/libsvn_ra_serf-1.so.0 target=libsvn_ra_serf-1.so.0.0.0
-file path=usr/lib/svn/libsvn_ra_serf-1.so.0.0.0
+#link path=usr/lib/svn/libsvn_ra_serf-1.so target=libsvn_ra_serf-1.so.0.0.0
+#link path=usr/lib/svn/libsvn_ra_serf-1.so.0 target=libsvn_ra_serf-1.so.0.0.0
+#file path=usr/lib/svn/libsvn_ra_serf-1.so.0.0.0
 link path=usr/lib/svn/libsvn_ra_svn-1.so target=libsvn_ra_svn-1.so.0.0.0
 link path=usr/lib/svn/libsvn_ra_svn-1.so.0 target=libsvn_ra_svn-1.so.0.0.0
 file path=usr/lib/svn/libsvn_ra_svn-1.so.0.0.0
