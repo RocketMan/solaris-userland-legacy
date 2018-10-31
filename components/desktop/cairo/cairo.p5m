@@ -28,6 +28,7 @@
 set name=pkg.fmri \
     value=pkg:/library/desktop/cairo@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
 set name=pkg.summary value="Cairo vector graphics library"
+set name=pkg.depend.bypass-generate value=libEGL\.so\.1
 # pkgdepend needs help to follow the runtime generated symlinks to libGL
 set name=pkg.depend.runpath \
     value=$PKGDEPEND_RUNPATH:usr/lib/mesa:usr/lib/mesa/$(MACH64)
@@ -82,7 +83,7 @@ file path=usr/lib/$(MACH64)/libcairo-script-interpreter.so.2.11400.8
 link path=usr/lib/$(MACH64)/libcairo.so target=libcairo.so.2.11400.8
 link path=usr/lib/$(MACH64)/libcairo.so.2 target=libcairo.so.2.11400.8
 file path=usr/lib/$(MACH64)/libcairo.so.2.11400.8
-#file path=usr/lib/$(MACH64)/pkgconfig/cairo-egl.pc
+file path=usr/lib/$(MACH64)/pkgconfig/cairo-egl.pc
 file path=usr/lib/$(MACH64)/pkgconfig/cairo-fc.pc
 file path=usr/lib/$(MACH64)/pkgconfig/cairo-ft.pc
 file path=usr/lib/$(MACH64)/pkgconfig/cairo-gl.pc
@@ -119,7 +120,7 @@ file path=usr/lib/libcairo-script-interpreter.so.2.11400.8
 link path=usr/lib/libcairo.so target=libcairo.so.2.11400.8
 link path=usr/lib/libcairo.so.2 target=libcairo.so.2.11400.8
 file path=usr/lib/libcairo.so.2.11400.8
-#file path=usr/lib/pkgconfig/cairo-egl.pc
+file path=usr/lib/pkgconfig/cairo-egl.pc
 file path=usr/lib/pkgconfig/cairo-fc.pc
 file path=usr/lib/pkgconfig/cairo-ft.pc
 file path=usr/lib/pkgconfig/cairo-gl.pc
@@ -201,3 +202,4 @@ file path=usr/share/gtk-doc/html/cairo/up-insensitive.png
 file path=usr/share/gtk-doc/html/cairo/up.png
 file files/libcairo.3lib path=usr/share/man/man3lib/libcairo.3lib
 license COPYING-LGPL-2.1 license=LGPLv2.1
+depend type=require fmri=__TBD pkg.debug.depend.file=usr/lib/mesa/libEGL.so.1
