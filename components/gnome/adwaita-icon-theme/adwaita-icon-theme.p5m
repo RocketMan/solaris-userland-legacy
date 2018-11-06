@@ -4912,6 +4912,7 @@ file path=usr/share/icons/Adwaita/cursors/lr_angle
 file path=usr/share/icons/Adwaita/cursors/move
 file path=usr/share/icons/Adwaita/cursors/pencil
 file path=usr/share/icons/Adwaita/cursors/plus
+link path=usr/share/icons/Adwaita/cursors/pointer target=hand2
 file path=usr/share/icons/Adwaita/cursors/pointer-move
 file path=usr/share/icons/Adwaita/cursors/question_arrow
 file path=usr/share/icons/Adwaita/cursors/right_ptr
