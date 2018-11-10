@@ -18,16 +18,16 @@ file path=usr/include/KHR/khrplatform.h
 #link path=usr/lib/$(MACH64)/libEGL.so.1 target=libEGL.so.1.0.0
 #link path=usr/lib/$(MACH64)/libEGL.so.1.0.0 #    target=../GL/$(MACH64)/libEGL.so.1.0.0
 file path=usr/lib/$(MACH64)/pkgconfig/egl.pc
-link path=usr/lib/GL/$(MACH64)/libEGL.so target=libEGL.so.1
-link path=usr/lib/GL/$(MACH64)/libEGL.so.1 target=libEGL.so.1.0.0
-link path=usr/lib/GL/$(MACH64)/libEGL.so.1.0.0 \
-    target=../../mesa/$(MACH64)/libEGL.so.1.0.0
-link path=usr/lib/GL/libEGL.so target=libEGL.so.1
-link path=usr/lib/GL/libEGL.so.1 target=libEGL.so.1.0.0
-link path=usr/lib/GL/libEGL.so.1.0.0 target=../mesa/libEGL.so.1.0.0
-link path=usr/lib/libEGL.so target=libEGL.so.1
-link path=usr/lib/libEGL.so.1 target=libEGL.so.1.0.0
-link path=usr/lib/libEGL.so.1.0.0 target=GL/libEGL.so.1.0.0
+##link path=usr/lib/GL/$(MACH64)/libEGL.so target=libEGL.so.1
+##link path=usr/lib/GL/$(MACH64)/libEGL.so.1 target=libEGL.so.1.0.0
+##link path=usr/lib/GL/$(MACH64)/libEGL.so.1.0.0
+##    target=../../mesa/$(MACH64)/libEGL.so.1.0.0
+##link path=usr/lib/GL/libEGL.so target=libEGL.so.1
+##link path=usr/lib/GL/libEGL.so.1 target=libEGL.so.1.0.0
+##link path=usr/lib/GL/libEGL.so.1.0.0 target=../mesa/libEGL.so.1.0.0
+##link path=usr/lib/libEGL.so target=libEGL.so.1
+##link path=usr/lib/libEGL.so.1 target=libEGL.so.1.0.0
+##link path=usr/lib/libEGL.so.1.0.0 target=GL/libEGL.so.1.0.0
 link path=usr/lib/mesa/$(MACH64)/libEGL.so target=libEGL.so.1
 link path=usr/lib/mesa/$(MACH64)/libEGL.so.1 target=libEGL.so.1.0.0
 file usr/lib/$(MACH64)/libEGL.so.1.0.0 \
