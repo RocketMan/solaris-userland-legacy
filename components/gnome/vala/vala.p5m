@@ -291,6 +291,8 @@ file path=usr/share/vala-0.36/vapi/hildon-1.deps
 file path=usr/share/vala-0.36/vapi/hildon-1.vapi
 file path=usr/share/vala-0.36/vapi/hildon-fm-2.deps
 file path=usr/share/vala-0.36/vapi/hildon-fm-2.vapi
+file files/javascriptcoregtk-4.0.vapi \
+    path=usr/share/vala-0.36/vapi/javascriptcoregtk-4.0.vapi
 file path=usr/share/vala-0.36/vapi/json-glib-1.0.deps
 file path=usr/share/vala-0.36/vapi/json-glib-1.0.vapi
 file path=usr/share/vala-0.36/vapi/libarchive.deps
@@ -417,10 +419,12 @@ file path=usr/share/vala-0.36/vapi/vte.deps
 file path=usr/share/vala-0.36/vapi/vte.vapi
 file path=usr/share/vala-0.36/vapi/webkit-1.0.deps
 file path=usr/share/vala-0.36/vapi/webkit-1.0.vapi
-file path=usr/share/vala-0.36/vapi/webkit2gtk-4.0.deps
-file path=usr/share/vala-0.36/vapi/webkit2gtk-4.0.vapi
-file path=usr/share/vala-0.36/vapi/webkit2gtk-web-extension-4.0.deps
-file path=usr/share/vala-0.36/vapi/webkit2gtk-web-extension-4.0.vapi
+file files/webkit2gtk-4.0.deps path=usr/share/vala-0.36/vapi/webkit2gtk-4.0.deps
+file files/webkit2gtk-4.0.vapi path=usr/share/vala-0.36/vapi/webkit2gtk-4.0.vapi
+file files/webkit2gtk-web-extension-4.0.deps \
+    path=usr/share/vala-0.36/vapi/webkit2gtk-web-extension-4.0.deps
+file files/webkit2gtk-web-extension-4.0.vapi \
+    path=usr/share/vala-0.36/vapi/webkit2gtk-web-extension-4.0.vapi
 file path=usr/share/vala-0.36/vapi/x11.vapi
 file path=usr/share/vala-0.36/vapi/xcb-icccm.vapi
 file path=usr/share/vala-0.36/vapi/xcb.vapi
