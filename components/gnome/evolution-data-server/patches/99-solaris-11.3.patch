@@ -1,0 +1,52 @@
+--- a/iconv-detect.c	2017-03-20 08:47:25.000000000 +0000
++++ b/iconv-detect.c	2018-11-20 15:29:41.434413606 +0000
+@@ -125,8 +125,10 @@
+ 	FILE *fp;
+ 	int i;
+ 
++#ifdef ICONV_TEST
+ 	if (!test_iconv ())
+ 		return 1;
++#endif
+ 
+ 	fp = fopen ("iconv-detect.h", "w");
+ 	if (fp == NULL)
+--- a/CMakeLists.txt	2018-11-20 14:08:37.154332389 +0000
++++ b/CMakeLists.txt	2018-11-20 14:09:25.566014735 +0000
+@@ -502,14 +502,15 @@
+ # iconv checking
+ # ******************************
+ 
+-set(CMAKE_REQUIRED_LIBRARIES "-liconv")
++#set(CMAKE_REQUIRED_LIBRARIES "-liconv")
+ CHECK_C_SOURCE_COMPILES("#include <iconv.h>
+ 			#include <stdlib.h>
+ 			int main(void) { iconv_t cd; cd = iconv_open (\"UTF-8\", \"ISO-8859-1\"); return 0; }" HAVE_LIBICONV)
+-unset(CMAKE_REQUIRED_LIBRARIES)
++#unset(CMAKE_REQUIRED_LIBRARIES)
+ 
+ if(HAVE_LIBICONV)
+-	set(ICONV_LIBS "-liconv")
++#	set(ICONV_LIBS "-liconv")
++	set(ICONV_LIBS "")
+ 	set(HAVE_ICONV ON)
+ else(HAVE_LIBICONV)
+ 	set(ICONV_LIBS "")
+--- a/src/camel/camel-net-utils.h	2017-03-20 08:47:25.000000000 +0000
++++ b/src/camel/camel-net-utils.h	2018-11-20 14:27:51.140366445 +0000
+@@ -50,6 +50,7 @@
+  * under the terms of the GNU Lesser General Public License as published by
+  * the Free Software Foundation.
+  */
++#ifdef XXX
+ struct addrinfo {
+ 	gint ai_flags;
+ 	gint ai_family;
+@@ -60,6 +61,7 @@
+ 	gchar *ai_canonname;
+ 	struct addrinfo *ai_next;
+ };
++#endif // XXX
+ 
+ #define AI_CANONNAME	0x0002	/* Request for canonical name.  */
+ #define AI_NUMERICHOST	0x0004	/* Don't use name resolution.  */

@@ -34,6 +34,8 @@ include ../../../make-rules/shared-macros.mk
 # Evolution Mail Client; it is also a backend for various bits of data that
 # GNOME stores and various components now expect it to be present.
 
+PATH=/usr/gnu/bin:/usr/bin
+
 COMPONENT_NAME=		evolution-data-server
 COMPONENT_VERSION=	3.24.0
 COMPONENT_PROJECT_URL=  https://wiki.gnome.org/Apps/Evolution
@@ -54,12 +56,19 @@ CXXFLAGS += -std=c++11 -D__EXTENSIONS__ -DHAVE_SUN_KRB5
 CPPFLAGS += -I/usr/include/kerberosv5/
 CFLAGS += $(XPG6MODE)
 
+LDFLAGS += -lm -lsocket -lnsl -licui18n_gcc -licuuc_gcc
+
 CMAKE_OPTIONS += -DENABLE_GOOGLE_AUTH=OFF
 CMAKE_OPTIONS += -DENABLE_UOA=OFF
 CMAKE_OPTIONS += -DENABLE_INTROSPECTION=ON
-CMAKE_OPTIONS += -DENABLE_GTK_DOC=ON
+CMAKE_OPTIONS += -DENABLE_GTK_DOC=OFF
 CMAKE_OPTIONS += -DOPEN_LDAP=OFF
 CMAKE_OPTIONS += -DENABLE_VALA_BINDINGS=ON
+CMAKE_OPTIONS += -DWITH_KRB5=OFF
+CMAKE_OPTIONS += -DWITH_OPENLDAP=OFF
+CMAKE_OPTIONS += -DENABLE_IPV6=OFF
+CMAKE_OPTIONS += -DENABLE_WEATHER=OFF
+CMAKE_OPTIONS += -DENABLE_GOOGLE=OFF
 CMAKE_OPTIONS += -DSYSCONF_INSTALL_DIR="/etc"
 
 # for the tests
@@ -91,6 +100,7 @@ REQUIRED_PACKAGES += library/gnome/gcr
 REQUIRED_PACKAGES += library/gnome/gnome-online-accounts
 REQUIRED_PACKAGES += library/gnome/libsecret
 REQUIRED_PACKAGES += library/icu
+REQUIRED_PACKAGES += library/icu-gcc
 REQUIRED_PACKAGES += library/libical
 REQUIRED_PACKAGES += library/libsoup
 REQUIRED_PACKAGES += library/libxml2
