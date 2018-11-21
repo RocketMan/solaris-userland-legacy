@@ -1,0 +1,11 @@
+--- a/CMakeLists.txt	2018-08-14 20:49:51.000000000 +0000
++++ b/CMakeLists.txt	2018-11-21 11:59:34.214978002 +0000
+@@ -573,7 +573,7 @@
+ set(VERSION "${LIBICAL_LIB_VERSION_STRING}")
+ set(prefix "${CMAKE_INSTALL_PREFIX}")
+ set(exec_prefix "\${prefix}")
+-set(libdir "\${exec_prefix}/lib")
++set(libdir "${LIB_INSTALL_DIR}")
+ set(includedir "\${prefix}/include")
+ set(PTHREAD_LIBS "${CMAKE_THREAD_LIBS_INIT}")
+ 
