@@ -1,0 +1,11 @@
+--- a/cmake/modules/GObjectIntrospection.cmake	2017-03-20 08:47:25.000000000 +0000
++++ b/cmake/modules/GObjectIntrospection.cmake	2018-11-23 10:19:39.092167796 +0000
+@@ -116,7 +116,7 @@
+ 		file(WRITE ${CMAKE_CURRENT_BINARY_DIR}/${_gir_name}_files "${_gir_files}")
+ 
+ 		add_custom_command(
+-			COMMAND ${CMAKE_COMMAND} -E env "CC='${CMAKE_C_COMPILER}'" LDFLAGS=
++			COMMAND ${CMAKE_COMMAND} -E env "CC='${CMAKE_C_COMPILER}'" CFLAGS=${CC_BITS} LDFLAGS=
+ 				${INTROSPECTION_SCANNER_ENV}
+ 				${G_IR_SCANNER}
+ 				${INTROSPECTION_SCANNER_ARGS}

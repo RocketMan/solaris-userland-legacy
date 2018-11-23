@@ -23,7 +23,7 @@
 # Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
 #
 
-BUILD_BITS=		64
+BUILD_BITS=		64_and_32
 # All components using gobject-introspection must be built with gcc as
 # gobject-introspection does not produce correct results when using Studio.
 # Also, for now, all things built for C++11 require gcc.
@@ -56,7 +56,8 @@ CXXFLAGS += -std=c++11 -D__EXTENSIONS__ -DHAVE_SUN_KRB5
 CPPFLAGS += -I/usr/include/kerberosv5/
 CFLAGS += $(XPG6MODE)
 
-LDFLAGS += -lm -lsocket -lnsl -licui18n_gcc -licuuc_gcc
+LDFLAGS.32 += -L/usr/lib
+LDFLAGS += $(LDFLAGS.$(BITS)) -lm -lsocket -lnsl -licui18n_gcc -licuuc_gcc
 
 CMAKE_OPTIONS += -DENABLE_GOOGLE_AUTH=OFF
 CMAKE_OPTIONS += -DENABLE_UOA=OFF
@@ -70,6 +71,11 @@ CMAKE_OPTIONS += -DENABLE_IPV6=OFF
 CMAKE_OPTIONS += -DENABLE_WEATHER=OFF
 CMAKE_OPTIONS += -DENABLE_GOOGLE=OFF
 CMAKE_OPTIONS += -DSYSCONF_INSTALL_DIR="/etc"
+CMAKE_OPTIONS.32 += -DENABLE_GOA=OFF
+CMAKE_OPTIONS.32 += -DENABLE_GTK=OFF
+CMAKE_OPTIONS.32 += -DCC_BITS=$(CC_BITS)
+
+#CMAKE_OPTIONS += -DCMAKE_VERBOSE_MAKEFILE:BOOL=ON
 
 # for the tests
 unexport SHELLOPTS
