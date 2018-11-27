@@ -1,0 +1,11 @@
+--- a/gcr/gcr-pkcs11-importer.c	2016-02-13 06:46:34.000000000 +0000
++++ b/gcr/gcr-pkcs11-importer.c	2018-11-27 16:48:41.841514341 +0000
+@@ -750,7 +750,7 @@
+ 
+ static const char *token_blacklist[] = {
+ 	"pkcs11:manufacturer=Gnome%20Keyring;serial=1:SECRET:MAIN",
+-	"pkcs11:manufacturer=Gnome%20Keyring;serial=1%3aXDG%3aDEFAULT",
++//	"pkcs11:manufacturer=Gnome%20Keyring;serial=1%3aXDG%3aDEFAULT",
+ 	NULL
+ };
+ 
