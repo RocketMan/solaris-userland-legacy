@@ -1,0 +1,40 @@
+--- a/p11-kit/Makefile.am	2018-08-28 14:57:30.000000000 +0000
++++ b/p11-kit/Makefile.am	2018-11-27 14:49:46.253634294 +0000
+@@ -296,10 +296,10 @@
+ 
+ CLEANFILES += p11-kit/p11-kit-server.service
+ 
+-systemduserunit_DATA = \
+-	p11-kit/p11-kit-server.socket \
+-	p11-kit/p11-kit-server.service \
+-	$(NULL)
++#systemduserunit_DATA = \
++#	p11-kit/p11-kit-server.socket \
++#	p11-kit/p11-kit-server.service \
++#	$(NULL)
+ endif
+ 
+ EXTRA_DIST += p11-kit/p11-kit-server.socket p11-kit/p11-kit-server.service.in
+--- a/configure.ac	2018-08-28 14:57:30.000000000 +0000
++++ b/configure.ac	2018-11-27 14:49:03.883957591 +0000
+@@ -569,8 +569,8 @@
+ 	PKG_CHECK_MODULES([LIBSYSTEMD], [libsystemd], [],
+ 		[with_systemd=no])
+ 
+-	PKG_CHECK_VAR([systemduserunitdir], [systemd], [systemduserunitdir], [],
+-		[with_systemd=no])
++#	PKG_CHECK_VAR([systemduserunitdir], [systemd], [systemduserunitdir], [],
++#		[with_systemd=no])
+ 
+ 	AS_IF([test "$with_systemd" != "no"], [
+ 		with_systemd=yes
+--- a/common/path.c	2018-11-27 14:48:27.462803344 +0000
++++ b/common/path.c	2018-11-27 14:55:12.244053358 +0000
+@@ -51,6 +51,7 @@
+ #include <string.h>
+ 
+ #ifdef OS_UNIX
++#undef _POSIX_PTHREAD_SEMANTICS
+ #include <pwd.h>
+ #include <unistd.h>
+ #endif

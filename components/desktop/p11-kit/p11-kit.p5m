@@ -39,6 +39,7 @@ set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2016/311
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+dir  path=etc/pkcs11/modules
 file path=etc/pkcs11/pkcs11.conf.example
 file path=usr/bin/p11-kit
 file path=usr/bin/trust

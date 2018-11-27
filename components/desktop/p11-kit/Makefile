@@ -28,10 +28,10 @@ COMPILER=gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		p11-kit
-COMPONENT_VERSION=	0.23.2
+COMPONENT_VERSION=	0.23.14
 COMPONENT_PROJECT_URL=	https://p11-glue.github.io/p11-glue/p11-kit.html
 GIT_REPO=		https://github.com/p11-glue/$(COMPONENT_NAME)
-GIT_COMMIT_ID=		794385d
+GIT_COMMIT_ID=		0.23.14
 #COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 #COMPONENT_ARCHIVE_HASH= \
 #    sha256:ba726ea8303c97467a33fca50ee79b7b35212964be808ecf9b145e9042fdfaf0
@@ -52,9 +52,11 @@ COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fiv);
 
 CONFIGURE_ENV += CFLAGS="$(CFLAGS)"
 #CONFIGURE_OPTIONS += --enable-doc
+CONFIGURE_OPTIONS += --without-systemd
 CONFIGURE_OPTIONS += --disable-doc-html
 CONFIGURE_OPTIONS += --localstatedir=$(VARDIR)
 CONFIGURE_OPTIONS += --sysconfdir=$(ETCDIR)
+#CONFIGURE_OPTIONS += --with-system-config=/usr/share/p11-kit
 CONFIGURE_OPTIONS.32 += --with-module-path=/usr/lib/security
 CONFIGURE_OPTIONS.64 += --with-module-path=/usr/lib/security/$(MACH64)
 CONFIGURE_OPTIONS += --with-trust-paths=/etc/certs/ca-certificates.crt
