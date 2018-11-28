@@ -36,7 +36,10 @@ set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2016/311
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-file path=usr/bin/seahorse
+$(SOLARIS_11_4_5_ONLY)file path=usr/bin/seahorse
+$(SOLARIS_11_3_ONLY)file files/seahorse path=usr/bin/seahorse
+$(SOLARIS_11_3_ONLY)file usr/bin/seahorse path=usr/lib/$(MACH64)/seahorse \
+    mode=0555
 file usr/lib/$(MACH64)/seahorse/seahorse-ssh-askpass \
     path=usr/lib/seahorse/seahorse-ssh-askpass mode=0555
 file usr/lib/$(MACH64)/seahorse/xloadimage path=usr/lib/seahorse/xloadimage \
