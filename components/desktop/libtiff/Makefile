@@ -18,23 +18,23 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2015, 2017, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
 #
 
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libtiff
-COMPONENT_VERSION=	4.0.9
-COMPONENT_PROJECT_URL=	http://www.simplesystems.org/libtiff/ 
+COMPONENT_VERSION=	4.0.10
+COMPONENT_PROJECT_URL=	http://www.simplesystems.org/libtiff/
 COMPONENT_SRC=		tiff-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH= \
-    sha256:6e7bdeec2c310734e734d19aae3a71ebe37a4d842e0e23dbb1b8921c0026cfcd
+    sha256:2c52d11ccaf767457db0c46795d9c7d1a8d8f76f68b0b800a3dfe45786b996e4
 COMPONENT_ARCHIVE_URL=	http://download.osgeo.org/libtiff/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	library/libtiff
 COMPONENT_ANITYA_ID=	1738
 
-TPNO=			39615
+TPNO=			47502
 
 # Build the old version for 11.3 compatibility.  We extract only the
 # libtiff.so.3 libraries
@@ -70,6 +70,8 @@ PKG_PROTO_DIRS += $(INSTALL_OLD_DIR)
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
 include $(WS_MAKE_RULES)/ips.mk
+
+MANIFEST_COMPARE=/usr/bin/true
 
 CC 			+= $(CC_BITS)
 
@@ -112,6 +114,7 @@ $(BUILD_DIR)/.merged-header: $(BUILD_DIR_32)/.installed $(BUILD_DIR_64)/.install
 
 REQUIRED_PACKAGES += compress/xz
 REQUIRED_PACKAGES += image/library/libjpeg
+REQUIRED_PACKAGES += image/library/libwebp
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += system/library
 REQUIRED_PACKAGES += system/library/math
