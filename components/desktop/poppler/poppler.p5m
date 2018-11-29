@@ -217,17 +217,17 @@ file path=usr/lib/girepository-1.0/Poppler-0.18.typelib
 link path=usr/lib/libpoppler-cpp.so target=libpoppler-cpp.so.0
 link path=usr/lib/libpoppler-cpp.so.0 target=libpoppler-cpp.so.0.5.0
 file path=usr/lib/libpoppler-cpp.so.0.5.0
+link path=usr/lib/libpoppler-glib.so target=libpoppler-glib.so.8
 link path=usr/lib/libpoppler-glib.so.5 target=libpoppler-glib.so.5.0.0
 file 0.14.5/usr/lib/libpoppler-glib.so.5.0.0 \
     path=usr/lib/libpoppler-glib.so.5.0.0
-link path=usr/lib/libpoppler-glib.so target=libpoppler-glib.so.8
 link path=usr/lib/libpoppler-glib.so.8 target=libpoppler-glib.so.8.10.0
 file path=usr/lib/libpoppler-glib.so.8.10.0
 link path=usr/lib/libpoppler.so target=libpoppler.so.81
-link path=usr/lib/libpoppler.so.81 target=libpoppler.so.81.0.0
-file path=usr/lib/libpoppler.so.81.0.0
 link path=usr/lib/libpoppler.so.7 target=libpoppler.so.7.0.0
 file 0.14.5/usr/lib/libpoppler.so.7.0.0 path=usr/lib/libpoppler.so.7.0.0
+link path=usr/lib/libpoppler.so.81 target=libpoppler.so.81.0.0
+file path=usr/lib/libpoppler.so.81.0.0
 file path=usr/lib/pkgconfig/poppler-cairo.pc
 file path=usr/lib/pkgconfig/poppler-cpp.pc
 file path=usr/lib/pkgconfig/poppler-glib.pc

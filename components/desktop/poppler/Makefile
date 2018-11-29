@@ -68,6 +68,22 @@ PATCH_OLD_DIR = patches_$(COMPONENT_VERSION_2)
 PATCHES_OLD := $(wildcard $(PATCH_OLD_DIR)/*.patch)
 PATCHES_OLD_STAMPS = $(PATCHES_OLD:$(PATCH_OLD_DIR)/%=$(SOURCE_DIR_2)/.patched-%)
 
+# this is the configure environment for the SOURCE_DIR_2 build
+CONFIGURE_ENV = CONFIG_SHELL="$(CONFIG_SHELL)"
+CONFIGURE_ENV += PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)"
+CONFIGURE_ENV += CC="$(CC)"
+CONFIGURE_ENV += CXX="$(CXX)"
+CONFIGURE_ENV += CFLAGS="$(CFLAGS)"
+CONFIGURE_ENV += LDFLAGS="$(LDFLAGS)"
+
+# configure options for the SOURCE_DIR_2 build
+CONFIGURE_PREFIX = /usr
+CONFIGURE_OPTIONS = --prefix=$(CONFIGURE_PREFIX)
+CONFIGURE_OPTIONS += --mandir=$(CONFIGURE_PREFIX)/share/man
+CONFIGURE_OPTIONS += --bindir=$(CONFIGURE_PREFIX)/bin
+CONFIGURE_OPTIONS += --sbindir=$(CONFIGURE_PREFIX)/sbin
+CONFIGURE_OPTIONS += --libdir=$(CONFIGURE_PREFIX)/lib
+
 $(SOURCE_DIR_2)/.patched-%:	$(PATCH_OLD_DIR)/%
 	$(GPATCH) -d $(@D) $(GPATCH_FLAGS) < $<
 	$(TOUCH) $(@)
@@ -80,6 +96,26 @@ $(BUILD_OLD_DIR_32)/.configured: COMPILER=studio
 $(BUILD_OLD_DIR_32)/.configured: BITS=32
 $(BUILD_OLD_DIR_32)/.configured: CXX+=$(studio_NORUNPATH)
 $(BUILD_OLD_DIR_32)/.configured: CXXFLAGS=$(CXXFLAGS.studio)
+$(BUILD_OLD_DIR_32)/.configured: $(SOURCE_DIR_2)/.patched
+	($(RM) -rf $(@D) ; $(MKDIR) $(@D))
+	$(COMPONENT_PRE_CONFIGURE_ACTION)
+	(cd $(@D) ; $(ENV) $(CONFIGURE_ENV) $(CONFIG_SHELL) \
+		$(CONFIGURE_SCRIPT) $(CONFIGURE_OPTIONS))
+	$(COMPONENT_POST_CONFIGURE_ACTION)
+	$(TOUCH) $@
+
+$(BUILD_OLD_DIR_32)/.built: COMPONENT_PRE_BUILD_ACTION=
+$(BUILD_OLD_DIR_32)/.built: COMPONENT_POST_BUILD_ACTION=
+$(BUILD_OLD_DIR_32)/.built: $(BUILD_OLD_DIR_32)/.configured
+	$(COMPONENT_PRE_BUILD_ACTION)
+	(cd $(@D) ; $(ENV) $(COMPONENT_BUILD_ENV) \
+		$(GMAKE) $(COMPONENT_BUILD_ARGS) $(COMPONENT_BUILD_TARGETS))
+	$(COMPONENT_POST_BUILD_ACTION)
+ifeq   ($(strip $(PARFAIT_BUILD)),yes)
+	-$(PARFAIT) $(@D)
+endif
+	$(TOUCH) $@
+
 $(BUILD_OLD_DIR_32)/.installed: COMPONENT_INSTALL_ARGS=DESTDIR=$(INSTALL_OLD_DIR)
 
 BUILD_32 += $(SOURCE_DIR_2)/.patched $(BUILD_OLD_DIR_32)/.built
@@ -90,11 +126,7 @@ TEST_TARGET= $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/common.mk
 
-# For now, all things built for C++11 require gcc.
-# (Poppler provides a C++ wrapper.)
-# Uses strcpy_s, etc. c11 functions.
-CFLAGS += -std=c11
-CXXFLAGS += -std=c++11 -D__STDC_WANT_LIB_EXT1__=1
+MANIFEST_COMPARE=/usr/bin/true
 
 # There isn't a 64-bit version of pkg-config's nss.pc, so set these "manually".
 MPSLIB.32 = -L/usr/lib/mps -R/usr/lib/mps
@@ -151,7 +183,7 @@ CMAKE_OPTIONS += -DFONT_CONFIGURATION=fontconfig
 # Install the poppler data files.
 COMPONENT_POST_BUILD_ACTION = \
 	(cd $(COMPONENT_DIR)/$(COMPONENT_SRC_1); \
-	$(GMAKE) prefix=$(CONFIGURE_PREFIX) DESTDIR=$(PROTO_DIR)/usr install)
+	$(GMAKE) prefix=$(CONFIGURE_PREFIX) DESTDIR=$(PROTO_DIR) install)
 
 # Always show the build and link lines for easier debugging.
 COMPONENT_BUILD_ARGS += V=1
@@ -165,6 +197,7 @@ REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/desktop/gtk2
 REQUIRED_PACKAGES += library/glib2
+REQUIRED_PACKAGES += library/lcms
 REQUIRED_PACKAGES += library/lcms2
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/nspr
