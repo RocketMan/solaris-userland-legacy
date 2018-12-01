@@ -55,7 +55,7 @@ CONFIGURE_BINDIR.32 =   $(CONFIGURE_PREFIX)/bin
 
 CONFIGURE_OPTIONS +=	--sysconfdir=$(ETCDIR)
 CONFIGURE_OPTIONS +=	--with-dbus-daemondir=$(USRLIBDIR)
-CONFIGURE_OPTIONS +=	--with-dbus-user=root
+CONFIGURE_OPTIONS +=	--with-dbus-user=dbus
 CONFIGURE_OPTIONS +=	--libexecdir=$(USRLIBDIR)
 CONFIGURE_OPTIONS +=	--localstatedir=$(VARDIR)
 CONFIGURE_OPTIONS +=	--disable-static

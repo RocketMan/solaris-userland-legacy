@@ -53,7 +53,7 @@ file path=usr/bin/dbus-test-tool
 file path=usr/bin/dbus-update-activation-environment
 file path=usr/bin/dbus-uuidgen
 file path=usr/lib/dbus-daemon mode=0555
-file path=usr/lib/dbus-daemon-launch-helper mode=0555
+file path=usr/lib/dbus-daemon-launch-helper group=dbus mode=4554
 dir  path=usr/share/dbus-1/services
 file path=usr/share/dbus-1/session.conf
 dir  path=usr/share/dbus-1/session.d
@@ -461,4 +461,7 @@ file path=usr/share/man/man1/dbus-test-tool.1
 file path=usr/share/man/man1/dbus-update-activation-environment.1
 file path=usr/share/man/man1/dbus-uuidgen.1
 dir  path=var/lib/dbus
+group groupname=dbus gid=108
+user username=dbus gcos-field="DBus System Message Bus User" group=dbus \
+    home-dir=/ password=NP uid=108
 license dbus.license license="dbus, GPLv2"
