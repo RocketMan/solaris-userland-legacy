@@ -461,7 +461,7 @@ file path=usr/share/man/man1/dbus-test-tool.1
 file path=usr/share/man/man1/dbus-update-activation-environment.1
 file path=usr/share/man/man1/dbus-uuidgen.1
 dir  path=var/lib/dbus
-group groupname=dbus gid=108
-user username=dbus gcos-field="DBus System Message Bus User" group=dbus \
-    home-dir=/ password=NP uid=108
+group groupname=dbus gid=59
+user username=dbus gcos-field="DBus System Message Bus UID" group=dbus \
+    home-dir=/ password=NP uid=59
 license dbus.license license="dbus, GPLv2"
