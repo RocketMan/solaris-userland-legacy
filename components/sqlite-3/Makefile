@@ -67,15 +67,15 @@ TEA_CONFIGURE_OPTIONS += $(TEA_CONFIGURE_OPTIONS.$(MACH).$(BITS))
 TEA_CONFIGURE_OPTIONS += ac_cv_cross=no
 TEA_CONFIGURE_OPTIONS += CC=$(CC)
 
-COMPONENT_PREP_ACTION += (cd $(@D)/tea; autoreconf -fiv)
+#COMPONENT_PREP_ACTION += (cd $(@D)/tea; autoreconf -fiv)
 
-COMPONENT_POST_CONFIGURE_ACTION = \
-	(cd $(@D)/tea ; $(ENV) $(CONFIGURE_ENV) $(CONFIG_SHELL) \
-	./configure $(TEA_CONFIGURE_OPTIONS));
+#COMPONENT_POST_CONFIGURE_ACTION = \
+#	(cd $(@D)/tea ; $(ENV) $(CONFIGURE_ENV) $(CONFIG_SHELL) \
+#	./configure $(TEA_CONFIGURE_OPTIONS));
 
-COMPONENT_POST_BUILD_ACTION = \
-	(cd $(@D)/tea ; $(ENV) $(COMPONENT_BUILD_ENV) \
-	$(GMAKE) $(COMPONENT_BUILD_ARGS) $(COMPONENT_BUILD_TARGETS));
+#COMPONENT_POST_BUILD_ACTION = \
+#	(cd $(@D)/tea ; $(ENV) $(COMPONENT_BUILD_ENV) \
+#	$(GMAKE) $(COMPONENT_BUILD_ARGS) $(COMPONENT_BUILD_TARGETS));
 
 # Enable DSQLITE_ENABLE_FTS3_TOKENIZER to allow thunderbird work. Should disable it if
 # thunderbird fixes that. Bugzilla id https://bugzilla.mozilla.org/show_bug.cgi?id=1252937
