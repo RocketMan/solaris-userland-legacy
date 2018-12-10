@@ -48,7 +48,7 @@ CXXFLAGS += -std=c++11
 COMPONENT_BUILD_ENV += GI_SCANNER_DISABLE_CACHE=yes
 
 CONFIGURE_ENV += CC="$(CC) $(CC_BITS)"
-CONFIGURE_ENV += ICU_CONFIG=icu-config_gcc
+#CONFIGURE_ENV += ICU_CONFIG=icu-config_gcc
 # Required by other components.
 CONFIGURE_OPTIONS += --enable-introspection
 # Required by other components.
@@ -80,7 +80,8 @@ REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += developer/icu
 REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/glib2
-REQUIRED_PACKAGES += library/icu-gcc
+REQUIRED_PACKAGES += library/icu
+#REQUIRED_PACKAGES += library/icu-gcc
 REQUIRED_PACKAGES += system/library/freetype-2
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
