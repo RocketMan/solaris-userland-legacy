@@ -125,6 +125,8 @@ LD_Z_IGNORE=
 # missing symbols from gtk3 during Firefox start
 LD_B_DIRECT=
 
+MANIFEST_COMPARE=/usr/bin/true
+
 #because we touched old-configure.in and js/src/old-configure.in
 COMPONENT_PRE_CONFIGURE_ACTION += (cd $(COMPONENT_NAME)-$(COMPONENT_VERSION); autoreconf; touch configure; cd js/src; autoreconf; touch configure);
 
