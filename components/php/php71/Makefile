@@ -61,7 +61,7 @@ COMPONENT_PREP_ACTION += (cd $(SOURCE_DIR) ; autoreconf) ;
 
 include enable-extensions.mk
 
-CONFIGURE_ENV += ICU_CONFIG=/usr/bin/icu-config_gcc
+#CONFIGURE_ENV += ICU_CONFIG=/usr/bin/icu-config_gcc
 
 CONFIGURE_OPTIONS += --enable-dtrace
 
@@ -157,7 +157,8 @@ $(SKIP_TEST_AT_TOP_LEVEL)
 
 
 REQUIRED_PACKAGES += image/library/libpng
-REQUIRED_PACKAGES += library/icu-gcc
+REQUIRED_PACKAGES += library/icu
+#REQUIRED_PACKAGES += library/icu-gcc
 REQUIRED_PACKAGES += library/libc-client
 
 # Add directory for generate check
