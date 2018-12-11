@@ -1,4 +1,3 @@
-#!/bin/sh
 #
 # CDDL HEADER START
 #
@@ -19,15 +18,12 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2013, 2018, Oracle and/or its affiliates. All rights reserved.
+
+#
+# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
 #
 
-export HOME=/var/lib/rabbitmq
-
-# RabbitMQ commands require the full access to /var/lib/rabbitmq directory.
-if [ ! -r "${HOME}" -o ! -w "${HOME}" -o ! -x "${HOME}" ]; then
-  echo "Insufficient permissions to execute '$(basename $0) $@' command!" >&2
-  exit 1
-fi
-
-exec /usr/lib/rabbitmq/sbin/${0##*/} "$@"
+# To avoid substitution of i386 for $(MACH) we temporarily rename it.
+# It is called before the default transformations, and renamed back in
+# erlang.generate file. Script added to GENERATE_TRANSFORMS in Makefile.
+<transform file path=.*/internal/i386/.* -> edit path /i386/ /arch_i386/>

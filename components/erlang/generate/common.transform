@@ -1,4 +1,3 @@
-#!/bin/sh
 #
 # CDDL HEADER START
 #
@@ -19,15 +18,18 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2013, 2018, Oracle and/or its affiliates. All rights reserved.
+
+#
+# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
 #
 
-export HOME=/var/lib/rabbitmq
+# By default everything is in main package
+<transform file link -> default pkg.type erlang>
 
-# RabbitMQ commands require the full access to /var/lib/rabbitmq directory.
-if [ ! -r "${HOME}" -o ! -w "${HOME}" -o ! -x "${HOME}" ]; then
-  echo "Insufficient permissions to execute '$(basename $0) $@' command!" >&2
-  exit 1
-fi
+# Ignore files in the root.
+<transform file path=([a-z]|[A-Z]|[0-9]|\.)+$ -> drop>
 
-exec /usr/lib/rabbitmq/sbin/${0##*/} "$@"
+# Html and pdf documentation is in erlang-doc package.
+<transform file path=doc/.* -> set pkg.type extradoc>
+<transform file path=erts-.* -> set pkg.type extradoc>
+<transform file path=lib/.* -> set pkg.type extradoc>

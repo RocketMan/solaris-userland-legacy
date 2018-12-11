@@ -1,4 +1,3 @@
-#!/bin/sh
 #
 # CDDL HEADER START
 #
@@ -19,15 +18,19 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2013, 2018, Oracle and/or its affiliates. All rights reserved.
+
+#
+# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
 #
 
-export HOME=/var/lib/rabbitmq
+<include generate/common.transform>
 
-# RabbitMQ commands require the full access to /var/lib/rabbitmq directory.
-if [ ! -r "${HOME}" -o ! -w "${HOME}" -o ! -x "${HOME}" ]; then
-  echo "Insufficient permissions to execute '$(basename $0) $@' command!" >&2
-  exit 1
-fi
+# Delete everything not belonging to the erlang documentation.
+<transform file link pkg.type=(?!extradoc) -> drop>
 
-exec /usr/lib/rabbitmq/sbin/${0##*/} "$@"
+# Modify the paths to the documentation files.
+<transform file path=(doc/.+)$ -> edit path %<1> usr/share/doc/erlang/%<1>>
+<transform file path=(erts-.+)$ -> edit path %<1> usr/share/doc/erlang/%<1>>
+<transform file path=lib/.+ -> edit path ^lib/ usr/share/doc/erlang/lib/>
+
+<transform file link -> delete pkg.type .*>
