@@ -20,28 +20,13 @@
 #
 
 #
-# Copyright (c) 2011, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
 #
-BUILD_BITS= 64
-include ../../../make-rules/shared-macros.mk
 
-COMPONENT_NAME=		mod_jk
-COMPONENT_VERSION=	1.2.46
-COMPONENT_PROJECT_URL=	https://tomcat.apache.org/connectors-doc/
-COMPONENT_SRC_NAME=	tomcat-connectors
-COMPONENT_SRC=		$(COMPONENT_SRC_NAME)-$(COMPONENT_VERSION)-src
-COMPONENT_ARCHIVE_HASH=	\
-    sha256:7e1d520e1d1dacd042087ae52be7aae47a093b93cf26931827724aa8ab66cbe9
-COMPONENT_ARCHIVE_URL=	https://archive.apache.org/dist/tomcat/tomcat-connectors/jk/$(COMPONENT_ARCHIVE)
-COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
-COMPONENT_ANITYA_ID=	13296
+# Add example program
+file examples/Inputrc path=usr/demo/readline/Inputrc
 
-TPNO=			46457
-
-CONFIGURE_DEFAULT_DIRS=no
-MODULES_INSTALL=
-include ../modules.mk
-
-PATCH_LEVEL=0
-
-CONFIGURE_SCRIPT = $(SOURCE_DIR)/native/configure
+# Add llib-lreadline named files
+file $(MACH64)/llib-lreadline.ln path=usr/lib/$(MACH64)/llib-lreadline.ln
+file llib-lreadline path=usr/lib/llib-lreadline
+file $(MACH32)/llib-lreadline.ln path=usr/lib/llib-lreadline.ln
