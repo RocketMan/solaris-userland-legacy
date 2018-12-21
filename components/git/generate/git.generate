@@ -18,19 +18,17 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2017, 2018, Oracle and/or its affiliates. All rights reserved.
+
+#
+# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
 #
 
-set name=pkg.fmri \
-    value=pkg:/runtime/perl-common@$(COMPONENT_VERSION),$(BUILD_VERSION)
-set name=pkg.summary value=Perl
-set name=pkg.description value="Common package for every perl"
-set name=info.classification \
-    value=org.opensolaris.category.2008:Development/Perl
-set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
-set name=org.opensolaris.arc-caseid value=PSARC/2017/051
-set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-file sitecustomize.pl path=etc/perl/sitecustomize.pl owner=root group=sys \
-    mode=0644 overlay=allow preserve=renamenew
-file perl.2d path=usr/share/man/man2d/perl.2d mangler.bypass=true
-license license license=Oracle
+# Consider man pages in correct path
+<transform file path=man([^/])+/(.+)$ -> edit path ^ usr/share/man/>
+
+# Replace variables used through the p5m file 
+<transform dir file link hardlink -> edit path "/$(PERL_VERSION)/" "/$!(PERL_VERSION)/">
+<transform dir file link hardlink -> edit path "\$!\((.*)\)" "$(\1)">
+
+# This file needs to have mode 0555 
+<transform file path=usr/share/gitweb/gitweb.cgi -> set mode 0555>

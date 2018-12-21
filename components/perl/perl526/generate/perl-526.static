@@ -18,19 +18,17 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2017, 2018, Oracle and/or its affiliates. All rights reserved.
+
+#
+# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
 #
 
-set name=pkg.fmri \
-    value=pkg:/runtime/perl-common@$(COMPONENT_VERSION),$(BUILD_VERSION)
-set name=pkg.summary value=Perl
-set name=pkg.description value="Common package for every perl"
-set name=info.classification \
-    value=org.opensolaris.category.2008:Development/Perl
-set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
-set name=org.opensolaris.arc-caseid value=PSARC/2017/051
-set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-file sitecustomize.pl path=etc/perl/sitecustomize.pl owner=root group=sys \
-    mode=0644 overlay=allow preserve=renamenew
-file perl.2d path=usr/share/man/man2d/perl.2d mangler.bypass=true
-license license license=Oracle
+file path=usr/perl5/5.26/lib/$(P_ARCH)-solaris-thread-multi-64/.packlist
+dir  path=usr/perl5/site_perl/5.26/$(P_ARCH)-solaris-thread-multi-64
+
+# These links are mediated so customers may create their own IPS
+# packages and replace perl.
+link path=usr/perl5/bin target=5.26/bin mediator=perl
+link path=usr/perl5/man target=5.26/man mediator=perl
+link path=usr/perl5/pod target=5.26/lib/pod mediator=perl
+
