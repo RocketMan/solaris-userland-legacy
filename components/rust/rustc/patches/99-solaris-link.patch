@@ -1,0 +1,12 @@
+diff --git a/src/libstd/build.rs b/src/libstd/build.rs
+index 9d6e8c4..1876004 100644
+--- a/src/libstd/build.rs
++++ b/src/libstd/build.rs
+@@ -52,6 +52,7 @@ fn main() {
+         println!("cargo:rustc-link-lib=posix4");
+         println!("cargo:rustc-link-lib=pthread");
+         println!("cargo:rustc-link-lib=resolv");
++        println!("cargo:rustc-link-lib=nsl");
+     } else if target.contains("apple-darwin") {
+         println!("cargo:rustc-link-lib=System");
+ 
