@@ -20,30 +20,20 @@
 #
 
 #
-# Copyright (c) 2015, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
 #
-BUILD_BITS= 64
-# xdebug 2.5.1 doesn't compile with studio.
-COMPILER= gcc
-include ../../../make-rules/shared-macros.mk
 
-COMPONENT_NAME=		xdebug
-COMPONENT_VERSION=	2.5.1
-COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tgz
-COMPONENT_ARCHIVE_HASH= \
-	sha256:7fda9020fd5a2c549ae5a692fcabbb00f74e39dda81d53d25e622bdab4880ec2
-COMPONENT_ARCHIVE_URL=	http://xdebug.org/files/$(COMPONENT_ARCHIVE)
-COMPONENT_PROJECT_URL=	http://xdebug.org/
-COMPONENT_ANITYA_ID=	13302
+<include generate/common.transform>
 
-TPNO=			35000
-
-TEST_TARGET= $(NO_TESTS)
-include $(PHP_TOP_DIR)/phpize.mk
-include $(WS_MAKE_RULES)/common.mk
-include $(PHP_TOP_DIR)/php.mk
-
-CONFIGURE_OPTIONS +=	--enable-xdebug
-
-REQUIRED_PACKAGES += system/library/math
-REQUIRED_PACKAGES += web/php-71
+# Delete everything not belonging to this package
+<transform path=usr/share/.+ -> drop>
+<transform path=usr/bin/.+ -> drop>
+<transform path=usr/sbin/.+ -> drop>
+<transform path=usr/sbin/.+ -> drop>
+<transform path=usr/include/.+ -> drop>
+<transform path=man/.+ -> drop>
+<transform path=.+inc -> drop>
+<transform path=.+pc -> drop>
+#
+<transform link path=usr/lib/libicu.+.so$ -> drop>
+<transform link path=usr/lib/\$\(MACH64\)/libicu.+.so$ -> drop>
