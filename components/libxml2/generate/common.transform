@@ -20,10 +20,12 @@
 #
 
 #
-# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
 
-<include generate/common.transform>
+# by default everything is libxml2 package
+<transform file link -> default pkg.type common>
 
-<transform file link pkg.type=(?!libs) -> drop>
-<transform file link -> delete pkg.type .*>
+# python module package(s)
+<transform file link path=usr/lib/python2\.7/ -> set pkg.type python27>
+<transform file link path=usr/lib/python3\.4/ -> set pkg.type python34>
