@@ -56,7 +56,8 @@ CC_FOR_BUILD=
 CONFIGURE_CPPFLAGS=
 
 # force use of shared system libtiff
-CONFIGURE_OPTIONS +=    --with-system-libtiff
+$(SOLARIS_11_4_5_ONLY)CONFIGURE_OPTIONS +=	--with-system-libtiff
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS +=	--with-libtiff=no
 
 CONFIGURE_OPTIONS +=	--with-drivers=ALL
 CONFIGURE_OPTIONS +=	--with-ijs
