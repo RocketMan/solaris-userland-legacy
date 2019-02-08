@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,16 +17,14 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2012, 2019, Oracle and/or its affiliates. All rights reserved.
+#
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
 
-set name=pkg.fmri \
-    value=pkg:/developer/build/automake@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
-set name=pkg.summary value="A Makefile generator"
-set name=com.oracle.info.description value="GNU automake"
-set name=info.classification value=org.opensolaris.category.2008:Development/GNU
-set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
-set name=info.upstream-url value=http://www.gnu.org/software/automake/
-set name=org.opensolaris.arc-caseid value=PSARC/2019/004
-set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-depend type=require fmri=developer/build/automake-116
+link path=usr/X11/lib/$(MACH64)/libXinerama.so \
+    target=../../../lib/$(MACH64)/libXinerama.so
+link path=usr/X11/lib/$(MACH64)/libXinerama.so.1 \
+    target=../../../lib/$(MACH64)/libXinerama.so.1
+link path=usr/X11/lib/libXinerama.so target=../../lib/libXinerama.so
+link path=usr/X11/lib/libXinerama.so.1 target=../../lib/libXinerama.so.1
+
