@@ -603,7 +603,7 @@ SUNWlibical@0.5.11,5.11-0.175.0.0.0.0.0 library/libical@0.5.11-0.133
 SUNWlibmcrypt@2.5.8-11.4.0.0.1.9.0
 SUNWlibmemcached@0.16,5.11-0.133 library/libmemcached@0.16-0.133
 SUNWlibmikmod@5.12,5.12-11.4.0.0.1.9.0
-SUNWlibmng@1.0.10,5.11-0.133 library/graphics/libmng@1.0.10-0.133
+SUNWlibmng@1.0.10,5.11-11.5.0.0.0.43.0
 SUNWlibnet@1.1.2.1,5.11-0.133 system/library/libnet@1.1.2.1-0.133
 SUNWliboil@5.12,5.12-11.4.0.0.1.9.0
 SUNWlibopenusb@1.0.1,5.11-0.133 system/library/usb/openusb@1.0.1-0.133
@@ -984,6 +984,10 @@ consolidation/gnome_l10n/gnome_l10n-incorporation@0.5.11,5.11-0.175.0.0.0.0.0
 database/mysql-51@5.1.37,5.12-11.4.0.0.1.9.0
 database/mysql-51/library@5.1.37,5.12-11.4.0.0.1.9.0
 database/mysql-51/tests@5.1.37,5.12-11.4.0.0.1.9.0
+database/mysql-55@5.5.62-11.5.0.0.0.43.0
+database/mysql-55/client@5.5.62-11.5.0.0.0.43.0
+database/mysql-55/library@5.5.62-11.5.0.0.0.43.0
+database/mysql-55/tests@5.5.62-11.5.0.0.0.43.0
 desktop/administration/gnome-system-tools@2.30.0,5.11-0.175.0.0.0.0.0
 desktop/administration/gparted@0.25.0,5.12-11.4.0.0.1.9.0 
 desktop/administration/nwam-manager@1.175.1.1,5.12-11.4.0.0.1.9.0
@@ -1229,6 +1233,7 @@ library/gnome/gnome-vfs@2.24.4,5.12-11.4.0.0.1.9.0 data/shared-mime-info incorpo
 library/gnome/libgnomekbd@2.30.0,5.12-11.4.0.0.1.9.0 incorporate=consolidation/desktop/gnome-incorporation
 library/gnome/print/gnome-print@2.18.8,5.11-0.175.0.0.0.0.0
 library/gnome/print/gnome-print/gnome-print-papi@2.18.8,5.11-0.175.0.0.0.0.0
+library/graphics/libmng@1.0.10,5.11-11.5.0.0.0.43.0
 library/guile@1.8.8,5.12-11.4.0.0.1.9.0
 library/id3lib@3.8.3,5.12-11.4.0.0.1.9.0
 library/idnkit@11.5-11.5.0.0.0.40.0
@@ -1605,6 +1610,7 @@ print/cups/system-config-printer@1.0.16-11.4.0.0.1.9.0
 print/lp/filter/a2ps@4.13,5.11-0.173.0.0.0.0.0 print/filter/a2ps@4.13,5.11-0.173.0.0.0.0.0
 print/lp/print-manager@1.4.21,5.11-0.175.0.0.0.0.0
 print/mp@5.12,5.12-11.4.0.0.1.9.0 print/paps@5.12,5.12-11.4.0.0.1.9.0
+print/filter/enscript@1.6.6,5.11-11.5.0.0.0.43.0
 release/getting-started@0.5.11,5.11-0.175.0.0.0.0.0
 release/getting-started/locale/de@0.5.11,5.11-0.175.0.0.0.0.0
 release/getting-started/locale/es@0.5.11,5.11-0.175.0.0.0.0.0
