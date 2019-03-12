@@ -161,13 +161,16 @@ REQUIRED_PACKAGES += library/libxslt
 CONFIGURE_OPTIONS += --enable-zip=shared
 
 # Special cases
+# IMAP: using imap from package library/libc-client
+CONFIGURE_OPTIONS += --with-imap=shared
+CONFIGURE_OPTIONS += --with-imap-ssl=shared
 
 # IMAP
-CONFIGURE_OPTIONS += --with-imap=shared,$(PHP_TOP_DIR)/uw-imap/build/$(MACH64)
-CONFIGURE_OPTIONS += --with-imap-ssl=shared,/usr
-CONFIGURE_OPTIONS += --with-kerberos   # WARNING! openssl reads same flag!
+#CONFIGURE_OPTIONS += --with-imap=shared,$(PHP_TOP_DIR)/uw-imap/build/$(MACH64)
+#CONFIGURE_OPTIONS += --with-imap-ssl=shared,/usr
+#CONFIGURE_OPTIONS += --with-kerberos   # WARNING! openssl reads same flag!
 
-COMPONENT_PRE_CONFIGURE_ACTION += gmake -C $(PHP_TOP_DIR)/uw-imap build;
+#COMPONENT_PRE_CONFIGURE_ACTION += gmake -C $(PHP_TOP_DIR)/uw-imap build;
 
 # Enables emulation of the obsolete mhash extension by the hash extension.
 CONFIGURE_OPTIONS += --with-mhash

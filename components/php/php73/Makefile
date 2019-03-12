@@ -154,14 +154,17 @@ CLEAN_PATHS += proto-scripts
 # test results are unstable between runs but still useful for humans.
 $(SKIP_TEST_AT_TOP_LEVEL)
 
-clobber::
-	cd ../uw-imap; gmake clobber
+#clobber::
+#	cd ../uw-imap; gmake clobber
 
 # Add directory for generate check
 GENERATE_PROTO_DIRS += files^files
 
 REQUIRED_PACKAGES += developer/icu
+REQUIRED_PACKAGES += image/library/libpng
+REQUIRED_PACKAGES += library/libc-client
 REQUIRED_PACKAGES += library/libxml2
+REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/security/openssl
 REQUIRED_PACKAGES += system/dtrace
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
