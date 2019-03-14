@@ -20,31 +20,11 @@
 #
 
 #
-# Copyright (c) 2015, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
-BUILD_BITS= 64
-# xdebug 2.5.1 doesn't compile with studio.
-COMPILER= gcc
-include ../../../make-rules/shared-macros.mk
 
-COMPONENT_NAME=		xdebug
-COMPONENT_VERSION=	2.7.0
-COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tgz
-COMPONENT_ARCHIVE_HASH= \
-	sha256:e896da91ce0373f5fd8f4ca392c68da8593932ad51b2ec5eb3ee032b50d4b2d6
-COMPONENT_ARCHIVE_URL=	http://xdebug.org/files/$(COMPONENT_ARCHIVE)
-COMPONENT_PROJECT_URL=	http://xdebug.org/
-COMPONENT_ANITYA_ID=	13302
+<include generate/common.transform>
 
-TPNO=			50138
-
-TEST_TARGET= $(NO_TESTS)
-include $(PHP_TOP_DIR)/phpize.mk
-include $(WS_MAKE_RULES)/common.mk
-include $(PHP_TOP_DIR)/php.mk
-
-CONFIGURE_OPTIONS +=	--enable-xdebug
-
-REQUIRED_PACKAGES += system/library/math
-REQUIRED_PACKAGES += web/php-71
-REQUIRED_PACKAGES += web/php-73
+# delete everything not belonging to this package
+<transform file link pkg.type=(?!client-pkg) -> drop>
+<transform file link -> delete pkg.type .*>
