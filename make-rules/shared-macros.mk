@@ -388,7 +388,10 @@ $(BUILD_DIR_64)/.built:		BITS=64
 # limited by the number of logical cores.
 ifneq ($(wildcard /usr/sbin/psrinfo),)
 PSRINFO=/usr/sbin/psrinfo
-COMPONENT_MAKE_JOBS ?= $(shell $(PSRINFO) -pv | grep -c "The core")
+#COMPONENT_MAKE_JOBS ?= $(shell $(PSRINFO) -pv | grep -c "The core")
+# JM 2019-03-19 for 11.3:
+PROC_COUNT = $(shell $(PSRINFO) | grep -c "on-line")
+COMPONENT_MAKE_JOBS ?= $(shell expr $(PROC_COUNT) / 2)
 SYSTEM_MAX_LOAD := $(shell $(PSRINFO) | wc -l)
 endif
 
