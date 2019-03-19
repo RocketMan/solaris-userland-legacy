@@ -33,13 +33,13 @@ include ../../../make-rules/shared-macros.mk
 ESR = esr
 
 COMPONENT_NAME =		firefox
-COMPONENT_VERSION =		60.5.1
+COMPONENT_VERSION =		60.6.0
 COMPONENT_PROJECT_URL =		http://www.mozilla.com/firefox
 COMPONENT_SRC_NAME =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_SRC = 		$(COMPONENT_SRC_NAME)
 COMPONENT_ARCHIVE =		$(COMPONENT_SRC_NAME)$(ESR).source.tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:3f01ff52a174bc554934dd85f8703b2817789ceb749abe09f00bef9cf70b71f5
+    sha256:7c80d82c347ff6163e3d5d72448a38911b30e4e627183caac4264bcf613b85d5
 ifndef CANDIDATE_BUILD
 MOZILLA_FTP = 		        http://ftp.mozilla.org/pub/$(COMPONENT_NAME)/releases/$(COMPONENT_VERSION)$(ESR)
 else
@@ -49,7 +49,7 @@ COMPONENT_ARCHIVE_URL =		$(MOZILLA_FTP)/source/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB =		firefox/browser
 COMPONENT_ANITYA_ID=    	16838
 
-TPNO=				49397
+TPNO=				50274
 
 # There are a set of .xpi files (as given in the LANG_LIST definition
 # below) that we need. We could download and unpack them individually, but
@@ -58,7 +58,7 @@ TPNO=				49397
 # one file with version number.
 COMPONENT_ARCHIVE_1 =           $(COMPONENT_SRC_NAME)$(ESR)-xpi.tar.bz2
 COMPONENT_ARCHIVE_HASH_1 = \
-    sha256:cd009d1a43df9dd46f905e165551776cff8625a1f99f9d91757a6897c155ca16
+    sha256:3c37e37784493c8bb8893dab0f2d3708d49ad2221714ba970dce633274ab1251
 COMPONENT_ARCHIVE_URL_1 =       make://download-xpis/$(COMPONENT_ARCHIVE_1)
 
 LANG_LIST = ach af an ar as ast az be bg bn-BD bn-IN br bs ca cak cs cy \
@@ -75,8 +75,6 @@ include $(WS_MAKE_RULES)/common.mk
 # /usr/gnu/bin needed to pick up the GNU version of tail and readelf.
 # /usr/sbin needed for dtrace.
 PATH =			$(dirname $(CC)):/usr/gnu/bin:/usr/bin:/usr/sbin
-
-COMPONENT_BUILD_ARGS += $(JOBS:%=-j%)
 
 CLEAN_PATHS +=		$(COMPONENT_DIR)/xpi
 
@@ -187,6 +185,7 @@ COMPONENT_TEST_TRANSFORMS = \
 REQUIRED_PACKAGES += codec/libogg
 REQUIRED_PACKAGES += codec/libvorbis
 REQUIRED_PACKAGES += codec/ogg-vorbis
+REQUIRED_PACKAGES += compress/bzip2
 REQUIRED_PACKAGES += database/sqlite-3
 REQUIRED_PACKAGES += developer/build/autoconf-213
 ifneq ($(MACH), sparc)

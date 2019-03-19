@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, 2019, Oracle and/or its affiliates. All rights reserved.
 #
 
 BUILD_BITS =            64
@@ -29,11 +29,12 @@ COMPILER = 		gcc
 include ../../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		xf86-video-vesa
-COMPONENT_VERSION=	2.3.4
+COMPONENT_VERSION=	2.4.0
 COMPONENT_ARCHIVE_HASH= \
-	sha256:7bddf4d879dd6f67088ecb203a31e12334aab980174bd0909930a21f32e251c1
+	sha256:bf443c94d7bf6cd4e248f8a3147f4647be04dc4c80250d9405006263bbdee38c
 COMPONENT_BUGDB=        x11/devices-x86
 COMPONENT_ANITYA_ID=	5243
+TPNO=			49213
 
 TEST_TARGET = $(NO_TESTS)
 
