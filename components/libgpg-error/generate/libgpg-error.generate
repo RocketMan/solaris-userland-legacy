@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,13 +17,6 @@
 #
 # CDDL HEADER END
 #
-
 #
-# Copyright (c) 2018, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
-
-# Do not add 32 bit executables
-<transform path=usr/bin/\$\(MACH32\)/.+ -> drop>
-
-# gsx is shipped in as a separate package
-<transform file path=usr/bin/gsx -> drop>
