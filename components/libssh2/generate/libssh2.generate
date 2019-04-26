@@ -20,23 +20,9 @@
 #
 
 #
-# Copyright (c) 2007, 2016, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
-/^TCL_CC=/c\
-TCL_CC='/opt/SUNWspro/bin/cc'
 
-/^TCL_BUILD_LIB_SPEC=/c\
-TCL_BUILD_LIB_SPEC='-ltcl8.5${TCL_DBGX}'
-
-/^TCL_SRC_DIR=/c\
-TCL_SRC_DIR=
-
-/^TCL_BUILD_STUB_LIB_SPEC=/c\
-TCL_BUILD_STUB_LIB_SPEC='-ltclstub8.5${TCL_DBGX}'
-
-/^TCL_BUILD_STUB_LIB_PATH=/c\
-TCL_BUILD_STUB_LIB_PATH='/usr/lib/64/libtclstub8.5${TCL_DBGX}.a'
-
-s,-lsunmath,,
-s,-L/usr/lib/amd64 ,,
-s,-L/usr/lib/sparcv9 ,,
+# change manual page location and extension
+<transform file -> edit path man/man3/ man/man3ssh2/ >
+<transform file -> edit path .3$ .3ssh2 >
