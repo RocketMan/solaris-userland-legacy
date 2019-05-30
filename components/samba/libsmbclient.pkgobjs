@@ -1,3 +1,4 @@
+file path=usr/include/samba/libsmbclient.h
 link path=usr/lib/samba/$(MACH64)/libdcerpc-binding.so.0     target=libdcerpc-binding.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libdcerpc-binding.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libndr-krb5pac.so.0     target=libndr-krb5pac.so.0.0.1
@@ -17,6 +18,9 @@ link path=usr/lib/samba/$(MACH64)/libsamba-util.so.0     target=libsamba-util.so
 file path=usr/lib/samba/$(MACH64)/libsamba-util.so.0.0.1
 link path=usr/lib/samba/$(MACH64)/libsamdb.so.0 target=libsamdb.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libsamdb.so.0.0.1
+link path=usr/lib/samba/$(MACH64)/libsmbclient.so target=libsmbclient.so.0.4.0
+link path=usr/lib/samba/$(MACH64)/libsmbclient.so.0 target=libsmbclient.so.0.4.0
+file path=usr/lib/samba/$(MACH64)/libsmbclient.so.0.4.0
 file path=usr/lib/samba/$(MACH64)/libsmbconf.so.0
 link path=usr/lib/samba/$(MACH64)/libtevent-util.so.0     target=libtevent-util.so.0.0.1
 file path=usr/lib/samba/$(MACH64)/libtevent-util.so.0.0.1
@@ -25,6 +29,8 @@ file path=usr/lib/samba/$(MACH64)/libwbclient.so.0.14
 file path=usr/lib/samba/private/$(MACH64)/libCHARSET3-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libMESSAGING-SEND-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libaddns-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libasn1-samba4.so.8     target=libasn1-samba4.so.8.0.0
+file path=usr/lib/samba/private/$(MACH64)/libasn1-samba4.so.8.0.0
 file path=usr/lib/samba/private/$(MACH64)/libasn1util-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libauthkrb5-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libcli-cldap-samba4.so
@@ -32,6 +38,8 @@ file path=usr/lib/samba/private/$(MACH64)/libcli-ldap-common-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libcli-nbt-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libcli-smb-common-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libcliauth-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libcom_err-samba4.so.0     target=libcom_err-samba4.so.0.25
+file path=usr/lib/samba/private/$(MACH64)/libcom_err-samba4.so.0.25
 file path=usr/lib/samba/private/$(MACH64)/libcommon-auth-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libdbwrap-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libdcerpc-samba-samba4.so
@@ -39,11 +47,21 @@ file path=usr/lib/samba/private/$(MACH64)/libflag-mapping-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libgenrand-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libgensec-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libgse-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libgssapi-samba4.so.2     target=libgssapi-samba4.so.2.0.0
+file path=usr/lib/samba/private/$(MACH64)/libgssapi-samba4.so.2.0.0
+link path=usr/lib/samba/private/$(MACH64)/libhcrypto-samba4.so.5     target=libhcrypto-samba4.so.5.0.1
+file path=usr/lib/samba/private/$(MACH64)/libhcrypto-samba4.so.5.0.1
+link path=usr/lib/samba/private/$(MACH64)/libheimbase-samba4.so.1     target=libheimbase-samba4.so.1.0.0
+file path=usr/lib/samba/private/$(MACH64)/libheimbase-samba4.so.1.0.0
+link path=usr/lib/samba/private/$(MACH64)/libhx509-samba4.so.5     target=libhx509-samba4.so.5.0.0
+file path=usr/lib/samba/private/$(MACH64)/libhx509-samba4.so.5.0.0
 file path=usr/lib/samba/private/$(MACH64)/libinterfaces-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libiov-buf-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libkrb5-samba4.so.26     target=libkrb5-samba4.so.26.0.0
+file path=usr/lib/samba/private/$(MACH64)/libkrb5-samba4.so.26.0.0
 file path=usr/lib/samba/private/$(MACH64)/libkrb5samba-samba4.so
-link path=usr/lib/samba/private/$(MACH64)/libldb.so.1 target=libldb.so.1.4.3
-file path=usr/lib/samba/private/$(MACH64)/libldb.so.1.4.3
+link path=usr/lib/samba/private/$(MACH64)/libldb.so.1 target=libldb.so.1.4.6
+file path=usr/lib/samba/private/$(MACH64)/libldb.so.1.4.6
 file path=usr/lib/samba/private/$(MACH64)/libldbsamba-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/liblibcli-lsa3-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/liblibsmb-samba4.so
@@ -53,6 +71,8 @@ file path=usr/lib/samba/private/$(MACH64)/libmsghdr-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libmsrpc3-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libndr-samba-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libreplace-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libroken-samba4.so.19     target=libroken-samba4.so.19.0.1
+file path=usr/lib/samba/private/$(MACH64)/libroken-samba4.so.19.0.1
 file path=usr/lib/samba/private/$(MACH64)/libsamba-cluster-support-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libsamba-debug-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libsamba-modules-samba4.so
@@ -81,4 +101,6 @@ file path=usr/lib/samba/private/$(MACH64)/libutil-reg-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libutil-setid-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libutil-tdb-samba4.so
 file path=usr/lib/samba/private/$(MACH64)/libwinbind-client-samba4.so
+link path=usr/lib/samba/private/$(MACH64)/libwind-samba4.so.0     target=libwind-samba4.so.0.0.0
+file path=usr/lib/samba/private/$(MACH64)/libwind-samba4.so.0.0.0
 file path=usr/lib/samba/private/$(MACH64)/libz-samba4.so
