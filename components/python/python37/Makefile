@@ -108,7 +108,7 @@ CONFIGURE_OPTIONS += --with-dtrace
 CONFIGURE_OPTIONS += --with-gcc
 CONFIGURE_OPTIONS += --enable-shared
 CONFIGURE_OPTIONS += --without-ensurepip
-CONFIGURE_OPTIONS += --enable-optimizations
+#CONFIGURE_OPTIONS += --enable-optimizations
 
 CONFIGURE_OPTIONS += --bindir=/usr/bin
 CONFIGURE_OPTIONS += --infodir=$(CONFIGURE_INFODIR)
@@ -175,7 +175,7 @@ install:    $(INSTALL_64)
 # You can set TESTOPTS_PYTHON_TEST to a particular test if you want to run just
 # one test.  For example:
 # $ TESTOPTS_PYTHON_TEST=test_sys
-TESTOPTS_PYTHON_TEST =
+TESTOPTS_PYTHON_TEST = -x test_asyncio
 COMPONENT_TEST_ENV = PATH="$(PATH)"
 # Using "-uall,-network" ensures all tests are run except the network tests.
 # The network tests contain many expected failures when run behind a firewall.
