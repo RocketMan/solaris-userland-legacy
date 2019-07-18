@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2011, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2011, 2019, Oracle and/or its affiliates. All rights reserved.
 #
 BUILD_BITS= 32_and_64
 COMPILER= gcc
@@ -29,16 +29,16 @@ include ../../make-rules/shared-macros.mk
 PATH=$(USRBINDIR):$(GNUBIN):$(USRSBINDIR)
 
 COMPONENT_NAME=		mercurial
-COMPONENT_VERSION=	4.7.1
+COMPONENT_VERSION=	4.9.1
 COMPONENT_PROJECT_URL=	http://mercurial-scm.org/
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:4f9c5bdc4ede2e0f2fcfacce5d6f41eb96f8f7d0c819fa3b99f57cee0e2d062d
+    sha256:32ac6bbfb2e99dcd0606179f8168f8ac1b9f4f23c0564dd181aeb175ea1256e7
 COMPONENT_ARCHIVE_URL=	https://www.mercurial-scm.org/release/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_BUGDB=	utility/hg
 COMPONENT_ANITYA_ID=	1969
 
-TPNO=			48160
+TPNO=			50789
 
 # Mercurial does not yet support Python 3.
 PYTHON_VERSIONS = $(PYTHON2_VERSIONS)
@@ -69,6 +69,7 @@ COMPONENT_POST_INSTALL_ACTION += $(PYTHON_SCRIPTS_PROCESS)
 
 PKG_PROTO_DIRS +=	$(COMPONENT_SRC)/contrib
 PKG_PROTO_DIRS +=	$(COMPONENT_SRC)/doc
+PKG_MACROS     +=	COMPONENT_SRC=$(COMPONENT_SRC)
 
 GENERATE_PROTO_DIRS += $(COMPONENT_SRC)/contrib^usr/demo/mercurial
 
@@ -127,29 +128,34 @@ hg-local: clean prep
 # Right now you have to
 # - make sure that rst.patch and hgmanpage.patch applies
 # sudo pip --proxy $http_proxy install docutils
-# gmake patches/manpages.patch
+# gmake regenerate-man-patch
 #
 # This recipe is just for the component maintainer's benefit.
-.PHONY: patches/manpages.patch
-patches/manpages.patch:
+.PHONY: regenerate-man-patch
+regenerate-man-patch:
 	$(RM) "$@"
 	( \
 	    ( : First create a workspace without manpages.patch applied ); \
+	    $(RM) patches/manpages.patch; \
 	    $(MAKE) clean prep; \
 	    \
 	    ( : Backup all the existing man pages ); \
-	    cd $(COMPONENT_SRC)/doc; \
+	    cd $(COMPONENT_SRC); \
 	    for f in hg.1 hgignore.5 hgrc.5 hg-ssh.8; do \
-		$(CP) $$f $$f.orig; \
+		$(CP) doc/$$f doc/$$f.orig; \
 	    done; \
 	    \
 	    ( : Re-generate the man pages ); \
-	    gmake man || true; \
+	    gmake -C doc man || true; \
 	    \
 	    ( : Run a diff and create new patch ); \
 	    for f in hg.1 hgignore.5 hgrc.5 hg-ssh.8; do \
-		diff -u $$f.orig $$f || : ; \
-	    done > $(COMPONENT_DIR)/$@; \
+		diff -u ./doc/$$f.orig ./doc/$$f || : ; \
+	    done | \
+	    $$( : Remove timestamps by removing last three words \
+	          to keep the diffs a bit less cluttered ) \
+	    $(PERL) -pe 's/^(---|\+\+\+)(.*?)(\s+\S+){3}$$/$$1$$2/' > \
+		$(COMPONENT_DIR)/patches/manpages.patch; \
 	)
 
 REQUIRED_PACKAGES += file/gnu-coreutils
