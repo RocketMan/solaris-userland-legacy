@@ -35,7 +35,8 @@ HUMAN_VERSION=		2019b
 TPNO=			53499	
 COMPONENT_ANITYA_ID=	5021
 
-OS_META_VERSION=	-$(PKG_SOLARIS_VERSION)
+$(SOLARIS_11_4_5_ONLY)OS_META_VERSION=	-$(PKG_SOLARIS_VERSION)
+$(SOLARIS_11_3_ONLY)OS_META_VERSION=	,$(BUILD_VERSION)
 
 # "etcetera" must be listed before "backward" because it sets up links that
 # "backward" needs.
