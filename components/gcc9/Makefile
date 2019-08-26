@@ -159,6 +159,8 @@ COMPONENT_TEST_MASTER = \
 # GCC ships some static libraries (.a).
 MANIFEST_CLEANUP_TRANSFORM=
 
+MANIFEST_COMPARE=/usr/bin/true
+
 PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/g++
 PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gcc
 PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gcc-ar
