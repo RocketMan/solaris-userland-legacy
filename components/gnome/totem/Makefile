@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2019, Oracle and/or its affiliates. All rights reserved.
 #
 
 BUILD_BITS =            64_and_32
@@ -59,7 +59,7 @@ CONFIGURE_ENV += PYTHON="$(PYTHON)"
 # Only build Python 2.7 support; most of GNOME still uses Python 2.x.  Building
 # both would lead to the possibility of both Python runtimes being loaded into
 # the same process space (not a good idea).
-PYTHON_VERSIONS=2.7
+PYTHON_VERSION = 2.7
 
 # Ensure Python modules are installed to vendor-packages directory;
 # the default is site-packages.
@@ -72,7 +72,7 @@ CONFIGURE_OPTIONS += --enable-introspection
 #CONFIGURE_OPTIONS += --enable-nautilus
 CONFIGURE_OPTIONS += --disable-nautilus
 # Required for other components.
-CONFIGURE_OPTIONS += --enable-python
+CONFIGURE_OPTIONS += --enable-python=$(PYTHON)
 CONFIGURE_OPTIONS += --enable-shared
 # Required for other components.
 CONFIGURE_OPTIONS += --enable-vala
