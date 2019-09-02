@@ -26,8 +26,11 @@
 # Fix a problem with false positive unresolved dependency error.
 <transform file path=usr/lib/python3.7/(cProfile|platform|profile|pdb|trace|smtpd).py -> \
     set pkg.depend.bypass-generate .*>
+<transform file path=usr/bin/.* -> set pkg.depend.bypass-generate .*>
+<transform file path=usr/lib/python3.7/.* -> set pkg.depend.bypass-generate .*>
 <transform file path=usr/lib/python3.7/lib-dynload/.*\.so -> \
     add pkg.linted.userland.action001.2 true>
+<transform link path=.*/python3.pc -> add pkg.linted.pkglint.dupaction010.3 true>
 <transform file path=usr.*/man/.+ -> default mangler.man.stability uncommitted>
 <transform file path=.*/(idle_)?tests?/.* -> default facet.optional.test true>
 set name=pkg.fmri \
@@ -185,11 +188,11 @@ file $(MACH64)/llib-lpython37m.ln path=usr/lib/$(MACH64)/llib-lpython3.7m.ln
 file path=usr/lib/$(MACH64)/pkgconfig/python-3.7.pc
 link path=usr/lib/$(MACH64)/pkgconfig/python-3.7m.pc target=python-3.7.pc
 link path=usr/lib/$(MACH64)/pkgconfig/python3.pc target=python-3.7.pc \
-    mediator=python mediator-version=3.7
+    mediator=python3 mediator-version=3.7
 file llib-lpython37m path=usr/lib/llib-lpython3.7m
 link path=usr/lib/pkgconfig/python-3.7.pc \
     target=../$(MACH64)/pkgconfig/python-3.7.pc
-link path=usr/lib/pkgconfig/python3.pc target=python-3.7.pc mediator=python \
+link path=usr/lib/pkgconfig/python3.pc target=python-3.7.pc mediator=python3 \
     mediator-version=3.7
 file path=usr/lib/python3.7/LICENSE.txt
 file path=usr/lib/python3.7/__future__.py
@@ -629,9 +632,7 @@ file path=usr/lib/python3.7/encodings/uu_codec.py
 file path=usr/lib/python3.7/encodings/zlib_codec.py
 file path=usr/lib/python3.7/ensurepip/__init__.py
 file path=usr/lib/python3.7/ensurepip/__main__.py
-file path=usr/lib/python3.7/ensurepip/_bundled/pip-10.0.1-py2.py3-none-any.whl
 file path=usr/lib/python3.7/ensurepip/_bundled/pip-19.0.3-py2.py3-none-any.whl
-file path=usr/lib/python3.7/ensurepip/_bundled/setuptools-39.0.1-py2.py3-none-any.whl
 file path=usr/lib/python3.7/ensurepip/_bundled/setuptools-40.8.0-py2.py3-none-any.whl
 file path=usr/lib/python3.7/ensurepip/_uninstall.py
 file path=usr/lib/python3.7/enum.py
@@ -884,6 +885,7 @@ file path=usr/lib/python3.7/lib-dynload/array.cpython-37m.so
 file path=usr/lib/python3.7/lib-dynload/audioop.cpython-37m.so
 file path=usr/lib/python3.7/lib-dynload/binascii.cpython-37m.so
 file path=usr/lib/python3.7/lib-dynload/cmath.cpython-37m.so
+$(SOLARIS_11_4_5_ONLY)file path=usr/lib/python3.7/lib-dynload/dlpi.cpython-37m.so
 file path=usr/lib/python3.7/lib-dynload/fcntl.cpython-37m.so
 file path=usr/lib/python3.7/lib-dynload/grp.cpython-37m.so
 file path=usr/lib/python3.7/lib-dynload/math.cpython-37m.so
@@ -906,10 +908,8 @@ file path=usr/lib/python3.7/lib-dynload/xxlimited.cpython-37m.so
 file path=usr/lib/python3.7/lib-dynload/zlib.cpython-37m.so
 file path=usr/lib/python3.7/lib2to3/Grammar$(COMPONENT_VERSION).final.0.pickle
 file path=usr/lib/python3.7/lib2to3/Grammar.txt
-file path=usr/lib/python3.7/lib2to3/Grammar3.7.1.final.0.pickle
 file path=usr/lib/python3.7/lib2to3/PatternGrammar$(COMPONENT_VERSION).final.0.pickle
 file path=usr/lib/python3.7/lib2to3/PatternGrammar.txt
-file path=usr/lib/python3.7/lib2to3/PatternGrammar3.7.1.final.0.pickle
 file path=usr/lib/python3.7/lib2to3/__init__.py
 file path=usr/lib/python3.7/lib2to3/__main__.py
 file path=usr/lib/python3.7/lib2to3/btm_matcher.py
@@ -1192,7 +1192,6 @@ file path=usr/lib/python3.7/test/badsyntax_future7.py pkg.tmp.autopyc=false
 file path=usr/lib/python3.7/test/badsyntax_future8.py pkg.tmp.autopyc=false
 file path=usr/lib/python3.7/test/badsyntax_future9.py pkg.tmp.autopyc=false
 file path=usr/lib/python3.7/test/badsyntax_pep3120.py pkg.tmp.autopyc=false
-file path=usr/lib/python3.7/test/bisect.py
 file path=usr/lib/python3.7/test/bisect_cmd.py
 file path=usr/lib/python3.7/test/bytecode_helper.py
 file path=usr/lib/python3.7/test/capath/4e1295a3.0
@@ -1545,10 +1544,6 @@ file path=usr/lib/python3.7/test/test_asyncio/echo.py
 file path=usr/lib/python3.7/test/test_asyncio/echo2.py
 file path=usr/lib/python3.7/test/test_asyncio/echo3.py
 file path=usr/lib/python3.7/test/test_asyncio/functional.py
-file path=usr/lib/python3.7/test/test_asyncio/keycert3.pem
-file path=usr/lib/python3.7/test/test_asyncio/pycacert.pem
-file path=usr/lib/python3.7/test/test_asyncio/ssl_cert.pem
-file path=usr/lib/python3.7/test/test_asyncio/ssl_key.pem
 file path=usr/lib/python3.7/test/test_asyncio/test_base_events.py
 file path=usr/lib/python3.7/test/test_asyncio/test_buffered_proto.py
 file path=usr/lib/python3.7/test/test_asyncio/test_context.py

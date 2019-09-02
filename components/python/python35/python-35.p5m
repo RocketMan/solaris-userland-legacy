@@ -23,8 +23,11 @@
 # Copyright (c) 2012, 2019, Oracle and/or its affiliates. All rights reserved.
 
 #
+<transform file path=usr/bin/.* -> set pkg.depend.bypass-generate .*>
+<transform file path=usr/lib/python3.5/.* -> set pkg.depend.bypass-generate .*>
 <transform file path=usr/lib/python3.5/lib-dynload/.*\.so -> \
     add pkg.linted.userland.action001.2 true>
+<transform link path=.*/python3.pc -> add pkg.linted.pkglint.dupaction010.3 true>
 <transform file path=usr.*/man/.+ -> default mangler.man.stability uncommitted>
 <transform file path=.*/(idle_)?tests?/.* -> default facet.optional.test true>
 set name=pkg.fmri \
@@ -170,11 +173,11 @@ file $(MACH64)/llib-lpython35m.ln path=usr/lib/$(MACH64)/llib-lpython3.5m.ln
 file path=usr/lib/$(MACH64)/pkgconfig/python-3.5.pc
 link path=usr/lib/$(MACH64)/pkgconfig/python-3.5m.pc target=python-3.5.pc
 link path=usr/lib/$(MACH64)/pkgconfig/python3.pc target=python-3.5.pc \
-    mediator=python mediator-version=3.5
+    mediator=python3 mediator-version=3.5
 file llib-lpython35m path=usr/lib/llib-lpython3.5m
 link path=usr/lib/pkgconfig/python-3.5.pc \
     target=../$(MACH64)/pkgconfig/python-3.5.pc
-link path=usr/lib/pkgconfig/python3.pc target=python-3.5.pc mediator=python \
+link path=usr/lib/pkgconfig/python3.pc target=python-3.5.pc mediator=python3 \
     mediator-version=3.5
 file path=usr/lib/python3.5/LICENSE.txt
 file path=usr/lib/python3.5/__future__.py
