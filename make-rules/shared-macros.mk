@@ -250,7 +250,7 @@ PYTHON3_VERSIONS =	3.5 3.7
 PYTHON_VERSIONS =	$(PYTHON2_VERSIONS) $(PYTHON3_VERSIONS)
 
 # Convenience variable for builds without Python 3.7
-WITHOUT_PYTHON3.7 = 3.4 3.5 $(PYTHON2_VERSIONS)
+WITHOUT_PYTHON3.7 = 3.5 $(PYTHON2_VERSIONS)
 
 # PYTHON3_SOABI variable defines the naming scheme
 # of python3 extension libraries: cpython or abi3.
