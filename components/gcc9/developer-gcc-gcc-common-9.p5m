@@ -121,7 +121,6 @@ file \
     path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/mps/prcpucfg.h \
     variant.arch=sparc
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/mps/secport.h
-$(SOLARIS_11_4_5_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/openssl/fips-140/openssl/opensslconf.h
 $(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/netinet/ip_compat.h
 $(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/netinet/ip_fil.h
 $(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/netinet/ip_lookup.h
@@ -129,11 +128,12 @@ $(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VER
 $(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/netinet/ip_pool.h
 $(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/netinet/ip_proxy.h
 $(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/netinet/ip_state.h
+$(SOLARIS_11_4_5_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/openssl/fips-140/openssl/opensslconf.h
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/openssl/opensslconf.h
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/pixman-1/pixman.h
+$(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/slang.h
 $(SOLARIS_11_4_5_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/stdcxx4/rw/_config-msvcrt.h
 $(SOLARIS_11_4_5_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/stdcxx4/rw/_config.h
-$(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/slang.h
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/stdio.h
 $(SOLARIS_11_3_ONLY)file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/sunmath.h
 file \
