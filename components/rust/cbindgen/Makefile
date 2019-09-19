@@ -37,8 +37,8 @@ COMPONENT_ARCHIVE_HASH = \
 COMPONENT_ARCHIVE_URL =	https://github.com/eqrion/cbindgen/archive/v$(COMPONENT_VERSION).tar.gz
 
 # hash for vendored sources
-COMPONENT_ARCHIVE_HASH_crates = \
-    sha256:36b406f71746c51feb2c0ba042780cef0c46641326aaf5945cb35efd19893be2
+#COMPONENT_ARCHIVE_HASH_crates = \
+#    sha256:36b406f71746c51feb2c0ba042780cef0c46641326aaf5945cb35efd19893be2
 
 TPNO = 52376
 
