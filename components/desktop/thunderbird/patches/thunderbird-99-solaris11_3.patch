@@ -1,11 +1,11 @@
---- a/comm/ldap/c-sdk/include/portable.h	2019-02-13 19:25:18.466202740 +0000
-+++ b/comm/ldap/c-sdk/include/portable.h	2019-02-14 09:12:10.876366007 +0000
-@@ -313,7 +313,7 @@
-         || defined(IRIX6) || defined(FREEBSD) || defined(VMS) \
-         || defined(NTO) || defined(OPENBSD) || defined(DRAGONFLY) \
- 	|| defined(SOLARIS)
--#define NSLDAPI_CTIME( c, b, l )        ctime_r( c, b )
-+#define NSLDAPI_CTIME( c, b, l )        ctime_r( c, b, l )
- #elif defined( OSF1V3 )
- #define NSLDAPI_CTIME( c, b, l )	(ctime_r( c, b, l ) ? NULL : b)
- #else
+--- a/comm/ldap/c-sdk/include/portable.h	2019-09-10 00:43:56.000000000 +0000
++++ b/comm/ldap/c-sdk/include/portable.h	2019-09-22 15:34:47.258953144 +0000
+@@ -317,7 +317,7 @@
+       defined(HPUX11) || defined(NETBSD) || defined(IRIX6) ||                  \
+       defined(FREEBSD) || defined(VMS) || defined(NTO) || defined(OPENBSD) ||  \
+       defined(DRAGONFLY) || defined(SOLARIS)
+-#    define NSLDAPI_CTIME(c, b, l) ctime_r(c, b)
++#    define NSLDAPI_CTIME(c, b, l) ctime_r(c, b, l)
+ #  elif defined(OSF1V3)
+ #    define NSLDAPI_CTIME(c, b, l) (ctime_r(c, b, l) ? NULL : b)
+ #  else
