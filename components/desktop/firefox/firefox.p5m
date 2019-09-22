@@ -184,8 +184,7 @@ file path=usr/lib/firefox/libxul.so
 file path=usr/lib/firefox/omni.ja
 file path=usr/lib/firefox/pingsender mode=0555
 file path=usr/lib/firefox/platform.ini
-file path=usr/lib/firefox/plugin-container mode=0555 \
-    pkg.linted.userland.action001.3=true pkg.linted.userland.action001.5=true
+file path=usr/lib/firefox/plugin-container mode=0555
 file path=usr/lib/firefox/removed-files
 file files/firefox.desktop path=usr/share/applications/firefox.desktop \
     restart_fmri=svc:/application/desktop-cache/desktop-mime-cache:default
