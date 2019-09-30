@@ -25,3 +25,4 @@
 
 # Add additional links
 link path=usr/lib/$(MACH64)/libarchive.so.12 target=libarchive.so.13
+link path=usr/lib/libarchive.so.12 target=libarchive.so.13

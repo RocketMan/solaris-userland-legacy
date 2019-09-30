@@ -53,6 +53,7 @@ link path=usr/lib/$(MACH64)/libarchive.so.13 \
 file path=usr/lib/$(MACH64)/pkgconfig/libarchive.pc
 link path=usr/lib/libarchive.so target=libarchive.so.1$(COMPONENT_VERSION)
 file path=usr/lib/libarchive.so.1$(COMPONENT_VERSION)
+link path=usr/lib/libarchive.so.12 target=libarchive.so.13
 link path=usr/lib/libarchive.so.13 target=libarchive.so.1$(COMPONENT_VERSION)
 file path=usr/lib/pkgconfig/libarchive.pc
 file path=usr/share/man/man3archive/archive_entry.3archive
