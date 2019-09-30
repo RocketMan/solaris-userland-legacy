@@ -37,7 +37,7 @@ file gv.ini path=etc/php/7.1/conf.d/gv.ini
 file path=usr/lib/$(MACH64)/graphviz/php/gv.php
 link path=usr/lib/$(MACH64)/graphviz/php/gv.so target=libgv_php.so
 file path=usr/lib/$(MACH64)/graphviz/php/libgv_php.so
-link path=usr/php/7.1/lib/extensions/no-debug-zts-20131226/gv.so \
+link path=usr/php/7.1/lib/extensions/no-debug-zts-20160303/gv.so \
     target=../../../../../lib/$(MACH64)/graphviz/php/libgv_php.so
 file path=usr/share/graphviz/demo/modgraph.php
 file path=usr/share/graphviz/doc/pdf/gv.3php.pdf

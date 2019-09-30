@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2011, 2017, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2011, 2019, Oracle and/or its affiliates. All rights reserved.
 #
 BUILD_BITS=64
 # Currently only builds with gcc
@@ -29,15 +29,15 @@ export PARFAIT_BUILD=no
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		cmake
-CMAKE_MAJOR_VERSION=	3.10
-COMPONENT_VERSION=	$(CMAKE_MAJOR_VERSION).3
+CMAKE_MAJOR_VERSION=	3.15
+COMPONENT_VERSION=	$(CMAKE_MAJOR_VERSION).2
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:0c3a1dcf0be03e40cf4f341dda79c96ffb6c35ae35f2f911845b72dab3559cf8
+    sha256:539088cb29a68e6d6a8fba5c00951e5e5b1a92c68fa38a83e1ed2f355933f768
 COMPONENT_ARCHIVE_URL=	http://www.cmake.org/files/v$(CMAKE_MAJOR_VERSION)/$(COMPONENT_ARCHIVE)
 COMPONENT_PROJECT_URL=  http://www.cmake.org/
 COMPONENT_ANITYA_ID=	306
 
-TPNO=			37292
+TPNO=			53325
 
 # configure in cmake does not accept many of the options set in
 # configure.mk (CC=, CXX=, --bindir, --libdir, --sbindir).
@@ -114,9 +114,8 @@ COMPONENT_TEST_ENV += http_proxy="$(HTTP_PROXY)"
 COMPONENT_TEST_ENV += https_proxy="$(HTTPS_PROXY)"
 COMPONENT_TEST_ENV += HTTP_PROXY="$(HTTP_PROXY)"
 COMPONENT_TEST_ENV += HTTPS_PROXY="$(HTTPS_PROXY)"
-
-# Results output is different on Intel vs. SPARC.
-COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-$(MACH).master
+# The default version of gfortran compiler should correspond to gcc and g++ versions.
+COMPONENT_TEST_ENV += FC="$(GCC_ROOT)/bin/gfortran"
 
 COMPONENT_TEST_TARGETS =	test
 
@@ -140,13 +139,20 @@ COMPONENT_SYSTEM_TEST_ENV += https_proxy="$(HTTPS_PROXY)"
 COMPONENT_SYSTEM_TEST_ENV += HTTP_PROXY="$(HTTP_PROXY)"
 COMPONENT_SYSTEM_TEST_ENV += HTTPS_PROXY="$(HTTPS_PROXY)"
 
+# Add path to libgfortran.so.[0-9] library to avoid Fortran test failures.
+# The library preload can be removed after bug 30144732 is fixed.
+# Note that the library preload could also be removed if the mediator is
+# set to the latest GCC version but it is safer to keep it since it would
+# break again when a newer version of GNU compiler is added to CBE.
+COMPONENT_TEST_ENV +=   LD_LIBRARY_PATH="$(GCC_ROOT)/lib/$(MACH64)/"
+
 COMPONENT_SYSTEM_TEST_TARGETS =	test
 
 # Install the man pages this way because we do not have Sphinx.
 COMPONENT_POST_INSTALL_ACTION += \
-	( $(MKDIR) -p $(PROTO_DIR)/usr/share ; \
-	  $(CP) -r $(COMPONENT_DIR)/files/man1 $(PROTO_DIR)/usr/share/ ; \
-	  $(CP) -r $(COMPONENT_DIR)/files/man7 $(PROTO_DIR)/usr/share/ )
+	( $(MKDIR) -p $(PROTO_DIR)/usr/share/man/ ; \
+	  $(CP) -r $(COMPONENT_DIR)/files/man1 $(PROTO_DIR)/usr/share/man/ ; \
+	  $(CP) -r $(COMPONENT_DIR)/files/man7 $(PROTO_DIR)/usr/share/man/ )
 
 # Built binaries are moved aside and replaced with
 # symlinks to the system-installed binaries in /usr/bin,
