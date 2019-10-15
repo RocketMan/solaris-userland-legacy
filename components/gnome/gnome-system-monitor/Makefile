@@ -46,6 +46,8 @@ CXXFLAGS += -std=c++11
 # Uses gcc-specific language extensions.
 CXXFLAGS.studio += -features=extensions
 
+LDFLAGS += -lsocket -lnsl
+
 CONFIGURE_OPTIONS += --disable-static
 # Linux-specific.
 CONFIGURE_OPTIONS += --disable-systemd
