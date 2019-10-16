@@ -51,6 +51,8 @@ $(SKIP_TEST_AT_TOP_LEVEL)
 
 include	$(WS_MAKE_RULES)/common.mk
 
+GCC_ROOT=		/usr/gcc/9
+
 VERSION_NUMBERS=	$(subst ., ,$(COMPONENT_VERSION))
 NODE_MAJOR_VERSION=	$(word 1,$(VERSION_NUMBERS))
 
