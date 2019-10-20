@@ -1,0 +1,82 @@
+fix for Bug 969322
+https://bugzilla.mozilla.org/show_bug.cgi?id=969322
+
+:-moz-window-inactive triggers on window drag
+
+Use of focus_{in,out}_event gtk+ signals for detecting window state
+changes is incorrect, as it results in spurious :-moz-window-inactive on
+drag.  Instead, we use window_state_event + GDK_WINDOW_STATE_FOCUSED.
+
+This patch is needed to keep csd from showing inactive state on drag
+whenever :-moz-window-inactive is used for styling.
+
+
+--- a/widget/gtk/nsWindow.cpp	2019-08-26 17:52:35.000000000 +0000
++++ a/widget/gtk/nsWindow.cpp	2019-10-19 15:45:13.967979271 +0000
+@@ -201,8 +201,6 @@
+ static gboolean button_press_event_cb(GtkWidget* widget, GdkEventButton* event);
+ static gboolean button_release_event_cb(GtkWidget* widget,
+                                         GdkEventButton* event);
+-static gboolean focus_in_event_cb(GtkWidget* widget, GdkEventFocus* event);
+-static gboolean focus_out_event_cb(GtkWidget* widget, GdkEventFocus* event);
+ static gboolean key_press_event_cb(GtkWidget* widget, GdkEventKey* event);
+ static gboolean key_release_event_cb(GtkWidget* widget, GdkEventKey* event);
+ static gboolean property_notify_event_cb(GtkWidget* widget,
+@@ -3875,10 +3873,6 @@
+     // widgets.
+     g_signal_connect(G_OBJECT(mContainer), "draw", G_CALLBACK(expose_event_cb),
+                      nullptr);
+-    g_signal_connect(mContainer, "focus_in_event",
+-                     G_CALLBACK(focus_in_event_cb), nullptr);
+-    g_signal_connect(mContainer, "focus_out_event",
+-                     G_CALLBACK(focus_out_event_cb), nullptr);
+     g_signal_connect(mContainer, "key_press_event",
+                      G_CALLBACK(key_press_event_cb), nullptr);
+     g_signal_connect(mContainer, "key_release_event",
+@@ -5574,24 +5568,6 @@
+   return TRUE;
+ }
+ 
+-static gboolean focus_in_event_cb(GtkWidget* widget, GdkEventFocus* event) {
+-  RefPtr<nsWindow> window = get_window_for_gtk_widget(widget);
+-  if (!window) return FALSE;
+-
+-  window->OnContainerFocusInEvent(event);
+-
+-  return FALSE;
+-}
+-
+-static gboolean focus_out_event_cb(GtkWidget* widget, GdkEventFocus* event) {
+-  RefPtr<nsWindow> window = get_window_for_gtk_widget(widget);
+-  if (!window) return FALSE;
+-
+-  window->OnContainerFocusOutEvent(event);
+-
+-  return FALSE;
+-}
+-
+ #ifdef MOZ_X11
+ // For long-lived popup windows that don't really take focus themselves but
+ // may have elements that accept keyboard input when the parent window is
+@@ -5777,6 +5753,21 @@
+   RefPtr<nsWindow> window = get_window_for_gtk_widget(widget);
+   if (!window) return FALSE;
+ 
++  if(event->changed_mask & GDK_WINDOW_STATE_FOCUSED &&
++     (window->WindowType() == eWindowType_toplevel ||
++      window->WindowType() == eWindowType_dialog)) {
++    GdkEventFocus eventFocus;
++    eventFocus.type = GDK_FOCUS_CHANGE;
++    eventFocus.window = event->window;
++    eventFocus.send_event = TRUE;
++    eventFocus.in = (event->new_window_state & GDK_WINDOW_STATE_FOCUSED)?TRUE:FALSE;
++    
++    if(eventFocus.in)
++      window->OnContainerFocusInEvent(&eventFocus);
++    else
++      window->OnContainerFocusOutEvent(&eventFocus);
++  }
++
+   window->OnWindowStateEvent(widget, event);
+ 
+   return FALSE;
