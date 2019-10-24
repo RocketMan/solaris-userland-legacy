@@ -30,22 +30,27 @@ whenever :-moz-window-inactive is used for styling.
  
    mHasAlphaVisual = false;
  }
-@@ -3118,6 +3115,24 @@
+@@ -3118,6 +3115,29 @@
    LOG(("nsWindow::OnWindowStateEvent [%p] changed %d new_window_state %d\n",
         (void*)this, aEvent->changed_mask, aEvent->new_window_state));
  
-+  if (aEvent->changed_mask & GDK_WINDOW_STATE_FOCUSED &&
++  // Synthesize a focus in/out event in response to change in
++  // GDK_WINDOW_STATE_FOCUSED instead of relying on focus_{in,out}_event.
++  //
++  // In addition, we must generate a focus-in event when a window
++  // is restored from the iconified state.
++  if ((aEvent->changed_mask &
++       (GDK_WINDOW_STATE_FOCUSED | GDK_WINDOW_STATE_ICONIFIED)) &&
++      !(aEvent->new_window_state & GDK_WINDOW_STATE_ICONIFIED) &&
 +      (mWindowType == eWindowType_toplevel ||
 +       mWindowType == eWindowType_dialog)) {
-+    // Synthesize focus in/out event in response to change in
-+    // GDK_WINDOW_STATE_FOCUS instead of focus_{in,out}_event.
 +    GdkEventFocus fEvent;
 +    fEvent.type = GDK_FOCUS_CHANGE;
 +    fEvent.window = aEvent->window;
 +    fEvent.send_event = TRUE;
 +    fEvent.in = (aEvent->new_window_state & GDK_WINDOW_STATE_FOCUSED) != 0;
 +    
-+    if(fEvent.in) {
++    if (fEvent.in) {
 +      OnContainerFocusInEvent(&fEvent);
 +    } else {
 +      OnContainerFocusOutEvent(&fEvent);
@@ -55,7 +60,7 @@ whenever :-moz-window-inactive is used for styling.
    if (IS_MOZ_CONTAINER(aWidget)) {
      // This event is notifying the container widget of changes to the
      // toplevel window.  Just detect changes affecting whether windows are
-@@ -3165,18 +3180,6 @@
+@@ -3165,18 +3185,6 @@
          aEvent->changed_mask | GDK_WINDOW_STATE_MAXIMIZED);
    }
  
@@ -74,7 +79,7 @@ whenever :-moz-window-inactive is used for styling.
    // We don't care about anything but changes in the maximized/icon/fullscreen
    // states
    if ((aEvent->changed_mask &
-@@ -3875,10 +3878,6 @@
+@@ -3875,10 +3883,6 @@
      // widgets.
      g_signal_connect(G_OBJECT(mContainer), "draw", G_CALLBACK(expose_event_cb),
                       nullptr);
@@ -85,7 +90,7 @@ whenever :-moz-window-inactive is used for styling.
      g_signal_connect(mContainer, "key_press_event",
                       G_CALLBACK(key_press_event_cb), nullptr);
      g_signal_connect(mContainer, "key_release_event",
-@@ -5574,24 +5573,6 @@
+@@ -5574,24 +5578,6 @@
    return TRUE;
  }
  
@@ -110,7 +115,7 @@ whenever :-moz-window-inactive is used for styling.
  #ifdef MOZ_X11
  // For long-lived popup windows that don't really take focus themselves but
  // may have elements that accept keyboard input when the parent window is
-@@ -6970,41 +6951,6 @@
+@@ -6970,41 +6956,6 @@
    return window.forget();
  }
  
