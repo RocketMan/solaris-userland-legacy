@@ -115,7 +115,7 @@ whenever :-moz-window-inactive is used for styling.
  #ifdef MOZ_X11
  // For long-lived popup windows that don't really take focus themselves but
  // may have elements that accept keyboard input when the parent window is
-@@ -6970,41 +6956,6 @@
+@@ -6970,56 +6956,6 @@
    return window.forget();
  }
  
@@ -154,9 +154,50 @@ whenever :-moz-window-inactive is used for styling.
 -  return !window->mTitlebarBackdropState;
 -}
 -
- static nsIFrame* FindTitlebarFrame(nsIFrame* aFrame) {
-   for (nsIFrame* childFrame : aFrame->PrincipalChildList()) {
-     const nsStyleDisplay* frameDisp = childFrame->StyleDisplay();
+-static nsIFrame* FindTitlebarFrame(nsIFrame* aFrame) {
+-  for (nsIFrame* childFrame : aFrame->PrincipalChildList()) {
+-    const nsStyleDisplay* frameDisp = childFrame->StyleDisplay();
+-    if (frameDisp->mAppearance == StyleAppearance::MozWindowTitlebar ||
+-        frameDisp->mAppearance == StyleAppearance::MozWindowTitlebarMaximized) {
+-      return childFrame;
+-    }
+-
+-    if (nsIFrame* foundFrame = FindTitlebarFrame(childFrame)) {
+-      return foundFrame;
+-    }
+-  }
+-  return nullptr;
+-}
+-
+ nsIFrame* nsWindow::GetFrame(void) {
+   nsView* view = nsView::GetViewFor(this);
+   if (!view) {
+@@ -7028,25 +6964,6 @@
+   return view->GetFrame();
+ }
+ 
+-void nsWindow::ForceTitlebarRedraw(void) {
+-  MOZ_ASSERT(mDrawInTitlebar, "We should not redraw invisible titlebar.");
+-
+-  if (!mWidgetListener || !mWidgetListener->GetPresShell()) {
+-    return;
+-  }
+-
+-  nsIFrame* frame = GetFrame();
+-  if (!frame) {
+-    return;
+-  }
+-
+-  frame = FindTitlebarFrame(frame);
+-  if (frame) {
+-    nsLayoutUtils::PostRestyleEvent(frame->GetContent()->AsElement(),
+-                                    RestyleHint{0}, nsChangeHint_RepaintFrame);
+-  }
+-}
+-
+ GtkTextDirection nsWindow::GetTextDirection() {
+   nsIFrame* frame = GetFrame();
+   if (!frame) {
 --- a/widget/gtk/nsWindow.h	2019-10-16 20:30:30.000000000 +0000
 +++ b/widget/gtk/nsWindow.h	2019-10-23 12:57:11.899876419 +0000
 @@ -389,7 +389,6 @@
@@ -176,6 +217,15 @@ whenever :-moz-window-inactive is used for styling.
    // Draggable titlebar region maintained by UpdateWindowDraggingRegion
    LayoutDeviceIntRegion mDraggableRegion;
  
+@@ -608,8 +605,6 @@
+ 
+   virtual int32_t RoundsWidgetCoordinatesTo() override;
+ 
+-  void ForceTitlebarRedraw();
+-
+   bool IsWaylandPopup();
+   GtkWidget* ConfigureWaylandPopupWindows();
+   void HideWaylandWindow();
 --- a/widget/gtk/nsNativeThemeGTK.cpp	2019-10-16 20:30:30.000000000 +0000
 +++ b/widget/gtk/nsNativeThemeGTK.cpp	2019-10-23 12:57:11.900257966 +0000
 @@ -444,11 +444,8 @@
