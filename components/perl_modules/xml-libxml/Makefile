@@ -20,23 +20,23 @@
 #
 
 #
-# Copyright (c) 2013, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2013, 2019, Oracle and/or its affiliates. All rights reserved.
 #
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		XML-LibXML
-COMPONENT_VERSION=	2.128
-HUMAN_VERSION=		2.0128
+COMPONENT_VERSION=	2.201
+HUMAN_VERSION=		2.0201
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(HUMAN_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:26e7ba451f3bade4d29ff00653a2ee01d13fe38b9a2ebcd0b0f3f82f9f688f2b
+    sha256:e008700732502b3f1f0890696ec6e2dc70abf526cd710efd9ab7675cae199bc2
 COMPONENT_ARCHIVE_URL=	http://search.cpan.org/CPAN/authors/id/S/SH/SHLOMIF/$(COMPONENT_ARCHIVE)
 COMPONENT_PROJECT_URL=	http://search.cpan.org/~shlomif/XML-LibXML/
 COMPONENT_BUGDB=	perl-mod/xml-libxml
 COMPONENT_ANITYA_ID=	3527
 
-TPNO=			31995
+TPNO=			53418
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/ips.mk
@@ -51,13 +51,7 @@ COMPONENT_TEST_TARGETS = test
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
 
 # Transform to remove machine-specific lines in test results
-COMPONENT_TEST_TRANSFORMS += \
-	'-e "1,/^\#/d" ' \
-	'-e "/\(^Files=\).*/d" ' \
-	'-e "/\(^t\/90\).*/d" ' \
-	'-e "/version:/d" ' \
-	'-e "/make\[/d" ' \
-	'-e "/\(^Hexadecimal\).*/d" '
+COMPONENT_TEST_TRANSFORMS += '-n -e "/^Result:/p"'
 
 build:		$(BUILD_64)
 
@@ -74,3 +68,4 @@ REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += $(PERL_VERSIONS:5.%=library/perl-5/xml-namespacesupport-5%)
 REQUIRED_PACKAGES += $(PERL_VERSIONS:5.%=library/perl-5/xml-sax-5%)
 REQUIRED_PACKAGES += $(PERL_VERSIONS:5.%=library/perl-5/xml-sax-base-5%)
+REQUIRED_PACKAGES += $(PERL_VERSIONS:5.%=library/perl-5/alien-libxml2-5%)
