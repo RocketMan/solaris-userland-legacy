@@ -1,0 +1,20 @@
+--- a/mesonbuild/compilers/compilers.py	2019-10-02 15:21:48.932575637 +0000
++++ b/mesonbuild/compilers/compilers.py	2019-10-26 19:19:29.741628652 +0000
+@@ -1885,7 +1885,7 @@
+     def __init__(self, compiler_type):
+         self.compiler_type = compiler_type
+         self.base_options = ['b_pch', 'b_lto', 'b_pgo', 'b_sanitize', 'b_coverage',
+-                             'b_ndebug', 'b_staticpic', 'b_pie']
++                             'b_ndebug', 'b_staticpic']
+         if (not self.compiler_type.is_osx_compiler and
+                 not self.compiler_type.is_windows_compiler and
+                 not mesonlib.is_openbsd()):
+@@ -2316,7 +2316,7 @@
+         # there is an unfortunate rule for using IPO (you can't control the
+         # name of the output file) which break assumptions meson makes
+         self.base_options = ['b_pch', 'b_lundef', 'b_asneeded', 'b_pgo',
+-                             'b_coverage', 'b_ndebug', 'b_staticpic', 'b_pie']
++                             'b_coverage', 'b_ndebug', 'b_staticpic']
+         self.id = 'intel'
+         self.lang_header = 'none'
+ 
