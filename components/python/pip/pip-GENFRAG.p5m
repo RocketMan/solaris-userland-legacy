@@ -22,4 +22,5 @@
 #
 
 # force the rename with an optional dependency on the old name
-depend type=optional fmri=library/python-2/pip@1.4.1,5.12-5.12.0.0.0.41.0
+$(SOLARIS_11_4_5_ONLY)depend type=optional \
+    fmri=library/python-2/pip@1.4.1,5.12-5.12.0.0.0.41.0
