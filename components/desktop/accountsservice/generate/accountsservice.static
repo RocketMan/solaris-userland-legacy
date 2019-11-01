@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,15 +17,12 @@
 #
 # CDDL HEADER END
 #
-
 #
-# Copyright (c) 2016, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
 
-file path=usr/include/pycairo/py3cairo.h
-file path=usr/lib/$(MACH64)/pkgconfig/py3cairo.pc
-license COPYING license=GPLv3
-license COPYING.LESSER license=LGPLv3
-# Manually added since python2 version is built separately in ../py2cairo
-depend type=conditional fmri=library/python/pycairo-27 \
-    predicate=runtime/python-27
+# We need to ensure these directories are created
+# when the package is installed
+dir  path=var/lib/AccountsService/icons
+dir  path=var/lib/AccountsService/users
+

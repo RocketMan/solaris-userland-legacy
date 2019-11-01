@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,13 +17,9 @@
 #
 # CDDL HEADER END
 #
-
 #
-# Copyright (c) 2018, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
 
-<include generate/common.transform>
-
-# delete everything not belonging to this package
-<transform file link pkg.type=(?!wireshark) -> drop>
-<transform file link -> delete pkg.type .*>
+# Change perms on daemon
+<transform file path=usr/lib/accounts-daemon -> set mode 0555>
