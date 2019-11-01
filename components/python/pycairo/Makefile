@@ -41,6 +41,10 @@ COMPONENT_ANITYA_ID=	13166
 
 TPNO=			53159
 
+# for 11.3, do not build the python2 targets
+PYTHON2_VERSIONS =
+PYTHON_VERSIONS =	$(PYTHON3_VERSIONS)
+
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
