@@ -3,255 +3,65 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=969322
 
 :-moz-window-inactive triggers on window drag
 
-Use of focus_{in,out}_event gtk+ signals for detecting window state
-changes is incorrect, as it results in spurious :-moz-window-inactive on
-drag.  Instead, we use window_state_event + GDK_WINDOW_STATE_FOCUSED.
-
 This patch is needed to keep csd from showing inactive state on drag
 whenever :-moz-window-inactive is used for styling.
 
 
 --- a/widget/gtk/nsWindow.cpp	2019-10-16 20:30:30.000000000 +0000
-+++ b/widget/gtk/nsWindow.cpp	2019-10-23 14:20:52.235934995 +0000
-@@ -201,8 +201,6 @@
- static gboolean button_press_event_cb(GtkWidget* widget, GdkEventButton* event);
- static gboolean button_release_event_cb(GtkWidget* widget,
-                                         GdkEventButton* event);
--static gboolean focus_in_event_cb(GtkWidget* widget, GdkEventFocus* event);
--static gboolean focus_out_event_cb(GtkWidget* widget, GdkEventFocus* event);
- static gboolean key_press_event_cb(GtkWidget* widget, GdkEventKey* event);
- static gboolean key_release_event_cb(GtkWidget* widget, GdkEventKey* event);
- static gboolean property_notify_event_cb(GtkWidget* widget,
-@@ -456,7 +454,6 @@
-   mPendingConfigures = 0;
-   mCSDSupportLevel = CSD_SUPPORT_NONE;
-   mDrawInTitlebar = false;
--  mTitlebarBackdropState = false;
++++ b/widget/gtk/nsWindow.cpp	2019-11-02 16:01:57.005586809 +0000
+@@ -2951,6 +2951,14 @@
  
-   mHasAlphaVisual = false;
- }
-@@ -3118,6 +3115,29 @@
-   LOG(("nsWindow::OnWindowStateEvent [%p] changed %d new_window_state %d\n",
-        (void*)this, aEvent->changed_mask, aEvent->new_window_state));
+   DispatchDeactivateEvent();
  
-+  // Synthesize a focus in/out event in response to change in
-+  // GDK_WINDOW_STATE_FOCUSED instead of relying on focus_{in,out}_event.
-+  //
-+  // In addition, we must generate a focus-in event when a window
-+  // is restored from the iconified state.
-+  if ((aEvent->changed_mask &
-+       (GDK_WINDOW_STATE_FOCUSED | GDK_WINDOW_STATE_ICONIFIED)) &&
-+      !(aEvent->new_window_state & GDK_WINDOW_STATE_ICONIFIED) &&
-+      (mWindowType == eWindowType_toplevel ||
-+       mWindowType == eWindowType_dialog)) {
-+    GdkEventFocus fEvent;
-+    fEvent.type = GDK_FOCUS_CHANGE;
-+    fEvent.window = aEvent->window;
-+    fEvent.send_event = TRUE;
-+    fEvent.in = (aEvent->new_window_state & GDK_WINDOW_STATE_FOCUSED) != 0;
-+    
-+    if (fEvent.in) {
-+      OnContainerFocusInEvent(&fEvent);
-+    } else {
-+      OnContainerFocusOutEvent(&fEvent);
-+    }
++  if (mDrawInTitlebar) {
++    // DispatchDeactivateEvent() ultimately results in a call to
++    // nsGlobalWindowOuter::ActivateOrDeactivate(), which resets
++    // the mIsActive flag.  We call UpdateMozWindowActive() to keep
++    // the flag in sync with GDK_WINDOW_STATE_FOCUSED.
++    UpdateMozWindowActive();
 +  }
 +
-   if (IS_MOZ_CONTAINER(aWidget)) {
-     // This event is notifying the container widget of changes to the
-     // toplevel window.  Just detect changes affecting whether windows are
-@@ -3165,18 +3185,6 @@
-         aEvent->changed_mask | GDK_WINDOW_STATE_MAXIMIZED);
+   LOGFOCUS(("Done with container focus out [%p]\n", (void*)this));
+ }
+ 
+@@ -3174,6 +3182,9 @@
+     mTitlebarBackdropState =
+         !(aEvent->new_window_state & GDK_WINDOW_STATE_FOCUSED);
+ 
++    // keep mIsActive in sync with GDK_WINDOW_STATE_FOCUSED
++    UpdateMozWindowActive();
++
+     ForceTitlebarRedraw();
    }
  
--  // This is a workaround for https://gitlab.gnome.org/GNOME/gtk/issues/1395
--  // Gtk+ controls window active appearance by window-state-event signal.
--  if (mDrawInTitlebar && (aEvent->changed_mask & GDK_WINDOW_STATE_FOCUSED)) {
--    // Emulate what Gtk+ does at gtk_window_state_event().
--    // We can't check GTK_STATE_FLAG_BACKDROP directly as it's set by Gtk+
--    // *after* this window-state-event handler.
--    mTitlebarBackdropState =
--        !(aEvent->new_window_state & GDK_WINDOW_STATE_FOCUSED);
--
--    ForceTitlebarRedraw();
--  }
--
-   // We don't care about anything but changes in the maximized/icon/fullscreen
-   // states
-   if ((aEvent->changed_mask &
-@@ -3875,10 +3883,6 @@
-     // widgets.
-     g_signal_connect(G_OBJECT(mContainer), "draw", G_CALLBACK(expose_event_cb),
-                      nullptr);
--    g_signal_connect(mContainer, "focus_in_event",
--                     G_CALLBACK(focus_in_event_cb), nullptr);
--    g_signal_connect(mContainer, "focus_out_event",
--                     G_CALLBACK(focus_out_event_cb), nullptr);
-     g_signal_connect(mContainer, "key_press_event",
-                      G_CALLBACK(key_press_event_cb), nullptr);
-     g_signal_connect(mContainer, "key_release_event",
-@@ -5574,24 +5578,6 @@
-   return TRUE;
- }
- 
--static gboolean focus_in_event_cb(GtkWidget* widget, GdkEventFocus* event) {
--  RefPtr<nsWindow> window = get_window_for_gtk_widget(widget);
--  if (!window) return FALSE;
--
--  window->OnContainerFocusInEvent(event);
--
--  return FALSE;
--}
--
--static gboolean focus_out_event_cb(GtkWidget* widget, GdkEventFocus* event) {
--  RefPtr<nsWindow> window = get_window_for_gtk_widget(widget);
--  if (!window) return FALSE;
--
--  window->OnContainerFocusOutEvent(event);
--
--  return FALSE;
--}
--
- #ifdef MOZ_X11
- // For long-lived popup windows that don't really take focus themselves but
- // may have elements that accept keyboard input when the parent window is
-@@ -6970,56 +6956,6 @@
-   return window.forget();
- }
- 
--bool nsWindow::GetTopLevelWindowActiveState(nsIFrame* aFrame) {
--  // Used by window frame and button box rendering. We can end up in here in
--  // the content process when rendering one of these moz styles freely in a
--  // page. Fail in this case, there is no applicable window focus state.
--  if (!XRE_IsParentProcess()) {
--    return false;
--  }
--  // All headless windows are considered active so they are painted.
--  if (gfxPlatform::IsHeadless()) {
--    return true;
--  }
--  // Get the widget. nsIFrame's GetNearestWidget walks up the view chain
--  // until it finds a real window.
--  nsWindow* window = static_cast<nsWindow*>(aFrame->GetNearestWidget());
--  if (!window) {
--    return false;
--  }
--
--  // Get our toplevel nsWindow.
--  if (!window->mIsTopLevel) {
--    GtkWidget* widget = window->GetMozContainerWidget();
--    if (!widget) {
--      return false;
--    }
--
--    GtkWidget* toplevelWidget = gtk_widget_get_toplevel(widget);
--    window = get_window_for_gtk_widget(toplevelWidget);
--    if (!window) {
--      return false;
--    }
--  }
--
--  return !window->mTitlebarBackdropState;
--}
--
--static nsIFrame* FindTitlebarFrame(nsIFrame* aFrame) {
--  for (nsIFrame* childFrame : aFrame->PrincipalChildList()) {
--    const nsStyleDisplay* frameDisp = childFrame->StyleDisplay();
--    if (frameDisp->mAppearance == StyleAppearance::MozWindowTitlebar ||
--        frameDisp->mAppearance == StyleAppearance::MozWindowTitlebarMaximized) {
--      return childFrame;
--    }
--
--    if (nsIFrame* foundFrame = FindTitlebarFrame(childFrame)) {
--      return foundFrame;
--    }
--  }
--  return nullptr;
--}
--
- nsIFrame* nsWindow::GetFrame(void) {
-   nsView* view = nsView::GetViewFor(this);
-   if (!view) {
-@@ -7028,25 +6964,6 @@
+@@ -7028,6 +7039,19 @@
    return view->GetFrame();
  }
  
--void nsWindow::ForceTitlebarRedraw(void) {
--  MOZ_ASSERT(mDrawInTitlebar, "We should not redraw invisible titlebar.");
--
--  if (!mWidgetListener || !mWidgetListener->GetPresShell()) {
--    return;
--  }
--
--  nsIFrame* frame = GetFrame();
--  if (!frame) {
--    return;
--  }
--
--  frame = FindTitlebarFrame(frame);
--  if (frame) {
--    nsLayoutUtils::PostRestyleEvent(frame->GetContent()->AsElement(),
--                                    RestyleHint{0}, nsChangeHint_RepaintFrame);
--  }
--}
--
- GtkTextDirection nsWindow::GetTextDirection() {
-   nsIFrame* frame = GetFrame();
-   if (!frame) {
++void nsWindow::UpdateMozWindowActive() {
++  // Update activation state for the :-moz-window-inactive pseudoclass.
++  // Normally, this follows focus; we override it here to follow
++  // GDK_WINDOW_STATE_FOCUSED.
++  mozilla::dom::Document* document = GetDocument();
++  if (document) {
++    nsPIDOMWindowOuter* window = document->GetWindow();
++    if (window) {
++      window->SetActive(!mTitlebarBackdropState);
++    }
++  }
++}
++
+ void nsWindow::ForceTitlebarRedraw(void) {
+   MOZ_ASSERT(mDrawInTitlebar, "We should not redraw invisible titlebar.");
+ 
 --- a/widget/gtk/nsWindow.h	2019-10-16 20:30:30.000000000 +0000
-+++ b/widget/gtk/nsWindow.h	2019-10-23 12:57:11.899876419 +0000
-@@ -389,7 +389,6 @@
-   static CSDSupportLevel GetSystemCSDSupportLevel();
- 
-   static bool HideTitlebarByDefault();
--  static bool GetTopLevelWindowActiveState(nsIFrame* aFrame);
-   static bool TitlebarCanUseShapeMask();
- 
-  protected:
-@@ -513,8 +512,6 @@
-   CSDSupportLevel mCSDSupportLevel;
-   // If true, draw our own window titlebar.
-   bool mDrawInTitlebar;
--  // Draw titlebar with :backdrop css state (inactive/unfocused).
--  bool mTitlebarBackdropState;
-   // Draggable titlebar region maintained by UpdateWindowDraggingRegion
-   LayoutDeviceIntRegion mDraggableRegion;
- 
-@@ -608,8 +605,6 @@
++++ b/widget/gtk/nsWindow.h	2019-11-02 16:01:59.275124120 +0000
+@@ -608,6 +608,8 @@
  
    virtual int32_t RoundsWidgetCoordinatesTo() override;
  
--  void ForceTitlebarRedraw();
--
++  void UpdateMozWindowActive();
++
+   void ForceTitlebarRedraw();
+ 
    bool IsWaylandPopup();
-   GtkWidget* ConfigureWaylandPopupWindows();
-   void HideWaylandWindow();
---- a/widget/gtk/nsNativeThemeGTK.cpp	2019-10-16 20:30:30.000000000 +0000
-+++ b/widget/gtk/nsNativeThemeGTK.cpp	2019-10-23 12:57:11.900257966 +0000
-@@ -444,11 +444,8 @@
-         aAppearance == StyleAppearance::MozWindowButtonClose ||
-         aAppearance == StyleAppearance::MozWindowButtonMinimize ||
-         aAppearance == StyleAppearance::MozWindowButtonMaximize ||
--        aAppearance == StyleAppearance::MozWindowButtonRestore) {
--      aState->backdrop = !nsWindow::GetTopLevelWindowActiveState(aFrame);
--    }
--
--    if (aAppearance == StyleAppearance::ScrollbarbuttonUp ||
-+        aAppearance == StyleAppearance::MozWindowButtonRestore ||
-+        aAppearance == StyleAppearance::ScrollbarbuttonUp ||
-         aAppearance == StyleAppearance::ScrollbarbuttonDown ||
-         aAppearance == StyleAppearance::ScrollbarbuttonLeft ||
-         aAppearance == StyleAppearance::ScrollbarbuttonRight ||
-@@ -2023,6 +2020,12 @@
- bool nsNativeThemeGTK::WidgetAppearanceDependsOnWindowFocus(
-     StyleAppearance aAppearance) {
-   switch (aAppearance) {
-+    case StyleAppearance::MozWindowTitlebar:
-+    case StyleAppearance::MozWindowTitlebarMaximized:
-+    case StyleAppearance::MozWindowButtonClose:
-+    case StyleAppearance::MozWindowButtonMinimize:
-+    case StyleAppearance::MozWindowButtonMaximize:
-+    case StyleAppearance::MozWindowButtonRestore:
-     case StyleAppearance::ScrollbarbuttonUp:
-     case StyleAppearance::ScrollbarbuttonDown:
-     case StyleAppearance::ScrollbarbuttonLeft:
