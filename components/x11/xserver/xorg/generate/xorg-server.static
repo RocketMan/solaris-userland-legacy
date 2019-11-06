@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,7 +17,24 @@
 #
 # CDDL HEADER END
 #
-
 #
 # Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
+
+# Directories that need special permissions
+dir  path=etc/X11 group=sys
+dir  path=etc/X11/xorg.conf.avail group=sys
+dir  path=etc/X11/xorg.conf.d group=sys
+
+# Files from the files directory, not the proto area
+file files/90-zap.conf path=etc/X11/xorg.conf.avail/90-zap.conf
+file files/xorgcfg.1 path=usr/share/man/man1/xorgcfg.1 mangler.bypass=true
+file files/xorgconfig.1 path=usr/share/man/man1/xorgconfig.1 mangler.bypass=true
+
+# Files from the source tree, not the proto area
+file config/x11-input.fdi path=etc/hal/fdi/preprobe/10osvendor/10-x11-input.fdi
+
+# Links for compatibility with Solaris 10 paths
+link path=usr/X11/include/xorg target=../../include/xorg
+link path=usr/lib/pkgconfig/xorg-server.pc \
+    target=../$(MACH64)/pkgconfig/xorg-server.pc
