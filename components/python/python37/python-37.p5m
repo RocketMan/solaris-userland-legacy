@@ -30,7 +30,7 @@
 <transform file path=usr/lib/python3.7/.* -> set pkg.depend.bypass-generate .*>
 <transform file path=usr/lib/python3.7/lib-dynload/.*\.so -> \
     add pkg.linted.userland.action001.2 true>
-<transform link path=.*/python3.pc -> add pkg.linted.pkglint.dupaction010.3 true>
+#<transform link path=.*/python3.pc -> add pkg.linted.pkglint.dupaction010.3 true>
 <transform file path=usr.*/man/.+ -> default mangler.man.stability uncommitted>
 <transform file path=.*/(idle_)?tests?/.* -> default facet.optional.test true>
 set name=pkg.fmri \
