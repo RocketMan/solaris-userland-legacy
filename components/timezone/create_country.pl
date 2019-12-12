@@ -1,3 +1,4 @@
+#!/usr/bin/perl -CSD
 #
 # CDDL HEADER START
 #
@@ -20,14 +21,33 @@
 #
 
 #
-# Copyright (c) 2014, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
-file release-notes/django2-library-python-django.txt \
-    path=usr/share/doc/release-notes/django2-library-python-django.txt \
-    mode=0444 must-display=true release-note=feature/pkg/self@0
-#
-license django.license license="BSD, Apache 2.0, MIT, PSFv2"
 
-# force the rename with an optional dependency on the old name
-depend type=optional fmri=library/python-2/django@1.4.10,5.12-5.12.0.0.0.44.0
 
+use utf8;
+use strict;
+
+# It seems that the file /usr/share/lib/zoneinfo/tab/country.tab must not
+# contain any utf-8 characters. We have to transliterate any utf-8 characters
+# into ascii range.
+
+while (<>) {
+	my $original_line = $_;
+
+	# Transliterate any utf-8 characters we have met
+	tr/Åôçé/Aoce/;
+
+	# Remove any ascii characters to verify that there is no more utf-8
+	my $non_ascii = s/[[:ascii:]]//gr;
+
+	# If anything is left then print an error
+	if (length $non_ascii > 0) {
+		print STDERR "Error, there are some remaining characters: $non_ascii\n";
+		print STDERR "Original line: $original_line";
+		exit 1;
+	}
+
+	# Print output
+	print;
+}

@@ -30,7 +30,7 @@ COMPONENT_NAME= 	timezone
 HUMAN_VERSION=		2019c
 # The last digit of COMPONENT_VERSION corresponds to the last letter of the
 # upstream archive name. 'a' -> 1, 'b' -> 2, etc.
-COMPONENT_VERSION=    	2019.3
+COMPONENT_VERSION=    	2019.3.1
 COMPONENT_PROJECT_URL=	http://www.iana.org/time-zones
 COMPONENT_ARCHIVE_URL=	https://data.iana.org/time-zones/releases/tzdata$(HUMAN_VERSION).tar.gz
 COMPONENT_ARCHIVE_HASH= sha256:8dbba650a85a686c8a7a774c54c1c4d88e013e7093a7935bdb1595e8ab7ae9d3
@@ -73,19 +73,25 @@ TZFILES= africa antarctica asia australasia etcetera europe \
 	 factory northamerica pacificnew \
 	 southamerica backward
 
+ZONEINFO_TAB_DIR=$(PROTO_DIR)/usr/share/lib/zoneinfo/tab
+
 build: $(SOURCE_DIR)/.prep $(BUILD_DIR)
 	( \
 		cd $(SOURCE_DIR); \
 		/usr/sbin/zic -d $(PROTOUSRSHARELIBDIR)/zoneinfo $(TZFILES) \
 	)
 
+	$(MKDIR) -p $(ZONEINFO_TAB_DIR)
 	# According to LSARC/2001/015 zone_sun.tab has additional column when
 	# compared to zone.tab
-	./create_zone_sun.pl $(SOURCE_DIR)/zone.tab > $(BUILD_DIR)/zone_sun.tab
+	./create_zone_sun.pl $(SOURCE_DIR)/zone.tab > $(ZONEINFO_TAB_DIR)/zone_sun.tab
+
+	# Remove utf-8 characters from country.tab
+	./create_country.pl $(SOURCE_DIR)/iso3166.tab > $(ZONEINFO_TAB_DIR)/country.tab
 
 	# Extract strings into translation template
 	$(SHELL) ./do_pofile.sh \
-		$(BUILD_DIR)/zone_sun.tab \
+		$(ZONEINFO_TAB_DIR)/zone_sun.tab \
 		$(SOURCE_DIR)/iso3166.tab \
 		$(COMPONENT_DIR)/continent.tab | \
 		/usr/bin/msguniq > $(BUILD_DIR)/$(POFILE)
