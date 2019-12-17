@@ -57,7 +57,7 @@ link path=usr/lib/libgweather-3.so.16 target=libgweather-3.so.16.0.0
 file path=usr/lib/libgweather-3.so.16.0.0
 file path=usr/lib/pkgconfig/gweather-3.0.pc
 file path=usr/share/gir-1.0/GWeather-3.0.gir
-file path=usr/share/glade/catalogs/libgweather.xml
+#file path=usr/share/glade/catalogs/libgweather.xml
 file path=usr/share/glib-2.0/schemas/org.gnome.GWeather.enums.xml
 file path=usr/share/glib-2.0/schemas/org.gnome.GWeather.gschema.xml
 file path=usr/share/libgweather/Locations.xml

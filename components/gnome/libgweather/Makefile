@@ -46,7 +46,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 CPPFLAGS += -std=gnu99 -D_XOPEN_SOURCE=700 -D__EXTENSIONS__ -D_XPG6
 
-CONFIGURE_OPTIONS += -Dzoneinfo-dir=/usr/share/lib/zoneinfo
+CONFIGURE_OPTIONS += -Dzoneinfo_dir=/usr/share/lib/zoneinfo
 
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
