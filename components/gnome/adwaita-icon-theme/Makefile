@@ -20,21 +20,21 @@
 #
 
 #
-# Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2019, Oracle and/or its affiliates. All rights reserved.
 #
 
 BUILD_BITS=             NO_ARCH
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		adwaita-icon-theme
-COMPONENT_VERSION=	3.24.0
+COMPONENT_VERSION=	3.33.92
 COMPONENT_PROJECT_URL=	https://github.com/GNOME/adwaita-icon-theme
 COMPONENT_ARCHIVE_HASH= \
-    sha256:ccf79ff3bd340254737ce4d28b87f0ccee4b3358cd3cd5cd11dc7b42f41b272a
+    sha256:bf041ecf7d9bf02267b83efa5f500431a98ad17f3dc85a5421d21c245f943c63
 COMPONENT_BUGDB=        gnome/themes
 COMPONENT_ANITYA_ID=	13117
 
-TPNO=			34531
+TPNO=			53954
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
