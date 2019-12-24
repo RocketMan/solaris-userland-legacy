@@ -30,6 +30,7 @@ set name=pkg.fmri \
 set name=pkg.summary value="Base plugins for GStreamer"
 set name=pkg.description \
     value="GStreamer Base Plug-ins is a well-groomed and well-maintained collection of GStreamer plug-ins and elements, spanning the range of possible types of elements one would want to write for GStreamer. It also contains helper libraries and base classes useful for writing elements. A wide range of video and audio decoders, encoders, and filters are included."
+set name=pkg.depend.bypass-generate value=libEGL\.so\.1 value=libGL\.so\.1
 set name=com.oracle.info.description value=gst-plugins-base
 set name=com.oracle.info.tpno value=$(TPNO)
 set name=info.classification \
@@ -250,6 +251,7 @@ file path=usr/lib/$(MACH64)/gstreamer-1.0/libgstgio.so
 file path=usr/lib/$(MACH64)/gstreamer-1.0/libgstlibvisual.so
 file path=usr/lib/$(MACH64)/gstreamer-1.0/libgstogg.so
 file path=usr/lib/$(MACH64)/gstreamer-1.0/libgstopengl.so
+file path=usr/lib/$(MACH64)/gstreamer-1.0/libgstopus.so
 file path=usr/lib/$(MACH64)/gstreamer-1.0/libgstoverlaycomposition.so
 file path=usr/lib/$(MACH64)/gstreamer-1.0/libgstpango.so
 file path=usr/lib/$(MACH64)/gstreamer-1.0/libgstpbtypes.so
@@ -350,6 +352,7 @@ file path=usr/lib/gstreamer-1.0/libgstgio.so
 file path=usr/lib/gstreamer-1.0/libgstlibvisual.so
 file path=usr/lib/gstreamer-1.0/libgstogg.so
 file path=usr/lib/gstreamer-1.0/libgstopengl.so
+file path=usr/lib/gstreamer-1.0/libgstopus.so
 file path=usr/lib/gstreamer-1.0/libgstoverlaycomposition.so
 file path=usr/lib/gstreamer-1.0/libgstpango.so
 file path=usr/lib/gstreamer-1.0/libgstpbtypes.so
@@ -472,3 +475,5 @@ file path=usr/share/man/man1/gst-device-monitor-1.0.1
 file path=usr/share/man/man1/gst-discoverer-1.0.1
 file path=usr/share/man/man1/gst-play-1.0.1
 license gst-plugins-base.license license="GPLv2, LGPLv2"
+depend type=require fmri=__TBD pkg.debug.depend.file=usr/lib/mesa/libEGL.so.1
+depend type=require fmri=__TBD pkg.debug.depend.file=usr/lib/mesa/libGL.so.1
