@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,16 +17,7 @@
 #
 # CDDL HEADER END
 #
-
 #
-# Copyright (c) 2019, 2020, Oracle and/or its affiliates. All rights reserved.
-#
-
-#
-# These transforms print only the package name from the manifest.
+# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
-<include auto_fmri>
-<include legacy>
-<transform set name=pkg.fmri value=pkg:/(.+)@.* -> print %<1> >
-<transform -> drop>
