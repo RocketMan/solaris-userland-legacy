@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,30 +17,14 @@
 #
 # CDDL HEADER END
 #
-
 #
-# Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
-BUILD_BITS = 32_and_64
-COMPILER=gcc
-include ../../../make-rules/shared-macros.mk
+# Drop 32-bit binary
+<transform file path=usr/bin/\$\(MACH32\)/fribidi -> drop>
 
-COMPONENT_NAME=		vala
-COMPONENT_VERSION=	0.46.1
-COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/Vala
-COMPONENT_ARCHIVE_HASH= \
-	sha256:14e579ab85739097849570b642cf09a91ed27765313a5ca6f94d474b199c9f81
-COMPONENT_BUGDB=        gnome/dev-tools
-COMPONENT_ANITYA_ID=	5065
+# pkglint transform
+<transform file path=usr/bin/fribidi -> set pkg.linted.userland.action001.2 true>
 
-TPNO=			54130
 
-# 23285126 - vala integrated tests should be hooked up
-TEST_TARGET= $(SKIP_TEST)
-
-include $(WS_MAKE_RULES)/gnome-component.mk
-
-REQUIRED_PACKAGES += developer/documentation-tool/doxygen
-REQUIRED_PACKAGES += image/graphviz
-REQUIRED_PACKAGES += library/glib2
