@@ -29,6 +29,8 @@ BUILD_BITS =            64_and_32
 COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
+MANIFEST_COMPARE=/usr/bin/true
+
 COMPONENT_NAME=		libwnck3
 COMPONENT_VERSION=	3.32.0
 COMPONENT_PROJECT_URL=	https://www.gnome.org
@@ -52,7 +54,7 @@ CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 
-LD_OPTIONS += -Wl,-zgnu-version-script-compat
+#LD_OPTIONS += -Wl,-zgnu-version-script-compat
 LD_OPTIONS += -M $(COMPONENT_DIR)/mapfile
 
 REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
