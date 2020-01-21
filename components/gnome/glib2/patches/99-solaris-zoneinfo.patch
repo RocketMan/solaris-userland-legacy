@@ -1,11 +1,11 @@
 --- a/glib/gtimezone.c	2017-02-13 15:53:27.000000000 +0000
 +++ b/glib/gtimezone.c	2018-11-24 10:05:25.921970307 +0000
-@@ -410,7 +410,7 @@
+@@ -416,7 +416,7 @@
  
-       tzdir = getenv ("TZDIR");
-       if (tzdir == NULL)
--        tzdir = "/usr/share/zoneinfo";
-+        tzdir = "/usr/share/lib/zoneinfo";
+   tzdir = getenv ("TZDIR");
+   if (tzdir == NULL)
+-    tzdir = "/usr/share/zoneinfo";
++    tzdir = "/usr/share/lib/zoneinfo";
  
-       if (*identifier == ':')
-         identifier ++;
+   /* identifier can be a relative or absolute path name;
+      if relative, it is interpreted starting from /usr/share/zoneinfo
