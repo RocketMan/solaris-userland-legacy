@@ -24,4 +24,4 @@
 #
 
 # Aclocal directory has to be specified in static file (no support in generate).
-dir path=usr/share/aclocal mode=0755
+dir path=usr/share/aclocal group=other mode=0755

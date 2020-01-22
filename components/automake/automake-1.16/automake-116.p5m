@@ -39,7 +39,7 @@ file path=usr/bin/aclocal-$(SVER)
 link path=usr/bin/automake target=automake-$(SVER) mediator=automake \
     mediator-version=$(SVER)
 file path=usr/bin/automake-$(SVER)
-dir  path=usr/share/aclocal mode=0755
+dir  path=usr/share/aclocal group=other mode=0755
 file path=usr/share/aclocal-$(SVER)/amversion.m4
 file path=usr/share/aclocal-$(SVER)/ar-lib.m4
 file path=usr/share/aclocal-$(SVER)/as.m4
