@@ -1,6 +1,4 @@
 #
-# CDDL HEADER START
-#
 # The contents of this file are subject to the terms of the
 # Common Development and Distribution License (the "License").
 # You may not use this file except in compliance with the License.
@@ -18,17 +16,10 @@
 #
 # CDDL HEADER END
 #
-
 #
 # Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
-link path=usr/bin/enchant target=enchant-2
-link path=usr/bin/enchant-lsmod target=enchant-lsmod-2
-link path=usr/lib/$(MACH64)/pkgconfig/enchant.pc target=enchant-2.pc
-link path=usr/lib/pkgconfig/enchant.pc target=enchant-2.pc
-link path=usr/lib/$(MACH64)/libenchant.so \
-    target=libenchant-2.so.$(COMPONENT_VERSION)
-link path=usr/lib/libenchant.so target=libenchant-2.so.$(COMPONENT_VERSION)
-
-
+# Drop the 32-bit binaries
+<transform file path=usr/bin/\$\(MACH32\)/glade -> drop>
+<transform file path=usr/bin/\$\(MACH32\)/glade-previewer -> drop>

@@ -18,9 +18,11 @@
 #
 # CDDL HEADER END
 #
-
-#
 # Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
-#Placeholder
+# pkgdepend transforms
+<transform file path=usr/bin/gnome-font-viewer -> \
+    set pkg.linted.userland.action001.2 true>
+<transform file path=usr/bin/gnome-thumbnail-font -> \
+    set pkg.linted.userland.action001.2 true>

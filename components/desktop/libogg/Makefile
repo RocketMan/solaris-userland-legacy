@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2016, 2019, Oracle and/or its affiliates. All rights reserved.
 #
 
 BUILD_BITS= 		32_and_64
@@ -28,15 +28,15 @@ COMPILER=		gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libogg
-COMPONENT_VERSION=	1.3.3
+COMPONENT_VERSION=	1.3.4
 COMPONENT_PROJECT_URL=	https://xiph.org/ogg/
 COMPONENT_ARCHIVE_HASH= \
-	sha256:c2e8a485110b97550f453226ec644ebac6cb29d1caef2902c007edab4308d985
+	sha256:fe5670640bd49e828d64d2879c31cb4dde9758681bb664f9bdbf159a01b0c76e
 COMPONENT_ARCHIVE_URL=	http://downloads.xiph.org/releases/ogg/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	gnome/multimedia
 COMPONENT_ANITYA_ID=	1694
 
-TPNO=			42992
+TPNO=			55241
 
 TEST_TARGET = $(NO_TESTS)
 

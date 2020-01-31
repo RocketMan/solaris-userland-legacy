@@ -20,16 +20,6 @@
 #
 
 #
-# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
 #
-
-<transform file path=usr/bin/\$\(MACH32\)/enchant -> drop>
-<transform file path=usr/bin/\$\(MACH32\)/enchant-lsmod -> drop>
-
-<transform file path=files/libenchant.3lib$ -> set action.hash %(path)>
-<transform file path=files/libenchant.3lib$ -> \
-    edit path files/libenchant.3lib usr/share/man/man3lib/libenchant.3lib> 
-
-<transform file path=files/enchant-lsmod.1$ -> set action.hash %(path)>
-<transform file path=files/enchant-lsmod.1$ -> \
-    edit path files/enchant-lsmod.1 usr/share/man/man1/enchant-lsmod.1>
+file files/exec_attr path=etc/security/exec_attr.d/library:desktop:gstreamer-1
