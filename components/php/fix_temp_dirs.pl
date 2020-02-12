@@ -1,3 +1,5 @@
+#!/usr/bin/perl
+
 #
 # CDDL HEADER START
 #
@@ -23,34 +25,34 @@
 # Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
-include ../../../make-rules/shared-macros.mk
+use strict;
 
-COMPONENT_NAME=		service_identity
-COMPONENT_VERSION=	18.1.0
-COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
-COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
-COMPONENT_ARCHIVE_HASH=	\
-    sha256:a6f74383cff70990cdf16a04250e4ba5641c1a497c9d85ee027f43a2ffc5e2d3
-COMPONENT_ARCHIVE_URL=	$(call pypi_url)
-COMPONENT_PROJECT_URL=	https://service-identity.readthedocs.io/en/stable/
-COMPONENT_BUGDB=	python-mod/service_identity
-COMPONENT_ANITYA_ID=	7917
+my ( $file, $tempdir ) = @ARGV;
 
-TPNO=			56529
+open F, $file or die "Can't open $file: $!\n";
+my $buffer = join "", <F>;
+close F;
 
-include $(WS_MAKE_RULES)/prep.mk
-include $(WS_MAKE_RULES)/setup.py.mk
-include $(WS_MAKE_RULES)/ips.mk
+# The regular expression says
+# replace
+#   s:<number>:<our temp dir>
+# with
+#   s:<number minus our temp size>:/temp
+# The regular expression uses /e switch meaning that the replacement must be
+# perl expression (here concatenation of three strings)
+$buffer =~ s,
+	# String to match
+	s:
+	(\d+)           # The number - $1
+	:"
+	($tempdir)      # our temp dir - $2
+,
+	# String to replace
+	"s:".
+	($1-length($2)+4).
+	':"/tmp'
+,xge;
 
-PUBLISH_TRANSFORMS += transform_python_34
-
-ASLR_MODE = $(ASLR_NOT_APPLICABLE)
-
-# common targets
-build:		$(BUILD_NO_ARCH)
-
-install:	$(INSTALL_NO_ARCH)
-
-test:		$(NO_TESTS)
-
-system-test:    $(SYSTEM_TESTS_NOT_IMPLEMENTED)
+open F, ">$file" or die "Can't open $file for writing: $!\n";
+print F $buffer;
+close F;
