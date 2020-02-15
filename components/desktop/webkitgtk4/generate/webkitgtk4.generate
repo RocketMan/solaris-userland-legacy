@@ -23,4 +23,18 @@
 # Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
-$(PYTHON_3.7_ONLY)file path=usr/lib/python$(PYVER)/vendor-packages/MySQLdb/_mysql.so
+# Deliver the 64-bit binary in /usr/bin
+<transform file path=usr/bin/\$\(MACH64\)/WebKitWebDriver -> \
+    set action.hash %(path)>
+<transform file path=usr/bin/\$\(MACH64\)/WebKitWebDriver -> \
+    edit path ^.*$ usr/bin/WebKitWebDriver>
+
+# Set perms on daemons
+<transform file path=usr/lib/\$\(MACH64\)/MiniBrowser -> set mode 0555>
+<transform file path=usr/lib/\$\(MACH64\)/WebKitNetworkProcess -> set mode 0555>
+<transform file path=usr/lib/\$\(MACH64\)/WebKitPluginProcess-> set mode 0555>
+<transform file path=usr/lib/\$\(MACH64\)/WebKitWebProcess -> set mode 0555>
+<transform file path=usr/lib/\$\(MACH64\)/jsc -> set mode 0555>
+
+
+

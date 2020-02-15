@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 BUILD_BITS= 64
 # Must use gcc because of 21090206
@@ -29,16 +29,16 @@ COMPILER= gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		php
-COMPONENT_VERSION=	7.3.11
+COMPONENT_VERSION=	7.3.14
 UL_PHP_MINOR_VERSION=	7.3
 COMPONENT_PROJECT_URL=	http://php.net/
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH=\
-    sha256:657cf6464bac28e9490c59c07a2cf7bb76c200f09cfadf6e44ea64e95fa01021
+    sha256:cc05dd373ca5d36652800762f65c10e828a17de35aaf246262e3efa99d00cdb0
 COMPONENT_ARCHIVE_URL=	http://php.net/get/$(COMPONENT_ARCHIVE)/from/this/mirror
 COMPONENT_ANITYA_ID=	3627
 
-TPNO=			54811
+TPNO=			56631
 TPNO_IMAP=		32942
 
 include $(WS_MAKE_RULES)/common.mk
@@ -110,6 +110,21 @@ CFLAGS += -DOPENSSL_NO_SSL2
 CFLAGS += -DOPENSSL_NO_SSL3
 
 PROTOUSRPHPVERDIR = $(PROTO_DIR)/$(CONFIGURE_PREFIX)
+
+COMPONENT_PRE_CONFIGURE_ACTION += $(MKDIR) $(BUILD_DIR)/temp;
+COMPONENT_BUILD_ENV += TMPDIR=$(BUILD_DIR)/temp
+CONFIGURE_ENV += TMPDIR=$(BUILD_DIR)/temp
+COMPONENT_INSTALL_ENV += TMPDIR=$(BUILD_DIR)/temp
+
+# In order to build pear on public build machine every engineer needs to use
+# his own temporary directory and not /var/tmp/pear. Unfortunatelly this
+# temporary directory is then stored into pear.conf file. So we need to correct
+# it back to the default which would be used without us specifying TMPDIR -
+# that is to /tmp/pear/temp
+COMPONENT_POST_INSTALL_ACTION += \
+	../fix_temp_dirs.pl \
+	    $(PROTO_DIR)/etc/php/$(UL_PHP_MINOR_VERSION)/pear.conf \
+	    $(BUILD_DIR)/temp ;
 
 # Adapted from PHP 5.3 Makefile.
 # Creates alternate versions of the scripts needed for building extensions
