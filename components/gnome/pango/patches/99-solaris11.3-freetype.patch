@@ -1,0 +1,10 @@
+--- a/pango/pangocairo-fcfont.c	2018-12-12 00:03:05.000000000 +0000
++++ b/pango/pangocairo-fcfont.c	2020-02-18 18:47:03.670706924 +0000
+@@ -34,7 +34,6 @@
+ #include "pango-impl-utils.h"
+ 
+ #include <hb-ot.h>
+-#include <freetype/ftmm.h>
+ 
+ #define PANGO_TYPE_CAIRO_FC_FONT           (pango_cairo_fc_font_get_type ())
+ #define PANGO_CAIRO_FC_FONT(object)        (G_TYPE_CHECK_INSTANCE_CAST ((object), PANGO_TYPE_CAIRO_FC_FONT, PangoCairoFcFont))

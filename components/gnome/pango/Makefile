@@ -42,7 +42,9 @@ BUILD_STYLE=		meson
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
-CONFIGURE_OPTIONS += -Denable_docs=true
+CONFIGURE_OPTIONS += -Denable_docs=false
+
+CFLAGS += -D__EXTENSIONS__ -D_XOPEN_SOURCE=600 -D_XPG6
 
 # Workaround for build failures due to pango Makefiles not passing CFLAGS or
 # LDFLAGS, especially the -m32/64 flag, to g-ir-scanner
@@ -78,6 +80,7 @@ REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/desktop/fribidi
 REQUIRED_PACKAGES += library/desktop/gobject/gobject-introspection
 REQUIRED_PACKAGES += library/desktop/harfbuzz
+REQUIRED_PACKAGES += library/fribidi
 REQUIRED_PACKAGES += library/glib2
 # Needs fontconfig version >= 2.10.91
 REQUIRED_PACKAGES += system/library/fontconfig
