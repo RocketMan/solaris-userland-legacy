@@ -20,11 +20,11 @@
 #
 
 #
-# Copyright (c) 2015, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
 BUILD_BITS =            64_and_32
-COMPILER=gcc
+COMPILER=		gcc
 
 # The Makefile of this component does not support multiple build jobs.
 COMPONENT_MAKE_JOBS=1
@@ -32,19 +32,20 @@ COMPONENT_MAKE_JOBS=1
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		p11-kit
-COMPONENT_VERSION=	0.23.14
+COMPONENT_VERSION=	0.23.20
 COMPONENT_PROJECT_URL=	https://p11-glue.github.io/p11-glue/p11-kit.html
-GIT_REPO=		https://github.com/p11-glue/$(COMPONENT_NAME)
-GIT_COMMIT_ID=		0.23.14
-#COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
-#COMPONENT_ARCHIVE_HASH= \
-#    sha256:ba726ea8303c97467a33fca50ee79b7b35212964be808ecf9b145e9042fdfaf0
-#COMPONENT_ARCHIVE_URL=	https://github.com/p11-glue/p11-kit/archive/$(COMPONENT_ARCHIVE)
+COMPONENT_ARCHIVE=	$(COMPONENT_VERSION).tar.gz
+COMPONENT_ARCHIVE_HASH= \
+    sha256:8f6116f34735f6902e9db461c5dbe3e7e25b5cb8c38f42ea2a5aede1cf693749
+COMPONENT_ARCHIVE_URL=	https://github.com/p11-glue/p11-kit/archive/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	gnome/security
 COMPONENT_ANITYA_ID=	2582
 
-TPNO=			32885	
+TPNO=			56793
 
+MANIFEST_COMPARE=/usr/bin/true
+
+BUILD_STYLE=meson
 include $(WS_MAKE_RULES)/common.mk
 
 #studio_C99MODE=$(studio_C99_ENABLE)
@@ -52,20 +53,21 @@ CFLAGS += -D_XPG6
 LDFLAGS += -lsocket -lnsl
 
 # Needed due to patch to automake-related files.
-COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fiv);
+#COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fiv);
 
 CONFIGURE_ENV += CFLAGS="$(CFLAGS)"
 #CONFIGURE_OPTIONS += --enable-doc
-CONFIGURE_OPTIONS += --without-systemd
-CONFIGURE_OPTIONS += --disable-doc-html
+#CONFIGURE_OPTIONS += --without-systemd
+#CONFIGURE_OPTIONS += --disable-doc-html
 CONFIGURE_OPTIONS += --localstatedir=$(VARDIR)
 CONFIGURE_OPTIONS += --sysconfdir=$(ETCDIR)
 #CONFIGURE_OPTIONS += --with-system-config=/usr/share/p11-kit
-CONFIGURE_OPTIONS.32 += --with-module-path=/usr/lib/security
-CONFIGURE_OPTIONS.64 += --with-module-path=/usr/lib/security/$(MACH64)
-CONFIGURE_OPTIONS += --with-trust-paths=/etc/certs/ca-certificates.crt
+CONFIGURE_OPTIONS.32 += -Dmodule_path=/usr/lib/security
+CONFIGURE_OPTIONS.64 += -Dmodule_path=/usr/lib/security/$(MACH64)
+CONFIGURE_OPTIONS += -Dtrust_paths=/etc/certs/ca-certificates.crt
+CONFIGURE_OPTIONS += --libexecdir=$(CONFIGURE_LIBDIR.$(BITS))
 
-COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-$(BITS).master
+COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
 COMPONENT_TEST_TRANSFORMS += \
         '-n ' \
         '-e "/TOTAL:/p" ' \

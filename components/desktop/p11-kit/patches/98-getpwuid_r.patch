@@ -9,3 +9,14 @@
  		if (pwd == NULL) {
  			if (ret == 0)
  				error = ESRCH;
+--- a/common/runtime.c	2020-01-29 16:46:16.000000000 +0000
++++ b/common/runtime.c	2020-02-20 18:42:13.086302389 +0000
+@@ -109,7 +109,7 @@
+ 	}
+ 
+ #ifdef OS_UNIX
+-	if (getpwuid_r (uid, &pwbuf, buf, sizeof buf, &pw) == 0 &&
++	if ((pw = getpwuid_r (uid, &pwbuf, buf, sizeof buf)) &&
+ 	    pw != NULL && pw->pw_dir != NULL && *pw->pw_dir == '/') {
+ 		if (asprintf (&directory, "%s/.cache", pw->pw_dir) < 0)
+ 			return CKR_HOST_MEMORY;

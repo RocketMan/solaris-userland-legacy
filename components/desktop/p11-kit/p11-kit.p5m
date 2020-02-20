@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2017, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
 <transform file path=usr.*/man/.+ -> \
@@ -39,7 +39,6 @@ set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2016/311
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-dir  path=etc/pkcs11/modules
 file path=etc/pkcs11/pkcs11.conf.example
 file path=usr/bin/p11-kit
 file path=usr/bin/trust
@@ -51,62 +50,93 @@ file path=usr/include/p11-kit-1/p11-kit/pkcs11.h
 file path=usr/include/p11-kit-1/p11-kit/pkcs11x.h
 file path=usr/include/p11-kit-1/p11-kit/remote.h
 file path=usr/include/p11-kit-1/p11-kit/uri.h
-link path=usr/lib/$(MACH64)/libp11-kit.so target=libp11-kit.so.0.1.0
-link path=usr/lib/$(MACH64)/libp11-kit.so.0 target=libp11-kit.so.0.1.0
-file usr/lib/amd64/libp11-kit.so path=usr/lib/$(MACH64)/libp11-kit.so.0.1.0
-link path=usr/lib/$(MACH64)/p11-kit-proxy.so target=libp11-kit.so.0.1.0
-#file path=usr/lib/$(MACH64)/p11-kit/p11-kit-remote mode=0555
-#file path=usr/lib/$(MACH64)/p11-kit/trust-extract-compat mode=0555
+link path=usr/lib/$(MACH64)/libp11-kit.so target=libp11-kit.so.0
+link path=usr/lib/$(MACH64)/libp11-kit.so.0 target=libp11-kit.so.0.3.0
+file path=usr/lib/$(MACH64)/libp11-kit.so.0.3.0
+link path=usr/lib/$(MACH64)/p11-kit-proxy.so target=libp11-kit.so.0
+file path=usr/lib/$(MACH64)/p11-kit/p11-kit-remote mode=0555
+file path=usr/lib/$(MACH64)/p11-kit/p11-kit-server mode=0555
 file path=usr/lib/$(MACH64)/pkgconfig/p11-kit-1.pc
-link path=usr/lib/libp11-kit.so target=libp11-kit.so.0.1.0
-link path=usr/lib/libp11-kit.so.0 target=libp11-kit.so.0.1.0
-file usr/lib/libp11-kit.so path=usr/lib/libp11-kit.so.0.1.0
-link path=usr/lib/p11-kit-proxy.so target=libp11-kit.so.0.1.0
-#file path=usr/lib/p11-kit/p11-kit-remote mode=0555
-#file path=usr/lib/p11-kit/trust-extract-compat mode=0555
+link path=usr/lib/libp11-kit.so target=libp11-kit.so.0
+link path=usr/lib/libp11-kit.so.0 target=libp11-kit.so.0.3.0
+file path=usr/lib/libp11-kit.so.0.3.0
+link path=usr/lib/p11-kit-proxy.so target=libp11-kit.so.0
+file path=usr/lib/p11-kit/p11-kit-remote mode=0555
+file path=usr/lib/p11-kit/p11-kit-server mode=0555
 file path=usr/lib/pkgconfig/p11-kit-1.pc
+file path=usr/lib/security/$(MACH64)/p11-kit-client.so
 file path=usr/lib/security/$(MACH64)/p11-kit-trust.so
+file path=usr/lib/security/p11-kit-client.so
 file path=usr/lib/security/p11-kit-trust.so
-#file path=usr/share/gtk-doc/html/p11-kit/config-example.html
-#file path=usr/share/gtk-doc/html/p11-kit/config-files.html
-#file path=usr/share/gtk-doc/html/p11-kit/config.html
-#file path=usr/share/gtk-doc/html/p11-kit/devel-building-style.html
-#file path=usr/share/gtk-doc/html/p11-kit/devel-building.html
-#file path=usr/share/gtk-doc/html/p11-kit/devel-commands.html
-#file path=usr/share/gtk-doc/html/p11-kit/devel-debugging.html
-#file path=usr/share/gtk-doc/html/p11-kit/devel-paths.html
-#file path=usr/share/gtk-doc/html/p11-kit/devel-testing.html
-#file path=usr/share/gtk-doc/html/p11-kit/devel.html
-#file path=usr/share/gtk-doc/html/p11-kit/gtk-doc.css
-#file path=usr/share/gtk-doc/html/p11-kit/home.png
-#file path=usr/share/gtk-doc/html/p11-kit/index.html
-#file path=usr/share/gtk-doc/html/p11-kit/left-insensitive.png
-#file path=usr/share/gtk-doc/html/p11-kit/left.png
-#file path=usr/share/gtk-doc/html/p11-kit/p11-kit-Deprecated.html
-#file path=usr/share/gtk-doc/html/p11-kit/p11-kit-Future.html
-#file path=usr/share/gtk-doc/html/p11-kit/p11-kit-Modules.html
-#file path=usr/share/gtk-doc/html/p11-kit/p11-kit-PIN-Callbacks.html
-#file path=usr/share/gtk-doc/html/p11-kit/p11-kit-URIs.html
-#file path=usr/share/gtk-doc/html/p11-kit/p11-kit-Utilities.html
-#file path=usr/share/gtk-doc/html/p11-kit/p11-kit.devhelp2
-#file path=usr/share/gtk-doc/html/p11-kit/p11-kit.html
-#file path=usr/share/gtk-doc/html/p11-kit/pkcs11-conf.html
-#file path=usr/share/gtk-doc/html/p11-kit/reference.html
-#file path=usr/share/gtk-doc/html/p11-kit/right-insensitive.png
-#file path=usr/share/gtk-doc/html/p11-kit/right.png
-#file path=usr/share/gtk-doc/html/p11-kit/sharing-managed.html
-#file path=usr/share/gtk-doc/html/p11-kit/sharing.html
-#file path=usr/share/gtk-doc/html/p11-kit/style.css
-#file path=usr/share/gtk-doc/html/p11-kit/tools.html
-#file path=usr/share/gtk-doc/html/p11-kit/trust-disable.html
-#file path=usr/share/gtk-doc/html/p11-kit/trust-glib-networking.html
-#file path=usr/share/gtk-doc/html/p11-kit/trust-module.html
-#file path=usr/share/gtk-doc/html/p11-kit/trust-nss.html
-#file path=usr/share/gtk-doc/html/p11-kit/trust.html
-#file path=usr/share/gtk-doc/html/p11-kit/up-insensitive.png
-#file path=usr/share/gtk-doc/html/p11-kit/up.png
-#file path=usr/share/man/man1/trust.1
-#file path=usr/share/man/man5/pkcs11.conf.5
-#file path=usr/share/man/man8/p11-kit.8
+file path=usr/share/locale/ar/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/as/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ast/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/az/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/bg/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/bn_IN/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ca/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ca@valencia/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/cs/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/cy/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/da/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/de/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/el/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/en_GB/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/eo/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/es/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/et/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/eu/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/fa/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/fi/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/fo/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/fr/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/fur/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ga/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/gl/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/gu/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/he/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/hi/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/hr/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/hu/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ia/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/id/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/it/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ja/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ka/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/kk/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/kn/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ko/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/lt/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/lv/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ml/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/mr/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ms/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/nb/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/nl/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/nn/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/oc/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/or/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/pa/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/pl/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/pt/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/pt_BR/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ro/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ru/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/sk/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/sl/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/sq/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/sr/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/sr@latin/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/sv/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/ta/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/te/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/th/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/tr/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/uk/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/vi/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/wa/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/zh_CN/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/zh_HK/LC_MESSAGES/p11-kit.mo
+file path=usr/share/locale/zh_TW/LC_MESSAGES/p11-kit.mo
 file path=usr/share/p11-kit/modules/p11-kit-trust.module
 license p11-kit.license license=BSD-like
