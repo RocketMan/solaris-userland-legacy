@@ -52,7 +52,7 @@ PKG_PROTO_DIRS +=	$(COMPONENT_SRC_1)
 
 include $(WS_MAKE_RULES)/common.mk
 
-PYTHON_VERSION = 3.7
+PYTHON_VERSION = 2.7
 
 # Deliver hardlinks as they appear in the proto area
 PKG_AUTO_HARDLINKS=1
@@ -156,7 +156,7 @@ REQUIRED_PACKAGES += library/pcre2
 REQUIRED_PACKAGES += library/security/openssl
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += $(PERL_PKG)
-REQUIRED_PACKAGES += runtime/python-37
+REQUIRED_PACKAGES += runtime/python-27
 REQUIRED_PACKAGES += shell/bash
 REQUIRED_PACKAGES += shell/ksh93
 REQUIRED_PACKAGES += web/curl
