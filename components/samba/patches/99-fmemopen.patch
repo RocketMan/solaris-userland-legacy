@@ -1,0 +1,24 @@
+--- a/source4/utils/oLschema2ldif/test.c	2020-01-28 10:18:04.000000000 +0000
++++ b/source4/utils/oLschema2ldif/test.c	2020-03-19 18:26:37.899848837 +0000
+@@ -29,6 +29,21 @@
+ struct test_ctx {
+ };
+ 
++#ifndef HAVE_FMEMOPEN
++static FILE *fmemopen(const void *buf, size_t len, const char *mode)
++{
++  FILE *fp;
++  char *fname = strdup("/tmp/test-fmemopenXXXXXX");
++  int fd = mkstemp(fname);
++  write(fd, buf, len);
++  close(fd);
++  fp = fopen(fname, mode);
++  unlink(fname);
++  free(fname);
++  return fp;
++}
++#endif
++
+ static int setup_context(void **state)
+ {
+ 	struct test_ctx *test_ctx;
