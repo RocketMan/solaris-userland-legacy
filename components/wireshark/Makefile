@@ -58,6 +58,8 @@ PKG_MACROS+= MICRO_VERSION=$(MICRO_VERSION)
 # Reported via bug 12923
 CFLAGS += -I/usr/include/kerberosv5
 
+$(SOLARIS_11_3_ONLY)LDFLAGS += -lsocket -lnsl
+
 # Set path to Qt5 cmake modules.
 CMAKE_OPTIONS += -DCMAKE_PREFIX_PATH=$(USRLIBDIR64)/cmake/
 # Add non-standard path to perl pod2man and pod2html commands.
