@@ -83,6 +83,7 @@ CONFIGURE_OPTIONS +=  -system-libjpeg
 CONFIGURE_OPTIONS +=  -system-harfbuzz
 CONFIGURE_OPTIONS +=  -system-pcre
 CONFIGURE_OPTIONS +=  -system-sqlite
+CONFIGURE_OPTIONS +=  -qpa xcb
 
 CONFIGURE_OPTIONS +=  -skip qt3d
 CONFIGURE_OPTIONS +=  -skip qtactiveqt
@@ -131,9 +132,11 @@ REQUIRED_PACKAGES += database/sqlite-3
 REQUIRED_PACKAGES += developer/llvm/clang
 REQUIRED_PACKAGES += developer/llvm/clang-build
 REQUIRED_PACKAGES += image/library/libjpeg
+REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += library/audio/pulseaudio
 REQUIRED_PACKAGES += library/desktop/gstreamer-1
+REQUIRED_PACKAGES += library/desktop/gstreamer-1/gst-plugins-bad
 REQUIRED_PACKAGES += library/desktop/gstreamer-1/gst-plugins-base
 # Qt5 requires gtk3 to support GTK style and theme, e.g.,
 # open/save dialog in Wireshark uses GTK style.
