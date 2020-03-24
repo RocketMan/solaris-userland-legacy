@@ -93,8 +93,8 @@
 <transform file path=.*/mkspecs/modules/qt_lib_service_support.* -> drop>
 <transform file link path=.*Qt5?KmsSupport.* -> drop>
 <transform file path=.*/mkspecs/modules/qt_lib_kms_support.* -> drop>
-<transform file link path=.*Qt5?ThemeSupport.* -> drop>
-<transform file path=.*/mkspecs/modules/qt_lib_theme_support.* -> drop>
+#<transform file link path=.*Qt5?ThemeSupport.* -> drop>
+#<transform file path=.*/mkspecs/modules/qt_lib_theme_support.* -> drop>
 <transform file path=.*AccessibilitySupport\.prl -> drop>
 <transform file path=.*/mkspecs/modules/qt_lib_(linux)?accessibility_support.* -> drop>
 

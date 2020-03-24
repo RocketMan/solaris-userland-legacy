@@ -28,3 +28,4 @@ file files/libqt.3lib path=usr/share/man/man3lib/libqt.3lib
 file files/qt5_usage_note.txt \
     path=usr/share/doc/release-notes/qt5_usage_note.txt owner=root group=bin \
     mode=0444
+file path=usr/lib/$(MACH64)/libQt5ThemeSupport.a

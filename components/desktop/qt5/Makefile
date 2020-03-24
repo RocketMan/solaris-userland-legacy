@@ -84,6 +84,7 @@ CONFIGURE_OPTIONS +=  -system-harfbuzz
 CONFIGURE_OPTIONS +=  -system-pcre
 CONFIGURE_OPTIONS +=  -system-sqlite
 CONFIGURE_OPTIONS +=  -qpa xcb
+CONFIGURE_OPTIONS +=  -gtk
 
 CONFIGURE_OPTIONS +=  -skip qt3d
 CONFIGURE_OPTIONS +=  -skip qtactiveqt
