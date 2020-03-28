@@ -94,6 +94,7 @@ COMPONENT_TEST_TRANSFORMS += \
 	'-e "/Errors/p" '
 
 REQUIRED_PACKAGES += image/library/libjpeg
+REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libtiff
 REQUIRED_PACKAGES += image/library/libwebp
