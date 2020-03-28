@@ -97,6 +97,9 @@ CONFIGURE_OPTIONS +=	--disable-phpdbg-debug
 # https://bugs.php.net/bugs-generating-backtrace.php
 # CONFIGURE_OPTIONS +=    --enable-debug
 
+# JM 2020-03-28 disable kerberos support
+CONFIGURE_OPTIONS +=	--without-kerberos
+
 # icu's switch to g++
 # 21090206 icu should build C++ to C++11
 # causes this in php forcing php to switch also
@@ -112,6 +115,9 @@ LDFLAGS += -lldap_r
 COMPONENT_BUILD_ARGS += LDAP_SHARED_LIBADD="-lldap_r"
 
 CFLAGS += -std=gnu99
+
+# JM 2020-03-28 for 11.3
+CFLAGS += -D__EXTENSIONS__ -D_XOPEN_SOURCE=600 -D_XPG6
 
 # Disable SSLv2 and SSLv3 for security reasons
 CFLAGS += -DOPENSSL_NO_SSL2
@@ -177,8 +183,8 @@ CLEAN_PATHS += proto-scripts
 # test results are unstable between runs but still useful for humans.
 $(SKIP_TEST_AT_TOP_LEVEL)
 
-clobber::
-	cd ../uw-imap; gmake clobber
+#clobber::
+#	cd ../uw-imap; gmake clobber
 
 # Add directory for generate check
 GENERATE_PROTO_DIRS += files^files
@@ -186,8 +192,10 @@ GENERATE_PROTO_DIRS += files^files
 REQUIRED_PACKAGES += database/sqlite-3
 REQUIRED_PACKAGES += developer/icu
 REQUIRED_PACKAGES += library/gd
+REQUIRED_PACKAGES += library/libc-client
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/oniguruma
+REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/pcre2
 REQUIRED_PACKAGES += library/security/openssl
 REQUIRED_PACKAGES += system/dtrace
