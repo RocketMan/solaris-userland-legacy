@@ -20,47 +20,44 @@
 #
 
 #
-# Copyright (c) 2012, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
 #
+
+COMPILER=		gcc
+
+# Component uses ABI3 naming.
+PYTHON3_SOABI=abi3
 
 include ../../../make-rules/shared-macros.mk
 
-COMPONENT_NAME=		paramiko
-COMPONENT_VERSION=	2.7.1
+COMPONENT_NAME=		bcrypt
+COMPONENT_VERSION=	3.1.7
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH=	\
-	sha256:81d265e2c0da5305040e699474d5da7d03c1487f80e630bfae4951a83bb6cd75
+    sha256:86ef92f1a7d420d8ecc4eff396800ac29b481a43384cee90ba49e5b5157be831
 COMPONENT_ARCHIVE_URL=	$(call pypi_url)
-COMPONENT_PROJECT_URL=	https://github.com/paramiko/paramiko/
-COMPONENT_BUGDB=	python-mod/paramiko
-COMPONENT_ANITYA_ID=	3954
+COMPONENT_PROJECT_URL=	hhttps://github.com/pyca/bcrypt/
+COMPONENT_BUGDB=	python-mod/bcrypt
+COMPONENT_ANITYA_ID=	9047
 
-TPNO=			55900
+TPNO=			58071
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
 
-# set LC_ALL for unicode sftp tests test_K_utf8 and test_L_utf8_chdir
-COMPONENT_TEST_ENV =	LC_ALL=en_US.UTF-8
-COMPONENT_TEST_ENV +=	PYTHONPATH=$(SOURCE_DIR)
-COMPONENT_SYSTEM_TEST_ENV =	LC_ALL=en_US.UTF-8
-
 COMPONENT_TEST_DIR =	$(SOURCE_DIR)/tests
 COMPONENT_TEST_CMD =	$(PYTHON) -m pytest
-COMPONENT_TEST_ARGS =	--ignore=test_config.py
+COMPONENT_TEST_ARGS =
 
 ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 
 # common targets
-build:		$(BUILD_NO_ARCH)
+build:		$(BUILD_32_and_64)
 
-install:	$(INSTALL_NO_ARCH)
+install:	$(INSTALL_32_and_64)
 
-test:		$(TEST_NO_ARCH)
+test:		$(TEST_32_and_64)
 
-system-test:	$(SYSTEM_TEST_NO_ARCH)
-
-# locale required for unicode sftp tests
-REQUIRED_PACKAGES += system/locale
+system-test:    $(SYSTEM_TEST_32_and_64)

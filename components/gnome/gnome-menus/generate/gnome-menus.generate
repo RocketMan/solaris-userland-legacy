@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,10 +17,8 @@
 #
 # CDDL HEADER END
 #
+#
+# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
+#
 
-#
-# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
-#
-<transform file path=usr/share/doc/release-notes/runtime-nodejs-nodejs-8.txt -> set must-display true>
-<transform file path=usr/share/doc/release-notes/runtime-nodejs-nodejs-8.txt -> set release-note feature/pkg/self@0>
-<transform path=usr/nodejs/8 -> edit path ^usr/nodejs/8 usr/nodejs/\$\(NODE_MAJOR_VERSION\)>
+

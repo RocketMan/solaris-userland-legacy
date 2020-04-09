@@ -1,4 +1,3 @@
-#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -18,13 +17,8 @@
 #
 # CDDL HEADER END
 #
+#
+# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
+#
 
-#
-# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
-#
-link path=usr/bin/node target=../nodejs/$(NODE_MAJOR_VERSION)/bin/node \
-    mediator=node mediator-version=$(NODE_MAJOR_VERSION)
-link path=usr/bin/npm target=../nodejs/$(NODE_MAJOR_VERSION)/bin/npm \
-    mediator=node mediator-version=$(NODE_MAJOR_VERSION)
-link path=usr/bin/npx target=../nodejs/$(NODE_MAJOR_VERSION)/bin/npx \
-    mediator=node mediator-version=$(NODE_MAJOR_VERSION)
+

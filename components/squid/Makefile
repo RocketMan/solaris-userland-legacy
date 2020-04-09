@@ -24,10 +24,13 @@
 #
 BUILD_BITS= 64
 COMPILER= gcc
-include ../../make-rules/shared-macros.mk
 
 # Upcoming squid version update will resolve GCC 9 build issues.
 GCC_ROOT= /usr/gcc/7
+# Disable reproducible paths in binaries since it requires GCC 9 or newer.
+gcc_FIX_PATH=
+
+include ../../make-rules/shared-macros.mk
 
 PATH=$(USRBINDIR):$(GNUBIN):$(USRSBINDIR):$(USRDIR)/perl5/bin
 
@@ -40,6 +43,7 @@ COMPONENT_ARCHIVE_HASH= SHA256:98f0100afd8a42ea5f6b81eb98b0e4b36d7a54beab1c73d2f
 COMPONENT_ARCHIVE_URL=  $(COMPONENT_PROJECT_URL)Versions/v4/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_ANITYA_ID=	4880
+COMPONENT_PUBLIC_KEY_URL=	http://www.squid-cache.org/pgp.asc
 
 # Use Perl better than default one
 PERL_VERSION = 5.26
