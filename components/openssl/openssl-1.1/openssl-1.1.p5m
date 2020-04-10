@@ -93,7 +93,7 @@ link path=lib/llib-lssl.ln target=../usr/openssl/1.1/lib/llib-lssl.ln \
 # binaries
 link path=usr/bin/CA.pl target=../openssl/1.1/bin/CA.pl mediator=openssl
 link path=usr/bin/c_rehash target=../openssl/1.1/bin/c_rehash mediator=openssl \
-    pkg.linted.pkglint.dupaction010.1=true
+    pkg.linted.pkglint.dupaction007=true pkg.linted.pkglint.dupaction010.1=true
 
 # Commands (only 64-bit openssl(1) is delivered)
 link path=usr/bin/openssl target=../openssl/1.1/bin/openssl mediator=openssl
@@ -104,18 +104,18 @@ link path=usr/include/openssl target=../openssl/1.1/include/openssl \
 # 64-bit pkg-config links
 link path=usr/lib/$(MACH64)/pkgconfig/libcrypto.pc \
     target=../../../openssl/1.1/pkgconfig/64/libcrypto.pc mediator=openssl \
-    pkg.linted.pkglint.dupaction010.1=true
+    pkg.linted.pkglint.dupaction007=true pkg.linted.pkglint.dupaction010.1=true
 link path=usr/lib/$(MACH64)/pkgconfig/libssl.pc \
     target=../../../openssl/1.1/pkgconfig/64/libssl.pc mediator=openssl \
-    pkg.linted.pkglint.dupaction010.1=true
+    pkg.linted.pkglint.dupaction007=true pkg.linted.pkglint.dupaction010.1=true
 
 # 32-bit pkg-config links
 link path=usr/lib/pkgconfig/libcrypto.pc \
     target=../../openssl/1.1/pkgconfig/32/libcrypto.pc mediator=openssl \
-    pkg.linted.pkglint.dupaction010.1=true
+    pkg.linted.pkglint.dupaction007=true pkg.linted.pkglint.dupaction010.1=true
 link path=usr/lib/pkgconfig/libssl.pc \
     target=../../openssl/1.1/pkgconfig/32/libssl.pc mediator=openssl \
-    pkg.linted.pkglint.dupaction010.1=true
+    pkg.linted.pkglint.dupaction007=true pkg.linted.pkglint.dupaction010.1=true
 file etc/openssl/1.1/misc/CA.pl path=usr/openssl/1.1/bin/CA.pl
 file path=usr/openssl/1.1/bin/c_rehash owner=root group=bin mode=0555
 file $(MACH64)/apps/openssl path=usr/openssl/1.1/bin/openssl owner=root \

@@ -99,8 +99,15 @@ function sx_check()
 	typeset binary="$BUILD_DIR/apps/openssl"
 
 	echo "Checking security extensions for $binary"
+
+	osver=`uname -v`
+	if [ $osver == '11.3' ]; then
+	    opts='(SUNW_ASLR)|(SUNW_NXSTACK)|(SUNW_NXHEAP)'
+	else
+	    opts='(SUNW_SX_ASLR)|(SUNW_SX_NXSTACK)|(SUNW_SX_NXHEAP)'
+        fi
 	cnt=$( elfdump -d $binary | \
-	    egrep -c '(SUNW_SX_ASLR)|(SUNW_SX_NXSTACK)|(SUNW_SX_NXHEAP)' )
+	    egrep -c $opts )
 	if (( cnt != 3 )); then
 		fail "Security extensions are not enabled for $binary"
 	fi
