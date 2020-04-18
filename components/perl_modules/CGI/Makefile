@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2016, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 include ../../../make-rules/shared-macros.mk
 
@@ -41,21 +41,9 @@ include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/ips.mk
 include $(WS_MAKE_RULES)/makemaker.mk
 
-COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
-
-# The test results are full of missing "Test::Entities" and "Test::Deep"
-# modules. That means we can't run all the tests, but it does not limit use of
-# the CGI perl module itself.
 COMPONENT_TEST_TARGETS = test
-
-COMPONENT_TEST_TRANSFORMS += \
-	 '-n ' \
-	 '-e "s/\s*[0-9][0-9]* wallclock secs (.*CPU)$$/ <TIMINGS REMOVED>/" ' \
-	 '-e "/^All tests successful/p" ' \
-	 '-e "/^Files=/p" ' \
-	 '-e "/^Result:/p" ' \
-	 '-e "/^Failed .* test programs/p" '
-
+COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
+COMPONENT_TEST_TRANSFORMS += '-n -e "/^Result:/p"'
 
 ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 
@@ -68,3 +56,7 @@ install:	$(INSTALL_64)
 test:		$(TEST_64)
 
 system-test:    $(SYSTEM_TESTS_NOT_IMPLEMENTED)
+
+REQUIRED_PACKAGES += $(PERL_VERSIONS:5.%=library/perl-5/html-entities-5%)
+REQUIRED_PACKAGES += $(PERL_VERSIONS:5.%=library/perl-5/test-deep-5%)
+REQUIRED_PACKAGES += $(PERL_VERSIONS:5.%=library/perl-5/test-warn-5%)
