@@ -59,6 +59,11 @@ TEST_TARGET= $(SKIP_TEST)
 
 include $(WS_MAKE_RULES)/common.mk
 
+# openssl 1.1
+#PKG_CONFIG_PATHS += /usr/openssl/1.1/pkgconfig/64
+CFLAGS += -I/usr/openssl/1.1/include
+LDFLAGS += -L/usr/openssl/1.1/lib/amd64
+
 CFLAGS += -DSET_USE_PAM
 CFLAGS += -DDEPRECATE_SUNSSH_OPT
 CFLAGS += -DKRB5_BUILD_FIX
@@ -89,7 +94,7 @@ LDFLAGS += $(CC_BITS)
 
 CONFIGURE_OPTIONS += --with-audit=solaris
 CONFIGURE_OPTIONS += --with-libedit
-CONFIGURE_OPTIONS += --with-kerberos5
+#CONFIGURE_OPTIONS += --with-kerberos5
 CONFIGURE_OPTIONS += --with-pam
 CONFIGURE_OPTIONS += --with-sandbox=solaris
 CONFIGURE_OPTIONS += --with-solaris-privs
@@ -118,6 +123,7 @@ COMPONENT_PREP_ACTION += \
 
 REQUIRED_PACKAGES += library/libedit
 REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += library/security/openssl-11
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += security/kerberos-5
 REQUIRED_PACKAGES += system/core-os
