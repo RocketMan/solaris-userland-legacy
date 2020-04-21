@@ -1,0 +1,21 @@
+OpenSSL's PRNG does not seed internally
+
+https://github.com/openssl/openssl/issues/4148
+
+External packages use RAND_status() to check whether OpenSSL's PRNG
+is internally seeded.  Test is quite simple - check runs simple one
+line program that check for "RAND_status() == 1".
+
+This patch restores the ability to run this test under openssl 1.1
+
+--- a/crypto/rand/drbg_lib.c	2020-03-31 13:17:45.000000000 +0000
++++ b/crypto/rand/drbg_lib.c	2020-04-21 14:03:01.739571808 +0000
+@@ -1087,6 +1087,8 @@
+         return 0;
+ 
+     rand_drbg_lock(drbg);
++    if(drbg->state == DRBG_UNINITIALISED
++       && RAND_DRBG_instantiate(drbg, NULL, 0) == 0);
+     ret = drbg->state == DRBG_READY ? 1 : 0;
+     rand_drbg_unlock(drbg);
+     return ret;
