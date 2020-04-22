@@ -59,6 +59,11 @@ PKG_AUTO_HARDLINKS=1
 
 PKG_MACROS +=		PYVER=$(PYTHON_VERSION)
 
+# openssl 1.1
+#PKG_CONFIG_PATHS += /usr/openssl/1.1/pkgconfig/64
+CFLAGS += -I/usr/openssl/1.1/include
+LDFLAGS += -L/usr/openssl/1.1/lib/amd64
+
 CONFIGURE_LIBDIR.64 =	$(CONFIGURE_PREFIX)/lib
 CONFIGURE_SCRIPT    =	$(@D)/configure
 CPPFLAGS += "-I/usr/include/pcre"
@@ -154,6 +159,7 @@ REQUIRED_PACKAGES += crypto/gnupg
 REQUIRED_PACKAGES += library/expat
 REQUIRED_PACKAGES += library/pcre2
 REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += library/security/openssl-11
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += $(PERL_PKG)
 REQUIRED_PACKAGES += runtime/python-27
