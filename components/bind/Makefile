@@ -83,7 +83,7 @@ CONFIGURE_OPTIONS +=	--with-python=$(PYTHON.$(PYTHON_VERSION))
 # - libtool: Build dynamic libraries, static libraries are not shipped.
 CONFIGURE_OPTIONS +=	--with-libtool
 # - openssl: use openssl, required for DNSSEC features.
-CONFIGURE_OPTIONS +=	--with-openssl=/usr
+CONFIGURE_OPTIONS +=	--with-openssl=/usr/openssl/1.1
 # - pkcs11: Use openSSL pkcs11 engine
 CONFIGURE_OPTIONS +=	--with-pkcs11=/usr/lib/$(MACH64)/libpkcs11.so.1
 # - Use xml2-config found uder /usr without checking its version.
@@ -188,11 +188,14 @@ REQUIRED_PACKAGES += library/json-c
 REQUIRED_PACKAGES += library/libedit
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += library/security/openssl-11
 REQUIRED_PACKAGES += library/security/openssl/openssl-fips-140
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += network/dns/bind
 REQUIRED_PACKAGES += runtime/python-37
 REQUIRED_PACKAGES += security/kerberos-5
+REQUIRED_PACKAGES += service/security/kerberos-5
 REQUIRED_PACKAGES += shell/ksh93
 REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/library/smf
+REQUIRED_PACKAGES += system/library/security/gss
