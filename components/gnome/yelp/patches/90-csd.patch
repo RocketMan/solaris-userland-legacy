@@ -1,0 +1,14 @@
+--- a/src/yelp-window.c	2019-01-16 14:33:04.000000000 +0000
++++ b/src/yelp-window.c	2020-04-24 10:50:46.192937418 +0000
+@@ -308,10 +308,7 @@
+     };
+ 
+     gtk_window_set_icon_name (GTK_WINDOW (window), "org.gnome.Yelp");
+-
+-    g_object_get (gtk_settings_get_default (),
+-                  "gtk-dialogs-use-header", &priv->use_header,
+-                  NULL);
++    priv->use_header = TRUE;
+ 
+     priv->view = (YelpView *) yelp_view_new ();
+ 
