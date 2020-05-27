@@ -44,7 +44,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
-LDFLAGS += -z gnu-version-script-compat
+$(SOLARIS_11_4_5_ONLY)LDFLAGS += -z gnu-version-script-compat
 
 COMPONENT_TEST_TRANSFORMS += '-e "s/      [0-9].[0-9][0-9] s//" '
 COMPONENT_TEST_TRANSFORMS += \

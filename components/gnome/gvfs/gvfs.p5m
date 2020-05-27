@@ -60,7 +60,8 @@ file path=usr/lib/gvfsd-computer mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-dav mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-dnssd mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-ftp mode=0555 pkg.linted.userland.action001.2=true
-$(SOLARIS_11_4_5_ONLY)file path=usr/lib/gvfsd-google mode=0555 pkg.linted.userland.action001.2=true
+$(SOLARIS_11_4_5_ONLY)file path=usr/lib/gvfsd-google mode=0555 \
+    pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-http mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-localtest mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-metadata mode=0555 pkg.linted.userland.action001.2=true
