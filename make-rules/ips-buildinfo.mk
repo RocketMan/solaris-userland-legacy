@@ -42,7 +42,7 @@
 # The Solaris Update number. This will be set by the gatekeepers.
 # The value must match the update number of the release.
 #
-UPDATENUM ?= 4
+UPDATENUM ?= 5
 
 # Target OS version
 PKG_SOLARIS_VERSION ?= 11.$(UPDATENUM)
@@ -52,7 +52,7 @@ PKG_SOLARIS_VERSION ?= 11.$(UPDATENUM)
 # version string. Typically it should not be set unless all the packages
 # are being delivered within an SRU.
 #
-SRUNUM ?= 24
+SRUNUM ?= 0
 
 #
 # For distinguising between Server OS and Storage OS branches, and/or between
@@ -99,7 +99,7 @@ BRANCHID ?= \
 # backwards compatibility with older releases; the default value is "5.11" so
 # the IPS team recommends we use that.
 #
-BUILD_VERSION ?=  11.4-$(BRANCHID)
+BUILD_VERSION ?=  5.11-$(BRANCHID)
 
 # Set a default reference repository against which pkglint is run, in case it
 # hasn't been set in the environment.
