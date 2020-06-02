@@ -53,8 +53,8 @@ LD_OPTIONS.32 += -L /usr/lib/gnutls-3
 LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
 LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 
-CONFIGURE_OPTIONS += --with-ca-certificates=/etc/certs/ca-certificates.crt
-CONFIGURE_OPTIONS += --with-pkcs11=no
+#CONFIGURE_OPTIONS += --with-ca-certificates=/etc/certs/ca-certificates.crt
+#CONFIGURE_OPTIONS += --with-pkcs11=no
 CONFIGURE_OPTIONS += --libexecdir=$(CONFIGURE_LIBDIR.$(BITS))
 
 # for the tests
