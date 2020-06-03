@@ -55,8 +55,8 @@ LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 
 #CONFIGURE_OPTIONS += --with-ca-certificates=/etc/certs/ca-certificates.crt
 #CONFIGURE_OPTIONS += --with-pkcs11=no
-CONFIGURE_OPTIONS += -Dgnutls=disabled
-CONFIGURE_OPTIONS += -Dopenssl=enabled
+##CONFIGURE_OPTIONS += -Dgnutls=disabled
+##CONFIGURE_OPTIONS += -Dopenssl=enabled
 CONFIGURE_OPTIONS += --libexecdir=$(CONFIGURE_LIBDIR.$(BITS))
 
 # for the tests
