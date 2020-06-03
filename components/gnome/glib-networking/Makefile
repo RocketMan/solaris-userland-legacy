@@ -55,6 +55,8 @@ LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 
 #CONFIGURE_OPTIONS += --with-ca-certificates=/etc/certs/ca-certificates.crt
 #CONFIGURE_OPTIONS += --with-pkcs11=no
+CONFIGURE_OPTIONS += -Dgnutls=disabled
+CONFIGURE_OPTIONS += -Dopenssl=enabled
 CONFIGURE_OPTIONS += --libexecdir=$(CONFIGURE_LIBDIR.$(BITS))
 
 # for the tests
@@ -73,4 +75,6 @@ REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/gnome/gnome-common
 REQUIRED_PACKAGES += library/gnutls-3
 REQUIRED_PACKAGES += library/libproxy
+REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += library/security/openssl-11
 REQUIRED_PACKAGES += text/gnu-gettext
