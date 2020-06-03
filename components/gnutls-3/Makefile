@@ -26,12 +26,14 @@ BUILD_BITS= 64_and_32
 COMPILER= gcc
 include ../../make-rules/shared-macros.mk
 
+PATH=$(GNUBIN):$(USRBINDIR)
+
 COMPONENT_NAME=		gnutls
-COMPONENT_VERSION=	3.5.16
-COMPONENT_PROJECT_URL=  ftp://ftp.gnutls.org/gcrypt/gnutls/v3.5
+COMPONENT_VERSION=	3.6.14
+COMPONENT_PROJECT_URL=  ftp://ftp.gnutls.org/gcrypt/gnutls/v3.6
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH= \
-    sha256:0924dec90c37c05f49fec966eba3672dab4d336d879e5c06e06e13325cbfec25
+    sha256:5630751adec7025b8ef955af4d141d00d252a985769f51b4059e5affa3d39d63
 COMPONENT_ARCHIVE_URL=  $(COMPONENT_PROJECT_URL)/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	library/gnutls
 COMPONENT_ANITYA_ID=	1221
@@ -68,6 +70,8 @@ endif
 include $(WS_MAKE_RULES)/common.mk
 
 CFLAGS += -I$(USRINCDIR)/idn
+
+LDFLAGS += -lgmp
 
 MCS = mcs
 STRIP = strip

@@ -56,32 +56,32 @@ file path=usr/include/$(COMPONENT_NAME)-3/$(COMPONENT_NAME)/tpm.h
 file path=usr/include/$(COMPONENT_NAME)-3/$(COMPONENT_NAME)/urls.h
 file path=usr/include/$(COMPONENT_NAME)-3/$(COMPONENT_NAME)/x509-ext.h
 file path=usr/include/$(COMPONENT_NAME)-3/$(COMPONENT_NAME)/x509.h
-link path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so target=libgnutls.so.30.14.8
+link path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so target=libgnutls.so.30.28.0
 link path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so.30 \
-    target=libgnutls.so.30.14.8
-file path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so.30.14.8
+    target=libgnutls.so.30.28.0
+file path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so.30.28.0
 link path=usr/lib/$(COMPONENT_NAME)-3/libgnutlsxx.so \
     target=libgnutlsxx.so.28.1.0
 link path=usr/lib/$(COMPONENT_NAME)-3/libgnutlsxx.so.28 \
     target=libgnutlsxx.so.28.1.0
 file path=usr/lib/$(COMPONENT_NAME)-3/libgnutlsxx.so.28.1.0
 link path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.so \
-    target=libgnutls.so.30.14.8
+    target=libgnutls.so.30.28.0
 link path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.so.30 \
-    target=libgnutls.so.30.14.8
-file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.so.30.14.8
+    target=libgnutls.so.30.28.0
+file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.so.30.28.0
 link path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutlsxx.so \
     target=libgnutlsxx.so.28.1.0
 link path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutlsxx.so.28 \
     target=libgnutlsxx.so.28.1.0
 file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutlsxx.so.28.1.0
 link path=usr/lib/$(MACH64)/libgnutls.so.30 \
-    target=$(COMPONENT_NAME)-3/libgnutls.so.30.14.8
+    target=$(COMPONENT_NAME)-3/libgnutls.so.30.28.0
 file usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/pkgconfig/gnutls.pc \
     path=usr/lib/$(MACH64)/pkgconfig/$(COMPONENT_NAME)-3/gnutls.pc
 file path=usr/lib/grub/wanboot/libgnutls.a variant.arch=i386
 link path=usr/lib/libgnutls.so.30 \
-    target=$(COMPONENT_NAME)-3/libgnutls.so.30.14.8
+    target=$(COMPONENT_NAME)-3/libgnutls.so.30.28.0
 file usr/lib/$(COMPONENT_NAME)-3/pkgconfig/gnutls.pc \
     path=usr/lib/pkgconfig/$(COMPONENT_NAME)-3/gnutls.pc
 file path=usr/share/$(COMPONENT_NAME)-3/man/man1/certtool.1
@@ -1127,8 +1127,6 @@ file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_verify_c
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_verify_named_crt.3
 file path=usr/share/locale/$(COMPONENT_NAME)-3/cs/LC_MESSAGES/gnutls.mo
 file path=usr/share/locale/$(COMPONENT_NAME)-3/de/LC_MESSAGES/gnutls.mo
-file path=usr/share/locale/$(COMPONENT_NAME)-3/en@boldquot/LC_MESSAGES/gnutls.mo
-file path=usr/share/locale/$(COMPONENT_NAME)-3/en@quot/LC_MESSAGES/gnutls.mo
 file path=usr/share/locale/$(COMPONENT_NAME)-3/eo/LC_MESSAGES/gnutls.mo
 file path=usr/share/locale/$(COMPONENT_NAME)-3/fi/LC_MESSAGES/gnutls.mo
 file path=usr/share/locale/$(COMPONENT_NAME)-3/fr/LC_MESSAGES/gnutls.mo
