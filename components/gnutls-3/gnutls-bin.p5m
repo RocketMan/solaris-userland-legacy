@@ -1,0 +1,66 @@
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License (the "License").
+# You may not use this file except in compliance with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+
+#
+# Copyright (c) 2015, 2017, Oracle and/or its affiliates. All rights reserved.
+#
+
+<transform file path=usr.*/man/.+ -> \
+    default mangler.man.stability "pass-through volatile">
+set name=pkg.fmri \
+    value=pkg:/library/gnutls-3-bin@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary value="GNU transport layer security command line tools"
+set name=pkg.description \
+    value="This package contains a commandline interface to the GNU TLS library, which can be used to set up secure connections from e.g. shell scripts, debugging connection issues or managing certificates."
+set name=com.oracle.info.description value="GnuTLS command line tools"
+set name=com.oracle.info.tpno value=$(TPNO)
+set name=info.classification \
+    value="org.opensolaris.category.2008:Applications/System Utilities"
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=org.opensolaris.arc-caseid value=LSARC/2009/098 value=PSARC/2015/363
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+file path=usr/bin/certtool
+file path=usr/bin/gnutls-cli
+file path=usr/bin/gnutls-cli-debug
+file path=usr/bin/gnutls-serv
+file path=usr/bin/ocsptool
+file path=usr/bin/psktool
+file path=usr/bin/srptool
+file usr/share/$(COMPONENT_NAME)-3/man/man1/certtool.1 \
+    path=usr/share/man/man1/certtool.1
+file usr/share/$(COMPONENT_NAME)-3/man/man1/gnutls-cli-debug.1 \
+    path=usr/share/man/man1/gnutls-cli-debug.1
+file usr/share/$(COMPONENT_NAME)-3/man/man1/gnutls-cli.1 \
+    path=usr/share/man/man1/gnutls-cli.1
+file usr/share/$(COMPONENT_NAME)-3/man/man1/gnutls-serv.1 \
+    path=usr/share/man/man1/gnutls-serv.1
+file usr/share/$(COMPONENT_NAME)-3/man/man1/ocsptool.1 \
+    path=usr/share/man/man1/ocsptool.1
+file usr/share/$(COMPONENT_NAME)-3/man/man1/p11tool.1 \
+    path=usr/share/man/man1/p11tool.1
+file usr/share/$(COMPONENT_NAME)-3/man/man1/psktool.1 \
+    path=usr/share/man/man1/psktool.1
+file usr/share/$(COMPONENT_NAME)-3/man/man1/srptool.1 \
+    path=usr/share/man/man1/srptool.1
+file usr/share/$(COMPONENT_NAME)-3/man/man1/tpmtool.1 \
+    path=usr/share/man/man1/tpmtool.1
+license gnutls.license license="GPLv3, LGPLv2.1, FDLv1.3"
