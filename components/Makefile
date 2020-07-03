@@ -217,8 +217,9 @@ incorporation:
 # component directories might get published
 pkglint:
 	@echo 'pkglinting all package manifests...'
-	@$(ENV) SOLARIS_VERSION=$(SOLARIS_VERSION) \
-			$(PKGLINT) -e $(WS_TOOLS)/python/ \
+	@$(ENV) PYTHONPATH=$(WS_TOOLS)/python \
+			SOLARIS_VERSION=$(SOLARIS_VERSION) \
+			$(PKGLINT) \
 			-c $(WS_LINT_CACHE) -f $(WS_TOOLS)/pkglintrc \
 			$(wildcard $(COMPONENT_DIRS:%=%/build/manifest-*.published)) \
 			>$(WS_LOGS)/pkglint 2>&1; \
