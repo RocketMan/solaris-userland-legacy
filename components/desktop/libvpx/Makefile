@@ -44,7 +44,7 @@ COMPONENT_ANITYA_ID=	11083
 
 # Required for 64-bit builds.
 LDFLAGS += $(CC_BITS)
-LDFLAGS += -Wl,-zgnu-version-script-compat
+#LDFLAGS += -Wl,-zgnu-version-script-compat
 
 include $(WS_MAKE_RULES)/common.mk
 
