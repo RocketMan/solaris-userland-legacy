@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2020, Oracle and/or its affiliates.
 #
 
 # parfait is a bit unhappy (22527218)
@@ -31,11 +31,11 @@ COMPILER = gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	thunderbird
-COMPONENT_VERSION =	68.7.0
+COMPONENT_VERSION =	68.10.0
 COMPONENT_PROJECT_URL =	https://www.thunderbird.net/
 COMPONENT_ARCHIVE = 	$(COMPONENT_SRC).source.tar.xz
 COMPONENT_ARCHIVE_HASH= \
-    sha256:bc2efd2fee1d8f856a177e1579d529890dbf3621e6fb32a443c225ff7bf14b84
+    sha256:700ca2e21fef8f76134fc18d901fe890180c21a988ab39ad651554a8ed08a01d
 ifndef CANDIDATE_BUILD
 MOZILLA_FTP = 		http://ftp.mozilla.org/pub/$(COMPONENT_NAME)/releases/$(COMPONENT_VERSION)
 else
@@ -45,7 +45,7 @@ COMPONENT_ARCHIVE_URL =	$(MOZILLA_FTP)/source/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB =	tbird/mailer
 COMPONENT_ANITYA_ID =	4967
 
-TPNO =			57520
+TPNO =			60063
 
 # There are a set of .xpi files (as given in the LANG_LIST definition
 # below) that we need. We could download and unpack them individually, but
@@ -54,7 +54,7 @@ TPNO =			57520
 # one file with version number.
 COMPONENT_ARCHIVE_1 = $(COMPONENT_SRC)-xpi.tar.bz2
 COMPONENT_ARCHIVE_HASH_1 = \
-    sha256:1ade72eba772e90a88307dd06d3eb26a010823e3b15f0ff22e3b1b85f2512656
+    sha256:6b55c7ee465adc594532df1b86a163ca3d65d436ab5ee6e997199aedafd17041
 COMPONENT_ARCHIVE_URL_1 =       make://download-xpis/$(COMPONENT_ARCHIVE_1)
 
 LANG_LIST = ar ast be bg br ca cak cs cy \
@@ -125,6 +125,7 @@ COMPONENT_PRE_CONFIGURE_ACTION += \
 	echo "ac_add_options --with-system-icu" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-libevent" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-zlib" >> $(MOZCONFIG) ; \
+	echo "ac_add_options --with-system-libvpx" >> $(MOZCONFIG) ; \
 
 CXXFLAGS += -Wno-invalid-offsetof -fpermissive
 
@@ -200,6 +201,7 @@ COMPONENT_TEST_TRANSFORMS = \
 	'-e "/^FAILURES:/,/Failed:/p" ' \
 	'-e "/.*/d" '
 
+REQUIRED_PACKAGES += codec/libvpx
 REQUIRED_PACKAGES += compress/bzip2
 REQUIRED_PACKAGES += compress/unzip
 REQUIRED_PACKAGES += database/sqlite-3

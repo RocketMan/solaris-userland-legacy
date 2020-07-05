@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2010, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2010, 2020, Oracle and/or its affiliates.
 #
 
 .PHONY: void
@@ -53,7 +53,7 @@ endef
 
 # The location of an external mirror of community source archives that we build
 # in this gate.  The external mirror is a replica of the internal mirror.
-EXTERNAL_ARCHIVE_MIRROR = 
+EXTERNAL_ARCHIVE_MIRROR =
 
 # Default to looking for source archives on the internal mirror and the external
 # mirror before we hammer on the community source archive repositories.
@@ -608,7 +608,7 @@ TEST_32_and_64 =	$(TEST_32) $(TEST_64)
 # When running tests at the top level, skip those tests,
 # by redefining the above TEST_* targets,
 # when a component Makefile includes $(SKIP_TEST_AT_TOP_LEVEL).
-# It's done in separate skip-test.mk file, to allow inclusion of 
+# It's done in separate skip-test.mk file, to allow inclusion of
 # a multi-line ifdef statement which is evaluated at the component
 # Makefile level
 
@@ -714,11 +714,6 @@ PYTHON.2.7.VENDOR_PACKAGES.32 = /usr/lib/python2.7/vendor-packages
 PYTHON.2.7.VENDOR_PACKAGES.64 = /usr/lib/python2.7/vendor-packages/64
 PYTHON.2.7.VENDOR_PACKAGES = $(PYTHON.2.7.VENDOR_PACKAGES.$(BITS))
 
-# Python 3.4 uses 32 bit path for NO_ARCH packages
-PYTHON.3.4.VENDOR_PACKAGES.32 = /usr/lib/python3.4/vendor-packages
-PYTHON.3.4.VENDOR_PACKAGES.64 = /usr/lib/python3.4/vendor-packages/64
-PYTHON.3.4.VENDOR_PACKAGES = $(PYTHON.3.4.VENDOR_PACKAGES.$(BITS))
-
 PYTHON.3.5.VENDOR_PACKAGES.32 =
 PYTHON.3.5.VENDOR_PACKAGES.64 = /usr/lib/python3.5/vendor-packages
 PYTHON.3.5.VENDOR_PACKAGES = $(PYTHON.3.5.VENDOR_PACKAGES.64)
@@ -735,7 +730,6 @@ PYTHON_VENDOR_PACKAGES.64 = $(PYTHON.$(PYTHON_VERSION).VENDOR_PACKAGES.64)
 PYTHON_VENDOR_PACKAGES = $(PYTHON.$(PYTHON_VERSION).VENDOR_PACKAGES)
 
 PYTHON.2.7.TEST = /usr/lib/python2.7/test
-PYTHON.3.4.TEST = /usr/lib/python3.4/test
 PYTHON.3.5.TEST = /usr/lib/python3.5/test
 PYTHON.3.7.TEST = /usr/lib/python3.7/test
 
@@ -755,10 +749,6 @@ PYTHON.2.7 =	$(USRBIN)/python2.7
 # in such a way that we still need the .32 macro below.  And since we build
 # 64-bit only, we stick it directly in usr/bin (i.e., the 32-bit path) rather
 # than the 64-bit path.
-PYTHON.3.4.32 =	$(USRBIN.32)/python3.4
-PYTHON.3.4.64 =	$(USRBIN.32)/python3.4
-PYTHON.3.4 =	$(USRBIN.32)/python3.4
-
 PYTHON.3.5.32 =	$(USRBIN.32)/python3.5
 PYTHON.3.5.64 =	$(USRBIN.32)/python3.5
 PYTHON.3.5 =	$(USRBIN.32)/python3.5
@@ -877,10 +867,10 @@ COMPONENT_POST_INSTALL_ACTION += $(PERL_SCRIPTS_PROCESS)
 PHP_TOP_DIR = $(WS_COMPONENTS)/php
 
 # All versions of PHP for building extension packages.
-PHP_VERSIONS = 7.1 7.3
+PHP_VERSIONS = 7.3 7.4
 
-PHP.7.1 = /usr/php/7.1/bin/php
 PHP.7.3 = /usr/php/7.3/bin/php
+PHP.7.4 = /usr/php/7.4/bin/php
 
 # This is the default BUILD version of tcl
 # Not necessarily the system's default version, i.e. /usr/bin/tclsh
@@ -937,6 +927,7 @@ GNU_GREP =	/usr/gnu/bin/grep
 CHMOD =		/usr/bin/chmod
 NAWK =		/usr/bin/nawk
 TAR =		/usr/bin/tar
+GNU_TAR =	/usr/gnu/bin/tar
 TEE =		/usr/bin/tee
 ANT =		/usr/bin/ant
 LOCALEDEF =	/usr/bin/localedef
@@ -1007,7 +998,7 @@ CC_BITS =	-m$(BITS)
 # Code generation instruction set and optimization 'hints'.  Use studio_XBITS
 # and not the .arch.bits variety directly.
 studio_XBITS.sparc.32 =	-xtarget=ultra2 -xarch=sparcvis -xchip=ultra2
-studio_XBITS.sparc.64 =	
+studio_XBITS.sparc.64 =
 ifneq   ($(strip $(PARFAIT_BUILD)),yes)
 studio_XBITS.sparc.64 += -xtarget=ultra2
 endif
@@ -1039,7 +1030,7 @@ studio_cplusplus_C99_ENABLE = 	-xlang=c99
 studio_cplusplus_C99_DISABLE =
 
 # And this is the macro you should actually use
-studio_cplusplus_C99MODE = 
+studio_cplusplus_C99MODE =
 
 # Allow zero-sized struct/union declarations and void functions with return
 # statements.
@@ -1147,7 +1138,7 @@ gcc_FIX_PATH ?= -ffile-prefix-map="$(COMPONENT_DIR)=."
 # compiler-specific variant.
 CC_PIC =		$($(COMPILER)_PIC)
 CC_PIC_ENABLE =		$(CC_PIC)
-CC_PIC_DISABLE =	
+CC_PIC_DISABLE =
 CC_PIC_MODE =		$(CC_PIC_DISABLE)
 
 # Default GNU C compiler flags.  Add the required feature to your Makefile
@@ -1304,7 +1295,7 @@ ADISTACK_DISABLE =		$(ADISTACK_DISABLE.$(MACH64))
 SSBD_ENABLE =			-zsx=ssbd=enable
 SSBD_DISABLE =			-zsx=ssbd=disable
 endif
- 
+
 # Enable ASLR, NXHEAP and NXSTACK by default unless target build is NO_ARCH.
 ifeq ($(strip $(BUILD_BITS)),NO_ARCH)
 ASLR_MODE= 		$(ASLR_NOT_APPLICABLE)

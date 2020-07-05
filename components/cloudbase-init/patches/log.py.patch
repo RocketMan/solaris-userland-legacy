@@ -1,0 +1,15 @@
+Patch out the import of serial, which causes a traceback on initialization of
+cloudbase-init.  Either we import pyserial or some form of restructuring should
+happen upstream as few platforms seem likely to find logging to serial to be
+useful.
+
+--- cloudbase-init-1.1.0/cloudbaseinit/utils/log.py
++++ cloudbase-init-1.1.0/cloudbaseinit/utils/log.py
+@@ -13,7 +13,6 @@
+ #    under the License.
+ 
+ import logging
+-import serial
+ import six
+ 
+ from oslo_log import formatters

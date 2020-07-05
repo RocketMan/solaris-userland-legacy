@@ -20,18 +20,18 @@
 #
 
 #
-# Copyright (c) 2011, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2011, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 BUILD_BITS= 64
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=         xorriso
-COMPONENT_VERSION=      1.4.8
+COMPONENT_VERSION=      1.5.2
 COMPONENT_ARCHIVE_HASH=	\
-      sha256:ec82069e04096cd9c18be9b12b87b750ade0b5e37508978feabcde36b2278481
+      sha256:3b69f5c93ae7c40c5bbe4a847fa3963f5efc9c565551622f77121c5792fc17e7
 COMPONENT_ANITYA_ID=	13270
 
-TPNO=			43136
+TPNO=			58801
 
 CPPFLAGS+=		-I./test
 

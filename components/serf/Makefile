@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2016, 2020, Oracle and/or its affiliates.
 #
 
 # Parallel build jobs are supported only if GNU make is used.
@@ -102,6 +102,9 @@ REQUIRED_PACKAGES += developer/build/scons-27
 REQUIRED_PACKAGES += library/apr-15
 REQUIRED_PACKAGES += library/apr-util-15
 REQUIRED_PACKAGES += developer/build/scons
+REQUIRED_PACKAGES += library/apr-1
+REQUIRED_PACKAGES += library/apr-util-1
+# to be removed after apr-1 gets into repo
 REQUIRED_PACKAGES += library/apr-16
 REQUIRED_PACKAGES += library/apr-util-16
 REQUIRED_PACKAGES += library/expat

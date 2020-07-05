@@ -1,0 +1,17 @@
+Add timeout to prevent cloudbase-init service being stuck in offline state
+for long time.
+This has not been committed upstream, but has been filed in launchpad:
+
+https://bugs.launchpad.net/cloudbase-init/+bug/1630006
+
+--- cloudbase-init-1.1.0/cloudbaseinit/metadata/services/base.py
++++ cloudbase-init-1.1.0/cloudbaseinit/metadata/services/base.py
+@@ -315,7 +315,7 @@ class BaseHTTPMetadataService(BaseMetada
+         LOG.debug('Executing http request %s at %s', method, url)
+         response = requests.request(method=method, url=url, data=data,
+                                     headers=headers,
+-                                    verify=self._verify_https_request())
++                                    verify=self._verify_https_request(), timeout=1)
+         response.raise_for_status()
+         return response.content
+ 

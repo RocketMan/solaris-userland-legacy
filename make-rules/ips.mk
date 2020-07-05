@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2010, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2010, 2020, Oracle and/or its affiliates.
 #
 
 #
@@ -132,7 +132,6 @@ PKG_MACROS +=		IPS_COMPONENT_RE_VERSION=$(subst .,\\.,$(IPS_COMPONENT_VERSION))
 PKG_MACROS +=		COMPONENT_RE_VERSION=$(subst .,\\.,$(COMPONENT_VERSION))
 
 PKG_MACROS +=		PYTHON_2.7_ONLY=\#
-PKG_MACROS +=		PYTHON_3.4_ONLY=\#
 PKG_MACROS +=		PYTHON_3.5_ONLY=\#
 PKG_MACROS +=		PYTHON_3.7_ONLY=\#
 
@@ -515,18 +514,18 @@ REQUIRED_PACKAGES::	$(RESOLVED)
 # lint the manifests all at once
 $(BUILD_DIR)/.linted-$(MACH):	$(BUILD_DIR)/.resolved-$(MACH)
 	@echo "VALIDATING MANIFEST CONTENT: $(RESOLVED)"
-	$(ENV) PYTHONPATH=$(WS_TOOLS)/python PROTO_PATH="$(PKG_PROTO_DIRS)"\
+	$(ENV) PROTO_PATH="$(PKG_PROTO_DIRS)"\
 		SOLARIS_VERSION=$(SOLARIS_VERSION)\
 		$(PKGLINTVAR) $(CANONICAL_REPO:%=-c $(WS_LINT_CACHE)) \
-			-f $(WS_TOOLS)/pkglintrc $(RESOLVED)
+			-e $(WS_TOOLS)/python/ -f $(WS_TOOLS)/pkglintrc $(RESOLVED)
 	$(TOUCH) $@
 
 lintme: FRC
 	@echo "VALIDATING MANIFEST CONTENT: $(RESOLVED)"
-	$(ENV) PYTHONPATH=$(WS_TOOLS)/python PROTO_PATH="$(PKG_PROTO_DIRS)"\
+	$(ENV) PROTO_PATH="$(PKG_PROTO_DIRS)"\
 		SOLARIS_VERSION=$(SOLARIS_VERSION)\
 		$(PKGLINTVAR) $(CANONICAL_REPO:%=-c $(WS_LINT_CACHE)) \
-			-f $(WS_TOOLS)/pkglintrc $(RESOLVED)
+			-e $(WS_TOOLS)/python/ -f $(WS_TOOLS)/pkglintrc $(RESOLVED)
 
 FRC:
 

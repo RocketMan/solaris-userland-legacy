@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2016, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
 BUILD_BITS =            64
@@ -40,8 +40,11 @@ TEST_TARGET = $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
-# Use explicit Python version rather than the default one
-CONFIGURE_ENV += PYTHON=$(PYTHON.2.7.32)
+ifeq ($(MACH),sparc)
+# Webkit expects that only 48 bits from the address are effectively used.
+# This is not true on Solaris SPARC platform, so we use a mapfile to limit virtual address space.
+LD_EXEC_OPTIONS += -M $(WS_COMPONENTS)/desktop/webkitgtk4/mapfile_sparc_48bits
+endif
 
 # need to use gnu-gettext
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"

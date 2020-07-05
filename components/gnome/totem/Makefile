@@ -20,24 +20,25 @@
 #
 
 #
-# Copyright (c) 2015, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
-BUILD_BITS =            64_and_32
+BUILD_BITS =            64
 # All components using gobject-introspection must be built with gcc as
 # gobject-introspection does not produce correct results when using Studio.
 COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		totem
-COMPONENT_VERSION=	3.24.0
+COMPONENT_VERSION=	3.34.0
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Apps/Totem
 COMPONENT_ARCHIVE_HASH= \
-	sha256:9bd78f7b940e886b5c809acdfe00a610a834de5080dd40272b92835528a58d01
+	sha256:04d56ede3e04ad16579774b64908641e57f13731793c9a258e93fd04cca8d701
 COMPONENT_BUGDB=        gnome/multimedia
 COMPONENT_ANITYA_ID=	13162
 
-TPNO=			35135
+TPNO=			54133
+BUILD_STYLE=		meson
 
 TEST_TARGET = $(NO_TESTS)
 
@@ -82,9 +83,14 @@ CONFIGURE_OPTIONS += --with-plugins=autodetect
 # Assumes GNU msgfmt is in PATH.
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
+COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 
+COMPONENT_POST_INSTALL_ACTION.64 += \
+        $(INSTALL) -D -m 0444 $(COMPONENT_DIR)/files/totem-audio-preview.1 \
+                $(PROTO_DIR)/usr/share/man/man1/totem-audio-preview.1;
+ 
 REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
-REQUIRED_PACKAGES += developer/python/pylint-27
+REQUIRED_PACKAGES += developer/python/pylint-37
 REQUIRED_PACKAGES += developer/vala
 REQUIRED_PACKAGES += gnome/file-manager/nautilus
 REQUIRED_PACKAGES += gnome/gsettings-desktop-schemas

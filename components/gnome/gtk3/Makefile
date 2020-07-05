@@ -56,7 +56,8 @@ gcc_OPT.i386.32 = -O2
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 CONFIGURE_OPTIONS += --enable-cloudprint
 # Required for other components.
-CONFIGURE_OPTIONS += --enable-introspection
+CONFIGURE_OPTIONS.32 += --disable-introspection
+CONFIGURE_OPTIONS.64 += --enable-introspection
 CONFIGURE_OPTIONS += --enable-libcanberra
 # Generate man pages
 CONFIGURE_OPTIONS += --enable-man
@@ -132,8 +133,8 @@ REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/json-glib
 REQUIRED_PACKAGES += library/print/cups-libs
 REQUIRED_PACKAGES += print/cups
-REQUIRED_PACKAGES += runtime/perl-522
-REQUIRED_PACKAGES += runtime/python-27
+REQUIRED_PACKAGES += runtime/perl-526
+REQUIRED_PACKAGES += runtime/python-37
 REQUIRED_PACKAGES += service/opengl/ogl-select
 REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/library/fontconfig

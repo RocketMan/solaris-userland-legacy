@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2013, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2013, 2020, Oracle and/or its affiliates.
 #
 
 COMPILER=		gcc
@@ -37,6 +37,7 @@ COMPONENT_ARCHIVE_HASH= \
     sha256:0585b64a8d4138b96ed721f01c749b86b8b5d7b015fd4426af62afae067c110d
 COMPONENT_ARCHIVE_URL=	$(call pypi_url)
 COMPONENT_BUGDB=	python-mod/pil
+COMPONENT_ANITYA_ID=	7974
 
 TPNO=			56435
 
@@ -53,7 +54,7 @@ TPNO_OLD=		42560
 
 
 # This component is delivered in two different versions.
-# The newer one does no longer support Python 2.7 and 3.4; the older one does
+# The newer one does no longer support Python 2.7; the older one does
 # but we don't want to fall behind until those are EOLed.
 
 include $(WS_MAKE_RULES)/prep.mk
@@ -63,28 +64,22 @@ include $(WS_MAKE_RULES)/ips.mk
 # Convenience variables
 TARGET_27.32 = $(BUILD_DIR)/$(MACH32)-2.7/
 TARGET_27.64 = $(BUILD_DIR)/$(MACH64)-2.7/
-TARGET_34 = $(BUILD_DIR)/$(MACH64)-3.4/
 SOURCE_DIR_OLD = $(COMPONENT_DIR)/$(COMPONENT_SRC_OLD)
 
 # Targets updated for older version build
 $(TARGET_27.32).built: SOURCE_DIR = $(SOURCE_DIR_OLD)
 $(TARGET_27.64).built: SOURCE_DIR = $(SOURCE_DIR_OLD)
-$(TARGET_34).built: SOURCE_DIR = $(SOURCE_DIR_OLD)
 
 $(TARGET_27.32).installed: SOURCE_DIR = $(SOURCE_DIR_OLD)
 $(TARGET_27.64).installed: SOURCE_DIR = $(SOURCE_DIR_OLD)
-$(TARGET_34).installed: SOURCE_DIR = $(SOURCE_DIR_OLD)
 
 $(TARGET_27.32).tested-and-compared: COMPONENT_TEST_DIR = $(COMPONENT_SRC_OLD)
 $(TARGET_27.64).tested-and-compared: COMPONENT_TEST_DIR = $(COMPONENT_SRC_OLD)
-$(TARGET_34).tested-and-compared: COMPONENT_TEST_DIR = $(COMPONENT_SRC_OLD)
 
 $(MANIFEST_BASE)-pillow-27.mogrified: COMPONENT_VERSION = $(COMPONENT_VERSION_OLD)
-$(MANIFEST_BASE)-pillow-34.mogrified: COMPONENT_VERSION = $(COMPONENT_VERSION_OLD)
 
 # Manifest convenience variables.
 $(MANIFEST_BASE)-pillow-27.mogrified: NEW_ONLY = \#
-$(MANIFEST_BASE)-pillow-34.mogrified: NEW_ONLY = \#
 $(MANIFEST_BASE)-pillow-35.mogrified: OLD_ONLY = \#
 $(MANIFEST_BASE)-pillow-37.mogrified: OLD_ONLY = \#
 
@@ -93,7 +88,7 @@ PKG_MACROS += NEW_ONLY="$(NEW_ONLY)"
 
 # Meta package must have versions of older runtimes fixed
 FIX_MANIFEST_VERSIONS:
-	echo "<transform depend fmri=(.*)pillow-(27|34)@(.*) \
+	echo "<transform depend fmri=(.*)pillow-27@(.*) \
 		-> edit fmri $(COMPONENT_VERSION) $(COMPONENT_VERSION_OLD)>" | \
 	$(PKGMOGRIFY) /dev/fd/0 $(MANIFEST_BASE)-pillow.mogrified \
 		> $(MANIFEST_BASE)-pillow.mogrified-fixed ;

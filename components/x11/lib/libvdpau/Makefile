@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2018, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
 BUILD_BITS =            64_and_32
@@ -41,6 +41,10 @@ TPNO=			55670
 include $(WS_MAKE_RULES)/x11-component.mk
 
 MANIFEST_COMPARE=/usr/bin/true
+
+# Documentation does not get reliably built anymore, so I am disabling it for
+# now
+CONFIGURE_OPTIONS += -Ddocumentation=false
 
 # for tests
 unexport SHELLOPTS

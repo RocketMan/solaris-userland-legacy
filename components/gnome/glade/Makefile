@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2016, 2020, Oracle and/or its affiliates. 
 #
 
 BUILD_BITS=		64_and_32
@@ -42,8 +42,12 @@ TEST_TARGET = $(SKIP_TEST)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
-# Use explicit Python version rather than the default one
-CONFIGURE_ENV += PYTHON=$(PYTHON.2.7)
+ifeq ($(MACH),sparc)
+# Webkit expects that only 48 bits from the address are effectively used.
+# This is not true on Solaris SPARC platform, so we use a mapfile to limit virtual address space.
+LD_EXEC_OPTIONS.64 += -M $(WS_COMPONENTS)/desktop/webkitgtk4/mapfile_sparc_48bits
+LD_EXEC_OPTIONS = $(LD_EXEC_OPTIONS.$(BITS))
+endif
 
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
@@ -55,10 +59,9 @@ CONFIGURE_OPTIONS += --enable-gladeui
 REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/desktop/gtk3
-REQUIRED_PACKAGES += library/desktop/webkitgtk4
 REQUIRED_PACKAGES += library/desktop/pango
+REQUIRED_PACKAGES += library/desktop/webkitgtk4
 REQUIRED_PACKAGES += library/glib2
-REQUIRED_PACKAGES += library/python/pygobject-27
 REQUIRED_PACKAGES += library/libxml2
-REQUIRED_PACKAGES += runtime/python-27
+REQUIRED_PACKAGES += runtime/python-37
 REQUIRED_PACKAGES += system/library/math

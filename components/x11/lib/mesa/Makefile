@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2018, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
 BUILD_BITS =            32_and_64
@@ -28,16 +28,17 @@ COMPILER=		gcc
 include ../../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		mesa
-COMPONENT_VERSION=	18.1.9
+COMPONENT_VERSION=	20.0.2
 COMPONENT_PROJECT_URL=  https://www.mesa3d.org
-COMPONENT_ARCHIVE=	$(COMPONENT_NAME)-$(COMPONENT_VERSION).tar.gz
+COMPONENT_ARCHIVE=	$(COMPONENT_NAME)-$(COMPONENT_VERSION).tar.xz
 COMPONENT_ARCHIVE_URL=  https://mesa.freedesktop.org/archive/$(COMPONENT_ARCHIVE)
 #COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
 COMPONENT_ARCHIVE_HASH= \
-	sha256:0f825dc834b1b3e3d9a6c3ce58b42977f0d9a248a7627a36dd3b313ffe41a499
+	sha256:aa54f1cb669550606aab8ceb475105d15aeb814fca5a778ce70d0fd10e98e86f
 COMPONENT_BUGDB=        x11/mesa
 COMPONENT_ANITYA_ID=	1970
-TPNO=			51903
+TPNO=			57775
+BUILD_STYLE=		meson
 
 TEST_TARGET = $(NO_TESTS)
 
@@ -51,28 +52,32 @@ FIX_PC_FILES += src/mesa/gl.pc.in
 FIX_PC_FILES += src/mapi/es1api/glesv1_cm.pc.in
 FIX_PC_FILES += src/mapi/es2api/glesv2.pc.in
 
-LIBDRM_BASE = $(WS_COMPONENTS)/x11/lib/libdrm/libdrm-2.4.97
+COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 
 # to find gnu egrep and gsed
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 
-COMPONENT_PREP_ACTION +=(cd $(@D); $(AUTORECONF_ENV) autoreconf -fiv);
-
-COMPONENT_POST_UNPACK_ACTION += \
-	if [ ! -e "$(dir $(LIBDRM_BASE))/.prep" ]; then \
-		$(MAKE) -C $(dir $(LIBDRM_BASE)) prep; \
-	fi; \
-	$(CP) $(LIBDRM_BASE)/intel/intel_aub.h $(SOURCE_DIR)/src/mesa/drivers/dri/i965; \
-
-CONFIGURE_OPTIONS.32 += --disable-llvm
-CONFIGURE_OPTIONS.64 += --enable-llvm --disable-llvm-shared-libs
-CONFIGURE_OPTIONS += --enable-shared
-CONFIGURE_OPTIONS += --disable-glx-tls
-ifneq ($(MACH), sparc)
-CONFIGURE_OPTIONS += --with-dri-drivers='i915 i965 radeon r200 swrast'
+CONFIGURE_OPTIONS.32 += -Ddri-drivers-path='/usr/lib/xorg/modules/dri'
+CONFIGURE_OPTIONS.64 += -Ddri-drivers-path='/usr/lib/xorg/modules/dri/$(MACH64)'
+CONFIGURE_OPTIONS += -Delf-tls=false
+# swrast gallium provider just for 64 bits (there is no 32 bits LLVM library)
+CONFIGURE_OPTIONS.32 += -Dgallium-drivers=''
+CONFIGURE_OPTIONS.64 += -Dgallium-drivers='swrast'
+CONFIGURE_OPTIONS += -Dvulkan-drivers=''
+CONFIGURE_OPTIONS += -Dgbm=true
+CONFIGURE_OPTIONS += -Dglvnd=false
+CONFIGURE_OPTIONS += -Dplatforms='x11, drm'
+CONFIGURE_OPTIONS += -Dllvm=true
+CONFIGURE_OPTIONS += -Dglx='auto'
+ifeq ($(MACH), i386)
+# Note that only one swrast provider can be built.
+CONFIGURE_OPTIONS.32 += -Ddri-drivers='i915,i965,r200,swrast'
+CONFIGURE_OPTIONS.64 += -Ddri-drivers='i915,i965,r200'
 else
-CONFIGURE_OPTIONS += --with-dri-drivers='swrast'
+CONFIGURE_OPTIONS.32 += -Ddri-drivers='swrast'
+CONFIGURE_OPTIONS.64 += -Ddri-drivers=''
 endif
+
 CONFIGURE_OPTIONS += --with-gallium-drivers=swrast
 CONFIGURE_OPTIONS += --enable-gbm
 CONFIGURE_OPTIONS += --disable-shader-cache
@@ -83,7 +88,6 @@ CONFIGURE_OPTIONS.64 += --with-dri-driverdir='/usr/lib/xorg/modules/dri/$(MACH64
 LIBDRM_RUNPATH_32 = /usr/lib/xorg
 LIBDRM_RUNPATH_64 = /usr/lib/xorg/$(MACH64)
 LIBDRM_RUNPATH = $(LIBDRM_RUNPATH_$(BITS))
-
 CXXFLAGS += -std=c++11 -I/usr/include/llvm/Support/Solaris/sys
 CFLAGS += -D__EXTENSIONS__ -I/usr/include/llvm/Support/Solaris/sys -Wno-incompatible-pointer-types
 $(SOLARIS_11_3_ONLY)CFLAGS += -D_POSIX_PTHREAD_SEMANTICS
@@ -97,7 +101,41 @@ LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 LD_OPTIONS += -z discard-unused=dependencies
 LD_OPTIONS += -M $(COMPONENT_DIR)/mapfile.externs
 
-CONFIGURE_OPTIONS += --enable-ldflags="$(CC_BITS)"
+# Use symlinks as Userland generate cannot treat hardlinks well.
+
+COMPONENT_POST_INSTALL_ACTION.64 += \
+	cd $(PROTOUSRLIBDIR)/xorg/modules/dri/$(MACH64) ; \
+	$(RM) kms_swrast_dri.so ; $(SYMLINK) swrast_dri.so kms_swrast_dri.so ;
+
+ifeq ($(MACH), i386)
+COMPONENT_POST_INSTALL_ACTION.64 += \
+	cd $(PROTOUSRLIBDIR)/xorg/modules/dri/$(MACH64) ; \
+	$(RM) i965_dri.so ; $(SYMLINK) i915_dri.so i965_dri.so ; \
+	$(RM) r200_dri.so ; $(SYMLINK) i915_dri.so r200_dri.so ;
+
+COMPONENT_POST_INSTALL_ACTION.32 += \
+	cd $(PROTOUSRLIBDIR)/xorg/modules/dri ; \
+	$(RM) i915_dri.so ; $(SYMLINK) swrast_dri.so i915_dri.so ; \
+	$(RM) i965_dri.so ; $(SYMLINK) swrast_dri.so i965_dri.so ; \
+	$(RM) r200_dri.so ; $(SYMLINK) swrast_dri.so r200_dri.so ;
+endif
+
+# Add RPATH to xorg lib directory where is libdrm.
+
+COMPONENT_POST_INSTALL_ACTION += \
+	test $(BITS) -eq 64 && dir64=/$(MACH64) ; \
+	for f in libgbm.so.1.0.0 libEGL.so.1.0.0 libGL.so.1.2.0 ; do \
+	$(ELFEDIT) -e "dyn:runpath /usr/lib/xorg$$dir64" \
+	  $(PROTOUSRLIBDIR)$$dir64/$$f ; \
+	done ; \
+	$(ELFEDIT) -e "dyn:runpath /usr/lib/xorg$$dir64" \
+	  $(PROTOUSRLIBDIR)/xorg/modules/dri$$dir64/swrast_dri.so ;
+
+ifeq ($(MACH), i386)
+COMPONENT_POST_INSTALL_ACTION.64 += \
+	$(ELFEDIT) -e "dyn:runpath /usr/lib/xorg/amd64" \
+	  $(PROTOUSRLIBDIR)/xorg/modules/dri/amd64/i915_dri.so ;
+endif
 
 REQUIRED_PACKAGES += developer/gnu-indent
 REQUIRED_PACKAGES += developer/lexer/flex
@@ -121,3 +159,4 @@ REQUIRED_PACKAGES += x11/library/libxext
 REQUIRED_PACKAGES += x11/library/libxfixes
 REQUIRED_PACKAGES += x11/library/libxxf86vm
 REQUIRED_PACKAGES += x11/library/libpthread-stubs
+REQUIRED_PACKAGES += x11/library/libxshmfence

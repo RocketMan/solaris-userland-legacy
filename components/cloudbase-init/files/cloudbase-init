@@ -1,0 +1,58 @@
+#!/usr/bin/python3.7
+
+# Copyright (c) 2017, 2020, Oracle and/or its affiliates.
+#
+#    Licensed under the Apache License, Version 2.0 (the "License"); you may
+#    not use this file except in compliance with the License. You may obtain
+#    a copy of the License at
+#
+#         http://www.apache.org/licenses/LICENSE-2.0
+#
+#    Unless required by applicable law or agreed to in writing, software
+#    distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
+#    WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
+#    License for the specific language governing permissions and limitations
+#    under the License.
+
+import configparser
+import os
+import subprocess
+import sys
+import urllib.error
+import urllib.request
+
+import smf_include
+
+
+def start():
+
+    # verify metadata service is reachable
+    parser = configparser.ConfigParser()
+    parser.read('/etc/cloudbase-init.conf')
+    if not parser.has_option('DEFAULT', 'config_drive'):
+        try:
+            if parser.has_option('DEFAULT', 'metadata_base_url'):
+                url = parser.get('DEFAULT', 'metadata_base_url')
+            else:
+                url = 'http://169.254.169.254'
+            open_url = urllib.request.urlopen(url, timeout=20)
+        except urllib.error.HTTPError:
+            # HTTP Error means we reached a service, but it didn't like our
+            # ping, so just start and see what cloudbase-init can figure out
+            pass
+        except Exception as err:
+            print('Failed response from %s: %s' % (url, err), file=sys.stderr)
+            return smf_include.SMF_EXIT_ERR_FATAL
+
+    # Initiate cloudbase-init service
+    cmd_str = "/usr/bin/cloudbase-init"
+    p = subprocess.run(cmd_str, stdout=sys.stdout, stderr=sys.stderr)
+    if p.returncode != 0:
+        return smf_include.SMF_EXIT_ERR_FATAL
+
+    return smf_include.SMF_EXIT_OK
+
+
+if __name__ == "__main__":
+    os.putenv("LC_ALL", "C")
+    smf_include.smf_main()

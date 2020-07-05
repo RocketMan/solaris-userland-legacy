@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2014, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2014, 2020, Oracle and/or its affiliates.
 #
 
 BUILD_BITS= 64
@@ -86,11 +86,17 @@ endif
 
 COMPONENT_POST_INSTALL_ACTION += ($(KSH93) Solaris/customization.sh $(PROTO_DIR))
 
-REQUIRED_PACKAGES += library/apr-15
-REQUIRED_PACKAGES += library/apr-util-15
-REQUIRED_PACKAGES += library/apr-util-15/apr-ldap
-REQUIRED_PACKAGES += library/apr-util-15/dbd-mysql
-REQUIRED_PACKAGES += library/apr-util-15/dbd-sqlite
+REQUIRED_PACKAGES += library/apr-1
+REQUIRED_PACKAGES += library/apr-util-1
+REQUIRED_PACKAGES += library/apr-util-1/apr-ldap
+REQUIRED_PACKAGES += library/apr-util-1/dbd-mysql
+REQUIRED_PACKAGES += library/apr-util-1/dbd-sqlite
+# to be removed after apr-1 gets into repo
+REQUIRED_PACKAGES += library/apr-16
+REQUIRED_PACKAGES += library/apr-util-16
+REQUIRED_PACKAGES += library/apr-util-16/apr-ldap
+REQUIRED_PACKAGES += library/apr-util-16/dbd-mysql
+REQUIRED_PACKAGES += library/apr-util-16/dbd-sqlite
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/nghttp2
 REQUIRED_PACKAGES += library/openldap
