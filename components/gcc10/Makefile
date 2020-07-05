@@ -161,6 +161,9 @@ COMPONENT_TEST_MASTER = \
 # GCC ships some static libraries (.a).
 MANIFEST_CLEANUP_TRANSFORM=
 
+
+MANIFEST_COMPARE=/usr/bin/true
+
 # We can not use PKG_AUTO_HARDLINKS because the generate files always expect
 # given path to be either file or hardlink. The hardlinks are in several
 # packages, which means that generate files would 'see' correctly only the
