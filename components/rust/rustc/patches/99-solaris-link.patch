@@ -10,3 +10,36 @@ index 9d6e8c4..1876004 100644
      } else if target.contains("apple-darwin") {
          println!("cargo:rustc-link-lib=System");
  
+--- a/src/librustc_target/spec/solaris_base.rs	2020-04-20 23:17:56.000000000 +0000
++++ b/src/librustc_target/spec/solaris_base.rs	2020-06-16 12:52:07.707064818 +0000
+@@ -1,7 +1,20 @@
+-use crate::spec::TargetOptions;
++use crate::spec::{LinkArgs, LinkerFlavor, TargetOptions};
+ use std::default::Default;
+ 
+ pub fn opts() -> TargetOptions {
++    let mut late_link_args = LinkArgs::new();
++    late_link_args.insert(
++        LinkerFlavor::Gcc,
++        vec![
++            // LLVM will insert calls to the stack protector functions
++            // "__stack_chk_fail" and "__stack_chk_guard" into code in native
++            // object files.  Some platforms include these symbols directly in
++            // libc, but at least historically these have been provided in
++            // libssp.so on illumos and Solaris systems.
++            "-lssp".to_string(),
++        ],
++    );
++
+     TargetOptions {
+         dynamic_linking: true,
+         executables: true,
+@@ -9,6 +22,8 @@
+         target_family: Some("unix".to_string()),
+         is_like_solaris: true,
+         limit_rdylib_exports: false, // Linker doesn't support this
++        eliminate_frame_pointer: false,
++        late_link_args,
+ 
+         ..Default::default()
+     }
