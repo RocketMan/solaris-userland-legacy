@@ -96,6 +96,7 @@ COMPONENT_BUILD_ARGS += V=1
 # Needed to find GNU msgfmt.
 COMPONENT_BUILD_ENV += PATH="/usr/gnu/bin:$(PATH)"
 
+REQUIRED_PACKAGES += desktop/pdf-viewer/poppler
 REQUIRED_PACKAGES += desktop/pdf-viewer/poppler-viewer
 REQUIRED_PACKAGES += gnome/file-manager/nautilus
 REQUIRED_PACKAGES += gnome/gsettings-desktop-schemas
