@@ -1,6 +1,16 @@
---- a/src/screenshot-interactive-dialog.c	2016-07-11 15:55:18.000000000 +0000
-+++ b/src/screenshot-interactive-dialog.c	2018-10-12 09:49:56.632795611 +0000
-@@ -448,6 +448,15 @@
+--- a/src/screenshot-interactive-dialog.c	2019-10-14 16:18:09.000000000 +0000
++++ b/src/screenshot-interactive-dialog.c	2020-07-08 16:05:35.234310358 +0000
+@@ -434,16 +434,30 @@
+   GtkWidget *dialog;
+   GtkWidget *main_vbox;
+   GtkWidget *header_bar;
++  GtkWidget *button_box;
+   GtkWidget *button;
+   GtkStyleContext *context;
+   g_autoptr(GtkSizeGroup) size_group = NULL;
+   CaptureData *data;
++  gboolean shows_app_menu;
++  GtkSettings *settings;
  
    dialog = gtk_application_window_new (GTK_APPLICATION (g_application_get_default ()));
  
@@ -14,16 +24,33 @@
 +    gtk_application_window_set_show_menubar (GTK_APPLICATION_WINDOW (dialog), FALSE);
 +
    header_bar = gtk_header_bar_new ();
+-  gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header_bar), TRUE);
+-  gtk_header_bar_set_decoration_layout (GTK_HEADER_BAR (header_bar), "menu");
++  if (shows_app_menu) {
++    gtk_header_bar_set_show_close_button (GTK_HEADER_BAR (header_bar), TRUE);
++    gtk_header_bar_set_decoration_layout (GTK_HEADER_BAR (header_bar), "menu");
++  }
    gtk_window_set_titlebar (GTK_WINDOW (dialog), header_bar);
  
-@@ -469,10 +478,6 @@
-   gtk_container_add (GTK_CONTAINER (main_vbox), button_box);
+   gtk_window_set_resizable (GTK_WINDOW (dialog), FALSE);
+@@ -459,6 +473,20 @@
+   create_screenshot_frame (main_vbox, _("Take Screenshot"));
+   create_effects_frame (main_vbox, _("Effects"));
  
-   /* add help as a dialog button if we're not showing the application menu */
--  settings = gtk_settings_get_for_screen (gtk_widget_get_screen (GTK_WIDGET (dialog)));
--  g_object_get (settings,
--                "gtk-shell-shows-app-menu", &shows_app_menu,
--                NULL);
-   if (!shows_app_menu)
-     {
-       button = gtk_button_new_with_mnemonic (_("_Help"));
++  button_box = gtk_button_box_new (GTK_ORIENTATION_HORIZONTAL);
++  gtk_button_box_set_layout (GTK_BUTTON_BOX (button_box), GTK_BUTTONBOX_END);
++  gtk_container_add (GTK_CONTAINER (main_vbox), button_box);
++
++  /* add help as a dialog button if we're not showing the application menu */
++  if (!shows_app_menu)
++    {
++      button = gtk_button_new_with_mnemonic (_("_Help"));
++      g_signal_connect_swapped (button, "clicked", G_CALLBACK (screenshot_display_help), dialog);
++      gtk_container_add (GTK_CONTAINER (button_box),
++                         button);
++      gtk_button_box_set_child_secondary (GTK_BUTTON_BOX (button_box), button, TRUE);
++    }
++
+   size_group = gtk_size_group_new (GTK_SIZE_GROUP_HORIZONTAL);
+ 
+   button = gtk_button_new_with_mnemonic (_("Take _Screenshot"));

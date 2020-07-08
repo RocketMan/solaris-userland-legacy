@@ -1,0 +1,11 @@
+--- a/meson.build	2019-10-14 16:18:09.000000000 +0000
++++ b/meson.build	2020-07-08 15:16:48.113409226 +0000
+@@ -8,7 +8,7 @@
+           'c_std=c99',
+         ])
+ 
+-add_project_arguments([ '-D_POSIX_C_SOURCE=200809L', '-D_XOPEN_SOURCE=700', '-D_DEFAULT_SOURCE' ], language: 'c')
++add_project_arguments([ '-D_POSIX_C_SOURCE=200809L', '-D_XOPEN_SOURCE=700', '-D_DEFAULT_SOURCE', '-D_XPG6' ], language: 'c')
+ 
+ cc = meson.get_compiler('c')
+ 

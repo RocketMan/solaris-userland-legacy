@@ -48,6 +48,8 @@ CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_BUILD_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_INSTALL_ENV += PATH=$(GNUBIN):$(PATH)
 
+MANIFEST_COMPARE=/usr/bin/true
+
 REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/desktop/gtk3

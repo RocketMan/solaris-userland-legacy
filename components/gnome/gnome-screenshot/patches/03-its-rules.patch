@@ -1,0 +1,21 @@
+--- a/src/meson.build	2019-10-14 16:18:09.000000000 +0000
++++ b/src/meson.build	2020-07-08 15:23:16.671391480 +0000
+@@ -38,12 +38,12 @@
+                 install: true,
+                 install_dir: gnome_screenshot_appsdir)
+ 
+-i18n.merge_file('appdata',
+-                input: 'org.gnome.Screenshot.metainfo.xml.in',
+-                output: 'org.gnome.Screenshot.metainfo.xml',
+-                po_dir: join_paths(meson.current_source_dir(), '../po'),
+-                install: true,
+-                install_dir: gnome_screenshot_appdatadir)
++#i18n.merge_file('appdata',
++#                input: 'org.gnome.Screenshot.metainfo.xml.in',
++#                output: 'org.gnome.Screenshot.metainfo.xml',
++#                po_dir: join_paths(meson.current_source_dir(), '../po'),
++#                install: true,
++#                install_dir: gnome_screenshot_appdatadir)
+ 
+ service_conf = configuration_data ()
+ service_conf.set('bindir', gnome_screenshot_bindir)

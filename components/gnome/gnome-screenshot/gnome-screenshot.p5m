@@ -144,5 +144,5 @@ file path=usr/share/locale/zh_CN/LC_MESSAGES/gnome-screenshot.mo
 file path=usr/share/locale/zh_HK/LC_MESSAGES/gnome-screenshot.mo
 file path=usr/share/locale/zh_TW/LC_MESSAGES/gnome-screenshot.mo
 file path=usr/share/man/man1/gnome-screenshot.1
-file path=usr/share/metainfo/org.gnome.Screenshot.metainfo.xml
+$(SOLARIS_11_4_5_ONLY)file path=usr/share/metainfo/org.gnome.Screenshot.metainfo.xml
 license gnome-screenshot.license license="GPLv2, LGPLv2"
