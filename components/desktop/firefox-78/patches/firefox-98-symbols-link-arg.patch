@@ -1,0 +1,13 @@
+--- a/python/mozbuild/mozbuild/backend/recursivemake.py	2020-06-25 20:43:18.000000000 +0000
++++ b/python/mozbuild/mozbuild/backend/recursivemake.py	2020-06-30 15:23:57.395787855 +0000
+@@ -1276,8 +1276,8 @@
+         if libdef.soname:
+             backend_file.write('DSO_SONAME := %s\n' % libdef.soname)
+         if libdef.symbols_file:
+-            if libdef.symbols_link_arg:
+-                backend_file.write('EXTRA_DSO_LDOPTS += %s\n' % libdef.symbols_link_arg)
++#            if libdef.symbols_link_arg:
++#                backend_file.write('EXTRA_DSO_LDOPTS += %s\n' % libdef.symbols_link_arg)
+                 backend_file.write('EXTRA_DEPS += %s\n' % libdef.symbols_file)
+         if not libdef.cxx_link:
+             backend_file.write('LIB_IS_C_ONLY := 1\n')
