@@ -28,14 +28,13 @@ export PARFAIT_BUILD=no
 
 BUILD_BITS = 64
 COMPILER = gcc
-#COMPILER = clang
 include ../../../make-rules/shared-macros.mk
 GCC_ROOT=/usr/gcc/10
 
 ESR = esr
 
 COMPONENT_NAME =	firefox
-COMPONENT_VERSION =	78.0.1
+COMPONENT_VERSION =	78.0.2
 COMPONENT_PROJECT_URL =	http://www.mozilla.com/firefox
 COMPONENT_SRC_NAME =	$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_SRC = 	$(COMPONENT_SRC_NAME)
