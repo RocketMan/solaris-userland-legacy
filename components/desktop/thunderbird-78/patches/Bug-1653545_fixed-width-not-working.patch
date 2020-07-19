@@ -1,0 +1,17 @@
+# HG changeset patch
+# User Khushil Mistry <khushil324@gmail.com>
+# Parent  4f8c251a9687560c234afe43271821dbb1cef865
+Bug 1653545 - Fixed Width not working. r=mkmelin
+
+diff --git a/mail/components/compose/content/ComposerCommands.js b/mail/components/compose/content/ComposerCommands.js
+--- a/comm/mail/components/compose/content/ComposerCommands.js
++++ b/comm/mail/components/compose/content/ComposerCommands.js
+@@ -482,6 +482,8 @@ function doStatefulCommand(commandID, ne
+     top.document
+       .querySelector("editor")
+       .contentDocument.execCommand(command, false, null);
++  } else if (commandID == "cmd_fontFace" && newState == "tt") {
++    goDoCommandParams(commandID, newState);
+   } else {
+     top.document
+       .querySelector("editor")
