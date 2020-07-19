@@ -1,0 +1,11 @@
+--- a/comm/ldap/c-sdk/libraries/libldap/sort.c	2020-07-18 15:54:42.942358532 +0000
++++ b/comm/ldap/c-sdk/libraries/libldap/sort.c	2020-07-18 15:55:53.916518423 +0000
+@@ -51,6 +51,8 @@
+ 
+ #include "ldap-int.h"
+ 
++#define XP_QSORT qsort
++
+ typedef struct keycmp {
+   void* kc_arg;
+   LDAP_KEYCMP_CALLBACK* kc_cmp;

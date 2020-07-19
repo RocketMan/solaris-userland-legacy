@@ -1,0 +1,22 @@
+--- a/security/nss/cmd/atob/atob.c	2020-07-13 19:07:30.000000000 +0000
++++ b/security/nss/cmd/atob/atob.c	2020-07-18 18:38:48.130189806 +0000
+@@ -7,7 +7,7 @@
+ #include "nssb64.h"
+ #include <errno.h>
+ 
+-#if defined(XP_WIN) || (defined(__sun) && !defined(SVR4))
++#if defined(XP_WIN)
+ #if !defined(WIN32)
+ extern int fread(char *, size_t, size_t, FILE *);
+ extern int fwrite(char *, size_t, size_t, FILE *);
+--- a/security/nss/cmd/btoa/btoa.c	2020-07-13 19:07:42.000000000 +0000
++++ b/security/nss/cmd/btoa/btoa.c	2020-07-18 18:36:50.473588425 +0000
+@@ -7,7 +7,7 @@
+ #include "nssb64.h"
+ #include <errno.h>
+ 
+-#if defined(XP_WIN) || (defined(__sun) && !defined(SVR4))
++#if defined(XP_WIN)
+ #if !defined(WIN32)
+ extern int fread(char *, size_t, size_t, FILE *);
+ extern int fwrite(char *, size_t, size_t, FILE *);
