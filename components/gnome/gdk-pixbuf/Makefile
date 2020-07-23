@@ -45,6 +45,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 # Workaround for build failures due to gdk-pixbuf Makefiles not passing CFLAGS
 # or LDFLAGS, especially the -m32/64 flag, to g-ir-scanner
+CFLAGS += -D_XPG6 -D__EXTENSIONS__
 COMPONENT_BUILD_ENV += CFLAGS="$(strip $(CFLAGS))"
 COMPONENT_BUILD_ENV += LDFLAGS="$(strip $(LDFLAGS))"
 
@@ -107,5 +108,6 @@ REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libtiff
 REQUIRED_PACKAGES += library/desktop/gobject/gobject-introspection
 REQUIRED_PACKAGES += library/glib2
+REQUIRED_PACKAGES += library/medialib
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += x11/library/libx11

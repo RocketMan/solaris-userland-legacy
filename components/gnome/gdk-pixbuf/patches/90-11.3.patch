@@ -1,0 +1,11 @@
+--- gdk-pixbuf-2.39.2/gdk-pixbuf/pixops/pixops.c	2019-08-14 13:55:00.000000000 +0000
++++ gdk-pixbuf-2.39.2/gdk-pixbuf/pixops/pixops.c	2020-07-23 19:03:43.301336213 +0000
+@@ -21,6 +21,8 @@
+ #include <math.h>
+ #include <glib.h>
+ 
++#include <sys/systeminfo.h>
++
+ #include "../fallback-c89.c"
+ #include "pixops.h"
+ 
