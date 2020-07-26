@@ -45,6 +45,8 @@ PYTHON_VERSION = 2.7
 
 include $(WS_MAKE_RULES)/common.mk
 
+CFLAGS += -DDISABLE_SIMD
+
 # Assumes GNU xgettext in PATH
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 

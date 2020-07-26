@@ -1,0 +1,12 @@
+--- pulseaudio-9.0/src/daemon/default.pa.in.~1~	2016-05-03 07:17:39.000000000 +0000
++++ pulseaudio-9.0/src/daemon/default.pa.in	2020-07-05 10:19:22.835416193 +0000
+@@ -41,8 +41,7 @@
+ #load-module module-alsa-source device=hw:1,0
+ ])dnl
+ ifelse(@HAVE_OSS_OUTPUT@, 1, [dnl
+-load-module module-oss 
+-#load-module module-oss device="/dev/dsp" sink_name=output source_name=input
++load-module module-oss device="/dev/dsp" sink_name=output source_name=input
+ #load-module module-oss-mmap device="/dev/dsp" sink_name=output source_name=input
+ ])dnl
+ ifelse(@HAVE_WAVEOUT@, 1, [dnl

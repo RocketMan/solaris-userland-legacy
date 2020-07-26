@@ -1,0 +1,18 @@
+--- a/src/pulsecore/cpu.c	2016-05-03 07:17:39.000000000 +0000
++++ b/src/pulsecore/cpu.c	2020-07-26 15:02:22.614190263 +0000
+@@ -25,6 +25,7 @@
+     cpu_info->cpu_type = PA_CPU_UNDEFINED;
+     /* don't force generic code, used for testing only */
+     cpu_info->force_generic_code = false;
++#ifndef DISABLE_SIMD
+     if (!getenv("PULSE_NO_SIMD")) {
+         if (pa_cpu_init_x86(&cpu_info->flags.x86))
+             cpu_info->cpu_type = PA_CPU_X86;
+@@ -32,6 +33,7 @@
+             cpu_info->cpu_type = PA_CPU_ARM;
+         pa_cpu_init_orc(*cpu_info);
+     }
++#endif
+ 
+     pa_remap_func_init(cpu_info);
+     pa_mix_func_init(cpu_info);
