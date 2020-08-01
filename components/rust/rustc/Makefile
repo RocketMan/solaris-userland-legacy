@@ -54,7 +54,7 @@ include $(WS_MAKE_RULES)/common.mk
 $(SOURCE_DIR_crates)/.patched: PATCH_LEVEL=0
 
 # Everything expects GNU utilities, so make sure those are preferred.
-PATH =			$(COMPONENT_DIR)/epoll:/usr/gnu/bin:/usr/bin
+PATH =			/usr/local/bin:$(COMPONENT_DIR)/epoll:/usr/gnu/bin:/usr/bin
 
 # LD_B_DIRECT breaks the build.
 LD_B_DIRECT =
