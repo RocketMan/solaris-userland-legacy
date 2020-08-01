@@ -20,10 +20,11 @@
 #
 
 #
-# Copyright (c) 2018, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2020, Oracle and/or its affiliates.
 #
 
-<transform file path=.*/cargo-vendor$ -> set action.hash %(path)>
-<transform file path=.*/cargo-vendor$ -> edit path bin/ usr/bin/>
-<transform file path=\.crates.toml$ -> drop>
-<transform file path=\.crates2.json$ -> drop>
+# Release notes
+file release-notes/legacy-antlr.txt \
+    path=usr/share/doc/release-notes/legacy-antlr.txt mode=0444 \
+    must-display=true \
+    release-note=feature/pkg/self@0.20.10,11.4-11.4.27.0.0.78.0
