@@ -20,6 +20,9 @@
 #
 
 #
-# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2020, Oracle and/or its affiliates.
 #
 
+# Change all version numbers to $(LUA_VERSION) string
+<transform dir file link hardlink -> edit path "/$(LUA_VERSION)/" "/$!(LUA_VERSION)/">
+<transform dir file link hardlink -> edit path "\$!\((.*)\)" "$(\1)">
