@@ -59,6 +59,7 @@ CONFIGURE_SCRIPT= $(SOURCE_DIR)/js/src/configure
 CONFIGURE_ENV += PYTHON="$(PYTHON)"
 CONFIGURE_ENV += LDSHARED="$(CC) -shared"
 CONFIGURE_ENV += NSPR_CONFIG="/usr/bin/pkg-config nspr"
+CONFIGURE_ENV += HOST_CFLAGS=-DSOLARIS
 
 CONFIGURE_OPTIONS += --disable-jemalloc
 CONFIGURE_OPTIONS += --enable-ctypes
@@ -76,9 +77,10 @@ CONFIGURE_OPTIONS += --with-system-zlib
 CONFIGURE_OPTIONS += --with-x
 CONFIGURE_OPTIONS += --enable-strip
 CONFIGURE_OPTIONS += --with-system-nspr
-LDFLAGS += -z gnu-version-script-compat
+$(SOLARIS_11_4_5_ONLY)LDFLAGS += -z gnu-version-script-compat
 CONFIGURE_OPTIONS.32 += --bindir=$(PROTOUSRBINDIR)/$(MACH32)
 CONFIGURE_OPTIONS.64 += --bindir=$(PROTOUSRBINDIR)/$(MACH64)
+PKG_CONFIG_PATH.64 = /usr/lib/pkgconfig/$(MACH64)
 
 # passing in --bindir doesn't seem to work, resulting in 32-bit bins 
 # being overwritten.  Copy 32-bit js-config from the build area 
