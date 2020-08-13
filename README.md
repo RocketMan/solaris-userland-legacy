@@ -18,9 +18,7 @@ rust, firefox, and thunderbird.
 Note: This fork generally does not contain any packages *not* in the
 upstream repo, such as the Nimbus gtk3 theme and epiphany.  For
 additional software not found in the Userland consolidation, see my
-Solaris ports collection:
-
-     https://github.com/RocketMan/solaris-ports
+[Solaris Ports Collection](https://github.com/RocketMan/solaris-ports).
 
 ## Getting Started
 This README provides a very brief overview of the gate (i.e., source
@@ -42,6 +40,6 @@ Build the individual component
     $ cd (component-dir) ; gmake publish
 
 # Copyright
-Copyright (c) 2020 Jim Mason <jmason at ibinx dot com>.  All rights reserved.
+Copyright &copy; 2020 Jim Mason.  All rights reserved.
 
 This repository is adapted from code Copyright (c) 2010, 2019, Oracle and/or its affiliates. All rights reserved.
