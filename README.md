@@ -39,7 +39,18 @@ Build the individual component
 
     $ cd (component-dir) ; gmake publish
 
-# Copyright
-Copyright &copy; 2020 Jim Mason.  All rights reserved.
+## Copyright
+Copyright &copy; 2020 Jim Mason.
 
-This repository is adapted from code Copyright (c) 2010, 2019, Oracle and/or its affiliates. All rights reserved.
+This repository is adapted from material originally authored and published by
+Oracle and/or its affiliates at https://github.com/oracle/solaris-userland.
+
+This repository contains files necessary to download, prep, build,
+test, package and publish open source software.  It does not include
+the source code of the respective open source packages.  This source
+code is maintained by its respective developers/communities, and is
+downloaded from their sites as part of the build process.
+
+## License
+The files in this repository are licensed under the [Common Development and
+Distribution License](LICENSE).
