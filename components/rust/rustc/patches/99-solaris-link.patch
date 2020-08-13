@@ -10,7 +10,7 @@
          println!("cargo:rustc-link-lib=posix4");
 --- rustc-1.44.1-src/src/librustc_target/spec/solaris_base.rs	2020-06-17 21:17:05.000000000 +0000
 +++ rustc-1.44.1-src/src/librustc_target/spec/solaris_base.rs	2020-08-01 18:57:44.327809206 +0000
-@@ -1,6 +1,19 @@
+@@ -1,6 +1,23 @@
 -use crate::spec::TargetOptions;
 +use crate::spec::{LinkArgs, LinkerFlavor, TargetOptions};
  
@@ -25,6 +25,10 @@
 +            // libc, but at least historically these have been provided in
 +            // libssp.so on illumos and Solaris systems.
 +            "-lssp".to_string(),
++
++            // Disable .SUNW_ldynsym sections on Solaris,
++            // as llvm cannot read the linked SHT_SYMTAB_SHNDX
++            "-Wl,-znoldynsym".to_string(),
 +        ],
 +    );
 +
@@ -40,3 +44,20 @@
  
          ..Default::default()
      }
+--- a/src/bootstrap/builder.rs	2020-06-17 21:17:04.000000000 +0000
++++ b/src/bootstrap/builder.rs	2020-08-12 18:42:32.832679461 +0000
+@@ -961,9 +961,13 @@
+                 None
+             };
+             if let Some(rpath) = rpath {
+-                rustflags.arg(&format!("-Clink-args={}", rpath));
++                rustflags.arg(&format!("-Clink-arg={}", rpath));
+             }
+         }
++
++        // Disable .SUNW_ldynsym sections on Solaris,
++        // as llvm cannot read the linked SHT_SYMTAB_SHNDX
++        rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
+ 
+         // FIXME: Don't use LLD if we're compiling libtest, since it fails to link it.
+         // See https://github.com/rust-lang/rust/issues/68647.
