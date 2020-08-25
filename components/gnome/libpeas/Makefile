@@ -75,4 +75,5 @@ REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/lua/lgi-54
 REQUIRED_PACKAGES += library/python/pygobject-3
 REQUIRED_PACKAGES += runtime/lua
+REQUIRED_PACKAGES += runtime/python-35
 REQUIRED_PACKAGES += runtime/python-37

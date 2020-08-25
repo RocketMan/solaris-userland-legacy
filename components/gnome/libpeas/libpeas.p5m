@@ -58,7 +58,6 @@ file path=usr/lib/$(MACH64)/girepository-1.0/PeasGtk-1.0.typelib
 link path=usr/lib/$(MACH64)/libpeas-1.0.so target=libpeas-1.0.so.0
 link path=usr/lib/$(MACH64)/libpeas-1.0.so.0 target=libpeas-1.0.so.0.2400.0
 file path=usr/lib/$(MACH64)/libpeas-1.0.so.0.2400.0
-file path=usr/lib/$(MACH64)/libpeas-1.0/loaders/liblua54loader.so
 file path=usr/lib/$(MACH64)/libpeas-1.0/loaders/libpython3loader.so
 link path=usr/lib/$(MACH64)/libpeas-gtk-1.0.so target=libpeas-gtk-1.0.so.0
 link path=usr/lib/$(MACH64)/libpeas-gtk-1.0.so.0 \
@@ -66,8 +65,6 @@ link path=usr/lib/$(MACH64)/libpeas-gtk-1.0.so.0 \
 file path=usr/lib/$(MACH64)/libpeas-gtk-1.0.so.0.2400.0
 file path=usr/lib/$(MACH64)/peas-demo/plugins/helloworld/helloworld.plugin
 file path=usr/lib/$(MACH64)/peas-demo/plugins/helloworld/libhelloworld.so
-file path=usr/lib/$(MACH64)/peas-demo/plugins/luahello/luahello.lua
-file path=usr/lib/$(MACH64)/peas-demo/plugins/luahello/luahello.plugin
 file path=usr/lib/$(MACH64)/peas-demo/plugins/pythonhello/pythonhello.plugin
 file path=usr/lib/$(MACH64)/peas-demo/plugins/pythonhello/pythonhello.py
 file path=usr/lib/$(MACH64)/peas-demo/plugins/secondtime/libsecondtime.so
@@ -76,7 +73,6 @@ file path=usr/lib/$(MACH64)/pkgconfig/libpeas-1.0.pc
 file path=usr/lib/$(MACH64)/pkgconfig/libpeas-gtk-1.0.pc
 file path=usr/share/gir-1.0/Peas-1.0.gir
 file path=usr/share/gir-1.0/PeasGtk-1.0.gir
-file path=usr/share/glade/catalogs/libpeas-gtk.xml
 file path=usr/share/icons/hicolor/16x16/actions/libpeas-plugin.png
 file path=usr/share/icons/hicolor/22x22/actions/libpeas-plugin.png
 file path=usr/share/icons/hicolor/32x32/actions/libpeas-plugin.png
