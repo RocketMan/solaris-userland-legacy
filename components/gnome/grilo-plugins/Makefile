@@ -38,6 +38,9 @@ COMPONENT_ANITYA_ID=	10929
 TPNO=			54074
 BUILD_STYLE=		meson
 
+# Tests do not pass because of insufficient gsed filtering.
+$(SKIP_TEST_AT_TOP_LEVEL)
+
 include $(WS_MAKE_RULES)/gnome-component.mk
 
 # For various non-standard #include extensions.
@@ -82,3 +85,4 @@ REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/media-player/totem-pl-parser
 REQUIRED_PACKAGES += runtime/lua
 REQUIRED_PACKAGES += system/network/avahi
+REQUIRED_PACKAGES += system/network/avahi/gui

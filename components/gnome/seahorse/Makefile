@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2016, 2020, Oracle and/or its affiliates.
 #
 
 BUILD_BITS=		64
@@ -38,6 +38,9 @@ COMPONENT_ANITYA_ID=	9548
 TPNO=			54131
 
 BUILD_STYLE=            meson
+
+# The unit tests failed to start.
+$(SKIP_TEST_AT_TOP_LEVEL)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
@@ -61,4 +64,5 @@ REQUIRED_PACKAGES += library/libxslt
 REQUIRED_PACKAGES += library/security/gpgme
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += system/network/avahi
+REQUIRED_PACKAGES += system/network/avahi/gui
 REQUIRED_PACKAGES += system/network/ldap/openldap

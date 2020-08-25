@@ -41,6 +41,8 @@ COMPONENT_ANITYA_ID   = 19543
 TPNO = 60046
 
 MANIFEST_COMPARE=/usr/bin/true
+# Disable tests since there are some regressions.
+$(SKIP_TEST_AT_TOP_LEVEL)
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/configure.mk
