@@ -29,17 +29,17 @@ include ../../../make-rules/shared-macros.mk
 COMPONENT_NAME_BASE=	lxml
 $(SOLARIS_11_3_ONLY)COMPONENT_NAME=$(COMPONENT_NAME_BASE)3
 $(SOLARIS_11_4_5_ONLY)COMPONENT_NAME=$(COMPONENT_NAME_BASE)
-COMPONENT_VERSION=	4.3.3
+COMPONENT_VERSION=	4.5.2
 COMPONENT_PROJECT_URL=	http://lxml.de/
 COMPONENT_SRC=		$(COMPONENT_NAME_BASE)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:4a03dd682f8e35a10234904e0b9508d705ff98cf962c5851ed052e9340df3d90
+    sha256:c189f474d3f5c7b4fb60e1be9464521f2dc5cbb54205fed76f4cbb4c87cdf596
 COMPONENT_ARCHIVE_URL=	$(call pypi_url)
 COMPONENT_BUGDB=	python-mod/lxml
 COMPONENT_ANITYA_ID=	3914
 
-TPNO=			50931
+TPNO=			60295
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
@@ -49,9 +49,6 @@ $(SOLARIS_11_3_ONLY)PYTHON2_VERSIONS=
 $(SOLARIS_11_3_ONLY)PYTHON_VERSIONS= $(PYTHON3_VERSIONS)
 
 include $(WS_MAKE_RULES)/ips.mk
-
-# Tests do not pass because of insufficient gsed filtering.
-$(SKIP_TEST_AT_TOP_LEVEL)
 
 ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 
@@ -75,21 +72,9 @@ COMPONENT_TEST_ENV+=	HTTPS_PROXY=
 COMPONENT_TEST_ENV+=	PYTHON=$(PYTHON)
 
 COMPONENT_TEST_TRANSFORMS += \
-	'-e "/\(cc\).*/d" ' \
-	'-e "/\(PYTHONPATH\).*/d" ' \
-	'-e "/\(Doctest\).*/d" ' \
-	'-e "/\(Building\).*/d" ' \
-	'-e "/\(building\).*/d" ' \
-	'-e "/\(Compiling\).*/d" ' \
-	'-e "/\(Cythonizing\).*/d" ' \
-	'-e "/\(copying\).*/d" ' \
-	'-e "/\(creating\).*/d" ' \
-	'-e "/\(prototype:\).*/d" ' \
-	'-e "/\(warning:\).*/d" ' \
-	'-e "/\(ignored\).*/d" ' \
-	'-e "/\(argument :\).*/d" ' \
-	'-e "/\(cannot find\).*/d" ' \
-	'-e "s|\(Ran [0-9][0-9]* tests\).*|\1|" '
+	'-n -e "/OK/p" ' \
+	'-e "/FAILED/p" ' \
+	'-e "s|\(Ran [0-9][0-9]* tests\).*|\1|p" '
 
 # common targets
 build:		$(BUILD_32_and_64)
