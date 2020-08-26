@@ -1,0 +1,81 @@
+#
+# CDDL HEADER START
+#
+# The contents of this file are subject to the terms of the
+# Common Development and Distribution License (the "License").
+# You may not use this file except in compliance with the License.
+#
+# You can obtain a copy of the license at usr/src/OPENSOLARIS.LICENSE
+# or http://www.opensolaris.org/os/licensing.
+# See the License for the specific language governing permissions
+# and limitations under the License.
+#
+# When distributing Covered Code, include this CDDL HEADER in each
+# file and include the License file at usr/src/OPENSOLARIS.LICENSE.
+# If applicable, add the following below this CDDL HEADER, with the
+# fields enclosed by brackets "[]" replaced with your own identifying
+# information: Portions Copyright [yyyy] [name of copyright owner]
+#
+# CDDL HEADER END
+#
+
+#
+# Copyright (c) 2016, 2020, Oracle and/or its affiliates.
+#
+#
+<transform file hardlink path=.*\.py$ -> add pkg.tmp.autopyc false>
+<transform file path=(usr/lib/python3.)([4-9])/site-packages/(.*)$ -> set action.hash %<1>%<2>/site-packages/%<3>>
+<transform file -> edit path (usr/lib/python3.)([4-9])/site-packages/(.*)$ \\1\\2/vendor-packages/\\3>
+<transform file path=(usr/lib/python3.)([4-9])/vendor-packages/((.*/)?.*).so$ -> set action.hash %<1>%<2>/site-packages/%<3>.cpython-3%<2>m.so>
+set name=pkg.fmri \
+    value=pkg:/library/python/pygobject-3-$(PYV)@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
+set name=pkg.summary \
+    value="Python $(MAYBE_PYVER_SPACE)bindings for GLib/Gobject/GIO/GTK+"
+set name=pkg.description \
+    value="PyGObject is a Python extension module that gives clean and consistent access to the entire GNOME software platform through the use of GObject Introspection. PyGObject provides full support of GObject Introspection and all of its features (callbacks, GVariant support, closures, sub-classing, etc.)."
+set name=com.oracle.info.description value=pygobject
+set name=com.oracle.info.tpno value=$(TPNO)
+set name=info.classification \
+    value="org.opensolaris.category.2008:Desktop (GNOME)/Libraries"
+set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
+set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
+set name=org.opensolaris.arc-caseid value=PSARC/2014/371 value=PSARC/2016/290
+set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+file path=usr/lib/python$(PYVER)/site-packages/PyGObject-$(IPS_COMPONENT_VERSION).egg-info
+file path=usr/lib/python$(PYVER)/site-packages/gi/__init__.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/_compat.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/_constants.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/_error.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/_gi.so
+file path=usr/lib/python$(PYVER)/site-packages/gi/_gi_cairo.so
+file path=usr/lib/python$(PYVER)/site-packages/gi/_gtktemplate.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/_option.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/_ossighelper.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/_propertyhelper.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/_signalhelper.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/docstring.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/importer.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/module.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/GIMarshallingTests.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/GLib.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/GObject.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/Gdk.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/GdkPixbuf.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/Gio.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/Gtk.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/Pango.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/__init__.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/overrides/keysyms.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/pygtkcompat.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/repository/__init__.py
+file path=usr/lib/python$(PYVER)/site-packages/gi/types.py
+file path=usr/lib/python$(PYVER)/site-packages/pygtkcompat/__init__.py
+file path=usr/lib/python$(PYVER)/site-packages/pygtkcompat/generictreemodel.py
+file path=usr/lib/python$(PYVER)/site-packages/pygtkcompat/pygtkcompat.py
+license COPYING license=LGPLv2.1
+# Avoid collisions with older versions of pygobject 2.x package which
+# delivered the /site-packages/gi/ files now found in this package.
+#depend type=optional fmri=library/python/pygobject-27@2.28.6,5.12.0.0.0.103
+# force a dependency on the pygobject-3 package
+depend type=require \
+    fmri=library/python/pygobject-3@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)

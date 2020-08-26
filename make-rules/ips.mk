@@ -94,7 +94,7 @@ PUBLISH_TRANSFORMS +=	$(WS_TOP)/transforms/puppet
 PUBLISH_TRANSFORMS +=	$(PKGMOGRIFY_TRANSFORMS)
 PUBLISH_TRANSFORMS +=	$(WS_TOP)/transforms/incorporate
 PUBLISH_TRANSFORMS +=	$(WS_TOP)/transforms/publish-cleanup
-PUBLISH_TRANSFORMS +=	$(WS_TOP)/transforms/legacy
+#PUBLISH_TRANSFORMS +=	$(WS_TOP)/transforms/legacy
 PUBLISH_TRANSFORMS +=	$(WS_TOP)/transforms/auto_fmri
 
 define add-limiting-variable
