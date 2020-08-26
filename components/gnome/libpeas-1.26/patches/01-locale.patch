@@ -1,0 +1,13 @@
+--- libpeas-1.26.0/peas-demo/peas-demo.c~	2020-03-06 21:12:16.247286600 +0000
++++ libpeas-1.26.0/peas-demo/peas-demo.c	2020-08-26 15:17:00.529682507 +0000
+@@ -27,6 +27,10 @@
+ #include <glib/gi18n.h>
+ #include <gtk/gtk.h>
+ 
++#ifdef __sun
++#include <locale.h>
++#endif
++
+ #include <libpeas/peas.h>
+ #include <libpeas-gtk/peas-gtk.h>
+ 
