@@ -30,6 +30,8 @@
     set action.hash %<1>/man/man3/%<2>.3>
 <transform file path=(.+)/man/man5oldap/(.+).5oldap$ -> \
     set action.hash %<1>/man/man5/%<2>.5>
+<transform file path=usr/bin/.*$ -> set pkg.linted.userland.action001.3 true>
+<transform file path=usr/lib/.*$ -> set pkg.linted.userland.action001.3 true>
 set name=pkg.fmri \
     value=pkg:/system/network/ldap/openldap@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
 set name=pkg.summary value=OpenLDAP
