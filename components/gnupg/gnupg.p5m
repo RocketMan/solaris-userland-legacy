@@ -39,7 +39,6 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 #
 file path=usr/bin/dirmngr
 file path=usr/bin/dirmngr-client
-file path=usr/bin/dirmngr_ldap
 file path=usr/bin/gpg-agent
 file path=usr/bin/gpg-check-pattern
 file path=usr/bin/gpg-connect-agent
