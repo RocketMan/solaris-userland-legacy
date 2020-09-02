@@ -39,14 +39,10 @@ COMPONENT_ARCHIVE_URL=  https://launchpad.net/ubuntu/+archive/primary/+files/$(C
 
 TPNO=		        27912	
 
-# Disable tests since there are some regressions.
-$(SKIP_TEST_AT_TOP_LEVEL)
-
 include $(WS_MAKE_RULES)/common.mk
 
 studio_C99MODE= $(studio_C99_ENABLE) 
 CFLAGS += -I. -I/usr/gnu/include -I/usr/include/ -I/usr/include/efi/x86_64 -I/usr/include/efi/
-CONFIGURE_OPTIONS  +=  uuid_CFLAGS="-I/usr/include/uuid" uuid_LIBS="-luuid"
 PATH=/usr/gnu/bin:/usr/bin
 
 # GNU Build System files have to be regenerated for automake 1.16.
