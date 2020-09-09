@@ -1,15 +1,17 @@
---- a/mesonbuild/compilers/compilers.py	2019-10-02 15:21:48.932575637 +0000
-+++ b/mesonbuild/compilers/compilers.py	2019-10-26 19:19:29.741628652 +0000
-@@ -1885,7 +1885,7 @@
-     def __init__(self, compiler_type):
-         self.compiler_type = compiler_type
-         self.base_options = ['b_pch', 'b_lto', 'b_pgo', 'b_sanitize', 'b_coverage',
+--- meson-0.54.3/mesonbuild/compilers/mixins/gnu.py	2020-06-14 20:40:08.000000000 +0000
++++ meson-0.54.3/mesonbuild/compilers/mixins/gnu.py	2020-09-09 17:38:14.777830481 +0000
+@@ -141,7 +141,7 @@
+ 
+     def __init__(self):
+         self.base_options = ['b_pch', 'b_lto', 'b_pgo', 'b_coverage',
 -                             'b_ndebug', 'b_staticpic', 'b_pie']
 +                             'b_ndebug', 'b_staticpic']
-         if (not self.compiler_type.is_osx_compiler and
-                 not self.compiler_type.is_windows_compiler and
-                 not mesonlib.is_openbsd()):
-@@ -2316,7 +2316,7 @@
+         if not (self.info.is_windows() or self.info.is_cygwin() or self.info.is_openbsd()):
+             self.base_options.append('b_lundef')
+         if not self.info.is_windows() or self.info.is_cygwin():
+--- meson-0.54.3/mesonbuild/compilers/mixins/intel.py	2020-01-23 12:51:19.000000000 +0000
++++ meson-0.54.3/mesonbuild/compilers/mixins/intel.py	2020-09-09 17:39:19.873450052 +0000
+@@ -77,7 +77,7 @@
          # there is an unfortunate rule for using IPO (you can't control the
          # name of the output file) which break assumptions meson makes
          self.base_options = ['b_pch', 'b_lundef', 'b_asneeded', 'b_pgo',
