@@ -42,48 +42,15 @@ BUILD_STYLE=		meson
 
 TEST_TARGET = $(NO_TESTS)
 
-$(SOLARIS_11_3_ONLY)CFLAGS += -DSOLARIS_11_3
-
 include $(WS_MAKE_RULES)/gnome-component.mk
 
-$(SOLARIS_11_3_ONLY)$(SOURCE_DIR)/.patched: $(SOURCE_DIR)/.patched-thumbnails
-
-$(SOURCE_DIR)/.patched-thumbnails:
-	$(CP) $(COMPONENT_DIR)/files-11.3/* $(SOURCE_DIR)/src
-	$(TOUCH) $(SOURCE_DIR)/.patched-thumbnails
-
-# The build process modifies the shebang line to use the version of Python
-# automatically found; to avoid using the current system default, one is
-# explicitly specified here.
-CONFIGURE_ENV += PYTHON="$(PYTHON)"
-
-# Only build Python 2.7 support; most of GNOME still uses Python 2.x.  Building
-# both would lead to the possibility of both Python runtimes being loaded into
-# the same process space (not a good idea).
-PYTHON_VERSION = 2.7
-
-# Ensure Python modules are installed to vendor-packages directory;
-# the default is site-packages.
-CONFIGURE_OPTIONS += am_cv_python_pythondir=$(PYTHON_VENDOR_PACKAGES)
-
-CONFIGURE_OPTIONS += --disable-static
-CONFIGURE_OPTIONS += --disable-schemas-compile
-# Required for other components.
-CONFIGURE_OPTIONS += --enable-introspection
-#CONFIGURE_OPTIONS += --enable-nautilus
-CONFIGURE_OPTIONS += --disable-nautilus
-# Required for other components.
-CONFIGURE_OPTIONS += --enable-python=$(PYTHON)
-CONFIGURE_OPTIONS += --enable-shared
-# Required for other components.
-CONFIGURE_OPTIONS += --enable-vala
-CONFIGURE_OPTIONS += --with-pic
-CONFIGURE_OPTIONS += --with-plugins=autodetect
-
 # Assumes GNU msgfmt is in PATH.
-CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
-COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
-COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
+# for 11.3, include Perl 5.26 path for pod2man
+CONFIGURE_ENV += PATH="$(dir $(PERL.5.26)):$(GNUBIN):$(PATH)"
+COMPONENT_BUILD_ENV += PATH="$(dir $(PERL.5.26)):$(GNUBIN):$(PATH)"
+COMPONENT_INSTALL_ENV += PATH="$(dir $(PERL.5.26)):$(GNUBIN):$(PATH)"
+
+CONFIGURE_OPTIONS += -Dwith-plugins=all
 
 COMPONENT_POST_INSTALL_ACTION.64 += \
         $(INSTALL) -D -m 0444 $(COMPONENT_DIR)/files/totem-audio-preview.1 \
