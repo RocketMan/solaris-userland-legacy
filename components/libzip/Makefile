@@ -41,6 +41,14 @@ BUILD_STYLE= cmake
 
 include $(WS_MAKE_RULES)/common.mk
 
+# Force use of gnutls-3 pkgconfig during 2.x->3.x transition
+PKG_CONFIG_PATHS.32 += /usr/lib/pkgconfig/gnutls-3
+PKG_CONFIG_PATHS.64 += /usr/lib/$(MACH64)/pkgconfig/gnutls-3
+PKG_CONFIG_PATHS += $(PKG_CONFIG_PATHS.$(BITS))
+LD_OPTIONS.32 += -L /usr/lib/gnutls-3
+LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
+LD_OPTIONS += $(LD_OPTIONS.$(BITS))
+
 # elfedit removes wrong RUNPATH/RPATH 
 COMPONENT_POST_INSTALL_ACTION.64 = ( \
 	for i in bin/zipcmp bin/zipmerge bin/ziptool \
