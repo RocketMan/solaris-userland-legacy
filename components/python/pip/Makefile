@@ -38,6 +38,8 @@ COMPONENT_ANITYA_ID=	6529
 
 TPNO=			52889
 
+MANIFEST_COMPARE = /usr/bin/true
+
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 
