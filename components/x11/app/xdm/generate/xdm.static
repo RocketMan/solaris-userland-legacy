@@ -20,31 +20,10 @@
 #
 
 #
-# Copyright (c) 2018, 2020, Oracle and/or its affiliates. 
+# Copyright (c) 2020, Oracle and/or its affiliates.
 #
 
-BUILD_BITS =            64
-BUILD_ARCH =		i386
-COMPILER = 		gcc
-include ../../../../make-rules/shared-macros.mk
+dir  path=etc/X11 group=sys
+dir  path=etc/X11/xdm group=sys
+file files/config-README.txt path=usr/lib/X11/xdm/README
 
-COMPONENT_NAME=		xf86-video-vesa
-COMPONENT_VERSION=	2.5.0
-COMPONENT_ARCHIVE_HASH= \
-	sha256:1f1624f3c73906801ad1bc98335a2cb5676a7a4d18e5374d9a1d18464e54c659
-COMPONENT_BUGDB=        x11/devices-x86
-COMPONENT_ANITYA_ID=	5243
-TPNO=			61992
-
-TEST_TARGET = $(NO_TESTS)
-
-include $(WS_MAKE_RULES)/x11-component.mk
-
-# Libraries/modules to link with
-LD_OPTIONS += \
-        -L$(PROTODIR)$(X11_SERVERMODS_DIR) \
-        -R$(X11_SERVERMODS_DIR) \
-        -lfb -lpciaccess -lshadow -lvbe
-
-REQUIRED_PACKAGES += diagnostic/scanpci
-REQUIRED_PACKAGES += x11/server/xorg

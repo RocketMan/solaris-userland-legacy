@@ -18,34 +18,35 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2010, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2010, 2020, Oracle and/or its affiliates.
 #
 
-SUBDIRS = components
+SUBDIRS =	components
 
-download:	TARGET = download
-unpack:		TARGET = unpack
-patch:		TARGET = patch
-prep:		TARGET = prep
-build:		TARGET = build
-install:	TARGET = install
-publish:	TARGET = publish
-validate:	TARGET = validate
-clean:		TARGET = clean
-clobber:	TARGET = clobber
-setup:		TARGET = setup
-test:		TARGET = test
-system-test:	TARGET = system-test
-check_rtime:	TARGET = check_rtime
-component-hook:		TARGET = component-hook
+TARGETS =	\
+		download \
+		unpack \
+		patch \
+		prep \
+		build \
+		install \
+		publish \
+		validate \
+		clean \
+		clobber \
+		setup \
+		test \
+		system-test \
+		check_rtime \
+		component-hook
+
+$(foreach target, $(TARGETS), $(eval $(target): TARGET = $(target)))
 
 .DEFAULT_GOAL :=	publish
 
-download setup unpack patch prep build install publish validate clean clobber \
-test system-test component-hook check_rtime: $(SUBDIRS)
+$(TARGETS): $(SUBDIRS)
 
-$(SUBDIRS):	FORCE
+$(SUBDIRS):
 	@+echo "$(TARGET) $@" ; $(MAKE) -C $@ $(TARGET)
 
-FORCE:
-.PHONY: FORCE
+.PHONY: $(SUBDIRS)
