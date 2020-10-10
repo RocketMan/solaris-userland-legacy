@@ -34,7 +34,7 @@ COMPONENT_PROJECT_URL=	http://www.postfix.org
 COMPONENT_ARCHIVE_HASH=	\
     sha256:d06849418d119d09366997b2b481bb23f737629769b4e4a52da42fb3ad8b0576
 COMPONENT_ARCHIVE_URL=	https://archive.mgm51.com/mirrors/$(COMPONENT_NAME)-source/official/$(COMPONENT_ARCHIVE)
-COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
+#COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
 COMPONENT_ANITYA_ID=	3693
 
 TPNO=			36084
@@ -61,7 +61,8 @@ CCARGS +=	-DHAS_LDAP -I/usr/include/openldap
 AUXLIBS +=	-lldap_r-2.4 -llber-2.4
 # Cyrus SASL
 CCARGS +=	-DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I/usr/include/sasl
-AUXLIBS +=	-lsasl2
+$(SOLARIS_11_4_5_ONLY)AUXLIBS +=	-lsasl2
+$(SOLARIS_11_3_ONLY)AUXLIBS +=	-lsasl
 
 # Enable adiheap and adistack security extensions
 ADIHEAP_MODE =	$(ADIHEAP_ENABLE)
@@ -90,6 +91,7 @@ REQUIRED_PACKAGES += library/security/openssl
 REQUIRED_PACKAGES += library/security/openssl/openssl-fips-140
 REQUIRED_PACKAGES += shell/ksh93
 REQUIRED_PACKAGES += system/core-os
+REQUIRED_PACKAGES += system/library/security/libsasl
 REQUIRED_PACKAGES += system/library/security/libsasl2
 REQUIRED_PACKAGES += system/network
 REQUIRED_PACKAGES += system/network/ldap/openldap
