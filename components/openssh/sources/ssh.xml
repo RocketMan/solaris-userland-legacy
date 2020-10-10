@@ -73,7 +73,7 @@ Copyright (c) 2004, 2019, Oracle and/or its affiliates. All rights reserved.
 	</dependent>
 
 	<method_context>
-		<method_credential user='root' clearance='ADMIN_HIGH' />
+		<method_credential user='root' />
 	</method_context>
 
 	<exec_method
