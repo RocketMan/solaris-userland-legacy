@@ -1,3 +1,4 @@
+#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -17,26 +18,17 @@
 #
 # CDDL HEADER END
 #
+
 #
 # Copyright (c) 2020, Oracle and/or its affiliates.
 #
 
-# During the gnome 3.18 initial testing phase, we had decided that
-# we shouldn't be delivering this file - 25598692
-<transform file \
-    path=usr/share/gnome-session/sessions/gnome-initial-setup.session -> drop>
-
-# Set perms and get rid of pkglint warning
-<transform file path=usr/lib/gnome-initial-setup-copy-worker -> \
-    set mode 0555>
-<transform file path=usr/lib/gnome-initial-setup-copy-worker -> \
-    set pkg.linted.userland.action001.2 true>
-
-<transform file path=usr/lib/gnome-initial-setup -> \
-    set mode 0555>
-<transform file path=usr/lib/gnome-initial-setup -> \
-    set pkg.linted.userland.action001.2 true>
-
-<transform file path=usr/lib/gnome-welcome-tour -> \
-    set mode 0555>
-
+link path=usr/share/man/man3/libpng.3 target=libpng16.3  mediator=libpng \
+    mediator-version=1.6 pkg.linted.pkglint.dupaction010.1=true
+file usr/share/man/man3/libpng.3 path=usr/share/man/man3/libpng16.3
+link path=usr/share/man/man3/libpngpf.3 target=libpngpf16.3 mediator=libpng \
+    mediator-version=1.6 pkg.linted.pkglint.dupaction010.1=true
+file usr/share/man/man3/libpngpf.3 path=usr/share/man/man3/libpngpf16.3
+link path=usr/share/man/man5/png.5 target=png16.5 mediator=libpng \
+    mediator-version=1.6 pkg.linted.pkglint.dupaction010.1=true
+file usr/share/man/man5/png.5 path=usr/share/man/man5/png16.5
