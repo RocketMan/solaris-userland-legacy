@@ -1,0 +1,63 @@
+--- rustc-1.44.1-src/library/std/build.rs	2020-08-01 18:53:31.114759517 +0000
++++ rustc-1.44.1-src/library/std/build.rs	2020-08-01 18:54:35.355354285 +0000
+@@ -25,6 +25,7 @@
+         println!("cargo:rustc-link-lib=posix4");
+         println!("cargo:rustc-link-lib=pthread");
+         println!("cargo:rustc-link-lib=resolv");
++        println!("cargo:rustc-link-lib=nsl");
+     } else if target.contains("illumos") {
+         println!("cargo:rustc-link-lib=socket");
+         println!("cargo:rustc-link-lib=posix4");
+--- rustc-1.44.1-src/src/librustc_target/spec/solaris_base.rs	2020-06-17 21:17:05.000000000 +0000
++++ rustc-1.44.1-src/src/librustc_target/spec/solaris_base.rs	2020-08-01 18:57:44.327809206 +0000
+@@ -1,6 +1,23 @@
+-use crate::spec::TargetOptions;
++use crate::spec::{LinkArgs, LinkerFlavor, TargetOptions};
+ 
+ pub fn opts() -> TargetOptions {
++    let mut late_link_args = LinkArgs::new();
++    late_link_args.insert(
++        LinkerFlavor::Gcc,
++        vec![
++            // LLVM will insert calls to the stack protector functions
++            // "__stack_chk_fail" and "__stack_chk_guard" into code in native
++            // object files.  Some platforms include these symbols directly in
++            // libc, but at least historically these have been provided in
++            // libssp.so on illumos and Solaris systems.
++            "-lssp".to_string(),
++
++            // Disable .SUNW_ldynsym sections on Solaris,
++            // as llvm cannot read the linked SHT_SYMTAB_SHNDX
++            "-Wl,-znoldynsym".to_string(),
++        ],
++    );
++
+     TargetOptions {
+         dynamic_linking: true,
+         executables: true,
+@@ -9,6 +26,8 @@
+         is_like_solaris: true,
+         limit_rdylib_exports: false, // Linker doesn't support this
+         eh_frame_header: false,
++        eliminate_frame_pointer: false,
++        late_link_args,
+ 
+         ..Default::default()
+     }
+--- a/src/bootstrap/builder.rs	2020-06-17 21:17:04.000000000 +0000
++++ b/src/bootstrap/builder.rs	2020-08-12 18:42:32.832679461 +0000
+@@ -961,9 +961,13 @@
+                 None
+             };
+             if let Some(rpath) = rpath {
+-                rustflags.arg(&format!("-Clink-args={}", rpath));
++                rustflags.arg(&format!("-Clink-arg={}", rpath));
+             }
+         }
++
++        // Disable .SUNW_ldynsym sections on Solaris,
++        // as llvm cannot read the linked SHT_SYMTAB_SHNDX
++        rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
+ 
+         // FIXME: Don't use LLD if we're compiling libtest, since it fails to link it.
+         // See https://github.com/rust-lang/rust/issues/68647.

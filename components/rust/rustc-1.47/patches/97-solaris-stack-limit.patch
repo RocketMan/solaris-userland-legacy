@@ -1,0 +1,30 @@
+--- a/vendor/stacker/src/lib.rs	2020-08-14 14:49:47.142682493 +0000
++++ b/vendor/stacker/src/lib.rs	2020-08-14 14:58:30.363074986 +0000
+@@ -355,7 +355,7 @@
+             );
+             Some(mi.assume_init().AllocationBase as usize + get_thread_stack_guarantee() + 0x1000)
+         }
+-    } else if #[cfg(any(target_os = "linux", target_os="solaris", target_os = "netbsd"))] {
++    } else if #[cfg(any(target_os = "linux", target_os = "netbsd"))] {
+         unsafe fn guess_os_stack_limit() -> Option<usize> {
+             let mut attr = std::mem::MaybeUninit::<libc::pthread_attr_t>::uninit();
+             assert_eq!(libc::pthread_attr_init(attr.as_mut_ptr()), 0);
+@@ -393,6 +393,12 @@
+             Some(libc::pthread_get_stackaddr_np(libc::pthread_self()) as usize -
+                 libc::pthread_get_stacksize_np(libc::pthread_self()) as usize)
+         }
++    } else if #[cfg(target_os = "solaris")] {
++        unsafe fn guess_os_stack_limit() -> Option<usize> {
++            let mut current_stack: libc::stack_t = std::mem::zeroed();
++            assert_eq!(libc::stack_getbounds(&mut current_stack), 0);
++            Some(current_stack.ss_sp as usize)
++        }
+     } else {
+         // fallback for other platforms is to always increase the stack if we're on
+         // the root stack. After we increased the stack once, we know the new stack
+--- rustc-1.47.0-src/vendor/stacker/.cargo-checksum.json	2020-10-07 10:33:32.000000000 +0000
++++ rustc-1.47.0-src/vendor/stacker/.cargo-checksum.json	2020-10-14 12:46:50.813186541 +0000
+@@ -1 +1 @@
+-{"files":{"Cargo.toml":"c4f854fdc0b79eddc1481a50a028cdfca71ab4ed1362a83990927392ab10950d","Cross.toml":"b5f300c31f4522caba733582f4957f693a4017f4728a69805390b63ad69eff67","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"e938c263b76ff66671013f0f77755aa289e807d91b7d39471ba92dea6782929e","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/lib.rs":"37ef9666d048191eeca23d8f7d99cf912b953cc489bf860107aec306b95b2d99","tests/simple.rs":"18fbb3e891ab486c58aa011698f755945818db8799c564f2fa8cfe5ac8d8f0dc","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"a92bc346006ae78c539d6ab2cf1a1532bc657b8339c464877a990ec82073c66f"}
+\ No newline at end of file
++{"files":{"Cargo.toml":"c4f854fdc0b79eddc1481a50a028cdfca71ab4ed1362a83990927392ab10950d","Cross.toml":"b5f300c31f4522caba733582f4957f693a4017f4728a69805390b63ad69eff67","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"e938c263b76ff66671013f0f77755aa289e807d91b7d39471ba92dea6782929e","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/lib.rs":"6dfbf59b64a02ff87b338f6c60502537eaf7006997abc233a20612bd45621907","tests/simple.rs":"18fbb3e891ab486c58aa011698f755945818db8799c564f2fa8cfe5ac8d8f0dc","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"a92bc346006ae78c539d6ab2cf1a1532bc657b8339c464877a990ec82073c66f"}
