@@ -72,6 +72,7 @@ include $(WS_MAKE_RULES)/common.mk
 # This causes the default compilation argument to be wrong and isn't necessary.
 studio_MT=
 
+CFLAGS += -I/usr/include/gssapi
 CPPFLAGS += -I$(USRINCDIR)/openldap
 LDFLAGS += $(CC_BITS)  -lscf -lresolv
 
