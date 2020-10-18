@@ -20,33 +20,10 @@
 #
 
 #
-# Copyright (c) 2018, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2020, Oracle and/or its affiliates.
 #
 
-BUILD_BITS =            64_and_32
-include ../../../../make-rules/shared-macros.mk
-
-COMPONENT_NAME=		libSM
-COMPONENT_VERSION=	1.2.3
-COMPONENT_ARCHIVE_HASH= \
-	sha256:2d264499dcb05f56438dee12a1b4b71d76736ce7ba7aa6efbf15ebb113769cbb
-COMPONENT_BUGDB=        x11/libraries
-COMPONENT_ANITYA_ID=	1726
-TPNO=			49563
-
-TEST_TARGET = $(NO_TESTS)
-
-FIX_PC_FILES=sm.pc.in
-
-include $(WS_MAKE_RULES)/x11-component.mk
-
-CONFIGURE_OPTIONS += --enable-unix-transport
-CONFIGURE_OPTIONS += --enable-tcp-transport
-CONFIGURE_OPTIONS += --enable-IPv6
-CONFIGURE_OPTIONS += --with-libuuid
-
-LD_OPTIONS += -M$(COMPONENT_DIR)/mapfile
-
-REQUIRED_PACKAGES += x11/header/x11-protocols
-REQUIRED_PACKAGES += x11/library/libice
-REQUIRED_PACKAGES += x11/library/xtrans
+<transform dir file link hardlink -> edit path "/5.2\d/" "/$!(PERLVER)/">
+<transform dir file link hardlink -> edit path "\$!\((.*)\)" "$(\1)">
+<transform dir file link hardlink -> edit path "$(PERL_ARCH)" "$!(PERL_ARCH)">
+<transform dir file link hardlink -> edit path "\$!\((.*)\)" "$(\1)">
