@@ -64,7 +64,7 @@ typedef struct sftpproto {
 		SFTP_TRANSFER_DONE(&proto); \
 	} \
 
-#include <sftp_provider.h>
+#include "sftp_provider.h"
 
 #ifdef	__cplusplus
 }
