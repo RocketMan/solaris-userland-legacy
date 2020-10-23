@@ -29,3 +29,4 @@
 # python module package(s)
 <transform file link path=usr/lib/python2\.7/ -> set pkg.type python27>
 <transform file link path=usr/lib/python3\.7/ -> set pkg.type python37>
+<transform file link path=usr/lib/python3\.9/ -> set pkg.type python39>
