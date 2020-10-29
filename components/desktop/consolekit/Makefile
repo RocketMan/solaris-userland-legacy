@@ -18,10 +18,11 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2016, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2016, 2020, Oracle and/or its affiliates.
 #
 
 BUILD_BITS=		64_and_32
+COMPILER=		gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		ConsoleKit
@@ -37,6 +38,8 @@ COMPONENT_ANITYA_ID=	340
 TPNO=			7882
 
 TEST_TARGET = $(NO_TESTS)
+
+SMF_MANIFESTS= $(COMPONENT_DIR)/files/consolekit.xml
 
 include $(WS_MAKE_RULES)/common.mk
 
