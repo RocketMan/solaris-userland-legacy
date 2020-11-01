@@ -37,6 +37,8 @@ COMPONENT_ANITYA_ID=	10896
 
 TPNO=			61162
 
+MANIFEST_COMPARE=/usr/bin/true
+
 include $(WS_MAKE_RULES)/gnome-component.mk
 
 # Need to regenerate configure after stack-protector.patch edits configure.ac
@@ -44,6 +46,9 @@ COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fiv);
 
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
+
+# Development files for libuuid (for 11.3)
+PKG_CONFIG_PATHS.64 += $(COMPONENT_DIR)/files
 
 # Force use of gnutls-3 pkgconfig during 2.x->3.x transition
 PKG_CONFIG_PATHS.64 += /usr/lib/$(MACH64)/pkgconfig/gnutls-3
