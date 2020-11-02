@@ -18,10 +18,15 @@
 #
 # CDDL HEADER END
 #
+
 #
-# Copyright (c) 2019, 2020, Oracle and/or its affiliates. 
+# Copyright (c) 2020, Oracle and/or its affiliates.
 #
 
-<transform file path=files/librsvg-2.3lib -> set action.hash %(path)>
-<transform file path=files/librsvg-2.3lib -> \
-    set path usr/share/man/man3lib/librsvg-2.3lib>
+# remove .py suffix from executable files and drop unnecessary links
+<transform file path=usr/bin/.* -> set action.hash %(path)>
+<transform file path=usr/bin/.* -> edit path .py$ "">
+<transform link path=usr/bin/.* -> drop>
+
+# optional trans python package is not available
+<transform file path=usr/bin/asciidoc -> set pkg.depend.bypass-generate .*trans.*>
