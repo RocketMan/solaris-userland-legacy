@@ -30,14 +30,14 @@ COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libgweather
-COMPONENT_VERSION=	3.34.0
+COMPONENT_VERSION=	3.36.1
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/LibGWeather
 COMPONENT_ARCHIVE_HASH=	\
-	sha256:02245395d639d9749fe2d19b7e66b64a152b9509ab0e5aad92514538b9c6f1b9
+	sha256:de2709f0ee233b20116d5fa9861d406071798c4aa37830ca25f5ef2c0083e450
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	13147
 
-TPNO=			54685
+TPNO=			62675
 BUILD_STYLE=		meson
 
 TEST_TARGET= $(NO_TESTS)
@@ -47,6 +47,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 CPPFLAGS += -std=gnu99 -D_XOPEN_SOURCE=700 -D__EXTENSIONS__ -D_XPG6
 
 CONFIGURE_OPTIONS += -Dzoneinfo_dir=/usr/share/lib/zoneinfo
+CONFIGURE_OPTIONS.32 += -Dintrospection=false
 
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"

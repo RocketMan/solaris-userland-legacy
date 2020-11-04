@@ -1,0 +1,68 @@
+--- libgweather-3.36.1/meson_options.txt	2020-06-19 15:50:21.600783800 +0000
++++ libgweather-3.36.1/meson_options.txt	2020-11-04 18:39:55.951672762 +0000
+@@ -8,3 +8,6 @@
+        description: 'Install vala bindings')
+ option('gtk_doc', type: 'boolean', value: false,
+        description: 'Whether to generate the API reference')
++option('introspection',
++       type: 'boolean', value: true,
++       description: 'Generate introspection data (requires gobject-introspection)')
+--- libgweather-3.36.1/meson.build	2020-06-19 15:50:21.600783800 +0000
++++ libgweather-3.36.1/meson.build	2020-11-04 18:51:42.257259344 +0000
+@@ -43,6 +43,7 @@
+ gtk_req_version = '>= 3.13.5'
+ libsoup_req_version = '>= 2.44.0'
+ libxml_req_version = '>= 2.6.0'
++introspection_req = '>= 1.39.0'
+ 
+ c_compiler = meson.get_compiler('c')
+ gtk_dep = dependency('gtk+-3.0', version: gtk_req_version)
+@@ -113,6 +114,12 @@
+   enable_vala = enable_vala != 'false'
+ endif
+ 
++introspection_dep = dependency('gobject-introspection-1.0', version: introspection_req, required: false)
++generate_gir = get_option('introspection')
++if generate_gir and not introspection_dep.found()
++  generate_gir = false
++endif
++
+ root_inc = include_directories('.')
+ 
+ subdir('libgweather')
+--- libgweather-3.36.1/libgweather/meson.build	2020-06-19 15:50:21.598784000 +0000
++++ libgweather-3.36.1/libgweather/meson.build	2020-11-04 18:38:28.200362238 +0000
+@@ -66,6 +66,11 @@
+   install: true,
+ )
+ 
++libgweather_dep_sources = [
++  gweather_enum_types[1]
++]
++
++if generate_gir == true
+ gweather_gir = gnome.generate_gir(lib_libgweather,
+   sources: introspection_sources,
+   dependencies: deps_libgweather,
+@@ -83,14 +88,19 @@
+   install: true,
+ )
+ 
++libgweather_dep_sources += [
++  gweather_gir,
++]
++endif
++
+ libgweather_dep = declare_dependency(
+-  sources: [gweather_enum_types[1], gweather_gir],
++  sources: libgweather_dep_sources,
+   dependencies: deps_libgweather,
+   link_with: lib_libgweather,
+   include_directories: root_inc,
+ )
+ 
+-if enable_vala
++if enable_vala and generate_gir
+   gnome.generate_vapi('gweather-3.0',
+     sources: gweather_gir[0],
+     packages: ['gobject-2.0', 'gtk+-3.0'],
