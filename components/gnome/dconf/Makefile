@@ -42,7 +42,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
-CONFIGURE_OPTIONS += -Dgtk_doc=true
+CONFIGURE_OPTIONS += -Dgtk_doc=false
 
 # get rid of the timestamps from the test results
 COMPONENT_TEST_TRANSFORMS += '-e "s/      [0-9].[0-9][0-9]s//" '

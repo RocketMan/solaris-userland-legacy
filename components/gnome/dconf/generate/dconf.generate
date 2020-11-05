@@ -30,7 +30,28 @@
 <transform file path=usr/lib/dconf-service -> set pkg.linted.userland.action001.2 true>
 <transform file path=usr/bin/dconf -> set pkg.linted.userland.action001.2 true>
 
-
-
+file path=usr/share/gtk-doc/html/dconf/DConfClient.html
+file path=usr/share/gtk-doc/html/dconf/annotation-glossary.html
+file path=usr/share/gtk-doc/html/dconf/api-index-0.16.html
+file path=usr/share/gtk-doc/html/dconf/api-index-0.18.html
+file path=usr/share/gtk-doc/html/dconf/api-index-0.20.html
+file path=usr/share/gtk-doc/html/dconf/api-index-0.26.html
+file path=usr/share/gtk-doc/html/dconf/api-index-full.html
+file path=usr/share/gtk-doc/html/dconf/ch01.html
+file path=usr/share/gtk-doc/html/dconf/dconf-DConfChangeset.html
+file path=usr/share/gtk-doc/html/dconf/dconf-DConfError.html
+file path=usr/share/gtk-doc/html/dconf/dconf-dconf-Paths.html
+file path=usr/share/gtk-doc/html/dconf/dconf-overview.html
+file path=usr/share/gtk-doc/html/dconf/dconf-service.html
+file path=usr/share/gtk-doc/html/dconf/dconf-tool.html
+file path=usr/share/gtk-doc/html/dconf/dconf.devhelp2
+file path=usr/share/gtk-doc/html/dconf/home.png
+file path=usr/share/gtk-doc/html/dconf/index.html
+file path=usr/share/gtk-doc/html/dconf/left.png
+file path=usr/share/gtk-doc/html/dconf/object-tree.html
+file path=usr/share/gtk-doc/html/dconf/programs.html
+file path=usr/share/gtk-doc/html/dconf/right.png
+file path=usr/share/gtk-doc/html/dconf/style.css
+file path=usr/share/gtk-doc/html/dconf/up.png
 
 
