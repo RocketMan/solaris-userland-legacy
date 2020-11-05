@@ -653,7 +653,7 @@ $(BUILD_DIR_32) $(BUILD_DIR_64):
 BUILD_TOOLS ?=	/opt
 
 SPRO_ROOT ?=	$(BUILD_TOOLS)
-SPRO_VROOT ?=	$(SPRO_ROOT)/developerstudio12.6
+SPRO_VROOT ?=	$(SPRO_ROOT)/solarisstudio12.4
 
 PARFAIT_VER ?=	parfait-tools-2.3.0
 PARFAIT_ROOT =	$(BUILD_TOOLS)/parfait
