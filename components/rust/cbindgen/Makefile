@@ -28,17 +28,17 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	cbindgen
-COMPONENT_VERSION =	0.14.4
+COMPONENT_VERSION =	0.15.0
 COMPONENT_PROJECT_URL =	https://github.com/eqrion/cbindgen
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:02f84cb7b729fb840d9d1c9627b1fdb5a746266d395244ab5f206d4cff4f2573
+    sha256:9e2756a292a3b1182b8f741d6bb9e5a8b8a8dc2eacfb187c7db649966452798d
 COMPONENT_ARCHIVE_URL =	https://github.com/eqrion/cbindgen/archive/v$(COMPONENT_VERSION).tar.gz
 
 # hash for vendored sources
 COMPONENT_ARCHIVE_HASH_crates = \
-    sha256:c56fa0c1b98fa95033a05c58159cd59a7a4cc1b5733be7532221ad7c2cd43104
+    sha256:2e1362128c7f66e333d7c42edf411e60c4bba7fcfb398bb121bdd3da8e952d93
 
 COMPONENT_BUGDB =	utility/rust
 COMPONENT_ANITYA_ID =	16690
