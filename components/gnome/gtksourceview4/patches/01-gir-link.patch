@@ -1,0 +1,11 @@
+--- gtksourceview-4.4.0/gtksourceview/meson.build	2019-09-10 01:25:45.000000000 +0000
++++ gtksourceview-4.4.0/gtksourceview/meson.build	2020-11-08 17:27:09.278286414 +0000
+@@ -282,7 +282,7 @@
+         install_dir_gir: girdir,
+     install_dir_typelib: typelibdir,
+              extra_args: [ '--c-include=gtksourceview/gtksource.h',
+-	                   '--warn-all' ],
++	                   '--warn-all', '-lssp' ],
+   )
+ 
+   gtksource_dep_sources += [
