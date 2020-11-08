@@ -29,22 +29,26 @@ COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gnome-calculator
-COMPONENT_VERSION=	3.24.0
+COMPONENT_VERSION=	3.34.1
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Apps/Calculator
 COMPONENT_ARCHIVE_HASH= \
-        sha256:44758ac719edd20067381073de3c643f842308f26da039412b1978a415202d10
+        sha256:4d5348c2fbf01d040a2cb5e84de812c503911e1ea498a83e7eefff52c4417051
 COMPONENT_BUGDB=        gnome/applications
 COMPONENT_ANITYA_ID=	13126
 
 TPNO=			36159
+BUILD_STYLE=		meson
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
-CONFIGURE_OPTIONS += --disable-static
-CONFIGURE_OPTIONS += --enable-shared
-
-# Required due to patches.
-COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fiv);
+CONFIGURE_DEFAULT_DIRS=	no
+CONFIGURE_OPTIONS += --bindir="$(CONFIGURE_BINDIR.$(BITS))"
+CONFIGURE_OPTIONS += --sbindir="$(CONFIGURE_SBINDIR.$(BITS))"
+CONFIGURE_OPTIONS += --libdir="$(CONFIGURE_LIBDIR.$(BITS))"
+CONFIGURE_OPTIONS += --libexecdir="$(CONFIGURE_LIBDIR.$(BITS))"
+CONFIGURE_OPTIONS += --localstatedir="$(VARDIR)"
+CONFIGURE_OPTIONS += --mandir="$(CONFIGURE_MANDIR)"
+CONFIGURE_OPTIONS += --sysconfdir="$(CONFIGURE_ETCDIR.$(BITS))"
 
 # Assumes GNU msgfmt in PATH.
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
@@ -66,7 +70,8 @@ REQUIRED_PACKAGES += developer/vala
 REQUIRED_PACKAGES += gnome/gsettings-desktop-schemas
 REQUIRED_PACKAGES += library/desktop/atk
 REQUIRED_PACKAGES += library/desktop/gtk3
-REQUIRED_PACKAGES += library/desktop/gtksourceview3
+REQUIRED_PACKAGES += library/desktop/gtksourceview4
+REQUIRED_PACKAGES += library/desktop/libgee
 REQUIRED_PACKAGES += library/desktop/pango
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/gmp

@@ -1,5 +1,5 @@
---- a/data/buttons-programming.ui	2018-09-06 09:52:30.439296707 +0000
-+++ b/data/buttons-programming.ui	2018-09-06 10:30:40.863711617 +0000
+--- a/src/buttons-programming.ui	2018-09-06 09:52:30.439296707 +0000
++++ b/src/buttons-programming.ui	2018-09-06 10:30:40.863711617 +0000
 @@ -1384,19 +1384,16 @@
            </packing>
          </child>
@@ -25,15 +25,6 @@
            </object>
            <packing>
              <property name="left_attach">0</property>
-@@ -1482,7 +1479,7 @@
-             <property name="tooltip_text" translatable="yes">Clear Display [Escape]</property>
-             <property name="action_name">cal.clear</property>
-             <child>
--              <object class="GtkImage" id="image1">
-+              <object class="GtkImage" id="image2">
-                 <property name="visible">True</property>
-                 <property name="icon-name">edit-clear-symbolic</property>
-               </object>
 @@ -1494,15 +1491,16 @@
            </packing>
          </child>
