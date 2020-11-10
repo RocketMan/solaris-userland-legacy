@@ -20,18 +20,18 @@
 # CDDL HEADER END
 #
 #
-# Copyright (c) 2009, 2011, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2009, 2020, Oracle and/or its affiliates.
 #
 
 . /lib/svc/share/smf_include.sh
 
 # This script is being used for two purposes: as part of an SMF
-# start method, and as a snort(1M) application.
+# start method, and as a snort(8) application.
 #
 
 case $1 in 
 'start')
-	pfexec /usr/bin/snort -d -D
+	pfexec /usr/bin/snort -d -D -c /etc/snort/snort.conf
 	;;
 
 *)
