@@ -86,7 +86,7 @@ CMAKE_OPTIONS.32 += -DCC_BITS=$(CC_BITS)
 
 # for the tests
 unexport SHELLOPTS
-COMPONENT_PRE_CONFIGURE_ACTION += ($(CLONEY) $(SOURCE_DIR) $(@D));
+
 #
 # to locate dbus-daemon
 # NOTE: desktop must be running -> run
