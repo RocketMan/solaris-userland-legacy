@@ -1,0 +1,11 @@
+--- eog-3.38.0/src/eog-application.c~	2020-09-12 18:51:49.356675100 +0000
++++ eog-3.38.0/src/eog-application.c	2020-11-19 19:08:24.076604845 +0000
+@@ -311,7 +311,7 @@
+ 
+ 	settings = gtk_settings_get_default ();
+ 	g_object_set (G_OBJECT (settings),
+-	              "gtk-application-prefer-dark-theme", TRUE,
++	              "gtk-application-prefer-dark-theme", FALSE,
+ 	              NULL);
+ 
+ 	eog_application_init_app_menu (app);
