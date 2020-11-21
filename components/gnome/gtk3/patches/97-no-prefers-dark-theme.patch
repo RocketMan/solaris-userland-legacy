@@ -1,0 +1,33 @@
+It's fine for applications to hint that they want a dark theme, but there
+needs to be a way for users to opt-out.
+
+As there is no way for the user to opt-out, and as mixed-dark and
+normal themed windows in the Nimbus theme look out of place, we're
+ignorning the application-supplied hint.
+
+If the user wants, he can always choose the dark theme.
+
+--- a/gtk/gtksettings.c	2019-06-05 18:41:02.000000000 +0000
++++ b/gtk/gtksettings.c	2020-11-21 16:57:58.777477542 +0000
+@@ -3256,8 +3256,10 @@
+                 "gtk-application-prefer-dark-theme", &prefer_dark,
+                 NULL);
+ 
++#if defined(WANT_DARK_THEME_HINT)
+   if (prefer_dark)
+     *theme_variant = g_strdup ("dark");
++#endif
+ 
+   if (*theme_name && **theme_name)
+     return;
+--- a/gtk/gtkwindow.c	2019-09-03 19:53:07.000000000 +0000
++++ b/gtk/gtkwindow.c	2020-11-21 15:57:24.481465023 +0000
+@@ -11217,7 +11217,7 @@
+ static void
+ gtk_window_set_theme_variant (GtkWindow *window)
+ {
+-#ifdef GDK_WINDOWING_X11
++#if defined(GDK_WINDOWING_X11) && defined(WANT_DARK_THEME_HINT)
+   GdkWindow *gdk_window;
+   gboolean   dark_theme_requested;
+ 
