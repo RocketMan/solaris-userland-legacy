@@ -1,0 +1,19 @@
+While linux read(2) returns 0 to indicate eof, the legacy sun libc
+read(2) can return 0 for a zero-length buffer.  In this case, it is
+effectively a no-op which we ignore.
+
+
+--- vte-0.58.3/src/vte.cc.~2~	2020-11-26 16:14:37.687057779 +0000
++++ vte-0.58.3/src/vte.cc	2020-11-26 16:15:34.055611464 +0000
+@@ -4112,9 +4112,11 @@
+ 					case -1:
+ 						err = errno;
+ 						goto out;
++#if !defined(__sun)
+ 					case 0:
+ 						eof = TRUE;
+ 						goto out;
++#endif
+ 					default:
+ #if 0
+                                                 ret--;
