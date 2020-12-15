@@ -43,6 +43,7 @@ FIX_PC_FILES=xi.pc.in
 include $(WS_MAKE_RULES)/x11-component.mk
 
 CONFIGURE_ENV += LIB_MAN_SUFFIX=3xi
+CONFIGURE_OPTIONS += --with-asciidoc=no
 
 LD_OPTIONS += -M$(COMPONENT_DIR)/mapfile
 
