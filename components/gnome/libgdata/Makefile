@@ -23,7 +23,7 @@
 # Copyright (c) 2015, 2020, Oracle and/or its affiliates.
 #
 
-BUILD_BITS =            64
+BUILD_BITS =            64_and_32
 # All components using gobject-introspection must be built with gcc as
 # gobject-introspection does not produce correct results when using Studio.
 COMPILER=gcc
@@ -39,6 +39,7 @@ COMPONENT_ANITYA_ID=	13145
 
 TPNO=			62899
 BUILD_STYLE=		meson
+MANIFEST_COMPARE=	/usr/bin/true
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
@@ -47,7 +48,9 @@ COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 $(SOLARIS_11_4_5_ONLY)LDFLAGS += -z gnu-version-script-compat
 
 CONFIGURE_OPTIONS += -Dinstalled_tests=true
-CONFIGURE_OPTIONS += -Dgtk_doc=true
+CONFIGURE_OPTIONS += -Dgtk_doc=false
+CONFIGURE_OPTIONS.32 += -Dgoa=disabled
+CONFIGURE_OPTIONS.32 += -Dintrospection=false
 
 COMPONENT_TEST_TRANSFORMS += '-e "s/      [0-9]*.[0-9][0-9]s//" '
 COMPONENT_TEST_TRANSFORMS += \
