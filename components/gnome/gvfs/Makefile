@@ -43,28 +43,16 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 # Assumes GNU xgettext in PATH.
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 
-#CONFIGURE_ENV += SMBCLIENT_CFLAGS=-I/usr/include/samba
-#CONFIGURE_ENV += SMBCLIENT_LIBS=-lsmbclient
+# include samba pkgconfig
+PKG_CONFIG_PATH.64 = /usr/lib/$(MACH64)/pkgconfig:/usr/lib/samba/$(MACH64)/pkgconfig
 
 # Assumes GNU xgettext is first in $PATH.
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 
-#CONFIGURE_OPTIONS += --disable-static
-#CONFIGURE_OPTIONS += --enable-archive
-#CONFIGURE_OPTIONS += --enable-avahi
-#CONFIGURE_OPTIONS += --enable-documentation
-#CONFIGURE_OPTIONS += --enable-goa
-#CONFIGURE_OPTIONS += --disable-gphoto2
-#CONFIGURE_OPTIONS += --enable-gtk
-#CONFIGURE_OPTIONS += --enable-http
-#CONFIGURE_OPTIONS += --enable-keyring
-#CONFIGURE_OPTIONS += --enable-shared
-#CONFIGURE_OPTIONS += --enable-samba
-
 # We build goa only 64-bit in Solaris
 CONFIGURE_OPTIONS.32 += -Dgoa=false
-CONFIGURE_OPTIONS += -Dsmb=false
+CONFIGURE_OPTIONS.32 += -Dsmb=false # samba 64-bit for 11.3
 CONFIGURE_OPTIONS += -Dnfs=false
 # google backend requires goa which is only 64-bit in Solaris
 CONFIGURE_OPTIONS.32 += -Dgoogle=false
@@ -73,7 +61,7 @@ CONFIGURE_OPTIONS += -Ddevel_utils=true
 
 # admin requires libcap
 CONFIGURE_OPTIONS += -Dadmin=false
-CONFIGURE_OPTIONS += -Dbluray=false
+CONFIGURE_OPTIONS.32 += -Dbluray=false # bluray 64-bit for 11.3
 CONFIGURE_OPTIONS += -Dfuse=false
 # Requires linux specific systemd
 CONFIGURE_OPTIONS += -Dlogind=false

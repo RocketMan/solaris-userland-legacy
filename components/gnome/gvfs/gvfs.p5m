@@ -46,7 +46,7 @@ file path=usr/lib/$(MACH64)/gvfs/libgvfscommon.so
 file path=usr/lib/$(MACH64)/gvfs/libgvfsdaemon.so
 file path=usr/lib/gio/modules/libgioremote-volume-monitor.so
 file path=usr/lib/gio/modules/libgvfsdbus.so
-$(SOLARIS_11_4_5_ONLY)file path=usr/lib/gvfs-goa-volume-monitor mode=0555 \
+file path=usr/lib/gvfs-goa-volume-monitor mode=0555 \
     pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfs/libgvfscommon.so
 file path=usr/lib/gvfs/libgvfsdaemon.so
@@ -60,19 +60,21 @@ file path=usr/lib/gvfsd-computer mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-dav mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-dnssd mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-ftp mode=0555 pkg.linted.userland.action001.2=true
-$(SOLARIS_11_4_5_ONLY)file path=usr/lib/gvfsd-google mode=0555 \
-    pkg.linted.userland.action001.2=true
+file path=usr/lib/gvfsd-google mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-http mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-localtest mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-metadata mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-network mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-recent mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-sftp mode=0555 pkg.linted.userland.action001.2=true
+file path=usr/lib/gvfsd-smb mode=0555 pkg.linted.userland.action001.2=true
+file path=usr/lib/gvfsd-smb-browse mode=0555 \
+    pkg.linted.userland.action001.2=true
 file path=usr/lib/gvfsd-trash mode=0555 pkg.linted.userland.action001.2=true
 file path=usr/share/GConf/gsettings/gvfs-dns-sd.convert
 file path=usr/share/GConf/gsettings/gvfs-smb.convert
 file path=usr/share/dbus-1/services/org.gtk.vfs.Daemon.service
-$(SOLARIS_11_4_5_ONLY)file path=usr/share/dbus-1/services/org.gtk.vfs.GoaVolumeMonitor.service
+file path=usr/share/dbus-1/services/org.gtk.vfs.GoaVolumeMonitor.service
 file path=usr/share/dbus-1/services/org.gtk.vfs.Metadata.service
 file path=usr/share/glib-2.0/schemas/org.gnome.system.dns_sd.gschema.xml
 file path=usr/share/glib-2.0/schemas/org.gnome.system.gvfs.enums.xml
@@ -88,7 +90,7 @@ file path=usr/share/gvfs/mounts/dns-sd.mount
 file path=usr/share/gvfs/mounts/ftp.mount
 file path=usr/share/gvfs/mounts/ftpis.mount
 file path=usr/share/gvfs/mounts/ftps.mount
-$(SOLARIS_11_4_5_ONLY)file path=usr/share/gvfs/mounts/google.mount
+file path=usr/share/gvfs/mounts/google.mount
 file path=usr/share/gvfs/mounts/http.mount
 file path=usr/share/gvfs/mounts/localtest.mount
 file path=usr/share/gvfs/mounts/network.mount
@@ -97,7 +99,7 @@ file path=usr/share/gvfs/mounts/sftp.mount
 file path=usr/share/gvfs/mounts/smb-browse.mount
 file path=usr/share/gvfs/mounts/smb.mount
 file path=usr/share/gvfs/mounts/trash.mount
-$(SOLARIS_11_4_5_ONLY)file path=usr/share/gvfs/remote-volume-monitors/goa.monitor
+file path=usr/share/gvfs/remote-volume-monitors/goa.monitor
 file path=usr/share/locale/af/LC_MESSAGES/gvfs.mo
 file path=usr/share/locale/ar/LC_MESSAGES/gvfs.mo
 file path=usr/share/locale/as/LC_MESSAGES/gvfs.mo
