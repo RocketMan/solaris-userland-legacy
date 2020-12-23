@@ -1,0 +1,342 @@
+Solaris 11.3 does not have newlocale/uselocale, so we revert to the
+old way of doing things using setlocale.
+
+
+--- gnome-desktop-3.34.0/libgnome-desktop/gnome-wall-clock.c~	2019-09-10 01:59:50.000000000 +0000
++++ gnome-desktop-3.34.0/libgnome-desktop/gnome-wall-clock.c	2020-12-23 17:25:09.083100067 +0000
+@@ -273,6 +273,13 @@
+  * dcgettext(), the translation is still taken from the LC_MESSAGES
+  * catalogue and not the LC_TIME one.
+  */
++#ifdef __sun
++#define T_(string) (string)
++#ifdef N_
++#undef N_
++#endif
++#define N_(string) (string)
++#else
+ static const char *
+ translate_time_format_string (const char *str)
+ {
+@@ -299,6 +306,7 @@
+ }
+ 
+ #define T_(string) translate_time_format_string (string)
++#endif // __sun
+ 
+ /**
+  * gnome_wall_clock_string_for_datetime:
+--- gnome-desktop-3.34.0/libgnome-desktop/gnome-languages.c~	2019-09-10 01:59:50.000000000 +0000
++++ gnome-desktop-3.34.0/libgnome-desktop/gnome-languages.c	2020-12-23 17:33:28.065216216 +0000
+@@ -286,15 +286,15 @@
+ static gboolean
+ language_name_is_valid (const char *language_name)
+ {
+-        locale_t locale;
++        gboolean  is_valid;
++        int lc_type_id = LC_MESSAGES;
++        g_autofree char *old_locale = NULL;
++
++        old_locale = g_strdup (setlocale (lc_type_id, NULL));
++        is_valid = setlocale (lc_type_id, language_name) != NULL;
++        setlocale (lc_type_id, old_locale);
+ 
+-        locale = newlocale (LC_MESSAGES_MASK, language_name, (locale_t) 0);
+-        if (locale != (locale_t) 0) {
+-                freelocale (locale);
+-                return TRUE;
+-        }
+-
+-        return FALSE;
++        return is_valid;
+ }
+ 
+ static void
+@@ -302,15 +302,13 @@
+                                    char       **pcodeset,
+                                    gboolean    *is_utf8)
+ {
+-        locale_t locale;
+-        locale_t old_locale;
+-        const char *codeset = NULL;
++        g_autofree char *old_locale = NULL;
++        g_autofree char *codeset = NULL;
+ 
+-        locale = newlocale (LC_CTYPE_MASK, language_name, (locale_t) 0);
+-        if (locale == (locale_t) 0)
+-                return;
++        old_locale = g_strdup (setlocale (LC_CTYPE, NULL));
+ 
+-        old_locale = uselocale (locale);
++        if (setlocale (LC_CTYPE, language_name) == NULL)
++                return;
+ 
+         codeset = nl_langinfo (CODESET);
+ 
+@@ -319,13 +317,12 @@
+         }
+ 
+         if (is_utf8 != NULL) {
+-                g_autofree char *normalized_codeset = normalize_codeset (codeset);
++                codeset = normalize_codeset (codeset);
+ 
+-                *is_utf8 = strcmp (normalized_codeset, "UTF-8") == 0;
++                *is_utf8 = strcmp (codeset, "UTF-8") == 0;
+         }
+ 
+-        uselocale (old_locale);
+-        freelocale (locale);
++        setlocale (LC_CTYPE, old_locale);
+ }
+ 
+ /**
+@@ -703,14 +700,11 @@
+         name = NULL;
+         if (language != NULL) {
+                 const char *translated_name;
+-                locale_t loc = 0;
+-                locale_t old_locale = 0;
++                g_autofree char *old_locale = NULL;
+ 
+                 if (locale != NULL) {
+-                        loc = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
+-                        if (loc == (locale_t) 0)
+-                                return NULL;
+-                        old_locale = uselocale (loc);
++                        old_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
++                        setlocale (LC_MESSAGES, locale);
+                 }
+ 
+                 if (is_fallback_language (code)) {
+@@ -723,8 +717,7 @@
+                 }
+ 
+                 if (locale != NULL) {
+-                        uselocale (old_locale);
+-                        freelocale (loc);
++                        setlocale (LC_MESSAGES, old_locale);
+                 }
+         }
+ 
+@@ -761,15 +754,12 @@
+         name = NULL;
+         if (territory != NULL) {
+                 const char *translated_territory;
+-                locale_t loc;
+-                locale_t old_locale;
++                g_autofree char *old_locale = NULL;
+                 g_autofree char *tmp = NULL;
+ 
+                 if (locale != NULL) {
+-                        loc = newlocale (LC_MESSAGES_MASK, locale, (locale_t) 0);
+-                        if (loc == (locale_t) 0)
+-                                return NULL;
+-                        old_locale = uselocale (loc);
++                        old_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
++                        setlocale (LC_MESSAGES, locale);
+                 }
+ 
+                 translated_territory = dgettext ("iso_3166", territory);
+@@ -777,8 +767,7 @@
+                 name = capitalize_utf8_string (tmp);
+ 
+                 if (locale != NULL) {
+-                        uselocale (old_locale);
+-                        freelocale (loc);
++                        setlocale (LC_MESSAGES, old_locale);
+                 }
+         }
+ 
+@@ -1355,17 +1344,13 @@
+ {
+         char *retval;
+         GHashTable *modifiers_map;
+-        locale_t loc;
+-        locale_t old_locale;
++        g_autofree char *old_locale = NULL;
+ 
+         g_return_val_if_fail (modifier != NULL, NULL);
+ 
+         if (translation != NULL) {
+-                loc = newlocale (LC_MESSAGES_MASK, translation, (locale_t) 0);
+-                if (loc == (locale_t) 0) {
+-                        return NULL;
+-                }
+-                old_locale = uselocale (loc);
++                old_locale = g_strdup (setlocale (LC_MESSAGES, NULL));
++                setlocale (LC_MESSAGES, translation);
+         }
+ 
+         /* Modifiers as listed in glibc's SUPPORTED file:
+@@ -1405,8 +1390,7 @@
+         g_hash_table_destroy (modifiers_map);
+ 
+         if (translation != NULL) {
+-                uselocale (old_locale);
+-                freelocale (loc);
++                setlocale (LC_MESSAGES, old_locale);
+         }
+ 
+         return retval;
+--- gnome-desktop-3.34.0/tests/wallclock-reftest.c-	2019-09-10 01:59:50.000000000 +0000
++++ gnome-desktop-3.34.0/tests/wallclock-reftest.c	2020-12-23 17:37:59.127778609 +0000
+@@ -439,20 +439,12 @@
+   GnomeWallClock *clock;
+   GDateTime *datetime;
+   char *str;
+-  locale_t loc, previous_locale;
+ 
+   ui_file = g_file_get_path (file);
+ 
+   locale = get_locale_for_file (ui_file);
+   g_assert (locale);
+-  loc = newlocale (LC_ALL_MASK, locale, (locale_t) 0);
+-  if (loc == (locale_t)0)
+-    {
+-      g_test_skip("locale not found, skipping");
+-      return;
+-    }
+-  previous_locale = uselocale (loc);
+-  g_assert_true (previous_locale != (locale_t) 0);
++  setlocale (LC_ALL, locale);
+ 
+   clock = gnome_wall_clock_new ();
+   datetime = g_date_time_new_local (2014, 5, 28, 23, 59, 59);
+@@ -464,9 +456,6 @@
+   g_date_time_unref (datetime);
+   g_object_unref (clock);
+ 
+-  uselocale (previous_locale);
+-  freelocale (loc);
+-
+   provider = add_extra_css (ui_file, ".css");
+ 
+   ui_image = snapshot_ui_file (ui_file, str);
+--- gnome-desktop-3.34.0/tests/wall-clock.c~	2019-09-10 01:59:50.000000000 +0000
++++ gnome-desktop-3.34.0/tests/wall-clock.c	2020-12-23 17:44:38.720438516 +0000
+@@ -36,10 +36,12 @@
+ {
+ 	GDateTime  *datetime;
+ 	GnomeWallClock *clock;
+-	locale_t locale;
+-	locale_t save_locale;
++	const char *save_locale;
+ 	const char *str;
+ 
++	/* Save current locale */
++	save_locale = setlocale (LC_ALL, NULL);
++
+ 	/* When testing that UTF8 locales don't use double spaces
+ 	   to separate date and time, make sure the date itself
+ 	   doesn't contain double spaces ("Aug  1") */
+@@ -47,9 +49,7 @@
+ 
+ 	/* In the C locale, make sure the time string is formatted with regular
+          * colons */
+-	locale = newlocale (LC_ALL_MASK, "C", (locale_t) 0);
+-	g_assert_true (locale != (locale_t)0);
+-	save_locale = uselocale (locale);
++	setlocale (LC_ALL, "C");
+ 	clock = gnome_wall_clock_new ();
+ 	str = gnome_wall_clock_string_for_datetime (clock,
+ 	                                            datetime,
+@@ -60,12 +60,7 @@
+ 	g_object_unref (clock);
+ 
+ 	/* In a UTF8 locale, we want ratio characters and no colons. */
+-	locale = newlocale (LC_ALL_MASK, "en_US.utf8", locale);
+-	if (locale == (locale_t)0) {
+-		g_test_skip("en_US.utf8 locale not found, skipping");
+-		return;
+-	}
+-	uselocale (locale);
++	setlocale (LC_ALL, "en_US.utf8");
+ 	clock = gnome_wall_clock_new ();
+ 	str = gnome_wall_clock_string_for_datetime (clock,
+ 	                                            datetime,
+@@ -77,12 +72,7 @@
+ 
+ 	/* ... and same thing with an RTL locale: should be formatted with
+          * ratio characters */
+-	locale = newlocale (LC_ALL_MASK, "he_IL.utf8", locale);
+-	if (locale == (locale_t)0) {
+-		g_test_skip("he_IL.utf8 locale not found, skipping");
+-		return;
+-	}
+-	uselocale (locale);
++	setlocale (LC_ALL, "he_IL.utf8");
+ 	clock = gnome_wall_clock_new ();
+ 	str = gnome_wall_clock_string_for_datetime (clock,
+ 	                                            datetime,
+@@ -95,8 +85,8 @@
+ 	g_date_time_unref (datetime);
+ 
+ 	/* Restore previous locale */
+-	uselocale (save_locale);
+-	freelocale (locale);
++	/* Restore previous locale */
++	setlocale (LC_ALL, save_locale);
+ }
+ 
+ static void
+@@ -116,17 +106,13 @@
+ {
+ 	GnomeWallClock *clock;
+ 	GSettings *settings;
+-	locale_t locale;
+-	locale_t save_locale;
++	const char *save_locale;
+ 	const char *str;
+ 
+-	locale = newlocale (LC_ALL_MASK, "en_US.utf8", (locale_t) 0);
+-	if (locale == (locale_t)0) {
+-		g_test_skip("en_US.utf8 locale not found, skipping");
+-		return;
+-	}
+-	save_locale = uselocale (locale);
++	/* Save current locale */
++	save_locale = setlocale (LC_ALL, NULL);
+ 
++	setlocale (LC_ALL, "en_US.utf8");
+ 	settings = g_settings_new ("org.gnome.desktop.interface");
+ 
+ 	/* In 12h format, the string ends with AM or PM */
+@@ -146,8 +132,7 @@
+ 	g_object_unref (settings);
+ 
+ 	/* Restore previous locale */
+-	uselocale (save_locale);
+-	freelocale (locale);
++	setlocale (LC_ALL, save_locale);
+ }
+ 
+ static gboolean
+@@ -199,14 +184,13 @@
+ {
+ 	GnomeWallClock *clock;
+ 	GSettings *settings;
+-	locale_t locale;
+-	locale_t save_locale;
++	const char *save_locale;
+ 	const char *str, *ptr, *s;
+ 
+ 	/* Save current locale */
+-	locale = newlocale (LC_ALL_MASK, "C", (locale_t) 0);
+-	g_assert_true (locale != (locale_t)0);
+-	save_locale = uselocale (locale);
++	save_locale = setlocale (LC_ALL, NULL);
++
++	setlocale(LC_ALL, "C");
+ 	settings = g_settings_new ("org.gnome.desktop.interface");
+ 
+ 	/* Set 24h format, so that the only alphabetical part will be the weekday */
+@@ -242,8 +226,7 @@
+ 	g_object_unref (settings);
+ 
+ 	/* Restore previous locale */
+-	uselocale (save_locale);
+-	freelocale (locale);
++	setlocale (LC_ALL, save_locale);
+ }
+ 
+ int

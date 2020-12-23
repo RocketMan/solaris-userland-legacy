@@ -51,6 +51,8 @@ file path=usr/lib/$(MACH64)/girepository-1.0/GnomeDesktop-3.0.typelib
 file path=usr/lib/$(MACH64)/gnome-rr-debug mode=0555
 link path=usr/lib/$(MACH64)/libgnome-desktop-3.so \
     target=libgnome-desktop-3.so.18
+link path=usr/lib/$(MACH64)/libgnome-desktop-3.so.12 \
+    target=libgnome-desktop-3.so.18
 link path=usr/lib/$(MACH64)/libgnome-desktop-3.so.18 \
     target=libgnome-desktop-3.so.18.0.3
 file path=usr/lib/$(MACH64)/libgnome-desktop-3.so.18.0.3

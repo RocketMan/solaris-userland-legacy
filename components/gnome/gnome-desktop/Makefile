@@ -47,7 +47,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 CONFIGURE_OPTIONS += -Dgnome-distributor=Oracle
 CONFIGURE_OPTIONS += --libexecdir=$(USRLIB.$(BITS))
-LDFLAGS += -z gnu-version-script-compat
+$(SOLARIS_11_4_5_ONLY)LDFLAGS += -z gnu-version-script-compat
 
 # Assumes GNU versions of various utilities in PATH (e.g. msgfmt).
 COMPONENT_BUILD_ENV += PATH=$(GNUBIN):$(PATH)
