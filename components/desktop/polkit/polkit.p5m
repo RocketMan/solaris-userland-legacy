@@ -39,7 +39,7 @@ set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2016/312
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file path=etc/dbus-1/system.d/org.freedesktop.PolicyKit1.conf
-dir  path=etc/polkit-1/rules.d owner=_polkitd mode=700
+dir  path=etc/polkit-1/rules.d owner=polkitd mode=700
 file path=etc/polkit-1/rules.d/50-default.rules
 file path=lib/svc/manifest/system/polkit.xml
 file path=lib/svc/method/svc-polkit
@@ -131,7 +131,7 @@ file path=usr/share/gtk-doc/html/polkit-1/eggdbus-interface-org.freedesktop.Poli
 file path=usr/share/gtk-doc/html/polkit-1/eggdbus-interface-org.freedesktop.PolicyKit1.Authority.html
 file path=usr/share/gtk-doc/html/polkit-1/home.png
 file path=usr/share/gtk-doc/html/polkit-1/index.html
-file path=usr/share/gtk-doc/html/polkit-1/left-insensitive.png
+file path=usr/share/gtk-doc/html/polkit-1/index.sgml
 file path=usr/share/gtk-doc/html/polkit-1/left.png
 file path=usr/share/gtk-doc/html/polkit-1/license.html
 file path=usr/share/gtk-doc/html/polkit-1/manpages.html
@@ -142,6 +142,7 @@ file path=usr/share/gtk-doc/html/polkit-1/pkexec.1.html
 file path=usr/share/gtk-doc/html/polkit-1/pkttyagent.1.html
 file path=usr/share/gtk-doc/html/polkit-1/polit-index.html
 file path=usr/share/gtk-doc/html/polkit-1/polkit-1-PolkitError.html
+file path=usr/share/gtk-doc/html/polkit-1/polkit-1.devhelp
 file path=usr/share/gtk-doc/html/polkit-1/polkit-1.devhelp2
 file path=usr/share/gtk-doc/html/polkit-1/polkit-agents.html
 file path=usr/share/gtk-doc/html/polkit-1/polkit-apps.html
@@ -158,11 +159,9 @@ file path=usr/share/gtk-doc/html/polkit-1/polkitd.8.html
 file path=usr/share/gtk-doc/html/polkit-1/ref-api.html
 file path=usr/share/gtk-doc/html/polkit-1/ref-authentication-agent-api.html
 file path=usr/share/gtk-doc/html/polkit-1/ref-dbus-api.html
-file path=usr/share/gtk-doc/html/polkit-1/right-insensitive.png
 file path=usr/share/gtk-doc/html/polkit-1/right.png
 file path=usr/share/gtk-doc/html/polkit-1/style.css
 file path=usr/share/gtk-doc/html/polkit-1/subjects.html
-file path=usr/share/gtk-doc/html/polkit-1/up-insensitive.png
 file path=usr/share/gtk-doc/html/polkit-1/up.png
 file path=usr/share/locale/cs/LC_MESSAGES/polkit-1.mo
 file path=usr/share/locale/da/LC_MESSAGES/polkit-1.mo
@@ -187,7 +186,7 @@ file path=usr/share/man/man8/polkit.8
 file path=usr/share/man/man8/polkitd.8
 file path=usr/share/polkit-1/actions/org.freedesktop.policykit.examples.pkexec.policy
 file path=usr/share/polkit-1/actions/org.freedesktop.policykit.policy
-dir  path=usr/share/polkit-1/rules.d owner=_polkitd mode=700
-user username=_polkitd ftpuser=false gcos-field="Polkit authorization daemon" \
+dir  path=usr/share/polkit-1/rules.d owner=polkitd mode=700
+user username=polkitd ftpuser=false gcos-field="Polkit authorization daemon" \
     group=daemon home-dir=/ password=NP uid=63
 license COPYING license=LGPLv2+

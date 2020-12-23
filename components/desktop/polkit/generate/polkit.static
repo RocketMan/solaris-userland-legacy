@@ -22,7 +22,7 @@
 #
 
 # Setup perms and owner
-dir  path=usr/share/polkit-1/rules.d owner=_polkitd mode=700
-user username=_polkitd ftpuser=false gcos-field="Polkit authorization daemon" \
+dir  path=usr/share/polkit-1/rules.d owner=polkitd mode=700
+user username=polkitd ftpuser=false gcos-field="Polkit authorization daemon" \
     group=daemon home-dir=/ password=NP uid=63
-dir  path=etc/polkit-1/rules.d owner=_polkitd mode=700
+dir  path=etc/polkit-1/rules.d owner=polkitd mode=700

@@ -45,7 +45,7 @@
         </dependency>
 
         <method_context>
-            <method_credential user='root' clearance='ADMIN_HIGH' />
+            <method_credential user='root' />
         </method_context>
 
         <exec_method timeout_seconds="60" type="method" name="start"
