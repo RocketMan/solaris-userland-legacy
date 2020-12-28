@@ -24,6 +24,8 @@
 #
 
 # Temporary bypass until fix 31914901 is in effect
+<transform file path=.*\.py$ -> add pkg.depend.bypass-generate .*>
+<transform link path=.*/python3\.pc$ -> add pkg.linted.pkglint.dupaction010.3 true>
 <transform link path=.*/libpython3.so$ -> add pkg.linted.pkglint.dupaction010.1 true>
 # Fix a problem with false positive unresolved dependency error.
 <transform file path=usr/lib/python3.9/(cProfile|platform|profile|pdb|trace|smtpd).py -> \
@@ -933,7 +935,6 @@ file path=usr/lib/python3.9/lib-dynload/array.cpython-39.so
 file path=usr/lib/python3.9/lib-dynload/audioop.cpython-39.so
 file path=usr/lib/python3.9/lib-dynload/binascii.cpython-39.so
 file path=usr/lib/python3.9/lib-dynload/cmath.cpython-39.so
-file path=usr/lib/python3.9/lib-dynload/dlpi.cpython-39.so
 file path=usr/lib/python3.9/lib-dynload/fcntl.cpython-39.so
 file path=usr/lib/python3.9/lib-dynload/grp.cpython-39.so
 file path=usr/lib/python3.9/lib-dynload/math.cpython-39.so

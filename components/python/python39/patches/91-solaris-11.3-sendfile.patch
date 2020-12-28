@@ -1,0 +1,16 @@
+sendfile is erroring off in 11.3.  It seems the in and out fd are swapped.
+
+For now, just disabling.
+
+
+--- Python-3.9.0/configure.ac.~2~	2020-12-28 18:43:13.668008127 +0000
++++ Python-3.9.0/configure.ac	2020-12-28 18:52:34.595998307 +0000
+@@ -2824,7 +2824,7 @@
+ 
+ 
+ # checks for libraries
+-AC_CHECK_LIB(sendfile, sendfile)
++#AC_CHECK_LIB(sendfile, sendfile)
+ AC_CHECK_LIB(dl, dlopen)	# Dynamic linking for SunOS/Solaris and SYSV
+ AC_CHECK_LIB(dld, shl_load)	# Dynamic linking for HP-UX
+ 

@@ -1,0 +1,17 @@
+--- Python-3.9.0/Include/unicodeobject.h.~2~	2020-12-28 15:28:45.731859207 +0000
++++ Python-3.9.0/Include/unicodeobject.h	2020-12-28 16:39:07.117335074 +0000
+@@ -98,7 +98,13 @@
+ #endif
+ 
+ #if defined(__sun) && defined(__SVR4)
+-#  include <uchar.h>
++#if !defined(__cplusplus)
++typedef uint16_t char16_t;
++typedef uint32_t char32_t;
++#endif
++inline size_t mbrtoc32 (char32_t *pc32, const char *s, size_t n, mbstate_t *ps) {
++  return mbrtowc ((wchar_t *) pc32, s, n, ps);
++}
+ #  include <langinfo.h>
+ #endif
+ 
