@@ -109,7 +109,7 @@ CONFIGURE_OPTIONS += --with-system-expat
 CONFIGURE_OPTIONS += --with-system-ffi
 CONFIGURE_OPTIONS += --enable-ipv6
 CONFIGURE_OPTIONS += --with-dtrace
-CONFIGURE_OPTIONS += --with-gcc
+CONFIGURE_OPTIONS += --with-gcc="$(CC)"
 CONFIGURE_OPTIONS += --enable-shared
 CONFIGURE_OPTIONS += --without-ensurepip
 #CONFIGURE_OPTIONS += --enable-optimizations
