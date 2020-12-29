@@ -53,6 +53,8 @@ COMPONENT_ARCHIVE_URL_OLD=	$(call pypi_url,OLD)
 TPNO_OLD=		42560
 
 
+PYTHON_VERSIONS = $(PYTHON3_VERSIONS)
+
 # This component is delivered in two different versions.
 # The newer one does no longer support Python 2.7; the older one does
 # but we don't want to fall behind until those are EOLed.
