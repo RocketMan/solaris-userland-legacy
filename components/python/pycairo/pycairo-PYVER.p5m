@@ -37,7 +37,7 @@ set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2014/371
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 #
-file path=usr/lib/python$(PYVER)/vendor-packages/cairo/64/_cairo.so
+$(PYTHON2_ONLY)file path=usr/lib/python$(PYVER)/vendor-packages/cairo/64/_cairo.so
 file path=usr/lib/python$(PYVER)/vendor-packages/cairo/__init__.py
 file path=usr/lib/python$(PYVER)/vendor-packages/cairo/__init__.pyi
 file path=usr/lib/python$(PYVER)/vendor-packages/cairo/_cairo.so

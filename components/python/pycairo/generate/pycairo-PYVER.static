@@ -23,6 +23,7 @@
 # Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
 #
 
+$(PYTHON2_ONLY)file path=usr/lib/python$(PYVER)/vendor-packages/cairo/64/_cairo.so
 $(PYTHON3_ONLY)file path=usr/lib/python$(PYVER)/vendor-packages/cairo/include/py3cairo.h
 $(PYTHON2_ONLY)file path=usr/lib/python$(PYVER)/vendor-packages/cairo/include/pycairo.h
 $(PYTHON3_ONLY)file path=usr/lib/python$(PYVER)/vendor-packages/include/pycairo/py3cairo.h
