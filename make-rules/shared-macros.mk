@@ -668,7 +668,7 @@ export PARFAIT_NATIVEGXX=$(GCC_ROOT)/bin/g++
 ONBLD_ROOT ?=	$(BUILD_TOOLS)/onbld
 ONBLD_BIN ?=	$(ONBLD_ROOT)/bin
 
-GCC_ROOT ?=	/usr/gcc/9
+GCC_ROOT ?=	/usr/gcc/10
 
 CC.studio.32 =	$(SPRO_VROOT)/bin/cc
 CXX.studio.32 =	$(SPRO_VROOT)/bin/CC
@@ -783,7 +783,7 @@ PYTHON_DATA= $(PYTHON_LIB)
 # point at the userland default build python so as not to be influenced
 # by the ips python mediator.
 # In the component's Makefile define PYTHON_SCRIPTS with a list of files
-# to be editted.
+# to be edited.
 
 # Edit the leading #!/usr/bin/python line in python scripts to use the
 # BUILD's $(PYTHON).
@@ -855,7 +855,7 @@ PKG_MACROS +=   PERL_VERSION=$(PERL_VERSION)
 # point at the userland default build perl so as not to be influenced
 # by the ips perl mediator.
 # In the component's Makefile define PERL_SCRIPTS with a list of files
-# to be editted.
+# to be edited.
 
 # Edit the leading #!/usr/bin/perl line in perl scripts to use the
 # BUILD's $(PERL).
