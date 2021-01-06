@@ -26,6 +26,7 @@ PASS: focus
 PASS: gestures
 PASS: grid
 PASS: gtkmenu
+PASS: icontheme
 PASS: keyhash
 PASS: listbox
 PASS: notify
