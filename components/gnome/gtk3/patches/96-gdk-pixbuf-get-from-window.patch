@@ -1,0 +1,11 @@
+--- gtk+-3.24.11/gdk/gdkpixbuf-drawable.c~	2019-01-03 00:44:12.000000000 +0000
++++ gtk+-3.24.11/gdk/gdkpixbuf-drawable.c	2021-01-06 16:26:59.311219976 +0000
+@@ -104,7 +104,8 @@
+    * by external applications.
+    * So be on the safe side and:
+    */
++  cairo_surface_flush (surface);
+   cairo_surface_mark_dirty (surface);
+ 
+   if (cairo_surface_get_content (surface) & CAIRO_CONTENT_ALPHA)
+     copy = cairo_image_surface_create (CAIRO_FORMAT_ARGB32, width * scale, height * scale);
