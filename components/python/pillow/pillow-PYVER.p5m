@@ -39,13 +39,13 @@ set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2018/081
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 #
-file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imaging.so
-file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingcms.so
-file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingft.so
-file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingmath.so
-file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingmorph.so
-file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingtk.so
-file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_webp.so
+#file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imaging.so
+#file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingcms.so
+#file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingft.so
+#file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingmath.so
+#file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingmorph.so
+#file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_imagingtk.so
+#file path=usr/lib/python$(PYVER)/vendor-packages/PIL/64/_webp.so
 file path=usr/lib/python$(PYVER)/vendor-packages/PIL/BdfFontFile.py
 file path=usr/lib/python$(PYVER)/vendor-packages/PIL/BlpImagePlugin.py
 file path=usr/lib/python$(PYVER)/vendor-packages/PIL/BmpImagePlugin.py
