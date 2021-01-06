@@ -26,6 +26,7 @@
 BUILD_BITS =		64_and_32
 COMPILER =		gcc
 include ../../../make-rules/shared-macros.mk
+GCC_ROOT =		/usr/gcc/10
 
 COMPONENT_NAME=		libhandy
 COMPONENT_VERSION=	1.0.2
@@ -38,6 +39,8 @@ COMPONENT_ANITYA_ID=	114486
 TPNO=			63450
 BUILD_STYLE=		meson
 
+MANIFEST_COMPARE=	/usr/bin/true
+
 include $(WS_MAKE_RULES)/gnome-component.mk
 include $(WS_MAKE_RULES)/test-x11.mk
 
@@ -45,7 +48,8 @@ CONFIGURE_OPTIONS.32 += -Dintrospection=disabled
 CONFIGURE_OPTIONS.64 += -Dintrospection=enabled
 CONFIGURE_OPTIONS += -Dexamples=false
 
-CFLAGS += -Wstack-protector -fdata-sections -fstack-protector-all
+$(SOLARIS_11_4_5_ONLY)CFLAGS += -Wstack-protector -fdata-sections -fstack-protector-all
+$(SOLARIS_11_3_ONLY)CFLAGS += -Wno-stack-protector
 
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"

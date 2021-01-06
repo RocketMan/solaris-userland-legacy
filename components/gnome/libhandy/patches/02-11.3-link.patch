@@ -1,0 +1,31 @@
+--- libhandy-1.0.2/meson.build~	2020-11-12 13:41:24.000000000 +0000
++++ libhandy-1.0.2/meson.build	2021-01-06 12:37:48.534007121 +0000
+@@ -83,8 +83,6 @@
+ if get_option('buildtype') != 'plain'
+   if target_system == 'windows'
+     test_c_args += '-fstack-protector'
+-  else
+-    test_c_args += '-fstack-protector-strong'
+   endif
+ endif
+ if get_option('profiling')
+--- libhandy-1.0.2/src/meson.build.~2~	2021-01-06 12:41:50.773149177 +0000
++++ libhandy-1.0.2/src/meson.build	2021-01-06 12:54:01.682766651 +0000
+@@ -183,6 +183,7 @@
+   dependency('gtk+-3.0', version: '>= 3.24.1'),
+   cc.find_library('m', required: false),
+   cc.find_library('rt', required: false),
++  cc.find_library('ssp', required: false),
+ ]
+ 
+ libhandy_c_args = [
+--- libhandy-1.0.2/tests/meson.build~	2020-11-12 13:41:24.000000000 +0000
++++ libhandy-1.0.2/tests/meson.build	2021-01-06 12:57:50.208263217 +0000
+@@ -51,7 +51,6 @@
+                        c_args: test_cflags,
+                     link_args: test_link_args,
+                  dependencies: libhandy_deps + [libhandy_dep],
+-                          pie: true,
+                 )
+   test(test_name, t, env: test_env)
+ endforeach
