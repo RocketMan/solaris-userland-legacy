@@ -1,14 +1,11 @@
---- a/src/screenshot-utils.c	2020-07-08 15:02:37.932465091 +0000
-+++ b/src/screenshot-utils.c	2020-07-08 15:03:31.564705067 +0000
-@@ -721,7 +721,11 @@
+--- gnome-screenshot-3.38.0/src/screenshot-utils.c~	2020-09-10 13:54:34.000000000 +0000
++++ gnome-screenshot-3.38.0/src/screenshot-utils.c	2021-01-06 16:39:41.198108932 +0000
+@@ -150,7 +150,7 @@
    g_autoptr(GError) error = NULL;
  
-   gtk_show_uri (gtk_window_get_screen (parent),
-+#ifdef SOLARIS_11_3
-+		"help:screen-shot",
-+#else
-                 "help:gnome-help/screen-shot-record",
-+#endif
-                 gtk_get_current_event_time (), &error);
+   gtk_show_uri_on_window (parent,
+-                          "help:gnome-help/screen-shot-record",
++                          "help:screen-shot",
+                           gtk_get_current_event_time (),
+                           &error);
  
-   if (error)

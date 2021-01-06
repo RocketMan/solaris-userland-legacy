@@ -28,10 +28,10 @@ COMPILER =		gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gnome-screenshot
-COMPONENT_VERSION=	3.34.0
+COMPONENT_VERSION=	3.38.0
 COMPONENT_PROJECT_URL=	https://en.wikipedia.org/wiki/GNOME_Screenshot
 COMPONENT_ARCHIVE_HASH= \
-	sha256:c80af5f7a2bed4348585eb18dc4e60af5beba4f13d8ccf6ab1ee1d0912c2b1e6
+	sha256:e556d3dd134d91344d2857c066434bfb64f7c85bdec7bc33739366b9bcd29fc0
 COMPONENT_BUGDB=	gnome/applications
 COMPONENT_ANITYA_ID=	13135
 
@@ -41,8 +41,6 @@ BUILD_STYLE=		meson
 TEST_TARGET= $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
-
-$(SOLARIS_11_3_ONLY)CFLAGS += -DSOLARIS_11_3
 
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_BUILD_ENV += PATH=$(GNUBIN):$(PATH)

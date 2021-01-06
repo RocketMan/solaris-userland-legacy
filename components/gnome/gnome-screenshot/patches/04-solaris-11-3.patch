@@ -1,11 +1,12 @@
---- a/meson.build	2019-10-14 16:18:09.000000000 +0000
-+++ b/meson.build	2020-07-08 15:16:48.113409226 +0000
-@@ -8,7 +8,7 @@
-           'c_std=c99',
-         ])
- 
--add_project_arguments([ '-D_POSIX_C_SOURCE=200809L', '-D_XOPEN_SOURCE=700', '-D_DEFAULT_SOURCE' ], language: 'c')
-+add_project_arguments([ '-D_POSIX_C_SOURCE=200809L', '-D_XOPEN_SOURCE=700', '-D_DEFAULT_SOURCE', '-D_XPG6' ], language: 'c')
+--- gnome-screenshot-3.38.0/meson.build~	2020-09-10 13:54:34.000000000 +0000
++++ gnome-screenshot-3.38.0/meson.build	2021-01-06 13:20:44.112318817 +0000
+@@ -14,7 +14,8 @@
+ add_project_arguments([
+   '-D_POSIX_C_SOURCE=200809L',
+   '-D_XOPEN_SOURCE=700',
+-  '-D_DEFAULT_SOURCE'
++  '-D_DEFAULT_SOURCE',
++  '-D_XPG6',
+ ], language: 'c')
  
  cc = meson.get_compiler('c')
- 
