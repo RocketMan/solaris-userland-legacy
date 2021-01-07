@@ -1,3 +1,15 @@
+Successive calls to `gdk_pixbuf_get_from_window` result in:
+
+    Assertion failed: ! _cairo_surface_has_snapshots (surface), file /build/userland/components/desktop/cairo/cairo-1.16.0/src/cairo-surface.c, line 1733, function cairo_surface_mark_dirty_rectangle
+
+This can happen in, among other places, the X11-backend of gnome-snapshot,
+with its new 'back' button feature.
+
+The root cause is that the cairo surface needs to be flushed before it can be
+marked dirty.  See https://bugzilla.mozilla.org/show_bug.cgi?id=795737 for
+related discussion.
+
+
 --- gtk+-3.24.11/gdk/gdkpixbuf-drawable.c~	2019-01-03 00:44:12.000000000 +0000
 +++ gtk+-3.24.11/gdk/gdkpixbuf-drawable.c	2021-01-06 16:26:59.311219976 +0000
 @@ -104,7 +104,8 @@
