@@ -1,0 +1,14 @@
+Use the CC and CXX from the userland build environment rather than
+ones specified by the pkg mediator, as they can well be different.
+
+--- icu4c-68_1/icu/source/runConfigureICU~	2020-10-28 21:21:12.000000000 +0000
++++ icu4c-68_1/icu/source/runConfigureICU	2021-01-07 18:43:07.248681262 +0000
+@@ -165,8 +165,6 @@
+     Solaris/GCC)
+         THE_OS=SOLARIS
+         THE_COMP="the GNU C++"
+-        CC=gcc; export CC
+-        CXX=g++; export CXX
+         RELEASE_CFLAGS=-O1
+         RELEASE_CXXFLAGS=-O2
+         ;;
