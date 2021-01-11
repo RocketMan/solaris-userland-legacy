@@ -28,12 +28,12 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.47.0
+COMPONENT_VERSION =	1.48.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:ec2c81d2d34890486094a6407589be96161e4e301c238332d32c6dbae4f38ea2
+    sha256:ff0a242392a1865d7b2d08eb5ca6c1b3fd0820741d4c13a51a4b2d5d2bb53908
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
 
@@ -54,7 +54,7 @@ include $(WS_MAKE_RULES)/common.mk
 $(SOURCE_DIR_crates)/.patched: PATCH_LEVEL=0
 
 # Everything expects GNU utilities, so make sure those are preferred.
-PATH =			/usr/local/bin:$(COMPONENT_DIR)/epoll:/usr/gnu/bin:/usr/bin
+PATH = $(COMPONENT_DIR)/epoll:/usr/gnu/bin:/usr/bin
 
 # LD_B_DIRECT breaks the build.
 LD_B_DIRECT =
