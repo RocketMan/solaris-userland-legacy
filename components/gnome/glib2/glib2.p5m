@@ -56,6 +56,7 @@ file usr/bin/$(MACH64)/gdbus path=usr/bin/gdbus \
 file usr/bin/$(MACH64)/gdbus-codegen path=usr/bin/gdbus-codegen \
     pkg.depend.bypass-generate=.*
 file path=usr/bin/gio
+file path=usr/bin/gio-launch-desktop
 file path=usr/bin/gio-querymodules
 file usr/bin/$(MACH64)/glib-compile-resources \
     path=usr/bin/glib-compile-resources pkg.linted.userland.action001.2=true
