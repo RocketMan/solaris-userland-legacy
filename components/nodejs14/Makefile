@@ -51,6 +51,10 @@ $(SKIP_TEST_AT_TOP_LEVEL)
 
 include	$(WS_MAKE_RULES)/common.mk
 
+# nodejs build system does not support environment variables
+# CXXFLAGS and friends, so we brute force it
+$(SOLARIS_11_3_ONLY)CXX = $(GCC_ROOT)/bin/g++ -DLEGACY_THREAD_API
+
 VERSION_NUMBERS=	$(subst ., ,$(COMPONENT_VERSION))
 NODE_MAJOR_VERSION=	$(word 1,$(VERSION_NUMBERS))
 

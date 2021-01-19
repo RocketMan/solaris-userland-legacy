@@ -1,0 +1,34 @@
+--- node-14.15.4/deps/v8/src/base/platform/platform-solaris.cc.~2~	2021-01-18 20:07:06.972978009 +0000
++++ node-14.15.4/deps/v8/src/base/platform/platform-solaris.cc	2021-01-19 10:30:35.612878057 +0000
+@@ -12,7 +12,11 @@
+ #include <dlfcn.h>  // dladdr
+ #include <errno.h>
+ #include <ieeefp.h>  // finite()
++#ifdef LEGACY_THREAD_API
++#include <thread.h>
++#else
+ #include <pthread.h>
++#endif
+ #include <semaphore.h>
+ #include <signal.h>  // sigemptyset(), etc
+ #include <sys/mman.h>  // mmap()
+@@ -67,6 +71,11 @@
+ 
+ // static
+ void* Stack::GetStackStart() {
++#ifdef LEGACY_THREAD_API
++  stack_t s;
++  thr_stksegment(&s);
++  return reinterpret_cast<uint8_t*>(s.ss_sp);
++#else
+   pthread_attr_t attr;
+   int error;
+   error = pthread_getattr_np(pthread_self(), &attr);
+@@ -80,6 +89,7 @@
+   }
+   pthread_attr_destroy(&attr);
+   return nullptr;
++#endif
+ }
+ 
+ }  // namespace base
