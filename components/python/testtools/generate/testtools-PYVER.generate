@@ -20,33 +20,12 @@
 #
 
 #
-# Copyright (c) 2014, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
-include ../../../make-rules/shared-macros.mk
+<include ../generate/common.transform>
 
-COMPONENT_NAME=		testtools
-COMPONENT_VERSION=	2.4.0
-COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
-COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
-COMPONENT_ARCHIVE_HASH=	\
-    sha256:f5d6c29ae321e78249b33693b4eb08d2cdedb10c94417cf64eb56685963a8c61
-COMPONENT_ARCHIVE_URL=	$(call pypi_url)
-COMPONENT_PROJECT_URL=	https://github.com/testing-cabal/testtools
-COMPONENT_BUGDB=	python-mod/testtools
-COMPONENT_ANITYA_ID=	4047
+<transform file path=.*/testtools/tests/.* -> drop>
 
-TPNO=			64357
-
-include $(WS_MAKE_RULES)/prep.mk
-include $(WS_MAKE_RULES)/setup.py.mk
-include $(WS_MAKE_RULES)/ips.mk
-
-ASLR_MODE = $(ASLR_NOT_APPLICABLE)
-
-# common targets
-build:		$(BUILD_NO_ARCH)
-
-install:	$(INSTALL_NO_ARCH)
-
-test:		$(NO_TESTS)
+# This file is not Python 3 compatible, so don't deliver its .pyc files
+<transform file path=.*/testtools/_compat2x.py$ -> set pkg.tmp.autopyc false>
