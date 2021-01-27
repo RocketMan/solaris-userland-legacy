@@ -19,7 +19,7 @@
 #
 
 #
-# Copyright (c) 2011, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2011, 2021, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64_and_32
 COMPILER=	gcc
@@ -28,10 +28,10 @@ include ../../make-rules/shared-macros.mk
 PATH=$(dir $(CC)):$(USRBINDIR):$(GNUBIN)
 
 COMPONENT_NAME=         mpfr
-COMPONENT_VERSION=      3.1.5
+COMPONENT_VERSION=      4.1.0
 COMPONENT_PROJECT_URL=	http://www.mpfr.org/
 COMPONENT_ARCHIVE_HASH= \
-    sha256:f4eb5070883aee3fd8b927751ea63ff95aebe24418cde852439ce74c3dd2513c
+    sha256:3127fe813218f3a1f0adf4e8899de23df33b4cf4b4b3831a5314f78e65ffa2d6
 COMPONENT_DOWNLOAD_URL=	https://ftp.gnu.org/gnu/$(COMPONENT_NAME)
 COMPONENT_ARCHIVE_URL=	$(COMPONENT_DOWNLOAD_URL)/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
@@ -39,25 +39,18 @@ COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
 COMPONENT_BUGDB=	library/libmpfr
 COMPONENT_ANITYA_ID=	2019
 
-TPNO=			33316
-TPNO_2.4.2=		17709
+TPNO=			64433
+TPNO_3.1.5=		33316
 
-COMPONENT_VERSION_1=      2.4.2
+COMPONENT_VERSION_1=      3.1.5
 COMPONENT_SRC_1=          $(COMPONENT_NAME)-$(COMPONENT_VERSION_1)
 COMPONENT_ARCHIVE_1=      $(COMPONENT_SRC_1).tar.gz
 COMPONENT_ARCHIVE_HASH_1= \
-    sha256:246d7e184048b1fc48d3696dd302c9774e24e921204221540745e5464022b637
+    sha256:f4eb5070883aee3fd8b927751ea63ff95aebe24418cde852439ce74c3dd2513c
 COMPONENT_ARCHIVE_URL_1=$(COMPONENT_DOWNLOAD_URL)/$(COMPONENT_ARCHIVE_1)
 COMPONENT_SIG_URL_1=	$(COMPONENT_ARCHIVE_URL_1).sig
 
-# Disable the unit tests since the test results are outdated.
-$(SKIP_TEST_AT_TOP_LEVEL)
-
 include $(WS_MAKE_RULES)/common.mk
-
-# When gmp.h is installed in the default path, this can be removed.
-CFLAGS +=	$(shell pkg-config --cflags libgmp)
-LINT_FLAGS +=	$(shell pkg-config --cflags libgmp)
 
 # Macros to configure, build, and install the old version so we can contiune
 # to deliver runtime support for GCC until a newer build of GCC built against
@@ -98,11 +91,13 @@ CONFIGURE_OPTIONS += --disable-static
 CONFIGURE_OPTIONS += --disable-libtool-lock
 CONFIGURE_OPTIONS += --enable-thread-safe
 CONFIGURE_OPTIONS += --enable-tests-timeout=0
-CONFIGURE_OPTIONS += --with-gmp-include=$(shell pkg-config --variable=includedir libgmp)
 CONFIGURE_OPTIONS += --with-mulhigh-size=$(MPFRMULHIGH)
 CONFIGURE_OPTIONS += --with-pic
 
 COMPONENT_PREP_ACTION = (cd $(@D) ; $(AUTORECONF) -fiv)
+
+# We have to unset SHELLOPTS otherwise the build fails.
+unexport SHELLOPTS
 
 # so lint can find the header
 LINT_FLAGS += -I$(SOURCE_DIR)/src
