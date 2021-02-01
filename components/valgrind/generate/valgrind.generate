@@ -20,14 +20,16 @@
 #
 
 #
-# Copyright (c) 2020, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
-<include ../generate/common.transform>
+# valgrind tools should be executable and linter must
+# accept them not being ASLR enabled
+<transform file path=.*/valgrind/.*(x86|amd64)-solaris$ -> set mode 0555>
+<transform file path=.*/valgrind/.*(x86|amd64)-solaris$ -> set pkg.linted.userland.action001.5 true>
 
-# drop files handled in the .static file
-<transform file path=.*/64/_sendmsg.so$ -> drop>
+# -x86-solaris libraries are placed in 64bit directories
+<transform file path=.*-x86-solaris(|.so)$ -> set pkg.linted.userland.action001.2 true>
 
-# change mode of several demo files
-<transform file path=usr/demo/twisted-python\$\(PYVER\)/.*$ -> set mode 0555>
-<transform file path=usr/demo/twisted-python[23]\.[0-9]/.+ -> drop>
+# don't deliver doc files, which were brought in due to initial symlink cloning
+<transform file link path=usr/share/doc/.* -> drop>
