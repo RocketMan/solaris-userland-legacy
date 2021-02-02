@@ -1,0 +1,18 @@
+Workaround for:
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=1450912
+
+GCC libstdc++ should be fixed to support locales on Solaris so that
+std::regex functionality works.
+
+--- a/gtk/gtkmain.c	2020-06-11 03:45:39.000000000 +0000
++++ b/gtk/gtkmain.c	2021-02-02 15:15:10.216584031 +0000
+@@ -635,6 +635,8 @@
+ #else
+       if (!setlocale (LC_ALL, ""))
+         g_warning ("Locale not supported by C library.\n\tUsing the fallback 'C' locale.");
++      else
++        setlocale (LC_COLLATE, "C");
+ #endif
+     }
+ }
