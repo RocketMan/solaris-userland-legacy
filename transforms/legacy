@@ -39,6 +39,7 @@
 #
 
 <transform set name=pkg.fmri value=(pkg:/+)?.*(library/telepathy-logger) -> set mark_legacy true>
+<transform set name=pkg.fmri value=(pkg:/+)?.*(library/libmozjs-38) -> set mark_legacy true>
 
 <transform set name=pkg.fmri value=(pkg:/+)?.*(gnome/config/gconf) -> set mark_legacy true>
 <transform set name=pkg.fmri value=(pkg:/+)?.*(security/compliance/openscap/openscap-gconf-probe) -> set mark_legacy true>
@@ -57,6 +58,8 @@
 # The following packages should not be marked
 <transform set name=pkg.fmri value=(pkg:/+)?.*(developer/build/scons-27) -> delete mark_legacy true>
 
+# httping move to legacy
+<transform set name=pkg.fmri value=(pkg:/+)?.*(diagnostic/httping) -> set mark_legacy true>
 
 # !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 # Older legacy processing bellow this line (before PSARC/2020/053).

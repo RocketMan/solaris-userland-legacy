@@ -1,3 +1,4 @@
+#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -17,10 +18,13 @@
 #
 # CDDL HEADER END
 #
+
 #
-# Copyright (c) 2020, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
-<transform \
-    file path=usr/lib/\$\(MACH64\)/python3.7/vendor-packages/gi/overrides/Gom.py -> drop>
+# EOF text
+file release-notes/libmozjs-38.txt \
+    path=usr/share/doc/release-notes/libmozjs-38.txt mode=0444 \
+    must-display=true release-note=feature/pkg/self@0
 

@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2018, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            32_and_64
@@ -93,7 +93,11 @@ CFLAGS += -D__EXTENSIONS__ -I/usr/include/llvm/Support/Solaris/sys -Wno-incompat
 $(SOLARIS_11_3_ONLY)CFLAGS += -D_POSIX_PTHREAD_SEMANTICS
 CPPFLAGS += -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS
 LDFLAGS += -Wl,-zgnu-version-script-compat
-LDFLAGS += -Wl,-z,rescan-now -R$(LIBDRM_RUNPATH)
+# This code has init cycles and multiple C++ libraries, and misbehaves
+# when lazy loading is used. Since we're unable to restructure third
+# party code at that level, we must instead disable lazy loading.
+LDFLAGS += -Wl,-znolazyload
+LDFLAGS += -Wl,-z,rescan-now
 $(SOLARIS_11_3_ONLY)LDFLAGS += -lsocket -lnsl
 CFLAGS.64 += -Wstack-protector -fdata-sections -fstack-protector-all
 LD_OPTIONS.64+=	-z nodefs -z ignore -lLLVM -lssp
