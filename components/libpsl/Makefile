@@ -41,6 +41,8 @@ COMPONENT_ANITYA_ID=	7305
 TPNO=			63453
 BUILD_STYLE=		meson
 
+$(SOLARIS_11_3_ONLY)LDFLAGS+= -lsocket -lnsl
+
 # default libidn2 would need additional dependency 'libunistring'
 CONFIGURE_OPTIONS += -Druntime=libicu
 CONFIGURE_OPTIONS += -Dbuiltin=libicu
