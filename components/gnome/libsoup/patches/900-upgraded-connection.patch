@@ -1,0 +1,26 @@
+session: don't request Keep-Alive for upgraded connections
+
+When an upgrade is requested through "Connection: Upgrade" (used for
+setting up websocket connection for example), there is no need to
+request Keep-Alive.
+
+It turns out doing both is confusing some servers based on the h2o
+library.
+
+https://bugzilla.gnome.org/show_bug.cgi?id=788723
+
+See: https://github.com/GNOME/libsoup/commit/e24abeeb31da35e2d1073a296c193388691c8621
+
+--- a/libsoup/soup-session.c	2017-08-10 13:17:10.000000000 +0000
++++ b/libsoup/soup-session.c	2021-02-08 12:35:17.028956120 +0000
+@@ -1314,7 +1314,9 @@
+ 	if (!soup_message_headers_header_contains (item->msg->request_headers,
+ 						   "Connection", "Keep-Alive") &&
+ 	    !soup_message_headers_header_contains (item->msg->request_headers,
+-						   "Connection", "close")) {
++						   "Connection", "close") &&
++	    !soup_message_headers_header_contains (item->msg->request_headers,
++						   "Connection", "Upgrade")) {
+ 		soup_message_headers_append (item->msg->request_headers,
+ 					     "Connection", "Keep-Alive");
+ 	}
