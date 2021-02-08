@@ -30,14 +30,15 @@ COMPILER=gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libsoup
-COMPONENT_VERSION=	2.58.2
+COMPONENT_VERSION=	2.66.5
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/libsoup
-COMPONENT_ARCHIVE_HASH=	\
-    sha256:442300ca1b1bf8a3bbf2f788203287ff862542d4fc048f19a92a068a27d17b72
+#COMPONENT_ARCHIVE_HASH=	\
+#    sha256:442300ca1b1bf8a3bbf2f788203287ff862542d4fc048f19a92a068a27d17b72
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	11483
 
 TPNO=			37521
+BUILD_STYLE=		meson
 
 # Disable tests since there are some regressions.
 $(SKIP_TEST_AT_TOP_LEVEL)
@@ -55,10 +56,13 @@ LD_OPTIONS.32 += -L /usr/lib/gnutls-3
 LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
 LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 
-CONFIGURE_OPTIONS += --disable-static
+$(SOLARIS_11_3_ONLY)LDFLAGS += -lsocket -lnsl
+
+#CONFIGURE_OPTIONS += --disable-static
 # Required for other components.
-CONFIGURE_OPTIONS.32 += --disable-introspection
-CONFIGURE_OPTIONS.64 += --enable-introspection
+CONFIGURE_OPTIONS.32 += -Dintrospection=false
+CONFIGURE_OPTIONS.32 += -Dvapi=false
+CONFIGURE_OPTIONS.64 += -Dintrospection=true
 
 COMPONENT_POST_INSTALL_ACTION.64 += \
         $(INSTALL) -D -m 0444 $(COMPONENT_DIR)/files/libsoup-2.4.3lib \
@@ -66,7 +70,7 @@ COMPONENT_POST_INSTALL_ACTION.64 += \
 
 # for the tests
 unexport SHELLOPTS
-COMPONENT_PRE_CONFIGURE_ACTION += ($(CLONEY) $(SOURCE_DIR) $(@D));
+#COMPONENT_PRE_CONFIGURE_ACTION += ($(CLONEY) $(SOURCE_DIR) $(@D));
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-$(MACH)-$(BITS).master
 COMPONENT_TEST_ARGS =   -k -i
 COMPONENT_TEST_TRANSFORMS += \
@@ -84,6 +88,7 @@ REQUIRED_PACKAGES += library/desktop/gobject/gobject-introspection
 REQUIRED_PACKAGES += library/glib-networking
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/gnome/gnome-common
+REQUIRED_PACKAGES += library/libpsl
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += security/kerberos-5
 REQUIRED_PACKAGES += system/library/security/gss
