@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
 #
 
 <transform file path=usr/share/omf/evince/(.+)$ -> \
@@ -44,14 +44,9 @@ set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2012/051 value=PSARC/2016/025 \
     value=PSARC/2016/321
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-file files/evince-thumbnailer-ps.schemas \
-    path=etc/gconf/schemas/evince-thumbnailer-ps.schemas
-file files/evince-thumbnailer.schemas \
-    path=etc/gconf/schemas/evince-thumbnailer.schemas
-file files/evince.schemas path=etc/gconf/schemas/evince.schemas
-file path=usr/bin/evince
-file path=usr/bin/evince-previewer
-file path=usr/bin/evince-thumbnailer
+file path=usr/bin/evince pkg.linted.userland.action001.2=true
+file path=usr/bin/evince-previewer pkg.linted.userland.action001.2=true
+file path=usr/bin/evince-thumbnailer pkg.linted.userland.action001.2=true
 link path=usr/bin/gpdf target=evince
 file path=usr/include/evince/3.0/evince-document.h
 file path=usr/include/evince/3.0/evince-view.h
@@ -79,6 +74,7 @@ file path=usr/include/evince/3.0/libdocument/ev-document-type-builtins.h
 file path=usr/include/evince/3.0/libdocument/ev-document.h
 file path=usr/include/evince/3.0/libdocument/ev-file-exporter.h
 file path=usr/include/evince/3.0/libdocument/ev-file-helpers.h
+file path=usr/include/evince/3.0/libdocument/ev-form-field-private.h
 file path=usr/include/evince/3.0/libdocument/ev-form-field.h
 file path=usr/include/evince/3.0/libdocument/ev-image.h
 file path=usr/include/evince/3.0/libdocument/ev-init.h
@@ -111,38 +107,19 @@ file path=usr/lib/$(MACH64)/evince/4/backends/tiffdocument.evince-backend
 file path=usr/lib/$(MACH64)/evinced mode=0555
 file path=usr/lib/$(MACH64)/girepository-1.0/EvinceDocument-3.0.typelib
 file path=usr/lib/$(MACH64)/girepository-1.0/EvinceView-3.0.typelib
-link path=usr/lib/$(MACH64)/libevdocument3.so target=libevdocument3.so.4.0.0
+link path=usr/lib/$(MACH64)/libevdocument3.so target=libevdocument3.so.4
 link path=usr/lib/$(MACH64)/libevdocument3.so.4 target=libevdocument3.so.4.0.0
 file path=usr/lib/$(MACH64)/libevdocument3.so.4.0.0
-link path=usr/lib/$(MACH64)/libevview3.so target=libevview3.so.3.0.0
+link path=usr/lib/$(MACH64)/libevview3.so target=libevview3.so.3
 link path=usr/lib/$(MACH64)/libevview3.so.3 target=libevview3.so.3.0.0
 file path=usr/lib/$(MACH64)/libevview3.so.3.0.0
 #file path=usr/lib/$(MACH64)/nautilus/extensions-3.0/libevince-properties-page.so
 file path=usr/lib/$(MACH64)/pkgconfig/evince-document-3.0.pc
 file path=usr/lib/$(MACH64)/pkgconfig/evince-view-3.0.pc
-file path=usr/lib/evince/4/backends/libpdfdocument.so
-file path=usr/lib/evince/4/backends/libpsdocument.so
-file path=usr/lib/evince/4/backends/libtiffdocument.so
-file path=usr/lib/evince/4/backends/pdfdocument.evince-backend
-file path=usr/lib/evince/4/backends/psdocument.evince-backend
-file path=usr/lib/evince/4/backends/tiffdocument.evince-backend
-file path=usr/lib/girepository-1.0/EvinceDocument-3.0.typelib
-file path=usr/lib/girepository-1.0/EvinceView-3.0.typelib
-link path=usr/lib/libevdocument3.so target=libevdocument3.so.4.0.0
-link path=usr/lib/libevdocument3.so.4 target=libevdocument3.so.4.0.0
-file path=usr/lib/libevdocument3.so.4.0.0
-link path=usr/lib/libevview3.so target=libevview3.so.3.0.0
-link path=usr/lib/libevview3.so.3 target=libevview3.so.3.0.0
-file path=usr/lib/libevview3.so.3.0.0
-file path=usr/lib/pkgconfig/evince-document-3.0.pc
-file path=usr/lib/pkgconfig/evince-view-3.0.pc
+file path=usr/lib/systemd/user/org.gnome.Evince.service
 file path=usr/share/GConf/gsettings/evince.convert
-file path=usr/share/appdata/evince-pdfdocument.metainfo.xml
-file path=usr/share/appdata/evince-psdocument.metainfo.xml
-file path=usr/share/appdata/evince-tiffdocument.metainfo.xml
-file path=usr/share/appdata/evince.appdata.xml
-file path=usr/share/applications/evince-previewer.desktop
-file path=usr/share/applications/evince.desktop
+file path=usr/share/applications/org.gnome.Evince-previewer.desktop
+file path=usr/share/applications/org.gnome.Evince.desktop
 file path=usr/share/dbus-1/services/org.gnome.evince.Daemon.service
 file path=usr/share/evince/hand-open.png
 file path=usr/share/evince/icons/hicolor/16x16/actions/object-rotate-left.png
@@ -153,7 +130,6 @@ file path=usr/share/evince/icons/hicolor/16x16/actions/zoom-fit-height.png
 file path=usr/share/evince/icons/hicolor/16x16/actions/zoom-fit-width.png
 file path=usr/share/evince/icons/hicolor/16x16/actions/zoom.png
 file path=usr/share/evince/icons/hicolor/16x16/mimetypes/x-office-presentation.png
-file path=usr/share/evince/icons/hicolor/22x22/actions/eye.png
 file path=usr/share/evince/icons/hicolor/22x22/actions/object-rotate-left.png
 file path=usr/share/evince/icons/hicolor/22x22/actions/object-rotate-right.png
 file path=usr/share/evince/icons/hicolor/22x22/actions/view-page-continuous.png
@@ -181,18 +157,20 @@ file path=usr/share/evince/icons/hicolor/48x48/actions/resize-se.png
 file path=usr/share/evince/icons/hicolor/48x48/actions/resize-sw.png
 file path=usr/share/evince/icons/hicolor/48x48/actions/view-page-continuous.png
 file path=usr/share/evince/icons/hicolor/48x48/actions/view-page-facing.png
+file path=usr/share/evince/icons/hicolor/scalable/actions/annotations-squiggly-symbolic.svg
+file path=usr/share/evince/icons/hicolor/scalable/actions/annotations-text-symbolic.svg
+file path=usr/share/evince/icons/hicolor/scalable/actions/find-unsupported-symbolic.svg
 file path=usr/share/evince/icons/hicolor/scalable/actions/object-rotate-left.svg
 file path=usr/share/evince/icons/hicolor/scalable/actions/object-rotate-right.svg
+file path=usr/share/evince/icons/hicolor/scalable/actions/outline-symbolic.svg
+file path=usr/share/evince/icons/hicolor/scalable/actions/view-sidebar-symbolic.svg
+file path=usr/share/evince/icons/hicolor/scalable/actions/visible-symbolic.svg
 file path=usr/share/evince/icons/hicolor/scalable/mimetypes/x-office-presentation.svg
 file path=usr/share/gir-1.0/EvinceDocument-3.0.gir
 file path=usr/share/gir-1.0/EvinceView-3.0.gir
 file path=usr/share/glib-2.0/schemas/org.gnome.Evince.gschema.xml
-file path=usr/share/icons/hicolor/16x16/apps/evince.png
-file path=usr/share/icons/hicolor/22x22/apps/evince.png
-file path=usr/share/icons/hicolor/24x24/apps/evince.png
-file path=usr/share/icons/hicolor/256x256/apps/evince.png
-file path=usr/share/icons/hicolor/48x48/apps/evince.png
-file path=usr/share/icons/hicolor/symbolic/apps/evince-symbolic.svg
+file path=usr/share/icons/hicolor/scalable/apps/org.gnome.Evince.svg
+file path=usr/share/icons/hicolor/symbolic/apps/org.gnome.Evince-symbolic.svg
 file path=usr/share/locale/af/LC_MESSAGES/evince.mo
 file path=usr/share/locale/an/LC_MESSAGES/evince.mo
 file path=usr/share/locale/ar/LC_MESSAGES/evince.mo
@@ -247,6 +225,7 @@ file path=usr/share/locale/lt/LC_MESSAGES/evince.mo
 file path=usr/share/locale/lv/LC_MESSAGES/evince.mo
 file path=usr/share/locale/mai/LC_MESSAGES/evince.mo
 file path=usr/share/locale/mg/LC_MESSAGES/evince.mo
+file path=usr/share/locale/mjw/LC_MESSAGES/evince.mo
 file path=usr/share/locale/mk/LC_MESSAGES/evince.mo
 file path=usr/share/locale/ml/LC_MESSAGES/evince.mo
 file path=usr/share/locale/mn/LC_MESSAGES/evince.mo
@@ -288,9 +267,17 @@ file path=usr/share/locale/zh_CN/LC_MESSAGES/evince.mo
 file path=usr/share/locale/zh_HK/LC_MESSAGES/evince.mo
 file path=usr/share/locale/zh_TW/LC_MESSAGES/evince.mo
 file path=usr/share/locale/zu/LC_MESSAGES/evince.mo
+file path=usr/share/man/man1/evince-previewer.1
+file path=usr/share/man/man1/evince-thumbnailer.1
 file path=usr/share/man/man1/evince.1
 file files/ggv.1 path=usr/share/man/man1/ggv.1
 file files/gpdf.1 path=usr/share/man/man1/gpdf.1
+file path=usr/share/metainfo/evince-comicsdocument.metainfo.xml
+file path=usr/share/metainfo/evince-pdfdocument.metainfo.xml
+file path=usr/share/metainfo/evince-psdocument.metainfo.xml
+file path=usr/share/metainfo/evince-tiffdocument.metainfo.xml
+file path=usr/share/metainfo/evince-xpsdocument.metainfo.xml
+file path=usr/share/metainfo/org.gnome.Evince.appdata.xml
 file path=usr/share/thumbnailers/evince.thumbnailer
 license evince.license license=GPLv2
 depend type=require fmri=__TBD pkg.debug.depend.reason=shell/ev-window.c \

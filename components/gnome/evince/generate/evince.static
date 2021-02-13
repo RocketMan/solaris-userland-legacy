@@ -1,3 +1,4 @@
+#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -17,21 +18,13 @@
 #
 # CDDL HEADER END
 #
+
 #
-# Copyright (c) 2020, 2021, Oracle and/or its affiliates. 
+# Copyright (c) 2021, Oracle and/or its affiliates. 
 #
 
-# Drop 32-bit binaries
-<transform file path=usr/bin/\$\(MACH32\)/* -> drop>
+link path=usr/bin/gpdf target=evince
+file files/ggv.1 path=usr/share/man/man1/ggv.1
+file files/gpdf.1 path=usr/share/man/man1/gpdf.1
 
-# Transform to get rid of pkglint errors like 64-bit object in 32-bit path
-<transform file path=usr/lib/installed-tests/pango/test* -> \
-    set pkg.linted.userland.action001.2 true>
-<transform file path=usr/lib/installed-tests/pango/cxx-test -> \
-    set pkg.linted.userland.action001.2 true>
-<transform file path=usr/lib/installed-tests/pango/markup-parse -> \
-    set pkg.linted.userland.action001.2 true>
-<transform file path=usr/bin/pango-list -> \
-    set pkg.linted.userland.action001.2 true>
-<transform file path=usr/bin/pango-view -> \
-    set pkg.linted.userland.action001.2 true>
+
