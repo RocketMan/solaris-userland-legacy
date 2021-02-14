@@ -62,11 +62,11 @@ $(SOLARIS_11_3_ONLY)LDFLAGS += -lsocket -lnsl
 
 #CONFIGURE_OPTIONS += --disable-static
 # Required for other components.
-CONFIGURE_OPTIONS.32 += -Dintrospection=false
-CONFIGURE_OPTIONS.32 += -Dvapi=false
-CONFIGURE_OPTIONS.64 += -Dintrospection=true
+CONFIGURE_OPTIONS.32 += -Dintrospection=disabled
+CONFIGURE_OPTIONS.32 += -Dvapi=disabled
+CONFIGURE_OPTIONS.64 += -Dintrospection=enabled
 
-#CONFIGURE_OPTIONS += -Dsysprof=disabled
+CONFIGURE_OPTIONS += -Dsysprof=disabled
 
 COMPONENT_POST_INSTALL_ACTION.64 += \
         $(INSTALL) -D -m 0444 $(COMPONENT_DIR)/files/libsoup-2.4.3lib \
