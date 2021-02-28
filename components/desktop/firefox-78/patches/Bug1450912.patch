@@ -23,3 +23,79 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=1450912
  #endif
  
  #ifdef XP_MACOSX
+--- a/dom/plugins/ipc/PluginModuleChild.cpp	2021-01-20 18:08:37.000000000 +0000
++++ b/dom/plugins/ipc/PluginModuleChild.cpp	2021-02-03 11:23:28.195989178 +0000
+@@ -60,6 +60,8 @@
+ #  include "mozilla/Sandbox.h"
+ #endif
+ 
++#include <locale.h>
++
+ using namespace mozilla;
+ using namespace mozilla::ipc;
+ using namespace mozilla::plugins;
+@@ -556,6 +558,7 @@
+   PR_SetEnv("GDK_NATIVE_WINDOWS=1");
+ 
+   gtk_init(0, 0);
++  setlocale(LC_COLLATE, "C");
+ 
+   // GtkPlug is a static class so will leak anyway but this ref makes sure.
+   gpointer gtk_plug_class = g_type_class_ref(GTK_TYPE_PLUG);
+--- a/dom/ipc/ContentChild.cpp	2021-01-20 18:08:36.000000000 +0000
++++ b/dom/ipc/ContentChild.cpp	2021-02-03 11:25:12.923300419 +0000
+@@ -288,6 +288,8 @@
+ #  include "mozilla/CodeCoverageHandler.h"
+ #endif
+ 
++#include <locale.h>
++
+ using namespace mozilla;
+ using namespace mozilla::docshell;
+ using namespace mozilla::dom::ipc;
+@@ -669,6 +671,7 @@
+     } else {
+       gtk_init(nullptr, nullptr);
+     }
++    setlocale(LC_COLLATE, "C");
+   }
+ #endif
+ 
+--- a/gfx/ipc/GPUParent.cpp	2021-01-20 18:08:37.000000000 +0000
++++ b/gfx/ipc/GPUParent.cpp	2021-02-03 11:26:36.656764493 +0000
+@@ -75,6 +75,8 @@
+ #  include "mozilla/SandboxTestingChild.h"
+ #endif
+ 
++#include <locale.h>
++
+ namespace mozilla::gfx {
+ 
+ using namespace ipc;
+@@ -245,6 +247,7 @@
+   } else {
+     gtk_init(nullptr, nullptr);
+   }
++  setlocale(LC_COLLATE, "C");
+ 
+   // Ensure we have an FT library for font instantiation.
+   // This would normally be set by gfxPlatform::Init().
+--- a/gfx/thebes/gfxPlatformGtk.cpp	2021-01-20 18:08:37.000000000 +0000
++++ b/gfx/thebes/gfxPlatformGtk.cpp	2021-02-03 11:27:27.903742530 +0000
+@@ -63,6 +63,8 @@
+ 
+ #include "nsMathUtils.h"
+ 
++#include <locale.h>
++
+ #define GDK_PIXMAP_SIZE_MAX 32767
+ 
+ #define GFX_PREF_MAX_GENERIC_SUBSTITUTIONS \
+@@ -79,6 +81,7 @@
+ gfxPlatformGtk::gfxPlatformGtk() {
+   if (!gfxPlatform::IsHeadless()) {
+     gtk_init(nullptr, nullptr);
++    setlocale(LC_COLLATE, "C");
+   }
+ 
+   mMaxGenericSubstitutions = UNINITIALIZED_VALUE;
