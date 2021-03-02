@@ -445,7 +445,7 @@ diff -urN libgtop-2.25.91/sysdeps/solaris/fsusage.c ../SUNWlibgtop-2.25.91.hacke
 diff -urN libgtop-2.25.91/sysdeps/solaris/glibtop_machine.h ../SUNWlibgtop-2.25.91.hacked/libgtop-2.25.91/sysdeps/solaris/glibtop_machine.h
 --- libgtop-2.25.91/sysdeps/solaris/glibtop_machine.h	2008-05-23 22:13:24.000000000 +0000
 +++ ../SUNWlibgtop-2.25.91.hacked/libgtop-2.25.91/sysdeps/solaris/glibtop_machine.h	2009-02-25 17:16:38.055426000 +0000
-@@ -61,14 +61,14 @@
+@@ -61,14 +61,7 @@
      int pagesize;		/* in bits to shift, ie. 2^pagesize gives Kb */
      int ticks;			/* clock ticks, as returned by sysconf() */
      unsigned long long boot;	/* boot time, although it's ui32 in kstat */
@@ -455,15 +455,8 @@ diff -urN libgtop-2.25.91/sysdeps/solaris/glibtop_machine.h ../SUNWlibgtop-2.25.
 -    struct ps_prochandle *(*pgrab)(pid_t, int, int *);
 -    void (*pfree)(void *);
 -#else
-+//    void *libproc;		/* libproc handle */
-+//#if GLIBTOP_SOLARIS_RELEASE >= 50600
-+//    void (*objname)(void *, uintptr_t, const char *, size_t);
-+//    struct ps_prochandle *(*pgrab)(pid_t, int, int *);
-+//    void (*pfree)(void *);
-+//#else
      void *filler[3];
 -#endif
-+//#endif
  };
  
  G_END_DECLS
