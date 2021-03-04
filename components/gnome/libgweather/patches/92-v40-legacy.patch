@@ -1,0 +1,18 @@
+--- a/libgweather/gweather-weather.c	2021-02-14 20:05:34.205614600 +0000
++++ b/libgweather/gweather-weather.c	2021-03-04 19:44:09.084030776 +0000
+@@ -695,6 +695,15 @@
+ {
+     gboolean ok;
+ 
++    gweather_info_set_application_id (info, "org.gnome.LibGWeather");
++    gweather_info_set_contact_info (info, "https://gitlab.gnome.org/GNOME/libgweather/");
++    gweather_info_set_enabled_providers (info,
++	GWEATHER_PROVIDER_METAR |
++	GWEATHER_PROVIDER_IWIN |
++	GWEATHER_PROVIDER_YAHOO |
++	GWEATHER_PROVIDER_MET_NO |
++	GWEATHER_PROVIDER_OWM);
++
+     if (info->providers == GWEATHER_PROVIDER_NONE)
+         return;
+ 
