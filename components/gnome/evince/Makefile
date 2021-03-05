@@ -42,6 +42,8 @@ BUILD_STYLE=		meson
 
 TEST_TARGET= $(NO_TESTS)
 
+MANIFEST_COMPARE=/usr/bin/true
+
 include $(WS_MAKE_RULES)/common.mk
 
 # Need to pick up the GNU version of xgettext.
@@ -64,6 +66,8 @@ CONFIGURE_OPTIONS +=	-Ddjvu=disabled
 # Requires LaTeX libraries.
 CONFIGURE_OPTIONS +=	-Ddvi=disabled
 # Required for other components.
+CONFIGURE_OPTIONS +=	-Dgtk_doc=false
+CONFIGURE_OPTIONS +=	-Duser_doc=false
 
 #CONFIGURE_OPTIONS +=	--enable-introspection
 #CONFIGURE_OPTIONS +=	--disable-libgnome-desktop
@@ -83,7 +87,7 @@ CONFIGURE_OPTIONS +=	-Ddvi=disabled
 #COMPONENT_BUILD_ARGS += V=1
 
 CONFIGURE_OPTIONS.32 +=	-Dintrospection=false
-CONFIGURE_OPTIONS.32 +=	-Dnautilus=false
+CONFIGURE_OPTIONS +=	-Dnautilus=false
 CONFIGURE_OPTIONS +=	-Dps=enabled
 
 # Needed to find GNU msgfmt.
