@@ -1,13 +1,13 @@
---- rustc-1.44.1-src/library/std/build.rs	2020-08-01 18:53:31.114759517 +0000
-+++ rustc-1.44.1-src/library/std/build.rs	2020-08-01 18:54:35.355354285 +0000
-@@ -25,6 +25,7 @@
-         println!("cargo:rustc-link-lib=posix4");
-         println!("cargo:rustc-link-lib=pthread");
-         println!("cargo:rustc-link-lib=resolv");
-+        println!("cargo:rustc-link-lib=nsl");
-     } else if target.contains("illumos") {
-         println!("cargo:rustc-link-lib=socket");
-         println!("cargo:rustc-link-lib=posix4");
+--- rustc-1.50.0-src/library/std/src/sys/unix/mod.rs	2021-02-10 17:36:44.000000000 +0000
++++ rustc-1.50.0-src/library/std/src/sys/unix/mod.rs	2021-03-05 15:47:24.847514661 +0000
+@@ -259,6 +259,7 @@
+         #[link(name = "posix4")]
+         #[link(name = "pthread")]
+         #[link(name = "resolv")]
++        #[link(name = "nsl")]
+         extern "C" {}
+     } else if #[cfg(target_os = "illumos")] {
+         #[link(name = "socket")]
 --- rustc-1.44.1-src/compiler/rustc_target/src/spec/solaris_base.rs	2020-06-17 21:17:05.000000000 +0000
 +++ rustc-1.44.1-src/compiler/rustc_target/src/spec/solaris_base.rs	2020-08-01 18:57:44.327809206 +0000
 @@ -1,6 +1,23 @@
