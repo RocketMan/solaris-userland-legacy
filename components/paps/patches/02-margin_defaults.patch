@@ -1,0 +1,65 @@
+Solaris specific: modify margin default values to match mp(1) output.
+mp was EOLed, but we don't want to change behavior.
+
+diff --git a/src/paps.1 b/src/paps.1
+index b997556..7c2bc81 100644
+--- a/src/paps.1
++++ b/src/paps.1
+@@ -256,16 +256,16 @@ Scalable Vector Graphics
+ Each postscript point equals to 1/72 of an inch. 36 points are 1/2 of an inch.
+ .TP
+ .B \-\-bottom-margin=bm
+-Set bottom margin. Default is 36 postscript points.
++Set bottom margin. Default is 55 postscript points.
+ .TP
+ .B \-\-top-margin=tm
+-Set top margin. Default is 36 postscript points.
++Set top margin. Default is 55 postscript points.
+ .TP
+ .B \-\-left-margin=lm
+-Set left margin. Default is 36 postscript points.
++Set left margin. Default is 55 postscript points.
+ .TP
+ .B \-\-right-margin=rm
+-Set right margin. Default is 36 postscript points.
++Set right margin. Default is 55 postscript points.
+ .TP
+ .B \-\-gutter-width=gw
+ Set gutter width. Default is 40 postscript points.
+diff --git a/src/paps.c b/src/paps.c
+index 4e28d45..77db5c8 100644
+--- a/src/paps.c
++++ b/src/paps.c
+@@ -74,10 +74,10 @@ int wcwidth(wchar_t c);
+  */
+ #define	CAIRO_COMMENT_MAX       255
+ 
+-#define	MARGIN_LEFT     36
+-#define	MARGIN_RIGHT    36
+-#define	MARGIN_TOP      36
+-#define	MARGIN_BOTTOM   36
++#define	MARGIN_LEFT     55
++#define	MARGIN_RIGHT    55
++#define	MARGIN_TOP      55
++#define	MARGIN_BOTTOM   55
+ 
+ 
+ typedef enum {
+@@ -578,13 +578,13 @@ int main(int argc, char *argv[])
+     {"format", 0, 0, G_OPTION_ARG_CALLBACK, _paps_arg_format_cb,
+      N_("Set output format [pdf, svg, ps]. (Default: ps)"), "FORMAT"},
+     {"bottom-margin", 0, 0, G_OPTION_ARG_INT, &bottom_margin,
+-     N_("Set bottom margin in postscript point units (1/72 inch). (Default: 36)"), "NUM"},
++     N_("Set bottom margin in postscript point units (1/72 inch). (Default: 55)"), "NUM"},
+     {"top-margin", 0, 0, G_OPTION_ARG_INT, &top_margin,
+-     N_("Set top margin. (Default: 36)"), "NUM"},
++     N_("Set top margin. (Default: 55)"), "NUM"},
+     {"right-margin", 0, 0, G_OPTION_ARG_INT, &right_margin,
+-     N_("Set right margin. (Default: 36)"), "NUM"},
++     N_("Set right margin. (Default: 55)"), "NUM"},
+     {"left-margin", 0, 0, G_OPTION_ARG_INT, &left_margin,
+-     N_("Set left margin. (Default: 36)"), "NUM"},
++     N_("Set left margin. (Default: 55)"), "NUM"},
+     {"gutter-width", 0, 0, G_OPTION_ARG_INT, &gutter_width,
+      N_("Set gutter width. (Default: 40)"), "NUM"},
+     {"header", 0, 0, G_OPTION_ARG_NONE, &do_draw_header,
