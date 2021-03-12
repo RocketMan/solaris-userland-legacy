@@ -49,7 +49,7 @@ CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 
-LD_OPTIONS += -z gnu-version-script-compat
+$(SOLARIS_11_4_5_ONLY)LD_OPTIONS += -z gnu-version-script-compat
 
 # Required so that configure can find and use 64-bit version of config program.
 CONFIGURE_ENV.64 += ac_cv_path_LIBGCRYPT_CONFIG=$(USRBINDIR64)/libgcrypt-config
