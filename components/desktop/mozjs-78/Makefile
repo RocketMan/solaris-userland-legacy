@@ -28,13 +28,14 @@ BUILD_BITS =		64
 COMPILER =		gcc
 include ../../../make-rules/shared-macros.mk
 
-COMPONENT_NAME=		mozjs
+$(SOLARIS_11_3_ONLY)COMPONENT_NAME=		firefox
+$(SOLARIS_11_4_5_ONLY)COMPONENT_NAME=		mozjs
 COMPONENT_VERSION=	78.4.0
 COMPONENT_PROJECT_URL=	https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
-COMPONENT_ARCHIVE_HASH= \
-	sha256:1e91b74e40ad3330258f196041becab40ddb96116e17a98f3a43a1816119f0d0
+$(SOLARIS_11_4_5_ONLY)COMPONENT_ARCHIVE_HASH= \
+$(SOLARIS_11_4_5_ONLY)	sha256:1e91b74e40ad3330258f196041becab40ddb96116e17a98f3a43a1816119f0d0
 # Upstream no longer delivers mozjs archives; it needs to be extracted from
 # the firefox archive instead. Archives are hence only available directly in
 # the Userland package cache, and no online alternative is available.
@@ -54,11 +55,15 @@ TEST_TARGET = $(SKIP_TEST)
 
 include $(WS_MAKE_RULES)/common.mk
 
+# pick up the 64-bit nspr for 11.3
+PKG_CONFIG_PATH=/usr/lib/amd64/pkgconfig:/usr/lib/pkgconfig/amd64
+
 # configure script is not at root of source tree.
 CONFIGURE_SCRIPT= $(SOURCE_DIR)/js/src/configure
 
 CONFIGURE_ENV += PYTHON3="$(PYTHON)"
 CONFIGURE_ENV += LDSHARED="$(CC) -shared"
+# NB: the following line seems to be ignored
 CONFIGURE_ENV += NSPR_CONFIG="/usr/bin/pkg-config nspr"
 
 CONFIGURE_OPTIONS = --prefix=/usr
@@ -77,7 +82,7 @@ CONFIGURE_OPTIONS += --with-system-icu
 CONFIGURE_OPTIONS += --with-system-zlib
 CONFIGURE_OPTIONS += --enable-strip
 CONFIGURE_OPTIONS += --with-system-nspr
-LDFLAGS += -z gnu-version-script-compat
+$(SOLARIS_11_4_5_ONLY)LDFLAGS += -z gnu-version-script-compat
 
 # js coredumps on sparc - see bug 24935318
 ifeq ($(MACH), sparc)
