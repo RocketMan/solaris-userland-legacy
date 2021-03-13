@@ -1,0 +1,11 @@
+--- lua-5.4.0/src/Makefile.~2~	2021-03-13 18:09:01.604893533 +0000
++++ lua-5.4.0/src/Makefile	2021-03-13 18:12:55.435440495 +0000
+@@ -6,7 +6,7 @@
+ # Your platform. See PLATS for possible values.
+ PLAT= solaris
+ 
+-CC= gcc -std=gnu99
++CC= /usr/gcc/10/bin/gcc -std=gnu99
+ CFLAGS= -O2 -Wall -Wextra -DLUA_COMPAT_5_3 $(SYSCFLAGS) $(MYCFLAGS)
+ LDFLAGS= $(SYSLDFLAGS) $(MYLDFLAGS)
+ LIBS= -lm $(SYSLIBS) $(MYLIBS)
