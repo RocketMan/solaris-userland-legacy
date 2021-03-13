@@ -24,3 +24,27 @@
 <transform \
     file path=usr/lib/\$\(MACH64\)/python3.7/vendor-packages/gi/overrides/Gom.py -> drop>
 
+file path=usr/share/gtk-doc/html/gom/GomAdapter.html
+file path=usr/share/gtk-doc/html/gom/GomCommand.html
+file path=usr/share/gtk-doc/html/gom/GomCommandBuilder.html
+file path=usr/share/gtk-doc/html/gom/GomCursor.html
+file path=usr/share/gtk-doc/html/gom/GomFilter.html
+file path=usr/share/gtk-doc/html/gom/GomRepository.html
+file path=usr/share/gtk-doc/html/gom/GomResource.html
+file path=usr/share/gtk-doc/html/gom/GomResourceGroup.html
+file path=usr/share/gtk-doc/html/gom/GomSorting.html
+file path=usr/share/gtk-doc/html/gom/annotation-glossary.html
+file path=usr/share/gtk-doc/html/gom/api-index-full.html
+file path=usr/share/gtk-doc/html/gom/ch01.html
+file path=usr/share/gtk-doc/html/gom/deprecated-api-index.html
+file path=usr/share/gtk-doc/html/gom/gom.devhelp2
+file path=usr/share/gtk-doc/html/gom/home.png
+file path=usr/share/gtk-doc/html/gom/index.html
+file path=usr/share/gtk-doc/html/gom/left-insensitive.png
+file path=usr/share/gtk-doc/html/gom/left.png
+file path=usr/share/gtk-doc/html/gom/object-tree.html
+file path=usr/share/gtk-doc/html/gom/right-insensitive.png
+file path=usr/share/gtk-doc/html/gom/right.png
+file path=usr/share/gtk-doc/html/gom/style.css
+file path=usr/share/gtk-doc/html/gom/up-insensitive.png
+file path=usr/share/gtk-doc/html/gom/up.png
