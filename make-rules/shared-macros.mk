@@ -655,7 +655,7 @@ BUILD_TOOLS ?=	/opt
 SPRO_ROOT ?=	$(BUILD_TOOLS)
 SPRO_VROOT ?=	$(SPRO_ROOT)/solarisstudio12.4
 
-PARFAIT_VER ?=	parfait-tools-2.3.0
+PARFAIT_VER ?=	parfait-tools-4.0
 PARFAIT_ROOT =	$(BUILD_TOOLS)/parfait
 PARFAIT_VROOT=	$(PARFAIT_ROOT)/$(PARFAIT_VER)
 PARFAIT_TOOLS=	$(WS_TOOLS)/$(MACH)/parfait

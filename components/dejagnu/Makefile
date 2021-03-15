@@ -20,18 +20,18 @@
 #
 
 #
-# Copyright (c) 2013, 2017, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2013, 2021, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		dejagnu
-COMPONENT_VERSION=	1.6
+COMPONENT_VERSION=	1.6.2
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:00b64a618e2b6b581b16eb9131ee80f721baa2669fa0cdee93c500d1a652d763
+    sha256:0d0671e1b45189c5fc8ade4b3b01635fb9eeab45cf54f57db23e4c4c1a17d261
 COMPONENT_ANITYA_ID=	417
 
-TPNO=			34020
+TPNO=			67589
 
 SYSTEM_TEST_TARGET= configure $(SYSTEM_TEST_64)
 include $(WS_MAKE_RULES)/gnu-component.mk
