@@ -58,10 +58,5 @@ link path=usr/lib/$(MACH64)/libclutter-gst-3.0.so.0 \
     target=libclutter-gst-3.0.so.0.27.0
 file path=usr/lib/$(MACH64)/libclutter-gst-3.0.so.0.27.0
 file path=usr/lib/$(MACH64)/pkgconfig/clutter-gst-3.0.pc
-file path=usr/lib/gstreamer-1.0/libcluttergst3.so
-link path=usr/lib/libclutter-gst-3.0.so target=libclutter-gst-3.0.so.0.27.0
-link path=usr/lib/libclutter-gst-3.0.so.0 target=libclutter-gst-3.0.so.0.27.0
-file path=usr/lib/libclutter-gst-3.0.so.0.27.0
-file path=usr/lib/pkgconfig/clutter-gst-3.0.pc
 file path=usr/share/gir-1.0/ClutterGst-3.0.gir
 license COPYING license=LGPLv2.1
