@@ -1,0 +1,18 @@
+--- libsecret-0.20.4/docs/reference/libsecret/Makefile.am-	2018-06-09 05:54:10.000000000 +0000
++++ libsecret-0.20.4/docs/reference/libsecret/Makefile.am	2021-03-26 17:11:22.887978153 +0000
+@@ -92,12 +92,12 @@
+ 	$(top_builddir)/libsecret-@SECRET_MAJOR@.la
+ 
+ # This includes the standard gtk-doc make rules, copied by gtkdocize.
+-include $(top_srcdir)/gtk-doc.make
++#include $(top_srcdir)/gtk-doc.make
+ 
+ # Other files to distribute
+ # e.g. EXTRA_DIST += version.xml.in
+-EXTRA_DIST += \
+-	version.xml.in
++#EXTRA_DIST += \
++#	version.xml.in
+ 
+ # Files not to distribute
+ # for --rebuild-types in $(SCAN_OPTIONS), e.g. $(DOC_MODULE).types
