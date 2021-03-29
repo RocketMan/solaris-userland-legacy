@@ -1,0 +1,11 @@
+--- librsvg-2.50.2/configure.ac~	2020-11-05 18:52:02.000000000 +0000
++++ librsvg-2.50.2/configure.ac	2021-03-29 13:11:03.143585110 +0000
+@@ -70,7 +70,7 @@
+ dnl Please update COMPILING.md with version numbers if these change
+ CAIRO_REQUIRED=1.16.0
+ dnl This corresponds to Freetype2 2.8
+-FREETYPE2_REQUIRED=20.0.14
++FREETYPE2_REQUIRED=17.4.11
+ GDK_PIXBUF_REQUIRED=2.20
+ GIO_REQUIRED=2.24.0
+ GLIB_REQUIRED=2.50.0
