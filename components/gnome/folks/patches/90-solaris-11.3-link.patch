@@ -1,0 +1,20 @@
+--- folks-0.13.1/backends/dummy/lib/meson.build~	2019-06-21 03:01:33.000000000 +0000
++++ folks-0.13.1/backends/dummy/lib/meson.build	2021-03-30 12:57:08.701922865 +0000
+@@ -28,7 +28,6 @@
+ ]
+ 
+ dummy_backendlib_link_flags = [
+-  '-Wl,--version-script,@0@/folks-@1@.map'.format(meson.current_source_dir(), dummy_backend_name),
+ ]
+ 
+ dummy_backendlib = shared_library('folks-@0@'.format(dummy_backend_name),
+--- folks-0.13.1/backends/telepathy/lib/meson.build~	2019-06-21 03:01:33.000000000 +0000
++++ folks-0.13.1/backends/telepathy/lib/meson.build	2021-03-30 12:57:36.447058990 +0000
+@@ -121,7 +121,6 @@
+ ]
+ 
+ telepathy_backendlib_link_flags = [
+-  '-Wl,--version-script,@0@/folks-@1@.map'.format(meson.current_source_dir(), telepathy_backend_name),
+ ]
+ 
+ telepathy_backendlib = shared_library('folks-@0@'.format(telepathy_backend_name),

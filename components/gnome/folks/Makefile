@@ -64,6 +64,16 @@ CONFIGURE_OPTIONS += -Dbluez-backend=false
 # GSM Telephony Support (unnecessary).
 CONFIGURE_OPTIONS += -Dofono-backend=false
 CONFIGURE_OPTIONS += -Dinspect_tool=false
+
+# don't have required version of libebook
+#
+# (note that with the exception of the eds backend, the others
+# are already excluded above, albeit with a spelling mismatch,
+# which is not picked up by meson.)
+CONFIGURE_OPTIONS += -Deds_backend=false
+CONFIGURE_OPTIONS += -Dofono_backend=false
+CONFIGURE_OPTIONS += -Dbluez_backend=false
+
 # reverting to default of tracker being disabled 
 # to avoid issues with the gir generation with the updated vala
 
