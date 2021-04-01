@@ -1,3 +1,4 @@
+#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -17,13 +18,10 @@
 #
 # CDDL HEADER END
 #
-#
-# Copyright (c) 2019, 2020, Oracle and/or its affiliates.
-#
 
-<transform file path=files/xmakemap.man -> set action.hash %(path)>
-<transform file path=files/xmakemap.man -> \
-	set path usr/share/man/man1/xmakemap.1>
+#
+# Copyright (c) 2019, 2021, Oracle and/or its affiliates.
+#
 
 # drop xkeystone because it requires an interpreter
 # for the "nickle" language that we don't ship

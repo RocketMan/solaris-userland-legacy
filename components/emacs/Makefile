@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2011, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2011, 2021, Oracle and/or its affiliates.
 #
 # This code is built with gcc. See README.
 #
@@ -235,7 +235,6 @@ install:	$(BUILD_64) $(BUILD_DIR)/$(MACH64)-x/.installed
 
 REQUIRED_PACKAGES += editor/gnu-emacs
 REQUIRED_PACKAGES += file/gnu-findutils
-REQUIRED_PACKAGES += gnome/config/gconf
 REQUIRED_PACKAGES += image/library/libjpeg
 REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng16
