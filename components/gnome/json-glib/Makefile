@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64_and_32
@@ -37,7 +37,7 @@ COMPONENT_ARCHIVE_HASH=	\
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	13144
 
-TPNO=			54080
+TPNO=			62902
 BUILD_STYLE=		meson
 
 # Tests do not pass because of insufficient gsed filtering.
