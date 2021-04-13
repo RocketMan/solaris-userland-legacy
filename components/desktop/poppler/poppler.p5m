@@ -144,6 +144,7 @@ file path=usr/include/poppler/cpp/poppler-page.h
 file path=usr/include/poppler/cpp/poppler-rectangle.h
 file path=usr/include/poppler/cpp/poppler-toc.h
 file path=usr/include/poppler/cpp/poppler-version.h
+file path=usr/include/poppler/cpp/poppler_cpp_export.h
 file path=usr/include/poppler/fofi/FoFiBase.h
 file path=usr/include/poppler/fofi/FoFiEncodings.h
 file path=usr/include/poppler/fofi/FoFiIdentifier.h
@@ -179,6 +180,7 @@ file path=usr/include/poppler/goo/gmem.h
 file path=usr/include/poppler/goo/grandom.h
 file path=usr/include/poppler/goo/gstrtod.h
 file path=usr/include/poppler/poppler-config.h
+file path=usr/include/poppler/poppler_private_export.h
 file path=usr/include/poppler/splash/Splash.h
 file path=usr/include/poppler/splash/SplashBitmap.h
 file path=usr/include/poppler/splash/SplashClip.h
@@ -205,11 +207,11 @@ link path=usr/lib/$(MACH64)/libpoppler-cpp.so.0 target=libpoppler-cpp.so.0.9.0
 file path=usr/lib/$(MACH64)/libpoppler-cpp.so.0.9.0
 link path=usr/lib/$(MACH64)/libpoppler-glib.so target=libpoppler-glib.so.8
 link path=usr/lib/$(MACH64)/libpoppler-glib.so.8 \
-    target=libpoppler-glib.so.8.19.0
-file path=usr/lib/$(MACH64)/libpoppler-glib.so.8.19.0
-link path=usr/lib/$(MACH64)/libpoppler.so target=libpoppler.so.106
-link path=usr/lib/$(MACH64)/libpoppler.so.106 target=libpoppler.so.106.0.0
-file path=usr/lib/$(MACH64)/libpoppler.so.106.0.0
+    target=libpoppler-glib.so.8.20.0
+file path=usr/lib/$(MACH64)/libpoppler-glib.so.8.20.0
+link path=usr/lib/$(MACH64)/libpoppler.so target=libpoppler.so.109
+link path=usr/lib/$(MACH64)/libpoppler.so.109 target=libpoppler.so.109.0.0
+file path=usr/lib/$(MACH64)/libpoppler.so.109.0.0
 file path=usr/lib/$(MACH64)/pkgconfig/poppler-cpp.pc
 file path=usr/lib/$(MACH64)/pkgconfig/poppler-glib.pc
 file path=usr/lib/$(MACH64)/pkgconfig/poppler.pc
@@ -220,11 +222,11 @@ link path=usr/lib/libpoppler-glib.so target=libpoppler-glib.so.8
 link path=usr/lib/libpoppler-glib.so.5 target=libpoppler-glib.so.5.0.0
 file 0.14.5/usr/lib/libpoppler-glib.so.5.0.0 \
     path=usr/lib/libpoppler-glib.so.5.0.0
-link path=usr/lib/libpoppler-glib.so.8 target=libpoppler-glib.so.8.19.0
-file path=usr/lib/libpoppler-glib.so.8.19.0
-link path=usr/lib/libpoppler.so target=libpoppler.so.106
-link path=usr/lib/libpoppler.so.106 target=libpoppler.so.106.0.0
-file path=usr/lib/libpoppler.so.106.0.0
+link path=usr/lib/libpoppler-glib.so.8 target=libpoppler-glib.so.8.20.0
+file path=usr/lib/libpoppler-glib.so.8.20.0
+link path=usr/lib/libpoppler.so target=libpoppler.so.109
+link path=usr/lib/libpoppler.so.109 target=libpoppler.so.109.0.0
+file path=usr/lib/libpoppler.so.109.0.0
 link path=usr/lib/libpoppler.so.7 target=libpoppler.so.7.0.0
 file 0.14.5/usr/lib/libpoppler.so.7.0.0 path=usr/lib/libpoppler.so.7.0.0
 file path=usr/lib/pkgconfig/poppler-cpp.pc
@@ -372,6 +374,7 @@ file path=usr/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-3
 file path=usr/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-4
 file path=usr/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-5
 file path=usr/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-6
+file path=usr/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-7
 file path=usr/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-90ms-RKSJ
 file path=usr/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-90pv-RKSJ
 file path=usr/share/poppler/cMap/Adobe-Japan1/Adobe-Japan1-H-CID
@@ -435,6 +438,20 @@ file path=usr/share/poppler/cMap/Adobe-Japan1/UniJISX02132004-UTF32-V
 file path=usr/share/poppler/cMap/Adobe-Japan1/V
 file path=usr/share/poppler/cMap/Adobe-Japan1/WP-Symbol
 file path=usr/share/poppler/cMap/Adobe-Japan2/Adobe-Japan2-0
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-0
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-1
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-2
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-3
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-4
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-5
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-6
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-7
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-8
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-9
+file path=usr/share/poppler/cMap/Adobe-KR/Adobe-KR-UCS2
+file path=usr/share/poppler/cMap/Adobe-KR/UniAKR-UTF16-H
+file path=usr/share/poppler/cMap/Adobe-KR/UniAKR-UTF32-H
+file path=usr/share/poppler/cMap/Adobe-KR/UniAKR-UTF8-H
 file path=usr/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-0
 file path=usr/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-1
 file path=usr/share/poppler/cMap/Adobe-Korea1/Adobe-Korea1-2
