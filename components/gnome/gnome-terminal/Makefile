@@ -28,10 +28,10 @@ COMPILER=		gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gnome-terminal
-COMPONENT_VERSION=	3.34.2
+COMPONENT_VERSION=	3.40.0
 COMPONENT_PROJECT_URL=  https://wiki.gnome.org/Apps/Terminal
 COMPONENT_ARCHIVE_HASH= \
-	sha256:3bd723f4058ec014da4715db4181b7d73eccc797b85ad5e6236996951c01803d
+	sha256:9d2fe397be0b8b50c4ef96634a2e0480ad9ff56d1431582ecc804907e11fa74e
 COMPONENT_BUGDB=        gnome/terminal
 COMPONENT_ANITYA_ID=	10896
 
