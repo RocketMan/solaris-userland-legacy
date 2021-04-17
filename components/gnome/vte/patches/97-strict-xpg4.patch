@@ -1,0 +1,41 @@
+--- vte-0.62.1/src/vte.cc.~2~	2020-11-30 19:42:21.010777988 +0000
++++ vte-0.62.1/src/vte.cc	2020-11-30 19:43:32.095958788 +0000
+@@ -4016,6 +4016,7 @@
+ 				}
+ #elif defined(__sun) && defined(HAVE_STROPTS_H)
+ 				static unsigned char ctl_s[128];
++				struct iocblk *ioc;
+ 				struct strbuf ctlbuf, databuf;
+ 				int ret, flags = 0;
+ 				bool have_data = false;
+@@ -4032,6 +4033,14 @@
+ 				} else if (ctlbuf.len == 1) {
+ 					switch (ctl_s[0]) {
+ 					case M_IOCTL:
++#ifdef STRICT_XPG4
++						// hangup on break
++						ioc = (struct iocblk*)bp;
++						if(ioc->ioc_cmd == TCSBRK) {
++							eos = true;
++							goto out;
++						}
++#endif
+ 						pty_termios_changed();
+ 						break;
+ 					case M_STOP:
+@@ -4050,10 +4059,15 @@
+ 				}
+ 
+ 				if (have_data) {
++					// ptys in illumos before commit
++					// 7d8deab can have empty mblks
++					// see https://www.illumos.org/issues/12306
++#ifndef STRICT_XPG4
+ 					if (databuf.len == 0) {
+ 						eos = true;
+ 						goto out;
+ 					}
++#endif
+ 					bp += databuf.len;
+ 					rem -= databuf.len;
+ 					len += databuf.len;

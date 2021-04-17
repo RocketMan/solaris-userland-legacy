@@ -1,0 +1,69 @@
+--- vte-0.62.1/src/dumpkeys.c~	2020-10-08 13:30:11.000000000 +0000
++++ vte-0.62.1/src/dumpkeys.c	2020-11-22 15:40:59.143018552 +0000
+@@ -146,6 +146,20 @@
+ 	_exit(1);
+ }
+ 
++#ifdef __sun
++static void
++cfmakeraw (struct termios *t)
++{
++        t->c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL|IXON);
++        t->c_oflag &= ~OPOST;
++        t->c_lflag &= ~(ECHO|ECHONL|ICANON|ISIG|IEXTEN);
++        t->c_cflag &= ~(CSIZE|PARENB);
++        t->c_cflag |= CS8;
++        t->c_cc[VMIN] = 1;                /* read returns when one char is available.  */
++        t->c_cc[VTIME] = 0;
++}
++#endif /* sun */
++
+ int
+ main(int argc, char **argv)
+ {
+--- vte-0.62.1/src/mev.c~	2020-10-08 13:30:11.000000000 +0000
++++ vte-0.62.1/src/mev.c	2020-11-22 15:42:22.859540769 +0000
+@@ -350,6 +350,20 @@
+ 	_exit(1);
+ }
+ 
++#ifdef __sun
++static void
++cfmakeraw (struct termios *t)
++{
++        t->c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL|IXON);
++        t->c_oflag &= ~OPOST;
++        t->c_lflag &= ~(ECHO|ECHONL|ICANON|ISIG|IEXTEN);
++        t->c_cflag &= ~(CSIZE|PARENB);
++        t->c_cflag |= CS8;
++        t->c_cc[VMIN] = 1;                /* read returns when one char is available.  */
++        t->c_cc[VTIME] = 0;
++}
++#endif /* sun */
++
+ int
+ main(int argc, char **argv)
+ {
+--- vte-0.62.1/src/app/app.cc~	2020-10-08 13:30:11.000000000 +0000
++++ vte-0.62.1/src/app/app.cc	2020-11-22 15:43:29.685320191 +0000
+@@ -2427,6 +2427,20 @@
+                                                             nullptr));
+ }
+ 
++#ifdef __sun
++static void
++cfmakeraw (struct termios *t)
++{
++        t->c_iflag &= ~(IGNBRK|BRKINT|PARMRK|ISTRIP|INLCR|IGNCR|ICRNL|IXON);
++        t->c_oflag &= ~OPOST;
++        t->c_lflag &= ~(ECHO|ECHONL|ICANON|ISIG|IEXTEN);
++        t->c_cflag &= ~(CSIZE|PARENB);
++        t->c_cflag |= CS8;
++        t->c_cc[VMIN] = 1;                /* read returns when one char is available.  */
++        t->c_cc[VTIME] = 0;
++}
++#endif /* sun */
++
+ /* main */
+ 
+ int

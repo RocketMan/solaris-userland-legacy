@@ -30,10 +30,10 @@ COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		vte
-COMPONENT_VERSION=	0.58.3
+COMPONENT_VERSION=	0.64.0
 COMPONENT_PROJECT_URL=  https://wiki.gnome.org/Apps/Terminal/VTE
 COMPONENT_ARCHIVE_HASH= \
-	sha256:22dcb54ac2ad1a56ab0a745e16ccfeb383f0b5860b5bfa1784561216f98d4975
+	sha256:c0c60b8dc343167437c86d984b0cf134df86034180ed70513f683006ada3ec41
 COMPONENT_BUGDB=        gnome/terminal
 COMPONENT_ANITYA_ID=	10895
 
@@ -58,8 +58,15 @@ LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
 LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 LDFLAGS += -lssp
 
+# if you are on 11.3 and are using stock gcc which does NOT have the
+# 910-legacy-xpg4 patch from this repo, then uncomment the following
+# line to work-around strict XPG4 semantics.
+#$(SOLARIS_11_3_ONLY)CXXFLAGS += -DSTRICT_XPG4
+
 CONFIGURE_OPTIONS += -D_b_symbolic_functions=false
 CONFIGURE_OPTIONS += -D_systemd=false
+#CONFIGURE_OPTIONS += -Ddebugg=true
+#CONFIGURE_OPTIONS += --buildtype debug
 
 REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += developer/vala
@@ -72,6 +79,7 @@ REQUIRED_PACKAGES += library/desktop/gtk3
 REQUIRED_PACKAGES += library/desktop/pango
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/gnutls-3
+REQUIRED_PACKAGES += library/icu
 REQUIRED_PACKAGES += library/pcre2
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime

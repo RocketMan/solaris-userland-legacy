@@ -1,11 +1,8 @@
---- vte-0.58.3/src/pty.cc	2020-11-01 12:40:41.501447168 +0000
-+++ vte-0.58.3/src/pty.cc	2020-11-01 12:43:33.874540915 +0000
-@@ -77,7 +77,7 @@
+--- vte-0.62.1/src/vtedefines.hh~	2020-10-08 13:30:11.000000000 +0000
++++ vte-0.62.1/src/vtedefines.hh	2020-11-22 15:20:32.521424993 +0000
+@@ -142,4 +142,4 @@
  
  #define VTE_VERSION_NUMERIC ((VTE_MAJOR_VERSION) * 10000 + (VTE_MINOR_VERSION) * 100 + (VTE_MICRO_VERSION))
  
 -#define VTE_TERMINFO_NAME "xterm-256color"
 +#define VTE_TERMINFO_NAME "xterm"
- 
- #if !GLIB_CHECK_VERSION(2, 42, 0)
- #define G_PARAM_EXPLICIT_NOTIFY 0
