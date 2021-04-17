@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2020, Oracle and/or its affiliates. 
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64_and_32
@@ -42,8 +42,6 @@ BUILD_STYLE=		meson
 
 # default LD_Z_IGNORE produces errors in g-ir-scanner
 LD_Z_IGNORE=
-# Tests do not pass because of insufficient gsed filtering.
-$(SKIP_TEST_AT_TOP_LEVEL)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
@@ -66,7 +64,7 @@ COMPONENT_TEST_TRANSFORMS += \
         '-e "/Pass/p" ' \
         '-e "/Skipped/p" ' \
         '-e "/Timeout/p" '
-COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
+COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-$(BITS).master
 
 REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += developer/vala
