@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2017, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
 <transform file path=usr.*/man/.+ -> \
@@ -57,10 +57,10 @@ file path=usr/include/$(COMPONENT_NAME)-3/$(COMPONENT_NAME)/urls.h
 file path=usr/include/$(COMPONENT_NAME)-3/$(COMPONENT_NAME)/x509-ext.h
 file path=usr/include/$(COMPONENT_NAME)-3/$(COMPONENT_NAME)/x509.h
 file path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.la
-link path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so target=libgnutls.so.30.28.1
+link path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so target=libgnutls.so.30.29.1
 link path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so.30 \
-    target=libgnutls.so.30.28.1
-file path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so.30.28.1
+    target=libgnutls.so.30.29.1
+file path=usr/lib/$(COMPONENT_NAME)-3/libgnutls.so.30.29.1
 file path=usr/lib/$(COMPONENT_NAME)-3/libgnutlsxx.la
 link path=usr/lib/$(COMPONENT_NAME)-3/libgnutlsxx.so \
     target=libgnutlsxx.so.28.1.0
@@ -70,10 +70,10 @@ file path=usr/lib/$(COMPONENT_NAME)-3/libgnutlsxx.so.28.1.0
 file path=usr/lib/$(COMPONENT_NAME)-3/pkgconfig/gnutls.pc
 file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.la
 link path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.so \
-    target=libgnutls.so.30.28.1
+    target=libgnutls.so.30.29.1
 link path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.so.30 \
-    target=libgnutls.so.30.28.1
-file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.so.30.28.1
+    target=libgnutls.so.30.29.1
+file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutls.so.30.29.1
 file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutlsxx.la
 link path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutlsxx.so \
     target=libgnutlsxx.so.28.1.0
@@ -82,12 +82,12 @@ link path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutlsxx.so.28 \
 file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/libgnutlsxx.so.28.1.0
 file path=usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/pkgconfig/gnutls.pc
 link path=usr/lib/$(MACH64)/libgnutls.so.30 \
-    target=$(COMPONENT_NAME)-3/libgnutls.so.30.28.1
+    target=$(COMPONENT_NAME)-3/libgnutls.so.30.29.1
 file usr/lib/$(MACH64)/$(COMPONENT_NAME)-3/pkgconfig/gnutls.pc \
     path=usr/lib/$(MACH64)/pkgconfig/$(COMPONENT_NAME)-3/gnutls.pc
 file path=usr/lib/grub/wanboot/libgnutls.a variant.arch=i386
 link path=usr/lib/libgnutls.so.30 \
-    target=$(COMPONENT_NAME)-3/libgnutls.so.30.28.1
+    target=$(COMPONENT_NAME)-3/libgnutls.so.30.29.1
 file usr/lib/$(COMPONENT_NAME)-3/pkgconfig/gnutls.pc \
     path=usr/lib/pkgconfig/$(COMPONENT_NAME)-3/gnutls.pc
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/dane_cert_type_name.3
@@ -120,6 +120,7 @@ file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_alert_get_name.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_alert_get_strname.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_alert_send.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_alert_send_appropriate.3
+file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_alert_set_read_function.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_alpn_get_selected_protocol.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_alpn_set_protocols.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_anon_allocate_client_credentials.3
@@ -334,7 +335,10 @@ file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_handshake_set_max_packet
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_handshake_set_post_client_hello_function.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_handshake_set_private_extensions.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_handshake_set_random.3
+file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_handshake_set_read_function.3
+file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_handshake_set_secret_function.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_handshake_set_timeout.3
+file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_handshake_write.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_hash.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_hash_copy.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_hash_deinit.3
@@ -779,6 +783,7 @@ file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_session_set_ptr.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_session_set_verify_cert.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_session_set_verify_cert2.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_session_set_verify_function.3
+file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_session_set_verify_output_function.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_session_supplemental_register.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_session_ticket_enable_client.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_session_ticket_enable_server.3
@@ -1229,12 +1234,15 @@ file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_deinit.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_get_issuer.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_get_issuer_by_dn.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_get_issuer_by_subject_key_id.3
+file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_get_ptr.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_init.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_iter_deinit.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_iter_get_ca.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_remove_cas.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_remove_trust_file.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_remove_trust_mem.3
+file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_set_getissuer_function.3
+file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_set_ptr.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_verify_crt.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_verify_crt2.3
 file path=usr/share/$(COMPONENT_NAME)-3/man/man3/gnutls_x509_trust_list_verify_named_crt.3
