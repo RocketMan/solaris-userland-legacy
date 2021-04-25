@@ -55,6 +55,9 @@ endif
 
 # Doesn't build currently; conflicts between Solaris krb5.h and p11-kit.
 CONFIGURE_OPTIONS += --disable-kerberos
+# fedora brings in the identity provider, which also introduces kerberos
+# dependencies that break in 11.3.  disable it for now.
+CONFIGURE_OPTIONS += --disable-fedora
 CONFIGURE_OPTIONS += --disable-static
 CONFIGURE_OPTIONS += --enable-exchange
 CONFIGURE_OPTIONS += --enable-documentation

@@ -52,7 +52,6 @@ file path=usr/lib/$(MACH64)/girepository-1.0/Goa-1.0.typelib
 file path=usr/lib/$(MACH64)/goa-1.0/include/goaconfig.h
 file path=usr/lib/$(MACH64)/goa-1.0/web-extensions/libgoawebextension.so
 file path=usr/lib/$(MACH64)/goa-daemon mode=0555
-file path=usr/lib/$(MACH64)/goa-identity-service mode=0555
 link path=usr/lib/$(MACH64)/libgoa-1.0.so target=libgoa-1.0.so.0.0.0
 link path=usr/lib/$(MACH64)/libgoa-1.0.so.0 target=libgoa-1.0.so.0.0.0
 file path=usr/lib/$(MACH64)/libgoa-1.0.so.0.0.0
@@ -123,11 +122,12 @@ file path=usr/share/gtk-doc/html/goa/goa-GoaError.html
 file path=usr/share/gtk-doc/html/goa/goa-Version-Information.html
 file path=usr/share/gtk-doc/html/goa/goa-daemon.8.html
 file path=usr/share/gtk-doc/html/goa/goa-goautil.html
+file path=usr/share/gtk-doc/html/goa/goa.devhelp
 file path=usr/share/gtk-doc/html/goa/goa.devhelp2
 file path=usr/share/gtk-doc/html/goa/home.png
 file path=usr/share/gtk-doc/html/goa/index.html
+file path=usr/share/gtk-doc/html/goa/index.sgml
 file path=usr/share/gtk-doc/html/goa/ix01.html
-file path=usr/share/gtk-doc/html/goa/left-insensitive.png
 file path=usr/share/gtk-doc/html/goa/left.png
 file path=usr/share/gtk-doc/html/goa/overview-writing.html
 file path=usr/share/gtk-doc/html/goa/overview.html
@@ -137,11 +137,9 @@ file path=usr/share/gtk-doc/html/goa/ref-dbus-well-known-object.html
 file path=usr/share/gtk-doc/html/goa/ref-dbus.html
 file path=usr/share/gtk-doc/html/goa/ref-library-generated.html
 file path=usr/share/gtk-doc/html/goa/ref-library.html
-file path=usr/share/gtk-doc/html/goa/right-insensitive.png
 file path=usr/share/gtk-doc/html/goa/right.png
 file path=usr/share/gtk-doc/html/goa/style.css
 file path=usr/share/gtk-doc/html/goa/tools-fileformats.html
-file path=usr/share/gtk-doc/html/goa/up-insensitive.png
 file path=usr/share/gtk-doc/html/goa/up.png
 file path=usr/share/icons/hicolor/scalable/apps/goa-account-exchange.svg
 file path=usr/share/icons/hicolor/scalable/apps/goa-account-facebook.svg
