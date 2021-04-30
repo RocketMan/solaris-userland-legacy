@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
 #
 
 <transform file path=usr.*/man/.+ -> \
@@ -743,3 +743,4 @@ depend type=require fmri=__TBD pkg.debug.depend.reason=src/terminal-app.c \
     pkg.tmp.gsettings-schema=org.gnome.desktop.interface
 depend type=require fmri=__TBD pkg.debug.depend.reason=src/terminal-app.c \
     pkg.tmp.gsettings-schema=org.gnome.system.proxy
+
