@@ -20,18 +20,19 @@
 #
 
 #
-# Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2018, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64_and_32
 include ../../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libXres
-COMPONENT_VERSION=	1.2.0
+COMPONENT_VERSION=	1.2.1
 COMPONENT_ARCHIVE_HASH= \
-	sha256:ff75c1643488e64a7cfbced27486f0f944801319c84c18d3bd3da6bf28c812d4
+	sha256:b6e6fb1ebb61610e56017edd928fb89a5f53b3f4f990078309877468663b2b11
 COMPONENT_BUGDB=        x11/libraries
 COMPONENT_ANITYA_ID=	1790
+TPNO=			69911
 
 TEST_TARGET = $(NO_TESTS)
 
