@@ -1,0 +1,11 @@
+--- gnome-system-monitor-3.38.0/data/interface.ui~	2020-09-11 08:25:08.722186000 +0000
++++ gnome-system-monitor-3.38.0/data/interface.ui	2021-05-13 12:59:30.578593817 +0000
+@@ -231,7 +231,7 @@
+                             <property name="can_focus">False</property>
+                             <property name="margin_start">57</property>
+                             <property name="hexpand">True</property>
+-                            <property name="row_spacing">1</property>
++                            <property name="row_spacing">4</property>
+                             <property name="column_spacing">6</property>
+                             <property name="row_homogeneous">True</property>
+                             <property name="column_homogeneous">True</property>

@@ -1,0 +1,11 @@
+--- gnome-system-monitor-3.38.0/gnome-system-monitor.desktop.in.in~	2020-09-11 08:25:08.724186200 +0000
++++ gnome-system-monitor-3.38.0/gnome-system-monitor.desktop.in.in	2021-05-13 12:55:49.816829430 +0000
+@@ -4,7 +4,7 @@
+ TryExec=gnome-system-monitor
+ Exec=gnome-system-monitor
+ # Translators: Do NOT translate or transliterate this text (this is an icon file name)!
+-Icon=org.gnome.SystemMonitor
++Icon=utilities-system-monitor
+ Terminal=false
+ Type=Application
+ StartupNotify=true
