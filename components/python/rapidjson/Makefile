@@ -20,40 +20,48 @@
 #
 
 #
-# Copyright (c) 2018, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
 include ../../../make-rules/shared-macros.mk
+COMPILER=	gcc
 
-COMPONENT_NAME=		setuptools_scm
-COMPONENT_VERSION=	3.3.3
+COMPONENT_NAME=		python-rapidjson
+COMPONENT_VERSION=	1.0
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
-COMPONENT_ARCHIVE_HASH=	\
-	sha256:bd25e1fb5e4d603dcf490f1fde40fb4c595b357795674c3e5cb7f6217ab39ea5
+COMPONENT_ARCHIVE_HASH= \
+    sha256:6ff5101af8a011cfa1d8f50c1df9a3c71f8f47b478aea237c8f9f07f1b78940c
 COMPONENT_ARCHIVE_URL=	$(call pypi_url)
-COMPONENT_PROJECT_URL=	https://pypi.org/project/setuptools_scm/
-COMPONENT_BUGDB=	python-mod/setuptools_scm
-COMPONENT_ANITYA_ID=	7874
+COMPONENT_PROJECT_URL=	https://github.com/python-rapidjson/python-rapidjson
+COMPONENT_BUGDB=	python-mod/rapidjson
+COMPONENT_ANITYA_ID=	42927
 
-TPNO=			51808
+TPNO=			70710
+
+PYTHON_VERSIONS = $(PYTHON3_VERSIONS)
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
 
-ASLR_MODE = $(ASLR_NOT_APPLICABLE)
-
-COMPONENT_TEST_DIR =	$(SOURCE_DIR)/testing
+COMPONENT_TEST_DIR =	$(SOURCE_DIR)/tests
 COMPONENT_TEST_CMD =	$(PYTHON) -m pytest
 COMPONENT_TEST_ARGS =
-COMPONENT_TEST_TRANSFORMS = '-nE -e "s/ ?=+ ?//g" -e "s/ in .* seconds//p"'
+
+ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 
 # common targets
-build:		$(BUILD_NO_ARCH)
+build:		$(BUILD_32_and_64)
 
-install:	$(INSTALL_NO_ARCH)
+install:	$(INSTALL_32_and_64)
 
-test:		$(TEST_NO_ARCH)
+test:		$(TEST_32_and_64)
 
-system-test:	$(SYSTEM_TESTS_NOT_IMPLEMENTED)
+system-test:    $(SYSTEM_TEST_32_and_64)
+
+REQUIRED_PACKAGES += system/library
+REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
+REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
+REQUIRED_PACKAGES += system/library/libc
+REQUIRED_PACKAGES += system/library/math

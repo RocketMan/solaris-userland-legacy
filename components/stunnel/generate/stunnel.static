@@ -1,4 +1,3 @@
-#! /usr/bin/sh
 #
 # CDDL HEADER START
 #
@@ -21,10 +20,10 @@
 #
 
 #
-# Copyright (c) 2008, 2011, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
-# For the time being, this will launch a browser pointing to the
-# CUPS Web interface.
-exec /usr/bin/system-config-printer
-exec gnome-open http://localhost:631/admin/
+file auth_stunnel path=etc/security/auth_attr.d/stunnel
+file prof_stunnel path=etc/security/prof_attr.d/stunnel
+file stunnel.xml path=lib/svc/manifest/network/ssl/stunnel.xml
+file etc/stunnel/stunnel.conf-sample path=usr/share/doc/stunnel/tools/stunnel.conf-sample
