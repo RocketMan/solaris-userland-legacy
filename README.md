@@ -30,7 +30,9 @@ Build the individual component
     $ cd (component-dir) ; gmake publish
 
 ## Copyright
-Copyright &copy; 2020 Jim Mason.
+Copyright &copy; 2020-2021 Jim Mason.
+
+Copyright (c) 2010, 2021, Oracle and/or its affiliates.
 
 This repository is adapted from material originally authored and published by
 Oracle and/or its affiliates at https://github.com/oracle/solaris-userland.
