@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
 <transform file path=usr.*/man/.+ -> \
@@ -124,6 +124,8 @@ file path=usr/include/libical/vcaltmp.h
 file path=usr/include/libical/vcc.h
 file path=usr/include/libical/vcomponent_cxx.h
 file path=usr/include/libical/vobject.h
+file path=usr/lib/$(MACH64)/cmake/LibIcal/IcalGlibSrcGenerator-relwithdebinfo.cmake
+file path=usr/lib/$(MACH64)/cmake/LibIcal/IcalGlibSrcGenerator.cmake
 file path=usr/lib/$(MACH64)/cmake/LibIcal/LibIcalConfig.cmake
 file path=usr/lib/$(MACH64)/cmake/LibIcal/LibIcalConfigVersion.cmake
 file path=usr/lib/$(MACH64)/cmake/LibIcal/LibIcalTargets-relwithdebinfo.cmake
@@ -173,6 +175,7 @@ file path=usr/lib/libical.so.$(COMPONENT_VERSION)
 link path=usr/lib/libical.so.0 target=libical.so.0.48.0
 file 0.48/usr/lib/libical.so.0.48.0 path=usr/lib/libical.so.0.48.0
 link path=usr/lib/libical.so.3 target=libical.so.$(COMPONENT_VERSION)
+file path=usr/lib/libical/ical-glib-src-generator mode=0555
 link path=usr/lib/libical_cxx.so target=libical_cxx.so.3
 file path=usr/lib/libical_cxx.so.$(COMPONENT_VERSION)
 link path=usr/lib/libical_cxx.so.3 target=libical_cxx.so.$(COMPONENT_VERSION)
