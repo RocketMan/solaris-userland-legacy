@@ -1,0 +1,19 @@
+--- a/ui/gcr-display-view.c	2020-09-28 06:33:20.895133500 +0000
++++ b/ui/gcr-display-view.c	2021-07-11 12:45:08.733796303 +0000
+@@ -253,7 +253,6 @@
+ 	GtkTextIter iter;
+ 	GtkWidget *widget;
+ 	GtkWidget *label;
+-	GtkStyleContext *style;
+ 	gchar *text;
+ 
+ 	item = g_new0 (GcrDisplayItem, 1);
+@@ -312,8 +311,6 @@
+ 	gtk_event_box_set_visible_window (GTK_EVENT_BOX (item->details_widget), FALSE);
+ 	gtk_container_add (GTK_CONTAINER (item->details_widget), widget);
+ 	g_signal_connect (item->details_widget, "realize", G_CALLBACK (on_expander_realize), NULL);
+-	style = gtk_widget_get_style_context (GTK_WIDGET (item->details_widget));
+-	gtk_style_context_add_class (style, "gcr-red");
+ 	g_object_ref (item->details_widget);
+ 
+ 	return item;

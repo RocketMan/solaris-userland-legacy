@@ -23,6 +23,7 @@
 # Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
+$(SOLARIS_11_3_ONLY)<transform file path=usr/share/gtk-doc/.* -> drop>
 <transform file path=usr.*/man/.+ -> \
     default mangler.man.stability "pass-through volatile">
 set name=pkg.fmri \

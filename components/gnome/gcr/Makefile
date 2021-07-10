@@ -42,6 +42,9 @@ BUILD_STYLE=            meson
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
+$(SOLARIS_11_3_ONLY)MANIFEST_COMPARE=/usr/bin/true
+$(SOLARIS_11_3_ONLY)CFLAGS += -D_XPG6
+
 # Assumes GNU xgettext in PATH.
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_BUILD_ENV += PATH=$(GNUBIN):$(PATH)
@@ -51,6 +54,9 @@ COMPONENT_INSTALL_ENV += PATH=$(GNUBIN):$(PATH)
 CFLAGS.studio += $(studio_FEATURES_EXTENSIONS)
 
 CONFIGURE_OPTIONS.32 += -Dintrospection=false
+
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS += -Dgtk_doc=false
+
 # Fix 64-bit builds.
 CONFIGURE_OPTIONS += --libexecdir=$(USRLIBDIR)
 
