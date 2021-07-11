@@ -1,0 +1,17 @@
+--- a/pam/mock-pam.c	2021-07-10 13:09:17.156148890 +0000
++++ b/pam/mock-pam.c	2021-07-11 12:17:12.821600011 +0000
+@@ -31,6 +31,14 @@
+ #include <stdlib.h>
+ #include <string.h>
+ 
++#ifndef PAM_EXTERN
++#ifdef PAM_STATIC
++#define PAM_EXTERN static
++#else
++#define PAM_EXTERN extern
++#endif
++#endif
++
+ static int
+ prompt_password (pam_handle_t *ph,
+                  const char *prompt,
