@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2020, Oracle and/or its affiliates. 
+# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
 #
 
 # Static assertions fail when building with Studio
@@ -44,8 +44,6 @@ TPNO=			60493
 CFLAGS += -D__EXTENSIONS__ -DDECCHECK -D_XOPEN_SOURCE=600 -D_XPG6 -D_POSIX_C_SOURCE=200112L
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
-
-SMF_MANIFESTS= $(COMPONENT_DIR)/files/dbus.xml
 
 include $(WS_MAKE_RULES)/common.mk
 

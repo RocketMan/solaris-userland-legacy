@@ -20,14 +20,9 @@
 #
 
 #
-# Copyright (c) 2013, 2016, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
-# sed script to fix the rbconfig.rb file after 
-# the configure and install of ruby
 
-# These paths to GNU commands are symlinks which are only available when 
-# the pkg facet.gnu-links is true, so use the non-faceted paths
-s%/usr/bin/ginstall%/usr/gnu/bin/install%
-s%/usr/bin/gmkdir%/usr/gnu/bin/mkdir%
-s%/usr/bin/gsed%/usr/gnu/bin/sed%
-s%/usr/bin/ggrep%/usr/gnu/bin/grep%
+# Drop files that are part of system/locale
+<transform file path=usr/lib/locale/.* -> drop>
+<transform file path=usr/share/lib/pub/.* -> drop>

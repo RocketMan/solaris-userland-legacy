@@ -23,6 +23,13 @@
 # Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
-file release-notes/legacy-library-libmozjs-60.txt \
-    path=usr/share/doc/release-notes/legacy-library-libmozjs-60.txt mode=0444 \
-    must-display=true release-note=feature/pkg/self@0
+# Drop files that are part of localedef package
+<transform file path=usr/lib/localedef/.* -> drop>
+
+# include common parts with proper locale facets
+<include build/common.list>
+
+# The "generate" scripts expands
+# 'collate.4dab28' to 'collate.4dab$(COMPONENT_VERSION)'
+# because COMPONENT_VERSION=28 now. This is a workaround
+<transform file path=usr/lib/locale/common/collate.4dab.* -> drop>

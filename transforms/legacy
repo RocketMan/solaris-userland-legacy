@@ -64,7 +64,6 @@
 <transform set name=pkg.fmri value=(pkg:/+)terminal/cssh-526 -> set mark_legacy true>
 
 <transform set name=pkg.fmri value=(pkg:/+)?.*(library/libmozjs-38) -> set mark_legacy true>
-<transform set name=pkg.fmri value=(pkg:/+)?.*(library/libmozjs-60) -> set mark_legacy true>
 
 # MySQL 5.6 and related packages
 <transform set name=pkg.fmri value=(pkg:/+)?.*database/mysql-56.* -> set mark_legacy true>
@@ -85,8 +84,6 @@
 
 # The following packages should not be marked
 <transform set name=pkg.fmri value=(pkg:/+)?.*(developer/build/scons-27) -> delete mark_legacy true>
-
-<transform set name=pkg.fmri value=(pkg:/+)?.*(runtime/ruby-25) -> set mark_legacy true>
 
 # MCollective move to legacy
 <transform set name=pkg.fmri value=(pkg:/+)?.*(system/management/mcollective) -> set mark_legacy true>

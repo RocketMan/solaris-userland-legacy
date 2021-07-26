@@ -1620,6 +1620,7 @@ library/java/swt@3.3.2-11.4.0.0.1.9.0
 library/lcms@1.19-11.4.30.0.0.88.0
 library/liblouisxml@2.1.0-11.4.0.0.1.9.0
 library/libmozjs-24@24.2.0-11.4.24.0.1.75.0
+library/libmozjs-60@60.8.0-AUTO_FMRI
 library/libnotify@0.4.5-11.4.0.0.1.9.0 incorporate=consolidation/desktop/gnome-incorporation
 library/liboil@0.3.17-11.4.0.0.1.9.0
 library/libproxy/libproxy-mozjs@0.3.1-11.4.0.0.1.9.0
@@ -2535,7 +2536,7 @@ runtime/java/beanshell@2.0-11.4.0.0.1.9.0
 runtime/ocaml@3.11.2-11.4.9.0.1.1.0
 runtime/ocaml/lablgtk@2.10.1-0.170
 # Maybe one day-26498289 really obsolete runtime/perl-512
-runtime/perl-512@5.12.5-11.4.0.0.0.2.0 runtime/perl-522
+runtime/perl-512@5.12.5-AUTO_FMRI runtime/perl-common
 runtime/perl-threaded-512@5.12.5-11.4.0.0.0.2.0 runtime/perl-522
 runtime/perl-516@5.16.3-11.4.0.0.1.9.0
 runtime/perl-520@5.20.1-11.4.0.0.1.9.0
@@ -2548,8 +2549,9 @@ runtime/python-26/tests@2.6.8-11.4.0.0.1.9.0
 runtime/r@3.4.1-11.4.0.0.0.12.0
 runtime/ruby-18@1.8.7.374-11.4.0.0.1.9.0
 runtime/ruby-19@1.9.3.551-11.4.0.0.1.9.0
-runtime/ruby-23@2.3.8-11.4.18.0.1.3.0
 runtime/ruby-21@2.1.6-11.4.18.0.1.3.0
+runtime/ruby-23@2.3.8-11.4.18.0.1.3.0
+runtime/ruby-25@2.5.9-AUTO_FMRI
 runtime/ruby-19/ruby-tk@1.9.3.551-11.4.0.0.1.9.0
 runtime/ruby-21/ruby-tk@2.1.6-11.4.18.0.1.3.0
 runtime/ruby-23/ruby-tk@2.3.8-11.4.18.0.1.3.0
