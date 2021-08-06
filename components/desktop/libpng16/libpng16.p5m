@@ -73,12 +73,15 @@ link path=usr/lib/pkgconfig/libpng.pc target=libpng16.pc mediator=libpng \
     mediator-version=1.6 pkg.linted.pkglint.dupaction010.2=true
 file path=usr/lib/pkgconfig/libpng16.pc
 link path=usr/share/man/man3/libpng.3 target=libpng16.3 mediator=libpng \
-    mediator-version=1.6 pkg.linted.pkglint.dupaction010.1=true
+    mediator-version=1.6 pkg.linted.pkglint.dupaction007=True \
+    pkg.linted.pkglint.dupaction010.1=true
 file usr/share/man/man3/libpng.3 path=usr/share/man/man3/libpng16.3
 link path=usr/share/man/man3/libpngpf.3 target=libpngpf16.3 mediator=libpng \
-    mediator-version=1.6 pkg.linted.pkglint.dupaction010.1=true
+    mediator-version=1.6 pkg.linted.pkglint.dupaction007=True \
+    pkg.linted.pkglint.dupaction010.1=true
 file usr/share/man/man3/libpngpf.3 path=usr/share/man/man3/libpngpf16.3
 link path=usr/share/man/man5/png.5 target=png16.5 mediator=libpng \
-    mediator-version=1.6 pkg.linted.pkglint.dupaction010.1=true
+    mediator-version=1.6 pkg.linted.pkglint.dupaction007=True \
+    pkg.linted.pkglint.dupaction010.1=true
 file usr/share/man/man5/png.5 path=usr/share/man/man5/png16.5
 license LICENSE license=libpng

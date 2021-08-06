@@ -47,7 +47,7 @@ CONFIGURE_OPTIONS += --disable-static
 
 # Required because upstream Makefiles use --version-script with GNU-style
 # version scripts (similar to Solaris linker mapfiles)
-LDFLAGS += -Wl,-zgnu-version-script-compat
+$(SOLARIS_11_4_5_ONLY)LDFLAGS += -Wl,-zgnu-version-script-compat
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
 COMPONENT_TEST_ARGS = -k -i
