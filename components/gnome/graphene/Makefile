@@ -38,14 +38,18 @@ COMPONENT_ANITYA_ID=	7305
 TPNO=			63447
 BUILD_STYLE=		meson
 
+$(SOLARIS_11_3_ONLY)TEST_TARGET = $(NO_TESTS)
+
 include $(WS_MAKE_RULES)/gnome-component.mk
 
 CONFIGURE_OPTIONS.32 += -Dintrospection=false
 CONFIGURE_OPTIONS += -Darm_neon=false
 # we don't need to distribute graphene tests
 CONFIGURE_OPTIONS += -Dinstalled_tests=false
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS += -Dtests=false
 
 CPPFLAGS += -std=gnu99 -D_XOPEN_SOURCE=700 -D__EXTENSIONS__
+$(SOLARIS_11_3_ONLY)CPPFLAGS += -D_XPG6
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
 COMPONENT_TEST_TRANSFORMS += \
