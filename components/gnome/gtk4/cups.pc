@@ -1,0 +1,18 @@
+prefix=/usr
+exec_prefix=/usr
+bindir=/usr/bin
+includedir=${prefix}/include
+libdir=/usr/lib/amd64
+imagelibdir=/usr/lib/amd64
+datarootdir=/usr/share
+datadir=/usr/share
+sysconfdir=/etc
+cups_datadir=/usr/share/cups
+cups_serverbin=/usr/lib/cups
+cups_serverroot=/etc/cups
+
+Name: cups
+Description: Common Unix Printing System
+Version: 1.4.5
+Cflags: -I${includedir}
+Libs: -L${libdir} -lcupsimage -lcups

@@ -1,0 +1,281 @@
+--- gtk-4.3.0/modules/printbackends/meson.build~	2021-05-04 01:33:05.102386500 +0000
++++ gtk-4.3.0/modules/printbackends/meson.build	2021-08-07 11:45:23.736876880 +0000
+@@ -11,7 +11,7 @@
+   '-D_GLIB_EXTERN=@0@'.format(visibility_define),
+ ] + common_cflags
+ 
+-cups_dep = dependency('cups', version : '>=2.0', required: get_option('print-cups'))
++cups_dep = dependency('cups', version : '>=1.4.5', required: get_option('print-cups'))
+ if cups_dep.found()
+   print_backends += 'cups'
+   shared_module('printbackend-cups',
+--- gtk-4.3.0/modules/printbackends/gtkprintbackendcups.c.~1~	2021-05-04 01:33:05.102386500 +0000
++++ gtk-4.3.0/modules/printbackends/gtkprintbackendcups.c	2021-08-07 14:09:03.390890373 +0000
+@@ -296,10 +296,12 @@
+   return g_object_new (GTK_TYPE_PRINT_BACKEND_CUPS, NULL);
+ }
+ 
++#if CUPS_VERSION_CHECK(2,2,0)
+ static void                 create_temporary_queue                  (GtkPrintBackendCups *backend,
+                                                                      const gchar         *printer_name,
+                                                                      const gchar         *printer_uri,
+                                                                      const gchar         *device_uri);
++#endif
+ 
+ static void
+ gtk_print_backend_cups_class_init (GtkPrintBackendCupsClass *class)
+@@ -714,11 +716,15 @@
+ 
+   if (cups_printer->avahi_browsed)
+     {
++#if CUPS_VERSION_CHECK(1,7,0)
+       http = httpConnect2 (cups_printer->hostname, cups_printer->port,
+                            NULL, AF_UNSPEC,
+                            HTTP_ENCRYPTION_IF_REQUESTED,
+                            1, 30000,
+                            NULL);
++#else
++      http = httpConnect (cups_printer->hostname, cups_printer->port);
++#endif
+       if (http)
+         {
+           request = gtk_cups_request_new_with_username (http,
+@@ -1877,6 +1883,7 @@
+ 
+   if (cups_printer->is_temporary)
+     {
++#if CUPS_VERSION_CHECK(2,2,0)
+       /* Do not recreate printers which disappeared from Avahi. */
+       iter = g_list_find_custom (GTK_PRINT_BACKEND_CUPS (backend)->temporary_queues_removed,
+                                  gtk_printer_get_name (printer), (GCompareFunc) g_strcmp0);
+@@ -1888,6 +1895,7 @@
+                                   cups_printer->printer_uri,
+                                   cups_printer->temporary_queue_device_uri);
+         }
++#endif
+     }
+   else
+     {
+@@ -2864,7 +2872,11 @@
+   GtkCupsRequest         *request;
+   http_t                 *http;
+ 
++#if CUPS_VERSION_CHECK(1,7,0)
+   http = httpConnect2 (printer->hostname, printer->port, NULL, AF_UNSPEC, HTTP_ENCRYPTION_IF_REQUESTED, 1, 30000, NULL);
++#else
++  http = httpConnect (printer->hostname, printer->port);
++#endif
+   if (http)
+     {
+       data = g_new0 (RequestPrinterInfoData, 1);
+@@ -2959,6 +2971,7 @@
+   return result;
+ }
+ 
++#if CUPS_VERSION_CHECK(2,2,0)
+ static void
+ cups_create_local_printer_cb (GtkPrintBackendCups *print_backend,
+                               GtkCupsResult       *result,
+@@ -3040,6 +3053,7 @@
+                         NULL,
+                         NULL);
+ }
++#endif
+ 
+ /*
+  *  Create new GtkPrinter from information included in TXT records.
+@@ -4157,10 +4171,14 @@
+                                   gtk_printer_cups_get_ppd_name (GTK_PRINTER_CUPS (printer)));
+     }
+ 
++#if CUPS_VERSION_CHECK(1,7,0)
+   http = httpConnect2 (hostname, port,
+                        NULL, AF_UNSPEC,
+                        cupsEncryption (),
+                        1, 30000, NULL);
++#else
++  http = httpConnectEncrypt (hostname, port, cupsEncryption ());
++#endif
+ 
+   data = g_new0 (GetPPDData, 1);
+ 
+@@ -4519,6 +4537,7 @@
+ 
+   cups_printer = GTK_PRINTER_CUPS (printer);
+ 
++#if CUPS_VERSION_CHECK(2,2,0)
+   if (cups_printer->avahi_browsed)
+     {
+       create_temporary_queue (GTK_PRINT_BACKEND_CUPS (gtk_printer_get_backend (printer)),
+@@ -4526,7 +4545,9 @@
+                               cups_printer->printer_uri,
+                               cups_printer->temporary_queue_device_uri);
+     }
+-  else if (!cups_printer->reading_ppd &&
++  else
++#endif
++    if (!cups_printer->reading_ppd &&
+            gtk_printer_cups_get_ppd (cups_printer) == NULL)
+     {
+       if (cups_printer->remote && !cups_printer->avahi_browsed)
+--- gtk-4.3.0/modules/printbackends/gtkcupsutils.c.~1~	2021-05-04 01:33:05.101386500 +0000
++++ gtk-4.3.0/modules/printbackends/gtkcupsutils.c	2021-08-07 15:02:10.901495846 +0000
+@@ -30,6 +30,85 @@
+ #include <fcntl.h>
+ #include <sys/socket.h>
+ 
++#if !CUPS_VERSION_CHECK(2,0,0)
++#define httpReconnect2(a,b,c) httpReconnect(a)
++#endif
++
++#if !CUPS_VERSION_CHECK(1,6,0)
++int
++ippGetRange (ipp_attribute_t *attr,
++             int element,
++             int *upper)
++{
++  *upper = attr->values[element].range.upper;
++  return (attr->values[element].range.lower);
++}
++
++ipp_attribute_t *
++ippFirstAttribute (ipp_t *ipp)
++{
++  if (!ipp)
++    return (NULL);
++
++  return (ipp->current = ipp->attrs);
++}
++
++ipp_attribute_t *
++ippNextAttribute (ipp_t *ipp)
++{
++  if (!ipp || !ipp->current)
++    return (NULL);
++
++  return (ipp->current = ipp->current->next);
++}
++
++int
++ippSetState (ipp_t *ipp, ipp_state_t state)
++{
++  if (!ipp)
++    return (0);
++
++  ipp->state = state;
++  ipp->current = NULL;
++
++  return (1);
++}
++
++int
++ippSetRequestId (ipp_t *ipp, int request_id)
++{
++  if (!ipp)
++    return (0);
++
++  ipp->request.any.request_id = request_id;
++
++  return (1);
++}
++
++int
++ippSetOperation (ipp_t *ipp, ipp_op_t op)
++{
++  if (!ipp)
++    return (0);
++
++  ipp->request.op.operation_id = op;
++
++  return (1);
++}
++
++int
++ippSetVersion (ipp_t *ipp, int major, int minor)
++{
++  if (!ipp || major < 0 || minor < 0)
++    return (0);
++
++  ipp->request.any.version[0] = (ipp_uchar_t)major;
++  ipp->request.any.version[1] = (ipp_uchar_t)minor;
++
++  return (1);
++}
++#endif
++
+ typedef void (*GtkCupsRequestStateFunc) (GtkCupsRequest *request);
+ 
+ static void _connect            (GtkCupsRequest *request);
+@@ -146,10 +224,15 @@
+     }
+   else
+     {
++#if CUPS_VERSION_CHECK(1,7,0)
+       request->http = httpConnect2 (request->server, ippPort (),
+                                     NULL, AF_UNSPEC,
+                                     cupsEncryption (),
+                                     1, 30000, NULL);
++#else
++      request->http = httpConnectEncrypt (request->server, ippPort (),
++                                          cupsEncryption ());
++#endif
+ 
+       if (request->http)
+         httpBlocking (request->http, 0);
+@@ -664,10 +747,16 @@
+ 
+   if (request->http == NULL)
+     {
++#if CUPS_VERSION_CHECK(1,7,0)    
+       request->http = httpConnect2 (request->server, ippPort (),
+                                     NULL, AF_UNSPEC,
+                                     cupsEncryption (),
+                                     1, 30000, NULL);
++#else
++      request->http = httpConnectEncrypt (request->server, ippPort (),
++                                          cupsEncryption ());
++#endif
++
+       if (request->http == NULL)
+         request->attempts++;
+ 
+--- gtk-4.3.0/modules/printbackends/gtkcupsutils.h.~1~	2021-05-04 01:33:05.101386500 +0000
++++ gtk-4.3.0/modules/printbackends/gtkcupsutils.h	2021-08-07 15:02:10.034954535 +0000
+@@ -23,9 +23,37 @@
+ #include <cups/language.h>
+ #include <cups/http.h>
+ #include <cups/ipp.h>
++#include <pango/pango-utils.h>
+ 
+ G_BEGIN_DECLS
+ 
++#define CUPS_VERSIONX PANGO_VERSION_ENCODE( \
++        CUPS_VERSION_MAJOR, \
++        CUPS_VERSION_MINOR, \
++        CUPS_VERSION_PATCH)
++#define CUPS_VERSION_CHECK(major,minor,micro) \
++        (CUPS_VERSIONX >= PANGO_VERSION_ENCODE(major,minor,micro))
++
++#if !CUPS_VERSION_CHECK(1,6,0)
++#define ippGetOperation(ipp_request) ipp_request->request.op.operation_id
++#define ippGetInteger(attr, index) attr->values[index].integer
++#define ippGetBoolean(attr, index) attr->values[index].boolean
++#define ippGetString(attr, index, foo) attr->values[index].string.text
++#define ippGetValueTag(attr) attr->value_tag
++#define ippGetName(attr) attr->name
++#define ippGetCount(attr) attr->num_values
++#define ippGetGroupTag(attr) attr->group_tag
++#define ippGetCollection(attr, index) attr->values[index].collection
++
++int ippGetRange (ipp_attribute_t*, int, int*);
++ipp_attribute_t* ippFirstAttribute (ipp_t*);
++ipp_attribute_t* ippNextAttribute (ipp_t*);
++int ippSetState (ipp_t*, ipp_state_t);
++int ippSetRequestId (ipp_t*, int);
++int ippSetOperation (ipp_t*, ipp_op_t);
++int ippSetVersion (ipp_t*, int, int);
++#endif
++
+ typedef struct _GtkCupsRequest        GtkCupsRequest;
+ typedef struct _GtkCupsResult         GtkCupsResult;
+ typedef struct _GtkCupsConnectionTest GtkCupsConnectionTest;

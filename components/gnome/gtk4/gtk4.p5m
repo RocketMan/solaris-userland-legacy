@@ -397,6 +397,8 @@ file path=usr/lib/$(MACH64)/girepository-1.0/Gdk-4.0.typelib
 file path=usr/lib/$(MACH64)/girepository-1.0/GdkX11-4.0.typelib
 file path=usr/lib/$(MACH64)/girepository-1.0/Gsk-4.0.typelib
 file path=usr/lib/$(MACH64)/girepository-1.0/Gtk-4.0.typelib
+file path=usr/lib/$(MACH64)/gtk-4.0/4.0.0/media/libmedia-ffmpeg.so
+file path=usr/lib/$(MACH64)/gtk-4.0/4.0.0/media/libmedia-gstreamer.so
 file path=usr/lib/$(MACH64)/gtk-4.0/4.0.0/printbackends/libprintbackend-file.so
 link path=usr/lib/$(MACH64)/libgtk-4.so target=libgtk-4.so.1
 link path=usr/lib/$(MACH64)/libgtk-4.so.1 target=libgtk-4.so.1.300.0

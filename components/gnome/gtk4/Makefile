@@ -43,6 +43,8 @@ BUILD_STYLE=		meson
 include $(WS_MAKE_RULES)/gnome-component.mk
 include $(WS_MAKE_RULES)/test-x11.mk
 
+$(SOLARIS_11_3_ONLY)CFLAGS += -D_XPG6
+
 CONFIGURE_OPTIONS += -Dwayland-backend=false
 CONFIGURE_OPTIONS += -Dman-pages=true
 
@@ -65,12 +67,18 @@ REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/desktop/fribidi
 REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/desktop/graphene
+REQUIRED_PACKAGES += library/desktop/gstreamer-1
+REQUIRED_PACKAGES += library/desktop/gstreamer-1/gst-plugins-bad
+REQUIRED_PACKAGES += library/desktop/gstreamer-1/gst-plugins-base
+REQUIRED_PACKAGES += library/desktop/gstreamer-1/gst-plugins-good
+REQUIRED_PACKAGES += library/desktop/gstreamer-1/gst-plugins-ugly
 REQUIRED_PACKAGES += library/desktop/harfbuzz
 REQUIRED_PACKAGES += library/desktop/librest
 REQUIRED_PACKAGES += library/desktop/pango
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/json-glib
 REQUIRED_PACKAGES += library/print/cups-libs
+REQUIRED_PACKAGES += media/ffmpeg
 REQUIRED_PACKAGES += system/library
 REQUIRED_PACKAGES += system/library/fontconfig
 REQUIRED_PACKAGES += system/library/libc

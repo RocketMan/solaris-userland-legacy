@@ -1,0 +1,2 @@
+As a temporary fix to allow 11.3 to find the 64-bit cups libraries,
+copy 'cups.pc' to /usr/lib/amd64/pkgconfig.

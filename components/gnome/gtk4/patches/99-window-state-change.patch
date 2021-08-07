@@ -1,0 +1,25 @@
+--- gtk-4.3.0/gdk/x11/gdkdevicemanager-xi2.c.~1~	2021-05-04 01:33:04.927384900 +0000
++++ gtk-4.3.0/gdk/x11/gdkdevicemanager-xi2.c	2021-08-07 23:48:00.533371085 +0000
+@@ -1436,6 +1436,22 @@
+       event = gdk_focus_event_new (surface, device, focus_in);
+       gdk_display_put_event (gdk_surface_get_display (surface), event);
+       gdk_event_unref (event);
++
++      /*
++       * synthesize window state change if window manager does not
++       * support _NET_WM_STATE_FOCUSED
++       */
++      if (mode != NotifyGrab &&
++          mode != NotifyUngrab &&
++#ifdef XINPUT_2
++          mode != XINotifyPassiveGrab &&
++          mode != XINotifyPassiveUngrab &&
++#endif /* XINPUT_2 */
++          !gdk_x11_screen_supports_net_wm_hint (GDK_SURFACE_SCREEN (surface),
++						g_intern_static_string ("_NET_WM_STATE_FOCUSED")))
++        gdk_synthesize_surface_state (surface,
++                                     focus_in?0:GDK_TOPLEVEL_STATE_FOCUSED,
++                                     focus_in?GDK_TOPLEVEL_STATE_FOCUSED:0);
+     }
+ }
+ 
