@@ -32,7 +32,7 @@ include ../../../make-rules/shared-macros.mk
 GCC_ROOT=/usr/gcc/10
 
 COMPONENT_NAME =	thunderbird
-COMPONENT_VERSION =	78.11.0
+COMPONENT_VERSION =	78.13.0
 COMPONENT_PROJECT_URL =	https://www.thunderbird.net/
 COMPONENT_ARCHIVE = 	$(COMPONENT_SRC).source.tar.xz
 #COMPONENT_ARCHIVE_HASH= \
@@ -216,6 +216,7 @@ REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/desktop/gtk2
 REQUIRED_PACKAGES += library/desktop/gtk3
+REQUIRED_PACKAGES += library/desktop/harfbuzz
 REQUIRED_PACKAGES += library/desktop/pango
 REQUIRED_PACKAGES += library/desktop/startup-notification
 REQUIRED_PACKAGES += library/glib2
