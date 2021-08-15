@@ -45,6 +45,12 @@ include $(WS_MAKE_RULES)/test-x11.mk
 
 $(SOLARIS_11_3_ONLY)CFLAGS += -D_XPG6
 
+COMPONENT_POST_UNPACK_ACTION += (cp $(COMPONENT_DIR)/files/fontify.c \
+					$(SOURCE_DIR)/demos/gtk-demo)
+
+#gcc_OPT.i386.64 = -g
+#MESON_BUILDTYPE = debugoptimized
+#CONFIGURE_OPTIONS += -Ddebug=true
 CONFIGURE_OPTIONS += -Dwayland-backend=false
 CONFIGURE_OPTIONS += -Dman-pages=true
 
