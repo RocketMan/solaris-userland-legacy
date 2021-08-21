@@ -1,0 +1,28 @@
+Fixes toplevel window drag initiated on headerbar buttons
+
+See:
+    https://gitlab.gnome.org/GNOME/gtk/-/issues/3556
+    https://gitlab.gnome.org/GNOME/gtk/-/issues/2665
+    https://gitlab.gnome.org/GNOME/gtk/-/issues/3
+
+Potentially suitable for upstream.
+
+
+--- gtk-4.3.0/gdk/x11/gdksurface-x11.c~	2021-08-21 19:02:06.027271815 +0000
++++ gtk-4.3.0/gdk/x11/gdksurface-x11.c	2021-08-21 19:01:53.662744318 +0000
+@@ -4526,10 +4526,15 @@
+   GdkSurface *surface = GDK_SURFACE (toplevel);
+   int root_x, root_y;
+   int direction;
++  GdkEvent *event;
+ 
+   if (GDK_SURFACE_DESTROYED (surface))
+     return;
+ 
++  event = gdk_grab_broken_event_new (surface, device, NULL, TRUE);
++  gdk_display_put_event (gdk_surface_get_display (surface), event);
++  gdk_event_unref (event);
++
+   if (button == 0)
+     direction = _NET_WM_MOVERESIZE_MOVE_KEYBOARD;
+   else

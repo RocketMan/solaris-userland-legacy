@@ -29,6 +29,7 @@ include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gtk4
 COMPONENT_VERSION=	4.3.0
+IPS_COMPONENT_VERSION=	4.3.0.1
 COMPONENT_PROJECT_URL=	https://www.gtk.org/
 COMPONENT_SRC=		gtk-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE_HASH=	\
