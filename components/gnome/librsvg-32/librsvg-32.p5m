@@ -44,5 +44,6 @@ file path=usr/lib/librsvg-2.la
 link path=usr/lib/librsvg-2.so target=librsvg-2.so.2.40.21
 link path=usr/lib/librsvg-2.so.2 target=librsvg-2.so.2.40.21
 file path=usr/lib/librsvg-2.so.2.40.21
+file path=usr/lib/pkgconfig/librsvg-2.0.pc
 license librsvg.license license=LGPLv2.1
 depend type=require fmri=pkg:/image/library/librsvg
