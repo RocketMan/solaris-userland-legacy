@@ -25,7 +25,7 @@
 export PARFAIT_BUILD=no
 BUILD_BITS= 64
 COMPILER= gcc
-GCC_ROOT= /usr/gcc/11
+#GCC_ROOT= /usr/gcc/11
 
 include ../../make-rules/shared-macros.mk
 
@@ -100,7 +100,7 @@ CONFIGURE_LIBDIR.64 = $(CONFIGURE_PREFIX)/lib
 
 CONFIGURE_OPTIONS +=	--infodir=$(CONFIGURE_INFODIR)
 CONFIGURE_OPTIONS +=	--libexecdir=$(CONFIGURE_PREFIX)/lib
-CONFIGURE_OPTIONS +=	--enable-languages="ada,c,c++,fortran,go,objc"
+CONFIGURE_OPTIONS +=	--enable-languages="c,c++,fortran,go,objc"
 CONFIGURE_OPTIONS +=	--enable-shared
 CONFIGURE_OPTIONS +=	--enable-initfini-array
 CONFIGURE_OPTIONS +=	--disable-rpath
