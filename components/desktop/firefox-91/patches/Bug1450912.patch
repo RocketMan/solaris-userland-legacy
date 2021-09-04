@@ -1,0 +1,87 @@
+Workaround for:
+
+https://bugzilla.mozilla.org/show_bug.cgi?id=1450912
+
+
+--- a/toolkit/xre/nsAppRunner.cpp	2021-01-20 18:09:29.000000000 +0000
++++ b/toolkit/xre/nsAppRunner.cpp	2021-02-01 13:11:57.425738587 +0000
+@@ -3770,6 +3770,8 @@
+   // close it without fear that one day gtk might clean up the display it
+   // opens.
+   if (!gtk_parse_args(&gArgc, &gArgv)) return 1;
++  setlocale(LC_COLLATE, "C");
++  setlocale(LC_TIME, "C");
+ #endif /* MOZ_WIDGET_GTK */
+ 
+ #ifdef FUZZING
+--- a/js/xpconnect/shell/xpcshell.cpp	2021-01-20 18:08:45.000000000 +0000
++++ b/js/xpconnect/shell/xpcshell.cpp	2021-02-01 13:14:07.513887487 +0000
+@@ -38,6 +38,8 @@
+   // is not created here. Instead we set the command line args, which is a
+   // fairly cheap operation.
+   gtk_parse_args(&argc, &argv);
++  setlocale(LC_COLLATE, "C");
++  setlocale(LC_TIME, "C");
+ #endif
+ 
+ #ifdef XP_MACOSX
+--- a/dom/ipc/ContentChild.cpp	2021-01-20 18:08:36.000000000 +0000
++++ b/dom/ipc/ContentChild.cpp	2021-02-03 11:25:12.923300419 +0000
+@@ -288,6 +288,8 @@
+ #  include "mozilla/CodeCoverageHandler.h"
+ #endif
+ 
++#include <locale.h>
++
+ using namespace mozilla;
+ using namespace mozilla::docshell;
+ using namespace mozilla::dom::ipc;
+@@ -669,6 +671,8 @@
+     } else {
+       gtk_init(nullptr, nullptr);
+     }
++    setlocale(LC_COLLATE, "C");
++    setlocale(LC_TIME, "C");
+   }
+ #endif
+ 
+--- a/gfx/ipc/GPUParent.cpp	2021-01-20 18:08:37.000000000 +0000
++++ b/gfx/ipc/GPUParent.cpp	2021-02-03 11:26:36.656764493 +0000
+@@ -75,6 +75,8 @@
+ #  include "mozilla/SandboxTestingChild.h"
+ #endif
+ 
++#include <locale.h>
++
+ namespace mozilla::gfx {
+ 
+ using namespace ipc;
+@@ -245,6 +247,8 @@
+   } else {
+     gtk_init(nullptr, nullptr);
+   }
++  setlocale(LC_COLLATE, "C");
++  setlocale(LC_TIME, "C");
+ 
+   // Ensure we have an FT library for font instantiation.
+   // This would normally be set by gfxPlatform::Init().
+--- a/gfx/thebes/gfxPlatformGtk.cpp	2021-01-20 18:08:37.000000000 +0000
++++ b/gfx/thebes/gfxPlatformGtk.cpp	2021-02-03 11:27:27.903742530 +0000
+@@ -63,6 +63,8 @@
+ 
+ #include "nsMathUtils.h"
+ 
++#include <locale.h>
++
+ #define GDK_PIXMAP_SIZE_MAX 32767
+ 
+ #define GFX_PREF_MAX_GENERIC_SUBSTITUTIONS \
+@@ -79,6 +81,8 @@
+ gfxPlatformGtk::gfxPlatformGtk() {
+   if (!gfxPlatform::IsHeadless()) {
+     gtk_init(nullptr, nullptr);
++    setlocale(LC_COLLATE, "C");
++    setlocale(LC_TIME, "C");
+   }
+ 
+   mMaxGenericSubstitutions = UNINITIALIZED_VALUE;

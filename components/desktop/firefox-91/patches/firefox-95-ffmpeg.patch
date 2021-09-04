@@ -1,0 +1,18 @@
+Firefox is looking for FFVPXRuntimeLinker.h, which is supplied in a
+later version of ffmpeg than the one we have.
+
+Until we can sort out ffmpeg version requirements, we'll just disable this
+specific ffmpeg requirement, but leave the rest of it as-is.
+
+
+--- firefox-91.0.1/dom/media/webaudio/FFTBlock.h~	2021-08-16 19:14:34.000000000 +0000
++++ firefox-91.0.1/dom/media/webaudio/FFTBlock.h	2021-09-02 19:43:32.810583340 +0000
+@@ -13,6 +13,8 @@
+ #  include "dl/sp/api/omxSP.h"
+ #endif
+ 
++#undef MOZ_LIBAV_FFT
++
+ #include "AlignedTArray.h"
+ #include "AudioNodeEngine.h"
+ #if defined(MOZ_LIBAV_FFT)

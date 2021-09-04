@@ -1,0 +1,29 @@
+# HG changeset patch
+# User Petr Sumbera <petr.sumbera@oracle.com>
+# Date 1560937184 -7200
+#      Wed Jun 19 11:39:44 2019 +0200
+# Node ID 1c2190cf70a58a6e9ad82f52da97b00abcc81a8d
+# Parent  0dff9f803849e1e95d097fb2a41167f56c2d22c7
+Workaround for Bug 1533760
+Solaris: Text relocation remains against symbol ff_cos_512 referenced in in file x86/fft.o
+
+--- firefox-91.0.1/toolkit/moz.configure.~1~	2021-09-02 15:18:32.365601862 +0000
++++ firefox-91.0.1/toolkit/moz.configure	2021-09-02 15:22:01.400991340 +0000
+@@ -265,7 +265,7 @@
+     elif target.os == "Android":
+         return ("cairo-android",)
+     else:
+-        return ("cairo-gtk3", "cairo-gtk3-wayland")
++        return ("cairo-gtk3",)
+ 
+ 
+ @depends(toolkit_choices)
+@@ -1892,7 +1892,7 @@
+                 ]
+             else:
+                 flac_only = True
+-        elif target.cpu == "x86_64":
++        elif target.cpu == "x86_64" and target.kernel != 'SunOS':
+             flags = ["-D__x86_64__", "-DPIC", "-DELF", "-Pconfig_unix64.asm"]
+         elif target.cpu in ("x86", "arm", "aarch64"):
+             flac_only = True
