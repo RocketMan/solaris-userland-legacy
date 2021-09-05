@@ -3,85 +3,27 @@ Workaround for:
 https://bugzilla.mozilla.org/show_bug.cgi?id=1450912
 
 
---- a/toolkit/xre/nsAppRunner.cpp	2021-01-20 18:09:29.000000000 +0000
-+++ b/toolkit/xre/nsAppRunner.cpp	2021-02-01 13:11:57.425738587 +0000
-@@ -3770,6 +3770,8 @@
-   // close it without fear that one day gtk might clean up the display it
-   // opens.
-   if (!gtk_parse_args(&gArgc, &gArgv)) return 1;
-+  setlocale(LC_COLLATE, "C");
-+  setlocale(LC_TIME, "C");
- #endif /* MOZ_WIDGET_GTK */
+--- firefox-91.0.1/browser/app/nsBrowserApp.cpp~	2021-08-16 19:14:33.000000000 +0000
++++ firefox-91.0.1/browser/app/nsBrowserApp.cpp	2021-09-05 10:14:05.307734571 +0000
+@@ -257,6 +257,9 @@
+ #endif
  
- #ifdef FUZZING
---- a/js/xpconnect/shell/xpcshell.cpp	2021-01-20 18:08:45.000000000 +0000
-+++ b/js/xpconnect/shell/xpcshell.cpp	2021-02-01 13:14:07.513887487 +0000
-@@ -38,6 +38,8 @@
+ int main(int argc, char* argv[], char* envp[]) {
++  setenv("LC_COLLATE", "C", 1);
++  setenv("LC_TIME", "C", 1);
++
+ #if defined(MOZ_ENABLE_FORKSERVER)
+   if (strcmp(argv[argc - 1], "forkserver") == 0) {
+     nsresult rv = InitXPCOMGlue(LibLoadingStrategy::NoReadAhead);
+--- firefox-91.0.1/js/xpconnect/shell/xpcshell.cpp~	2021-08-16 19:14:37.000000000 +0000
++++ firefox-91.0.1/js/xpconnect/shell/xpcshell.cpp	2021-09-05 10:15:16.998352904 +0000
+@@ -42,6 +42,9 @@
+ #endif
+ 
+ int main(int argc, char** argv, char** envp) {
++  setenv("LC_COLLATE", "C", 1);
++  setenv("LC_TIME", "C", 1);
++
+ #ifdef MOZ_WIDGET_GTK
+   // A default display may or may not be required for xpcshell tests, and so
    // is not created here. Instead we set the command line args, which is a
-   // fairly cheap operation.
-   gtk_parse_args(&argc, &argv);
-+  setlocale(LC_COLLATE, "C");
-+  setlocale(LC_TIME, "C");
- #endif
- 
- #ifdef XP_MACOSX
---- a/dom/ipc/ContentChild.cpp	2021-01-20 18:08:36.000000000 +0000
-+++ b/dom/ipc/ContentChild.cpp	2021-02-03 11:25:12.923300419 +0000
-@@ -288,6 +288,8 @@
- #  include "mozilla/CodeCoverageHandler.h"
- #endif
- 
-+#include <locale.h>
-+
- using namespace mozilla;
- using namespace mozilla::docshell;
- using namespace mozilla::dom::ipc;
-@@ -669,6 +671,8 @@
-     } else {
-       gtk_init(nullptr, nullptr);
-     }
-+    setlocale(LC_COLLATE, "C");
-+    setlocale(LC_TIME, "C");
-   }
- #endif
- 
---- a/gfx/ipc/GPUParent.cpp	2021-01-20 18:08:37.000000000 +0000
-+++ b/gfx/ipc/GPUParent.cpp	2021-02-03 11:26:36.656764493 +0000
-@@ -75,6 +75,8 @@
- #  include "mozilla/SandboxTestingChild.h"
- #endif
- 
-+#include <locale.h>
-+
- namespace mozilla::gfx {
- 
- using namespace ipc;
-@@ -245,6 +247,8 @@
-   } else {
-     gtk_init(nullptr, nullptr);
-   }
-+  setlocale(LC_COLLATE, "C");
-+  setlocale(LC_TIME, "C");
- 
-   // Ensure we have an FT library for font instantiation.
-   // This would normally be set by gfxPlatform::Init().
---- a/gfx/thebes/gfxPlatformGtk.cpp	2021-01-20 18:08:37.000000000 +0000
-+++ b/gfx/thebes/gfxPlatformGtk.cpp	2021-02-03 11:27:27.903742530 +0000
-@@ -63,6 +63,8 @@
- 
- #include "nsMathUtils.h"
- 
-+#include <locale.h>
-+
- #define GDK_PIXMAP_SIZE_MAX 32767
- 
- #define GFX_PREF_MAX_GENERIC_SUBSTITUTIONS \
-@@ -79,6 +81,8 @@
- gfxPlatformGtk::gfxPlatformGtk() {
-   if (!gfxPlatform::IsHeadless()) {
-     gtk_init(nullptr, nullptr);
-+    setlocale(LC_COLLATE, "C");
-+    setlocale(LC_TIME, "C");
-   }
- 
-   mMaxGenericSubstitutions = UNINITIALIZED_VALUE;
