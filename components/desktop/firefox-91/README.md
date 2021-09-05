@@ -52,6 +52,9 @@
   in some other applications such as Thunderbird 78.  Rebuilding
   those with the updated icu should clear any problem.
 
+* Printing is not working.  Print.../Ctrl+P raises SIGSEGV before
+  print dialog is shown.
+
 ### Firefox 91.0.1 esr
 
 Using `slim-nimbus` and `firefox-nimbus-theme` from the [solaris-ports](https://github.com/RocketMan/solaris-ports/) repo.
