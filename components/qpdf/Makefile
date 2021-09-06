@@ -54,6 +54,17 @@ CONFIGURE_OPTIONS	+= --disable-largefile
 #The openssl implementation is making use of deprecated APIs
 CONFIGURE_OPTIONS       += --disable-crypto-openssl
 
+# Force use of gnutls-3 pkgconfig during 2.x->3.x transition
+PKG_CONFIG_PATHS.32 += /usr/lib/pkgconfig/gnutls-3
+PKG_CONFIG_PATHS.64 += /usr/lib/$(MACH64)/pkgconfig/gnutls-3
+PKG_CONFIG_PATHS += $(PKG_CONFIG_PATHS.$(BITS))
+LD_OPTIONS.32 += -L /usr/lib/gnutls-3
+LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
+LD_OPTIONS += $(LD_OPTIONS.$(BITS))
+LDFLAGS += -lsocket -lnsl
+CFLAGS += -I/usr/include/gnutls-3
+CXXFLAGS += -I/usr/include/gnutls-3
+
 # It would be nice to align this perl-script with perl version but it breaks a build.
 #PERL_SCRIPTS += $(PROTO_DIR)/usr/bin/fix-qdf
 
