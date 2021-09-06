@@ -88,6 +88,15 @@ COMPONENT_PRE_CONFIGURE_ACTION += $(CLONEY) $(SOURCE_DIR) $(@D)
 # we want to remove debugging data but not the symbols.
 COMPONENT_INSTALL_ENV += STRIPPROG="strip -x"
 
+# Force use of gnutls-3 pkgconfig during 2.x->3.x transition
+PKG_CONFIG_PATHS.32 += /usr/lib/pkgconfig/gnutls-3
+PKG_CONFIG_PATHS.64 += /usr/lib/$(MACH64)/pkgconfig/gnutls-3
+PKG_CONFIG_PATHS += $(PKG_CONFIG_PATHS.$(BITS))
+LD_OPTIONS.32 += -L /usr/lib/gnutls-3
+LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
+LD_OPTIONS += $(LD_OPTIONS.$(BITS))
+LDFLAGS += -lsocket -lnsl
+
 # cups scheduler
 PKG_OBJ =	cups
 # cups API
@@ -122,4 +131,5 @@ REQUIRED_PACKAGES += system/library/libc
 REQUIRED_PACKAGES += system/library/libdbus
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += system/library/pam-core
+REQUIRED_PACKAGES += system/library/security/gss
 REQUIRED_PACKAGES += system/network/avahi

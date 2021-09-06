@@ -1,0 +1,16 @@
+No pie on 11.3
+
+--- cups-2.3.3/config-scripts/cups-compiler.m4~	2020-04-27 19:04:29.000000000 +0000
++++ cups-2.3.3/config-scripts/cups-compiler.m4	2021-09-06 16:47:58.590399956 +0000
+@@ -158,11 +158,6 @@
+ 				;;
+ 
+ 			*)
+-				CFLAGS="$CFLAGS -fPIE -pie"
+-				AC_TRY_COMPILE(,,[
+-					PIEFLAGS="-fPIE -pie"
+-					AC_MSG_RESULT(yes)],
+-					AC_MSG_RESULT(no))
+ 				;;
+ 		esac
+ 		CFLAGS="$OLDCFLAGS"
