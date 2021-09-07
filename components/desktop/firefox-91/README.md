@@ -2,17 +2,6 @@
 
 ### Notes
 
-* Bug1450912.patch does not seem to achieve the intended effect.
-  It is supposed to set the LC_COLLATE and LC_TIME locales to C
-  for correct c++ std library operation on Solaris, but unlike
-  the analogous patch in Firefox 78, that does not seem to work.
-
-  **WORKAROUND:**
-
-  Launch firefox with LC_COLLATE and LC_TIME environment variables; e.g.,
-
-        LC_COLLATE=C LC_TIME=C firefox
-
 * EGL/glx probing seems to use a later version of EGL than we have, so
   falls back to libpci (part of pciutils) to detect the GPU.  This requires
   elevated priveges, which we really should not give to the browser.
@@ -52,8 +41,9 @@
   in some other applications such as Thunderbird 78.  Rebuilding
   those with the updated icu should clear any problem.
 
-* Printing is not working.  Print.../Ctrl+P raises SIGSEGV before
-  print dialog is shown.
+* **cups 1.6** or later is required at runtime for printing.  Firefox
+  will build and run without this, but any attempt to print using an
+  older CUPS will result in SIGSEGV.
 
 ### Firefox 91.0.1 esr
 
