@@ -1,0 +1,31 @@
+--- cups-filters-1.28.8/utils/cups-browsed.c-	2021-03-25 16:57:01.000000000 +0000
++++ cups-filters-1.28.8/utils/cups-browsed.c	2021-09-07 20:22:48.001023462 +0000
+@@ -744,7 +744,7 @@
+   if (debug_stderr || debug_logfile) {
+     time_t curtime = time(NULL);
+     char buf[64];
+-    ctime_r(&curtime, buf);
++    ctime_r(&curtime, buf, 64);
+     while(isspace(buf[strlen(buf)-1])) buf[strlen(buf)-1] = '\0';
+     va_list arglist;
+     if (debug_stderr) {
+@@ -781,7 +781,7 @@
+     time_t curtime = time(NULL);
+     char buf[64];
+     char *ptr1, *ptr2;
+-    ctime_r(&curtime, buf);
++    ctime_r(&curtime, buf, 64);
+     while(isspace(buf[strlen(buf)-1])) buf[strlen(buf)-1] = '\0';
+     ptr1 = log;
+     while(ptr1) {
+--- cups-filters-1.28.8/filter/gstoraster.c-	2021-03-25 16:57:01.000000000 +0000
++++ cups-filters-1.28.8/filter/gstoraster.c	2021-09-07 22:55:53.917904491 +0000
+@@ -462,7 +462,7 @@
+     }
+ 
+     /* Execute Ghostscript command line ... */
+-    execvpe(filename, gsargv, envp);
++    execve(filename, gsargv, envp);
+     fprintf(stderr, "ERROR: Unable to launch Ghostscript: %s: %s\n", filename, strerror(errno));
+     goto out;
+   }

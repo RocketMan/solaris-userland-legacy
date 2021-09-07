@@ -43,6 +43,8 @@ include $(WS_MAKE_RULES)/common.mk
 
 CPPFLAGS += -I/usr/include/cups
 
+$(SOLARIS_11_3_ONLY)LDFLAGS += -lsocket -lnsl
+
 # Ensure dynamic shared objects are linked using same LDFLAGS as executables.
 CONFIGURE_ENV += DSOFLAGS="$(LDFLAGS)"
 
@@ -55,7 +57,8 @@ CONFIGURE_OPTIONS +=	--localedir=$(USRSHARELOCALEDIR)
 CONFIGURE_OPTIONS +=	--sysconfdir=$(ETCDIR)
 CONFIGURE_OPTIONS +=	--localstatedir=$(VARDIR)
 CONFIGURE_OPTIONS +=	--with-cups-rundir=/system/volatile/cups
-CONFIGURE_OPTIONS +=	--with-ldap-includes=/usr/include/openldap
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS += --disable-ldap
+$(SOLARIS_11_4_5_ONLY)CONFIGURE_OPTIONS +=	--with-ldap-includes=/usr/include/openldap
 CONFIGURE_OPTIONS +=	--with-fontdir=$(USRSHAREFONTSDIR)
 CONFIGURE_OPTIONS +=	--disable-static
 # use pdftops (poppler) renderer instead
@@ -102,7 +105,9 @@ $(SOURCE_DIR)/cups-filters.license:
 
 $(INSTALL_64):	$(SOURCE_DIR)/cups-filters.license
 
+REQUIRED_PACKAGES += desktop/pdf-viewer/poppler
 REQUIRED_PACKAGES += image/library/libjpeg
+REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libpng16
 REQUIRED_PACKAGES += image/library/libtiff
 REQUIRED_PACKAGES += library/lcms2
