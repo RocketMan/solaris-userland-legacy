@@ -41,3 +41,13 @@
 <transform file link path=usr/include/.* -> drop>
 <transform file link path=usr/lib.*/pkgconfig/.* -> drop>
 <transform file link path=usr/share/man/.* -> drop>
+
+#
+# transitional exclusion for 11.3
+#
+# these files are provided by other packages
+<transform file path=usr/lib/cups/backend/beh -> drop>
+<transform file path=usr/lib/cups/filter/foomatic-rip -> drop>
+<transform file path=usr/lib/cups/filter/pdftoraster -> drop>
+<transform link path=usr/lib/cups/filter/pstopxl -> drop>
+<transform link path=usr/lib/cups/filter/pstoraster -> drop>

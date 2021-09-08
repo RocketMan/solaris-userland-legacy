@@ -42,7 +42,7 @@ file path=usr/lib/cups/$(MACH64)/libcupsfilters.so.1.0.0
 link path=usr/lib/cups/$(MACH64)/libfontembed.so target=libfontembed.so.1.0.0
 link path=usr/lib/cups/$(MACH64)/libfontembed.so.1 target=libfontembed.so.1.0.0
 file path=usr/lib/cups/$(MACH64)/libfontembed.so.1.0.0
-file path=usr/lib/cups/backend/beh mode=0555
+#file path=usr/lib/cups/backend/beh mode=0555
 file path=usr/lib/cups/backend/cups-brf mode=0500
 file path=usr/lib/cups/backend/implicitclass mode=0555
 file path=usr/lib/cups/backend/parallel mode=0555
@@ -55,7 +55,7 @@ link path=usr/lib/cups/filter/cmxtopdf target=vectortopdf
 file path=usr/lib/cups/filter/commandtoescpx mode=0555
 file path=usr/lib/cups/filter/commandtopclx mode=0555
 link path=usr/lib/cups/filter/emftopdf target=vectortopdf
-file path=usr/lib/cups/filter/foomatic-rip mode=0555
+#file path=usr/lib/cups/filter/foomatic-rip mode=0555
 file path=usr/lib/cups/filter/gstopdf mode=0555
 file path=usr/lib/cups/filter/gstopxl mode=0555
 file path=usr/lib/cups/filter/gstoraster mode=0555
@@ -70,9 +70,9 @@ file path=usr/lib/cups/filter/labeledtops mode=0555
 file path=usr/lib/cups/filter/musicxmltobrf mode=0555
 file path=usr/lib/cups/filter/pdftopdf mode=0555
 file path=usr/lib/cups/filter/pdftops mode=0555
-file path=usr/lib/cups/filter/pdftoraster mode=0555
-link path=usr/lib/cups/filter/pstopxl target=gstopxl
-link path=usr/lib/cups/filter/pstoraster target=gstoraster
+#file path=usr/lib/cups/filter/pdftoraster mode=0555
+#link path=usr/lib/cups/filter/pstopxl target=gstopxl
+#link path=usr/lib/cups/filter/pstoraster target=gstoraster
 file path=usr/lib/cups/filter/rastertoescpx mode=0555
 file path=usr/lib/cups/filter/rastertopclm mode=0555
 file path=usr/lib/cups/filter/rastertopclx mode=0555
