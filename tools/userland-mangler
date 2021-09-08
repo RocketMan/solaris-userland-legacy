@@ -249,7 +249,7 @@ def mangle_cddl(manifest, action, text):
 	return cddl_re.sub('', text)
 
 def mangle_path(manifest, action, src, dest):
-	if elf.is_elf_object(src):
+	if src.endswith('.so') or elf.is_elf_object(src):
 		mangle_elf(manifest, action, src, dest)
 	else:
 		# a 'text' document (script, man page, config file, ...
