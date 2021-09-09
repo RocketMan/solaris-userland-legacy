@@ -1,4 +1,4 @@
-## Firefox 91.0.1 for 11.3
+## Firefox 91 for 11.3
 
 ### Notes
 
@@ -44,7 +44,8 @@
   will build and run without this, but any attempt to print using an
   older CUPS will result in SIGSEGV.
 
-### Firefox 91.0.1 esr
+### Firefox 91 esr
 
-Using `slim-nimbus` and `firefox-nimbus-theme` from the [solaris-ports](https://github.com/RocketMan/solaris-ports/) repo.
+Using [slim-nimbus](https://github.com/RocketMan/solaris-ports/tree/master/components/look-and-feel/slim-nimbus)
+and [firefox-nimbus-theme](https://github.com/RocketMan/firefox-nimbus-theme).
 ![screenshot](https://raw.githubusercontent.com/RocketMan/solaris-userland-legacy/master/components/desktop/firefox-91/screenshot.png "Firefox 91.0.1 esr")
