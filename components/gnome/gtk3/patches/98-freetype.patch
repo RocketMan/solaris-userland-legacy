@@ -1,0 +1,13 @@
+--- gtk+-3.24.23/gtk/gtkfontchooserwidget.c~	2020-06-11 03:45:39.000000000 +0000
++++ gtk+-3.24.23/gtk/gtkfontchooserwidget.c	2021-09-14 10:36:59.032023597 +0000
+@@ -58,8 +58,8 @@
+ #include <hb.h>
+ #include <hb-ot.h>
+ #include <hb-ft.h>
+-#include <freetype/freetype.h>
+-#include <freetype/ftmm.h>
++#include <freetype2/freetype.h>
++#include <freetype2/ftmm.h>
+ #include "language-names.h"
+ #include "script-names.h"
+ #endif
