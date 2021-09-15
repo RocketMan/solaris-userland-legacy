@@ -23,5 +23,5 @@ text/x-tex=org.gnome.gedit.desktop;gvim.desktop;vim.desktop;emacs.desktop;
 text/x-vala=org.gnome.gedit.desktop;gvim.desktop;vim.desktop;emacs.desktop;
 # URI scheme handlers
 x-scheme-handler/mailto=thunderbird.desktop
-x-scheme-handler/http=firefox.desktop
-x-scheme-handler/https=firefox.desktop
+x-scheme-handler/http=org.gnome.Epiphany.desktop
+x-scheme-handler/https=org.gnome.Epiphany.desktop
