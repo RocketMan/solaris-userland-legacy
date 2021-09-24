@@ -41,10 +41,13 @@ BUILD_STYLE=		meson
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
+$(SOLARIS_11_3_ONLY)MANIFEST_COMPARE = /usr/bin/true
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS += -Denable-gtk-doc=false
+
 CONFIGURE_OPTIONS.32 += -Denable-introspection=false
 
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
-LDFLAGS +=  -Wl,-zgnu-version-script-compat
+$(SOLARIS_11_4_5_ONLY)LDFLAGS +=  -Wl,-zgnu-version-script-compat
 
 # get rid of the timestamps from the test results
 COMPONENT_TEST_TRANSFORMS += '-e "s/      [0-9].[0-9][0-9]s//" '
