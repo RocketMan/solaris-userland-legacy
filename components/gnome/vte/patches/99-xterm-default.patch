@@ -1,8 +1,11 @@
---- vte-0.62.1/src/vtedefines.hh~	2020-10-08 13:30:11.000000000 +0000
-+++ vte-0.62.1/src/vtedefines.hh	2020-11-22 15:20:32.521424993 +0000
-@@ -142,4 +142,4 @@
+--- vte-0.66.0/src/vtedefines.hh.~1~	2021-09-25 12:40:41.317973211 +0000
++++ vte-0.66.0/src/vtedefines.hh	2021-09-25 12:41:07.967461696 +0000
+@@ -141,7 +141,7 @@
  
  #define VTE_VERSION_NUMERIC ((VTE_MAJOR_VERSION) * 10000 + (VTE_MINOR_VERSION) * 100 + (VTE_MICRO_VERSION))
  
 -#define VTE_TERMINFO_NAME "xterm-256color"
 +#define VTE_TERMINFO_NAME "xterm"
+ 
+ #define VTE_MIN_CURSOR_BLINK_CYCLE (50 /* ms */)
+ #define VTE_MIN_CURSOR_BLINK_TIMEOUT (50 /* ms */)
