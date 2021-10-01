@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2020, Oracle and/or its affiliates.
+# Copyright (c) 2020, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =		64_and_32
@@ -29,14 +29,14 @@ include ../../../make-rules/shared-macros.mk
 GCC_ROOT =		/usr/gcc/10
 
 COMPONENT_NAME=		libhandy
-COMPONENT_VERSION=	1.1.90
+COMPONENT_VERSION=	1.4.0
 COMPONENT_PROJECT_URL=	https://gitlab.gnome.org/GNOME/libhandy
 COMPONENT_ARCHIVE_HASH=	\
-	sha256:b396ac085fe16c2bddcfe74925d0210c10575ba04c4f8e1fe5db6136e025fa36
+	sha256:2676d51fa1fa40fdee7497d3e763fefa18b0338bffcd2ee32e7f7e633c885446
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	114486
 
-TPNO=			63450
+TPNO=			74386
 BUILD_STYLE=		meson
 
 MANIFEST_COMPARE=	/usr/bin/true

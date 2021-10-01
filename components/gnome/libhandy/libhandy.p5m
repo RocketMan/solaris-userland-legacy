@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2020, Oracle and/or its affiliates.
+# Copyright (c) 2020, 2021, Oracle and/or its affiliates.
 #
 
 set name=pkg.fmri \
@@ -90,6 +90,7 @@ file path=usr/lib/pkgconfig/libhandy-1.pc
 file path=usr/share/gir-1.0/Handy-1.gir
 $(SOLARIS_11_4_5_ONLY)file path=usr/share/glade/catalogs/libhandy-1.xml
 file path=usr/share/locale/ca/LC_MESSAGES/libhandy.mo
+file path=usr/share/locale/de/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/en_GB/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/es/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/eu/LC_MESSAGES/libhandy.mo
@@ -97,6 +98,8 @@ file path=usr/share/locale/fi/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/fr/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/fur/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/id/LC_MESSAGES/libhandy.mo
+file path=usr/share/locale/nl/LC_MESSAGES/libhandy.mo
+file path=usr/share/locale/oc/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/pl/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/pt/LC_MESSAGES/libhandy.mo
 file path=usr/share/locale/pt_BR/LC_MESSAGES/libhandy.mo

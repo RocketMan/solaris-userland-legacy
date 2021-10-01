@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS= 		64
@@ -28,14 +28,15 @@ COMPILER=            	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gsound
-COMPONENT_VERSION=	1.0.2
+COMPONENT_VERSION=	1.0.3
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/GSound
 COMPONENT_ARCHIVE_HASH= \
-	sha256:bba8ff30eea815037e53bee727bbd5f0b6a2e74d452a7711b819a7c444e78e53
+	sha256:ca2d039e1ebd148647017a7f548862350bc9af01986d39f10cfdc8e95f07881a
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	9681
 
-TPNO=			25837
+TPNO=			73825
+BUILD_STYLE=		meson
 
 TEST_TARGET = $(NO_TESTS)
 
@@ -43,6 +44,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 # Assumes GNU msgfmt in PATH.
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
+COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 
 REQUIRED_PACKAGES += library/desktop/xdg/libcanberra
 REQUIRED_PACKAGES += library/glib2
