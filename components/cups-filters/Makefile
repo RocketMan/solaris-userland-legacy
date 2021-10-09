@@ -71,6 +71,7 @@ CONFIGURE_OPTIONS +=	--enable-driverless=no
 CONFIGURE_OPTIONS +=	ENABLE_DRIVERLESS_FALSE="Y"
 CONFIGURE_OPTIONS +=	--with-php=no
 CONFIGURE_OPTIONS +=	--with-test-font-path=/usr/share/fonts/TrueType/dejavu/DejaVuSans.ttf
+CONFIGURE_OPTIONS +=	--with-gs-path=/usr/bin/gs
 
 # Makefile.am files of this component are not compatible with Solaris make.
 # Use GNU make to avoid the configuration error when makefile fragments are processed.
