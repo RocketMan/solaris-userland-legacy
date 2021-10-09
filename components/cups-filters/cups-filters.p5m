@@ -70,9 +70,9 @@ file path=usr/lib/cups/filter/labeledtops mode=0555
 file path=usr/lib/cups/filter/musicxmltobrf mode=0555
 file path=usr/lib/cups/filter/pdftopdf mode=0555
 file path=usr/lib/cups/filter/pdftops mode=0555
-#file path=usr/lib/cups/filter/pdftoraster mode=0555
-#link path=usr/lib/cups/filter/pstopxl target=gstopxl
-#link path=usr/lib/cups/filter/pstoraster target=gstoraster
+file path=usr/lib/cups/filter/pdftoraster mode=0555
+link path=usr/lib/cups/filter/pstopxl target=gstopxl
+link path=usr/lib/cups/filter/pstoraster target=gstoraster
 file path=usr/lib/cups/filter/rastertoescpx mode=0555
 file path=usr/lib/cups/filter/rastertopclm mode=0555
 file path=usr/lib/cups/filter/rastertopclx mode=0555

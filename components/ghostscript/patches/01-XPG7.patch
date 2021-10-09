@@ -36,11 +36,12 @@ diff --git a/contrib/pcl3/eprn/eprnfs.c b/contrib/pcl3/eprn/eprnfs.c
 index d1557f4..ce950fd 100644
 --- a/contrib/pcl3/eprn/eprnfs.c
 +++ b/contrib/pcl3/eprn/eprnfs.c
-@@ -25,7 +25,6 @@
+@@ -25,7 +25,7 @@
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE	500
++#define _XOPEN_SOURCE	700
  #endif
  
  #include "gdeveprn.h"
@@ -88,11 +89,11 @@ index 21c6a26..d95a959 100644
 --- a/contrib/pcl3/eprn/mediasize.c
 +++ b/contrib/pcl3/eprn/mediasize.c
 @@ -14,7 +14,7 @@
->>>>>>> origin/master
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE	500
++#define _XOPEN_SOURCE	700
  #endif
  
  #include "std.h"
@@ -108,22 +109,17 @@ index a635bd4..2317f2d 100644
 +#define _XOPEN_SOURCE	700
  #endif
  
-<<<<<<< HEAD
- /* Standard headers */
- 
---- ghostscript-9.22/contrib/pcl3/src/gdevpcl3.c.orig	2017-11-15 22:39:33.708117318 +0000
-+++ ghostscript-9.22/contrib/pcl3/src/gdevpcl3.c	2017-11-15 22:40:38.495432108 +0000
-@@ -26,1 +26,1 @@
  #include "std.h"
 diff --git a/contrib/pcl3/src/gdevpcl3.c b/contrib/pcl3/src/gdevpcl3.c
 index 6b6468e..d684beb 100644
 --- a/contrib/pcl3/src/gdevpcl3.c
 +++ b/contrib/pcl3/src/gdevpcl3.c
-@@ -26,7 +26,6 @@
+@@ -26,7 +26,7 @@
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE   500
++#define _XOPEN_SOURCE   700
  #endif
  
  /* Special Aladdin header, must be included before <sys/types.h> on some
@@ -131,11 +127,12 @@ diff --git a/contrib/pcl3/src/pcl3opts.c b/contrib/pcl3/src/pcl3opts.c
 index edd28de..9ac1dbc 100644
 --- a/contrib/pcl3/src/pcl3opts.c
 +++ b/contrib/pcl3/src/pcl3opts.c
-@@ -16,7 +16,6 @@
+@@ -16,7 +16,7 @@
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE	500
++#define _XOPEN_SOURCE	700
  #endif
  
  /* Standard headers */
@@ -143,11 +140,12 @@ diff --git a/contrib/pcl3/src/pclcap.c b/contrib/pcl3/src/pclcap.c
 index 77f52aa..9bf872d 100644
 --- a/contrib/pcl3/src/pclcap.c
 +++ b/contrib/pcl3/src/pclcap.c
-@@ -14,7 +14,6 @@
+@@ -14,7 +14,7 @@
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE	500
++#define _XOPEN_SOURCE	700
  #endif
  
  /* Standard headers */
@@ -155,11 +153,12 @@ diff --git a/contrib/pcl3/src/pclcomp.c b/contrib/pcl3/src/pclcomp.c
 index ea849ec..cc6c749 100644
 --- a/contrib/pcl3/src/pclcomp.c
 +++ b/contrib/pcl3/src/pclcomp.c
-@@ -19,7 +19,6 @@
+@@ -19,7 +19,7 @@
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE	500
++#define _XOPEN_SOURCE	700
  #endif
  
  /* Interface definition */
@@ -167,11 +166,12 @@ diff --git a/contrib/pcl3/src/pclgen.c b/contrib/pcl3/src/pclgen.c
 index e6a9c96..1b06570 100644
 --- a/contrib/pcl3/src/pclgen.c
 +++ b/contrib/pcl3/src/pclgen.c
-@@ -52,7 +52,6 @@
+@@ -52,7 +52,7 @@
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE	500
++#define _XOPEN_SOURCE	700
  #endif
  
  /* Standard headers */
@@ -179,11 +179,12 @@ diff --git a/contrib/pcl3/src/pclscan.c b/contrib/pcl3/src/pclscan.c
 index 1919ec1..ef6dab1 100644
 --- a/contrib/pcl3/src/pclscan.c
 +++ b/contrib/pcl3/src/pclscan.c
-@@ -14,7 +14,6 @@
+@@ -14,7 +14,7 @@
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE	500
++#define _XOPEN_SOURCE	700
  #endif
  #ifndef _XOPEN_SOURCE_EXTENDED
  #define _XOPEN_SOURCE_EXTENDED	1
@@ -191,11 +192,12 @@ diff --git a/contrib/pcl3/src/pclsize.c b/contrib/pcl3/src/pclsize.c
 index 831b82b..3a322db 100644
 --- a/contrib/pcl3/src/pclsize.c
 +++ b/contrib/pcl3/src/pclsize.c
-@@ -14,7 +14,6 @@
+@@ -14,7 +14,7 @@
  /*****************************************************************************/
  
  #ifndef _XOPEN_SOURCE
 -#define _XOPEN_SOURCE	500
++#define _XOPEN_SOURCE	700
  #endif
  
  /* Standard headers */

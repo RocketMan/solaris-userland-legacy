@@ -37,9 +37,9 @@ COMPONENT_ARCHIVE_HASH= \
 COMPONENT_ARCHIVE_URL=  $(COMPONENT_DOWNLOAD_URL)/gs9540/$(COMPONENT_ARCHIVE)
 COMPONENT_ANITYA_ID=	1157
 
-COMPONENT_NAME_1=	tessdata_best
-GIT_REPO_1=		https://github.com/tesseract-ocr/$(COMPONENT_NAME_1)
-GIT_COMMIT_ID_1=	e2aad9b
+$(SOLARIS_11_4_5_ONLY)COMPONENT_NAME_1=	tessdata_best
+$(SOLARIS_11_4_5_ONLY)GIT_REPO_1=		https://github.com/tesseract-ocr/$(COMPONENT_NAME_1)
+$(SOLARIS_11_4_5_ONLY)GIT_COMMIT_ID_1=	e2aad9b
 
 TPNO=			68553
 
@@ -48,6 +48,8 @@ include $(WS_MAKE_RULES)/common.mk
 GPATCH_BACKUP=
 
 PATH=$(SPRO_VROOT)/bin:$(USRBINDIR):$(GNUBIN)
+
+$(SOLARIS_11_3_ONLY)CFLAGS += -D_XPG6
 
 # ghostscript uses a non-standard hybrid-build to build both 32 and 64-bit;
 # override these to prevent build failure.
@@ -66,6 +68,7 @@ CONFIGURE_OPTIONS +=	--with-fontpath=/usr/share/fonts
 CONFIGURE_OPTIONS +=	--enable-dynamic
 CONFIGURE_OPTIONS +=	--disable-compile-inits
 CONFIGURE_OPTIONS +=	--without-libidn
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS += --without-tesseract
 
 # Sparcv7 cores on test docxwrite
 gcc_OPT.sparc.32 = -O0 -munaligned-doubles
@@ -99,6 +102,7 @@ COMPONENT_SYSTEM_TEST_TARGETS =	system-check
 
 REQUIRED_PACKAGES += image/ghostscript
 REQUIRED_PACKAGES += image/library/libjpeg
+REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libpng16
 REQUIRED_PACKAGES += image/library/libtiff
 REQUIRED_PACKAGES += image/library/openjpeg2
