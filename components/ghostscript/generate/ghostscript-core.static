@@ -51,3 +51,6 @@ file build/$(MACH64)/examples/tiger.eps path=usr/share/ghostscript/$(COMPONENT_V
 file build/$(MACH64)/examples/transparency_example.ps path=usr/share/ghostscript/$(COMPONENT_VERSION)/examples/transparency_example.ps
 file build/$(MACH64)/examples/vasarely.ps path=usr/share/ghostscript/$(COMPONENT_VERSION)/examples/vasarely.ps
 file build/$(MACH64)/examples/waterfal.ps path=usr/share/ghostscript/$(COMPONENT_VERSION)/examples/waterfal.ps
+
+# prefer ghostcript for raster conversion
+file files/gstoraster.convs path=etc/cups/gstoraster.convs preserve=true

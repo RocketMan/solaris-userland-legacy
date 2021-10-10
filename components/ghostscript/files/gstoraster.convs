@@ -1,0 +1,4 @@
+# prefer ghostscript over poppler for rasterisation
+
+application/vnd.cups-pdf	application/vnd.cups-raster	33	gstoraster
+
