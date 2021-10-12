@@ -44,6 +44,10 @@ TEST_TARGET = $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
+# Compile with python version in the gate regardless of the mediator
+COMPONENT_POST_UNPACK_ACTION += (mkdir bin ; ln -fs $(PYTHON) bin/python3)
+CLEAN_PATHS += bin
+
 CONFIGURE_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
