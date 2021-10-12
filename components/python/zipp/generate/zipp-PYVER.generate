@@ -20,8 +20,10 @@
 #
 
 #
-# Copyright (c) 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
-$(PYTHON_3.7_ONLY)file path=usr/lib/python$(PYVER)/vendor-packages/jinja2/asyncfilters.py
-$(PYTHON_3.7_ONLY)file path=usr/lib/python$(PYVER)/vendor-packages/jinja2/asyncsupport.py
+<include ../generate/common.transform>
+
+# Drop accidentally included .rst news files for the next release.
+<transform file path=.*/NEWS.d/next/Library/.*\.rst -> drop>
