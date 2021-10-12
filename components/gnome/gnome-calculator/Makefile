@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64
@@ -41,29 +41,23 @@ BUILD_STYLE=		meson
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
-CONFIGURE_DEFAULT_DIRS=	no
-CONFIGURE_OPTIONS += --bindir="$(CONFIGURE_BINDIR.$(BITS))"
-CONFIGURE_OPTIONS += --sbindir="$(CONFIGURE_SBINDIR.$(BITS))"
-CONFIGURE_OPTIONS += --libdir="$(CONFIGURE_LIBDIR.$(BITS))"
-CONFIGURE_OPTIONS += --libexecdir="$(CONFIGURE_LIBDIR.$(BITS))"
-CONFIGURE_OPTIONS += --localstatedir="$(VARDIR)"
-CONFIGURE_OPTIONS += --mandir="$(CONFIGURE_MANDIR)"
-CONFIGURE_OPTIONS += --sysconfdir="$(CONFIGURE_ETCDIR.$(BITS))"
-
 # Assumes GNU msgfmt in PATH.
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
+COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 
-unexport SHELLOPTS
-COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
-COMPONENT_TEST_ARGS =   -k -i
+CONFIGURE_OPTIONS += -Dvala-version=0.50.2
+
+COMPONENT_TEST_TRANSFORMS += '-e "s/            [0-9].[0-9][0-9]s//"'
 COMPONENT_TEST_TRANSFORMS += \
         '-n ' \
-        '-e "/TOTAL:/p" ' \
-        '-e "/SKIP:/p" ' \
-        '-e "/PASS:/p" ' \
-        '-e "/FAIL:/p" ' \
-        '-e "/ERROR:/p" '
+        '-e "/OK/p" ' \
+        '-e "/Fail:/p" ' \
+        '-e "/Ok:/p" ' \
+        '-e "/Pass:/p" ' \
+        '-e "/Skipped:/p" ' \
+        '-e "/Timeout:/p" '
+COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
 
 REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += developer/vala

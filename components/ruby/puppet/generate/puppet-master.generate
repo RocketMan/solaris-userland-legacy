@@ -1,3 +1,4 @@
+#
 # CDDL HEADER START
 #
 # The contents of this file are subject to the terms of the
@@ -17,8 +18,19 @@
 #
 # CDDL HEADER END
 #
+
 #
-# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
+<transform dir file link hardlink -> edit path "$(VENDOR_RUBY)" "$!(VENDOR_RUBY)">
+<transform dir file link hardlink -> edit path "\$!\((.*)\)" "$(\1)">
 
+<transform file path=\$\(VENDOR_RUBY\)/puppet/* -> drop>
+<transform file path=\$\(VENDOR_RUBY\)/hiera/* -> drop>
+<transform file path=etc/puppetlabs/* -> drop>
+<transform file path=lib/svc/manifest/application/puppet.xml -> drop>
+<transform file path=usr/puppetlabs/puppet/* -> drop>
+<transform file path=usr/share/man/man8/puppet* -> drop>
+<transform file path=usr/share/man/man5/puppet* -> drop>
+<transform file path=usr/sbin/puppet -> drop>

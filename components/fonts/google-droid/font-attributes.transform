@@ -20,24 +20,9 @@
 #
 
 #
-# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2021, Oracle and/or its affiliates.
 #
 
-BUILD_BITS= NO_ARCH
-include ../../../make-rules/shared-macros.mk
-
-COMPONENT_NAME=         desktop-cache
-COMPONENT_VERSION=      0.3.0
-COMPONENT_SRC=          # all files under files/
-COMPONENT_BUGDB=	gnome/install
-COMPONENT_ARCHIVE_SRC=	none
-COMPONENT_ANITYA_ID=	N/A
-
-# nothing to download or build; just package
-BUILD_STYLE= pkg
-
-include $(WS_MAKE_RULES)/common.mk
-
-REQUIRED_PACKAGES += runtime/python-27
-REQUIRED_PACKAGES += service/opengl/ogl-select
-REQUIRED_PACKAGES += system/core-os
+# Remove Japanese font name attributes as they are non-ASCII and can break
+# pkg when running in a non-UTF8 environment.
+<transform file -> delete info.file.font.name:ja .*>
