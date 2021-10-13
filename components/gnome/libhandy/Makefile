@@ -51,6 +51,9 @@ CONFIGURE_OPTIONS += -Dexamples=false
 $(SOLARIS_11_4_5_ONLY)CFLAGS += -Wstack-protector -fdata-sections -fstack-protector-all
 $(SOLARIS_11_3_ONLY)CFLAGS += -Wno-stack-protector
 
+# Version 1.0.2 requires following for GCC 11 build.
+CFLAGS += -Wno-error=incompatible-pointer-types
+
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 
