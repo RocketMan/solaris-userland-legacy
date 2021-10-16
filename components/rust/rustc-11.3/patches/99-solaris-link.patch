@@ -12,7 +12,7 @@
 +++ rustc-1.44.1-src/compiler/rustc_target/src/spec/solaris_base.rs	2020-08-01 18:57:44.327809206 +0000
 @@ -1,6 +1,23 @@
 -use crate::spec::TargetOptions;
-+use crate::spec::{LinkArgs, LinkerFlavor, TargetOptions};
++use crate::spec::{LinkArgs, LinkerFlavor, TargetOptions, FramePointer};
  
  pub fn opts() -> TargetOptions {
 +    let mut late_link_args = LinkArgs::new();
@@ -39,7 +39,7 @@
          is_like_solaris: true,
          limit_rdylib_exports: false, // Linker doesn't support this
          eh_frame_header: false,
-+        eliminate_frame_pointer: false,
++        frame_pointer: FramePointer::Always,
 +        late_link_args,
  
          ..Default::default()
