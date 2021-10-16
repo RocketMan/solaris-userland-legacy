@@ -322,7 +322,11 @@ ifeq ($(MACH),i386)
 endif
 
 CMAKE_OPTIONS += -DCMAKE_ASM_COMPILER:STRING="/usr/gnu/bin/as"
-CMAKE_OPTIONS += -DCMAKE_INSTALL_RPATH:STRING="$(LLVM_RUNPATH)"
+
+# cmake-generated RPATH_CHANGE fails in 11.3.  elfdump of the target shows
+# LLVM_RUNPATH is already present in the RPATH, so we just leave it alone.
+$(SOLARIS_11_4_5_ONLY)CMAKE_OPTIONS += -DCMAKE_INSTALL_RPATH:STRING="$(LLVM_RUNPATH)"
+
 CMAKE_OPTIONS += -DLLVM_BUILD_TOOLS:BOOL=ON
 CMAKE_OPTIONS += -DLLVM_INCLUDE_TOOLS:BOOL=ON
 CMAKE_OPTIONS += -DLLVM_BUILD_TESTS:BOOL=ON
@@ -437,8 +441,8 @@ REQUIRED_PACKAGES += library/perl-5/xml-simple
 REQUIRED_PACKAGES += runtime/python-37
 REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/header
-REQUIRED_PACKAGES += system/library/gcc/gcc-runtime-11
-REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime-11
-REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime-11
-REQUIRED_PACKAGES += system/library/gcc/gcc-gobjc-runtime-11
+REQUIRED_PACKAGES += system/library/gcc/gcc-runtime-10
+REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime-10
+REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime-10
+REQUIRED_PACKAGES += system/library/gcc/gcc-gobjc-runtime-10
 REQUIRED_PACKAGES += system/library/math
