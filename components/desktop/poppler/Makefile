@@ -51,83 +51,9 @@ TPNO_POPPLER_DATA=	75324
 # Only cmake is currently supported to build libpoppler.
 BUILD_STYLE = cmake
 
-# Build the old version for 11.3 compatibility.  We extract only the
-# libpoppler-glib.so.5 and libpoppler.so.7 libraries.
-COMPONENT_VERSION_2=	0.14.5
-COMPONENT_SRC_2=	poppler-$(COMPONENT_VERSION_2)
-COMPONENT_ARCHIVE_2=	$(COMPONENT_SRC_2).tar.gz
-COMPONENT_ARCHIVE_HASH_2= \
-    sha256:c805317c4c1a7080098ae8c7c2a1c1b8e2c784858fc2e04941878eeb8164814c
-COMPONENT_ARCHIVE_URL_2= \
-    https://poppler.freedesktop.org/$(COMPONENT_ARCHIVE_2)
-
-SOURCE_DIR_2 = $(COMPONENT_DIR)/$(COMPONENT_SRC_2)
-BUILD_OLD_DIR_32 = $(COMPONENT_DIR)/build/$(COMPONENT_VERSION_2)-$(MACH32)
-INSTALL_OLD_DIR = $(PROTO_DIR)/$(COMPONENT_VERSION_2)
-PATCH_OLD_DIR = patches_$(COMPONENT_VERSION_2)
-
-PATCHES_OLD := $(wildcard $(PATCH_OLD_DIR)/*.patch)
-PATCHES_OLD_STAMPS = $(PATCHES_OLD:$(PATCH_OLD_DIR)/%=$(SOURCE_DIR_2)/.patched-%)
-
-# this is the configure environment for the SOURCE_DIR_2 build
-CONFIGURE_ENV = CONFIG_SHELL="$(CONFIG_SHELL)"
-CONFIGURE_ENV += PKG_CONFIG_PATH="$(PKG_CONFIG_PATH)"
-CONFIGURE_ENV += CC="$(CC)"
-CONFIGURE_ENV += CXX="$(CXX)"
-CONFIGURE_ENV += CFLAGS="$(CFLAGS)"
-CONFIGURE_ENV += LDFLAGS="$(LDFLAGS)"
-
-# configure options for the SOURCE_DIR_2 build
-CONFIGURE_PREFIX = /usr
-CONFIGURE_OPTIONS = --prefix=$(CONFIGURE_PREFIX)
-CONFIGURE_OPTIONS += --mandir=$(CONFIGURE_PREFIX)/share/man
-CONFIGURE_OPTIONS += --bindir=$(CONFIGURE_PREFIX)/bin
-CONFIGURE_OPTIONS += --sbindir=$(CONFIGURE_PREFIX)/sbin
-CONFIGURE_OPTIONS += --libdir=$(CONFIGURE_PREFIX)/lib
-
-$(SOURCE_DIR_2)/.patched-%:	$(PATCH_OLD_DIR)/%
-	$(GPATCH) -d $(@D) $(GPATCH_FLAGS) < $<
-	$(TOUCH) $(@)
-
-$(SOURCE_DIR_2)/.patched:	$(SOURCE_DIR_2)/.unpacked $(PATCHES_OLD_STAMPS)
-	$(TOUCH) $(@)
-
-$(BUILD_OLD_DIR_32)/.configured: CONFIGURE_SCRIPT=$(SOURCE_DIR_2)/configure
-$(BUILD_OLD_DIR_32)/.configured: COMPILER=studio
-$(BUILD_OLD_DIR_32)/.configured: BITS=32
-$(BUILD_OLD_DIR_32)/.configured: CXX+=$(studio_NORUNPATH)
-$(BUILD_OLD_DIR_32)/.configured: CXXFLAGS=$(CXXFLAGS.studio)
-$(BUILD_OLD_DIR_32)/.configured: $(SOURCE_DIR_2)/.patched
-	($(RM) -rf $(@D) ; $(MKDIR) $(@D))
-	$(COMPONENT_PRE_CONFIGURE_ACTION)
-	(cd $(@D) ; $(ENV) $(CONFIGURE_ENV) $(CONFIG_SHELL) \
-		$(CONFIGURE_SCRIPT) $(CONFIGURE_OPTIONS))
-	$(COMPONENT_POST_CONFIGURE_ACTION)
-	$(TOUCH) $@
-
-$(BUILD_OLD_DIR_32)/.built: COMPONENT_PRE_BUILD_ACTION=
-$(BUILD_OLD_DIR_32)/.built: COMPONENT_POST_BUILD_ACTION=
-$(BUILD_OLD_DIR_32)/.built: $(BUILD_OLD_DIR_32)/.configured
-	$(COMPONENT_PRE_BUILD_ACTION)
-	(cd $(@D) ; $(ENV) $(COMPONENT_BUILD_ENV) \
-		$(GMAKE) $(COMPONENT_BUILD_ARGS) $(COMPONENT_BUILD_TARGETS))
-	$(COMPONENT_POST_BUILD_ACTION)
-ifeq   ($(strip $(PARFAIT_BUILD)),yes)
-	-$(PARFAIT) $(@D)
-endif
-	$(TOUCH) $@
-
-$(BUILD_OLD_DIR_32)/.installed: COMPONENT_INSTALL_ARGS=DESTDIR=$(INSTALL_OLD_DIR)
-
-BUILD_32 += $(SOURCE_DIR_2)/.patched $(BUILD_OLD_DIR_32)/.built
-
-INSTALL_32 += $(BUILD_OLD_DIR_32)/.installed
-
 TEST_TARGET= $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/common.mk
-
-MANIFEST_COMPARE=/usr/bin/true
 
 # The path to cmake configure file has to be specified explicitly,
 # otherwise 32-bit openjpeg library is attempted to be linked to 64-bit 
@@ -166,41 +92,35 @@ CMAKE_OPTIONS += -DENABLE_BOOST=OFF
 # Install the poppler data files.
 COMPONENT_POST_BUILD_ACTION = \
 	(cd $(COMPONENT_DIR)/$(COMPONENT_SRC_1); \
-	$(GMAKE) prefix=$(CONFIGURE_PREFIX) DESTDIR=$(PROTO_DIR) install)
-#	$(GMAKE) prefix=/usr DESTDIR=$(PROTO_DIR) install)
+	$(GMAKE) prefix=/usr DESTDIR=$(PROTO_DIR) install)
 
 # Always show the build and link lines for easier debugging.
 COMPONENT_BUILD_ARGS += V=1
 
-##PKG_OBJ =	poppler
-##SUBPKG_OBJ =	poppler-desktop
-##EXCLUSION_FILE = poppler-desktop-deps
-##
-##include $(WS_MAKE_RULES)/pkgobjs.mk
-##$(EXCLUSION_FILE_TARGET): $(HEAP_OBJ)
-##	find $(PROTO_DIR) -type f | (while read f; do file "$$f"; done) | grep -w ELF | cut -f1 -d\: | (while read f; do echo $$f: `ldd "$$f"`; done) | egrep 'libXrender|gobj|libX11|glib|libGL' | cut -f1 -d\: | sed -e 's$$$(PROTO_DIR)/$$$$' | sed -e 's/$(MACH64)/$$(MACH64)/' > $@.tmp ; \
-##	find $(PROTO_DIR) -type f | egrep 'cairo' | sed -e 's$$$(PROTO_DIR)/$$$$' | sed -e 's/$(MACH64)/$$(MACH64)/' >> $@.tmp ; \
-##	find $(PROTO_DIR) -type f -o -type l | egrep 'glib|gir|g-i-r' | sed -e 's$$$(PROTO_DIR)/$$$$' | sed -e 's/$(MACH64)/$$(MACH64)/' >> $@.tmp ; \
-##	sort -u $@.tmp > $@ ; \
-##	rm $@.tmp
+PKG_OBJ =	poppler
+SUBPKG_OBJ =	poppler-desktop
+EXCLUSION_FILE = poppler-desktop-deps
+
+include $(WS_MAKE_RULES)/pkgobjs.mk
+$(EXCLUSION_FILE_TARGET): $(HEAP_OBJ)
+	find $(PROTO_DIR) -type f | (while read f; do file "$$f"; done) | grep -w ELF | cut -f1 -d\: | (while read f; do echo $$f: `ldd "$$f"`; done) | egrep 'libXrender|gobj|libX11|glib|libGL' | cut -f1 -d\: | sed -e 's$$$(PROTO_DIR)/$$$$' | sed -e 's/$(MACH64)/$$(MACH64)/' > $@.tmp ; \
+	find $(PROTO_DIR) -type f | egrep 'cairo' | sed -e 's$$$(PROTO_DIR)/$$$$' | sed -e 's/$(MACH64)/$$(MACH64)/' >> $@.tmp ; \
+	find $(PROTO_DIR) -type f -o -type l | egrep 'glib|gir|g-i-r' | sed -e 's$$$(PROTO_DIR)/$$$$' | sed -e 's/$(MACH64)/$$(MACH64)/' >> $@.tmp ; \
+	sort -u $@.tmp > $@ ; \
+	rm $@.tmp
 
 REQUIRED_PACKAGES += image/library/libjpeg
-REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libpng16
 REQUIRED_PACKAGES += image/library/libtiff
 REQUIRED_PACKAGES += image/library/openjpeg2
 REQUIRED_PACKAGES += library/desktop/cairo
-REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/glib2
-REQUIRED_PACKAGES += library/lcms
 REQUIRED_PACKAGES += library/lcms2
-REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/nspr
 REQUIRED_PACKAGES += library/security/nss
 REQUIRED_PACKAGES += print/filter/poppler
 REQUIRED_PACKAGES += system/library
-REQUIRED_PACKAGES += system/library/c++-runtime
 REQUIRED_PACKAGES += system/library/fontconfig
 REQUIRED_PACKAGES += system/library/freetype-2
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
