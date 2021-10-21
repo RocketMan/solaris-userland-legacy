@@ -32,12 +32,8 @@ include ../../../make-rules/shared-macros.mk
 COMPONENT_NAME=		vte
 COMPONENT_VERSION=	0.66.0
 COMPONENT_PROJECT_URL=  https://wiki.gnome.org/Apps/Terminal/VTE
-# COMPONENT_ARCHIVE and COMPONENT_ARCHIVE_URL work around missing
-# deliverable in https://download.gnome.org/sources/vte
-COMPONENT_ARCHIVE=	$(COMPONENT_NAME)-$(COMPONENT_VERSION).tar.bz2
-COMPONENT_ARCHIVE_URL=	https://gitlab.gnome.org/GNOME/$(COMPONENT_NAME)/-/archive/$(COMPONENT_VERSION)/$(COMPONENT_ARCHIVE)
 COMPONENT_ARCHIVE_HASH= \
-	sha256:331364a270e73965be52a57afc4f53dec34eb3a8b77053e5f5200b2c4d7e9630
+	sha256:d0813ac00fb1d74d88851e765f755d496c83e097097358ea1baadb38b37b7b33
 COMPONENT_BUGDB=        gnome/terminal
 COMPONENT_ANITYA_ID=	10895
 
