@@ -12,14 +12,9 @@ Content-Transfer-Encoding: 8bit
 Upstream-Status: Pending
 
 Signed-off-by: Andreas Müller <schnitzeltony@gmail.com>
----
- src/terminal.c | 6 ++++++
- 1 file changed, 6 insertions(+)
 
-diff --git a/src/terminal.c b/src/terminal.c
-index d06ce35..6284e4c 100644
---- a/src/terminal.c
-+++ b/src/terminal.c
+--- gnome-terminal-3.42.0/src/terminal.cc~	2021-09-22 17:38:05.782667600 +0000
++++ gnome-terminal-3.42.0/src/terminal.cc	2021-10-21 12:50:17.243412108 +0000
 @@ -47,6 +47,12 @@
  GS_DEFINE_CLEANUP_FUNCTION0(TerminalOptions*, gs_local_options_free, terminal_options_free)
  #define gs_free_options __attribute__ ((cleanup(gs_local_options_free)))
@@ -33,7 +28,3 @@ index d06ce35..6284e4c 100644
  /* Wait-for-exit helper */
  
  typedef struct {
--- 
-2.21.0
-
-

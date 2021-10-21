@@ -28,21 +28,19 @@ COMPILER=		gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gnome-terminal
-COMPONENT_VERSION=	3.40.1
+COMPONENT_VERSION=	3.42.0
 COMPONENT_PROJECT_URL=  https://wiki.gnome.org/Apps/Terminal
 COMPONENT_ARCHIVE_HASH= \
-	sha256:0770cc7320d737fb2eaf9e4cf5ecc6a741f120b17b192f061f683e14b869d8e4
+	sha256:b50e9e5664230e6ca290bcf38812a5b65e0baac66a486ee210894cf675f72e0b
 COMPONENT_BUGDB=        gnome/terminal
 COMPONENT_ANITYA_ID=	10896
+BUILD_STYLE=		meson
 
 TPNO=			69601
 
 MANIFEST_COMPARE=/usr/bin/true
 
 include $(WS_MAKE_RULES)/gnome-component.mk
-
-# Need to regenerate configure after stack-protector.patch edits configure.ac
-COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fiv);
 
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
@@ -56,18 +54,11 @@ PKG_CONFIG_PATHS += $(PKG_CONFIG_PATHS.$(BITS))
 LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
 LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 
-CONFIGURE_OPTIONS += --libexecdir=$(USRLIBDIR)
-
 PKG_CONFIG_PATHS += $(PKG_CONFIG_PATHS.$(BITS))
 LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 
-CONFIGURE_OPTIONS += --disable-static
-CONFIGURE_OPTIONS += --enable-introspection
-CONFIGURE_OPTIONS += --enable-shared
-CONFIGURE_OPTIONS += --disable-migration
-CONFIGURE_OPTIONS += --without-nautilus-extension
-CONFIGURE_OPTIONS += --disable-search-provider
-CONFIGURE_OPTIONS += --without-systemd
+CONFIGURE_OPTIONS += -Dnautilus_extension=false
+CONFIGURE_OPTIONS += -Dsearch_provider=false
 
 unexport SHELLOPTS
 
@@ -83,5 +74,6 @@ REQUIRED_PACKAGES += library/gnome/dconf
 REQUIRED_PACKAGES += library/gnome/vte3
 REQUIRED_PACKAGES += library/gnutls-3
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
+REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += x11/library/libx11
