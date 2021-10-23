@@ -78,7 +78,8 @@ NSS_ENV += $(USE_64_FLAG.$(BITS))
 
 COMPONENT_BUILD_ENV += $(NSS_ENV)
 # we need GNU sed to process the nss.def file correctly
-COMPONENT_BUILD_ENV +=   PATH=$(GNUBIN):$(PATH)
+# use version of gcc/g++ specified in the gate
+COMPONENT_BUILD_ENV +=   PATH=$(GCC_ROOT)/bin:$(GNUBIN):$(PATH)
 COMPONENT_BUILD_TARGETS =  all
 
 COMPONENT_INSTALL_ENV += $(NSS_ENV)
