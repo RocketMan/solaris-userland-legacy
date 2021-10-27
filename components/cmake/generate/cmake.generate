@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, 2021, Oracle and/or its affiliates.
 #
 
 # Use this trick to revert $(CMAKE_MAJOR_VERSION) expansions.
@@ -29,9 +29,6 @@
 
 # Ignore the temporary files after patching pages.
 <transform file path=.*\.\~1\~$ -> drop>
-
-# Avoid duplicate lines, manual pages are installed to the proto directory.
-<transform file path=files/man -> drop>
 
 # Replaced by 'pkg info --license cmake' command.
 <transform file path=usr/doc -> drop>
