@@ -48,6 +48,9 @@ UNPACK_ARGS= -r $(COMPONENT_SRC)
 
 COMPONENT_BUILD_TARGETS = all
 
+# use version of gcc/g++ specified in the gate
+PATH=$(GCC_ROOT)/bin:$(GNUBIN):$(USRBINDIR)
+
 include $(WS_MAKE_RULES)/common.mk
 
 CONFIGURE_SCRIPT = $(SOURCE_DIR)/icu/source/runConfigureICU Solaris/GCC
