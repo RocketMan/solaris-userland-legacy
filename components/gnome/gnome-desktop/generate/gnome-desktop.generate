@@ -30,4 +30,4 @@
 <transform file path=usr/lib/\$\(MACH64\)/gnome-desktop-debug/test-wall-clock -> set mode 0555>
 <transform file path=usr/lib/\$\(MACH64\)/gnome-desktop-debug/test-xkb-info -> set mode 0555>
 
-link path=usr/lib/$(MACH64)/libgnome-desktop-3.so.12 target=libgnome-desktop-3.so.18
+link path=usr/lib/$(MACH64)/libgnome-desktop-3.so.12 target=libgnome-desktop-3.so.19
