@@ -20,21 +20,21 @@
 #
 
 #
-# Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		nano
-COMPONENT_VERSION=	2.9.3
+COMPONENT_VERSION=	5.9
 COMPONENT_PROJECT_URL=	https://www.nano-editor.org/
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:f12058ead9955cb841c1c5e3b9aec6ba93114a807580e928de0eaf6144c91074
-COMPONENT_ARCHIVE_URL=	$(COMPONENT_PROJECT_URL)dist/v2.9/$(COMPONENT_ARCHIVE)
+    sha256:05d3aa578ae29ab8304fc8568c0682ce2b1c20e06e7d67f1ec4aa7e5e65b8b92
+COMPONENT_ARCHIVE_URL=	$(COMPONENT_PROJECT_URL)dist/v5/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_ANITYA_ID=	2046
 
-TPNO=			40914
+TPNO=			75878
 
 TEST_TARGET= $(NO_TESTS)
 include $(WS_MAKE_RULES)/common.mk
