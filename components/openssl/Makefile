@@ -20,11 +20,11 @@
 #
 
 #
-# Copyright (c) 2011, 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2011, 2021, Oracle and/or its affiliates.
 #
 
 TOPTARGETS := prep build install publish test clean clobber
-SUBDIRS=openssl-1.1 openssl-default openssl-fips-140
+SUBDIRS=openssl-3 openssl-1.1 openssl-default openssl-fips-140
 
 $(TOPTARGETS): $(SUBDIRS)
 $(SUBDIRS):
