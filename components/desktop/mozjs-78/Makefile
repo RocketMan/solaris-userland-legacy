@@ -31,7 +31,7 @@ include ../../../make-rules/shared-macros.mk
 $(SOLARIS_11_3_ONLY)COMPONENT_NAME=		firefox
 $(SOLARIS_11_4_5_ONLY)COMPONENT_NAME=		mozjs
 COMPONENT_VERSION=	78.11.0
-COMPONENT_PROJECT_URL=	https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey
+COMPONENT_PROJECT_URL=	https://spidermonkey.dev/
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.bz2
 $(SOLARIS_11_4_5_ONLY)COMPONENT_ARCHIVE_HASH= \
@@ -40,9 +40,9 @@ $(SOLARIS_11_4_5_ONLY)	sha256:5ad54ac2b0368b9748e08756658eb988d65e5bb088d91baf43
 # the firefox archive instead. Archives are hence only available directly in
 # the Userland package cache, and no online alternative is available.
 # Check the gnome releng location for tarballs if available
-COMPONENT_ARCHIVE_URL=	http://ftp.cse.buffalo.edu/pub/Gnome/teams/releng/tarballs-needing-help/mozjs/$(COMPONENT_ARCHIVE)
+COMPONENT_ARCHIVE_URL=	https://download.gnome.org/pub/Gnome/teams/releng/tarballs-needing-help/mozjs/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	library/libmozjs
-COMPONENT_ANITYA_ID=	11754
+COMPONENT_ANITYA_ID=	235328
 
 TPNO=			72349
 
