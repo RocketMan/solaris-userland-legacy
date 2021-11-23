@@ -30,6 +30,7 @@ set name=pkg.human-version value=$(HUMAN_VERSION)
 
 # This package name has known conflicts with other packages in the WOS
 set name=pkg.linted.pkglint.manifest004 value=true
+set name=pkg.linted.userland.action001.3 value=true
 set name=com.oracle.info.description value="the BIND DNS tools"
 set name=com.oracle.info.tpno value=$(TPNO)
 set name=info.classification \
