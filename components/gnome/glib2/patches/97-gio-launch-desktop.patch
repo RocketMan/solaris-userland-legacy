@@ -24,10 +24,10 @@ see https://gitlab.gnome.org/GNOME/glib/-/merge_requests/1362
  
  /* Monitor 'changed' signal handler {{{2 */
  static void desktop_file_dir_reset (DesktopFileDir *dir);
-@@ -2738,14 +2739,6 @@
-       char *sn_id = NULL;
+@@ -2776,14 +2777,6 @@
        char **wrapped_argv;
        int i;
+       gsize j;
 -      const gchar * const wrapper_argv[] =
 -        {
 -          "/bin/sh",
@@ -39,7 +39,7 @@ see https://gitlab.gnome.org/GNOME/glib/-/merge_requests/1362
  
        old_uris = dup_uris;
        if (!expand_application_parameters (info, exec_line, &dup_uris, &argc, &argv, error))
-@@ -2787,26 +2780,26 @@
+@@ -2825,26 +2818,26 @@
            g_list_free_full (launched_files, g_object_unref);
          }
  
@@ -72,8 +72,8 @@ see https://gitlab.gnome.org/GNOME/glib/-/merge_requests/1362
 +      wrapped_argv = g_new (char *, argc + 2);
 +      wrapped_argv[0] = g_strdup (gio_launch_desktop_path);
  
--      for (i = 0; i < G_N_ELEMENTS (wrapper_argv); i++)
--        wrapped_argv[i] = g_strdup (wrapper_argv[i]);
+-      for (j = 0; j < G_N_ELEMENTS (wrapper_argv); j++)
+-        wrapped_argv[j] = g_strdup (wrapper_argv[j]);
        for (i = 0; i < argc; i++)
 -        wrapped_argv[i + G_N_ELEMENTS (wrapper_argv)] = g_steal_pointer (&argv[i]);
 +        wrapped_argv[i + 1] = g_steal_pointer (&argv[i]);
