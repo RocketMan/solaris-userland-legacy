@@ -8,3 +8,23 @@
    ]
  )
  
+@@ -216,7 +216,8 @@
+ #define G_WITH_CYGWIN'''
+ else
+   glib_os = '#define G_OS_UNIX'
++  glib_conf.set('G_OS_UNIX', '')
+ endif
+ glibconfig_conf.set('glib_os', glib_os)
+ 
+ # We need to know the CRT being used to determine what .lib files we need on
+--- glib-2.67.1/gio/glocalfile.c~	2020-12-16 19:24:11.006539800 +0000
++++ glib-2.67.1/gio/glocalfile.c	2021-12-04 16:30:04.440365645 +0000
+@@ -25,7 +25,7 @@
+ #include <string.h>
+ #include <errno.h>
+ #include <fcntl.h>
+-#if G_OS_UNIX
++#ifdef G_OS_UNIX
+ #include <dirent.h>
+ #include <unistd.h>
+ #endif

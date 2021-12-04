@@ -28,10 +28,10 @@ BUILD_BITS =            32_and_64
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		glib
-COMPONENT_VERSION=	2.66.8
+COMPONENT_VERSION=	2.67.1
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/GLib/
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:97bc87dd91365589af5cbbfea2574833aea7a1b71840fd365ecd2852c76b9c8b
+    sha256:3b3409fe3a93f9e9f6f5dc9cd8405edfd7513b289589987e568369e627d3350c
 COMPONENT_BUGDB=	gnome/glib
 COMPONENT_ANITYA_ID=	10024
 
