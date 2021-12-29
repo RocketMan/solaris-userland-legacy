@@ -41,6 +41,8 @@ BUILD_STYLE=		meson
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
+$(SOLARIS_11_3_ONLY)COMPONENT_PRE_INSTALL_ACTION += ($(MKDIR) $(BUILD_DIR)/$(MACH64)/help/id; /usr/gnu/bin/cp -fnr $(SOURCE_DIR)/help/C/* $(BUILD_DIR)/$(MACH64)/help/id)
+
 # Assumes GNU msgfmt in PATH.
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
