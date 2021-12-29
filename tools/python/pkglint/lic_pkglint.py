@@ -1,7 +1,7 @@
 #!/usr/bin/python3.7
 
 #
-# Copyright (c) 2012, 2020, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2012, 2021, Oracle and/or its affiliates.
 #
 
 # OSNet-specific pkglint(1) checks, called as part of pkglint commands in
@@ -163,7 +163,7 @@ class ExtractLicense(base.ManifestChecker):
     @staticmethod
     def _construct_license(ldict):
         license = {}
-        for key in ["tpno", "name", "version", "description"]:
+        for key in ["baid", "name", "version", "description", "tpno"]:
             license[key] = ldict.get("com.oracle.info.%s" % key, "")
         return license
 
@@ -199,7 +199,7 @@ class ExtractLicense(base.ManifestChecker):
 
         # old method of defining license info, using "set" actions
         pkgvers = ""
-        if "com.oracle.info.tpno" in manifest:
+        if "com.oracle.info.baid" in manifest:
             licensepkg = ExtractLicense._construct_license(manifest)
             fileaction = ExtractLicense._construct_notempty_attrs(manifest)
             licensespkg.append(licensepkg)
@@ -213,6 +213,13 @@ class ExtractLicense(base.ManifestChecker):
                     pkgvers = ""
 
         pkgpath = manifest.fmri.get_pkg_stem()
+
+        # tpno shouldn't be used any longer
+        pkglint_id = "005"
+        lint_id = "%s%s" % (self.name, pkglint_id)
+        if "com.oracle.info.tpno" in manifest:
+            engine.error(_("%s includes now obsoleted com.oracle.info.tpno"
+                           " attribute.") % pkgpath, msgid=lint_id)
 
         pkglint_id = "000"
         lint_id = "%s%s" % (self.name, pkglint_id)
@@ -232,58 +239,65 @@ class ExtractLicense(base.ManifestChecker):
             licenseslic.append(licenselic)
 
         # manifest cannot use both set actions and license actions to define
-        # tpno attribute.
+        # baid attribute.
         if not licensepkg and not licenselic:
             return
 
         pkglint_id = "001"
         if licensepkg:
-            if licensepkg["tpno"] != "" and not licenselic:
+            if licensepkg["baid"] != "" and not licenselic:
                 if fileaction == "hascontent":
                     lint_id = "%s%s" % (self.name, pkglint_id)
                     engine.error(
-                        _("%(fmri)s has tpno but no license action")
+                        _("%(fmri)s has baid but no license action")
                         % {"fmri": pkgpath},
                         msgid=lint_id)
                     return
                 return
 
         pkglint_id = "002"
-        tpnostr = licenselic["tpno"]
-        if licensespkg and licenseslic and tpnostr:
+        baidstr = licenselic["baid"]
+        if licensespkg and licenseslic and baidstr:
             lint_id = "%s%s" % (self.name, pkglint_id)
             engine.error(_(
                 "%(fmri)s has both license and set actions for "
-                "tpno") % {"fmri": pkgpath}, msgid=lint_id)
+                "baid") % {"fmri": pkgpath}, msgid=lint_id)
 
         for license in licenseslic:
             if not license:
                 continue
-            # validation of tpno format
+            # validation of baid format
             pkglint_id = "003"
-            tpnostr = license["tpno"]
-            if tpnostr != "":
+            baidstr = license["baid"]
+            if baidstr != "":
                 try:
                     # force cast it to integer to compare
-                    tpnoval = int(tpnostr)
+                    baidval = int(baidstr)
                 except ValueError:
                     lint_id = "%s%s.1" % (self.name, pkglint_id)
                     engine.error(_(
-                        "%(pkg)s has non-integer TPNO "
+                        "%(pkg)s has non-integer BAID "
                         "value of %(key)s") %
-                        {"pkg": pkgpath, "key": tpnostr},
+                        {"pkg": pkgpath, "key": baidstr},
                         msgid=lint_id)
+
+            # tpno shouldn't be used any longer
+            pkglint_id = "005"
+            lint_id = "%s%s" % (self.name, pkglint_id)
+            if license["tpno"] != "":
+                engine.error(_("%s includes now obsoleted com.oracle.info.tpno"
+                               " attribute.") % pkgpath, msgid=lint_id)
 
             # com.oracle.info.name, com.oracle.info.description cannot be
             # empty.
             # com.oracle.info.version may be empty if there is no version for
             # the technology
             pkglint_id = "004"
-            for infofield in ["tpno", "name", "description", "version"]:
+            for infofield in ["baid", "name", "description", "version"]:
                 infoval = license[infofield]
                 if infoval == "":
 
-                    if infofield == "tpno":
+                    if infofield == "baid":
                         return
 
                     if infofield == "name":

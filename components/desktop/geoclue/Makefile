@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64_and_32
@@ -30,17 +30,17 @@ COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		geoclue
-COMPONENT_VERSION=	2.5.5
+COMPONENT_VERSION=	2.5.7
 COMPONENT_PROJECT_URL=	http://freedesktop.org/wiki/Software/GeoClue/
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.bz2
 COMPONENT_ARCHIVE_HASH= \
-        sha256:51e9d1b52d7e5a35e7ce44afb8d3ba19562668136b4324bbecf5746275c6f2ac
+        sha256:6cc7dbe4177b4e7f3532f7fe42262049789a3cd6c55afe60a3564d7394119c27
 COMPONENT_ARCHIVE_URL=	https://gitlab.freedesktop.org/$(COMPONENT_NAME)/$(COMPONENT_NAME)/-/archive/$(COMPONENT_VERSION)/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	13108
 
-TPNO=			56436
+COMPONENT_BAID=		112999
 
 TEST_TARGET = $(NO_TESTS)
 

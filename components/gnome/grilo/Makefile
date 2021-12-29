@@ -37,7 +37,7 @@ COMPONENT_ARCHIVE_HASH= \
 COMPONENT_BUGDB=        gnome/multimedia
 COMPONENT_ANITYA_ID=	10928
 
-TPNO=			63398
+COMPONENT_BAID=		89421
 BUILD_STYLE=		meson
 
 # default LD_Z_IGNORE produces errors in g-ir-scanner

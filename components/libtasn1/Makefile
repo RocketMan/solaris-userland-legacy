@@ -19,7 +19,7 @@
 # CDDL HEADER END
 #
 #
-# Copyright (c) 2010, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2010, 2021, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64_and_32
 include ../../make-rules/shared-macros.mk
@@ -32,7 +32,7 @@ COMPONENT_BUGDB=	library/libtasn1
 COMPONENT_ANITYA_ID=	1734
 COMPONENT_SIG_URL=
 
-TPNO=			40971
+COMPONENT_BAID=		46328
 
 # Build the old version for 11.3 compatibility.  We extract only the
 # libtasn1.so.3 libraries.

@@ -36,7 +36,7 @@ COMPONENT_PROJECT_URL=  https://github.com/pypa/pip
 COMPONENT_BUGDB=	utility/pip
 COMPONENT_ANITYA_ID=	6529
 
-TPNO=			70716
+COMPONENT_BAID=		101202
 
 MANIFEST_COMPARE = /usr/bin/true
 

@@ -39,7 +39,7 @@ COMPONENT_PROJECT_URL=	http://cairographics.org/pycairo/
 COMPONENT_BUGDB=	python-mod/pycairo
 COMPONENT_ANITYA_ID=	13166
 
-TPNO=			53159
+COMPONENT_BAID=		66833
 
 # for 11.3, do not build the python2 targets
 PYTHON2_VERSIONS =

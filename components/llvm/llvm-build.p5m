@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
 set name=pkg.fmri \
@@ -28,9 +28,9 @@ set name=pkg.fmri \
 set name=pkg.summary \
     value="LLVM $(COMPONENT_VERSION) Development Files and Libraries"
 set name=pkg.linted.userland.action001.3 value=true
+set name=com.oracle.info.baid value=$(COMPONENT_BAID)
 set name=com.oracle.info.description \
     value="LLVM - The Low Level Virtual Machine Compiler Infrastructure Framework - Development Files and Libraries"
-set name=com.oracle.info.tpno value=$(TPNO)
 set name=info.classification value=org.opensolaris.category.2008:Development/C \
     value=org.opensolaris.category.2008:Development/C++ \
     value=org.opensolaris.category.2008:Development/GNU \

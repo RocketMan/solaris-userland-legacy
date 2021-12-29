@@ -39,7 +39,7 @@ COMPONENT_ARCHIVE_URL=	https://www.apache.org/dist/$(COMPONENT_NAME)/$(COMPONENT
 COMPONENT_BUGDB=	library/libserf
 COMPONENT_ANITYA_ID=	1720
 
-TPNO=			34114
+COMPONENT_BAID=		38440
 
 include $(WS_MAKE_RULES)/prep.mk
 # Needed by the test: target. We override build and install.

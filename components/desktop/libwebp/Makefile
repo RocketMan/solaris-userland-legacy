@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
 #
 
 BUILD_BITS= 64_and_32
@@ -28,16 +28,16 @@ COMPILER= gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libwebp
-COMPONENT_VERSION=	1.1.0
+COMPONENT_VERSION=	1.2.1
 COMPONENT_PROJECT_URL=	https://www.webmproject.org/
 COMPONENT_ARCHIVE_HASH= \
-	sha256:98a052268cc4d5ece27f76572a7f50293f439c17a98e67c4ea0c7ed6f50ef043
+	sha256:808b98d2f5b84e9b27fdef6c5372dac769c3bda4502febbfa5031bd3c4d7d018
 COMPONENT_ARCHIVE_URL=	http://downloads.webmproject.org/releases/webp/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_BUGDB=	library/libwebp
 COMPONENT_ANITYA_ID=	1761
 
-TPNO=			57963
+COMPONENT_BAID=		112813
 
 # Required for 64-bit builds.
 LDFLAGS += $(CC_BITS)
@@ -68,7 +68,5 @@ REQUIRED_PACKAGES += image/library/libpng
 REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libpng16
 REQUIRED_PACKAGES += image/library/libtiff
-REQUIRED_PACKAGES += service/opengl/ogl-select
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += x11/library/freeglut
-REQUIRED_PACKAGES += x11/library/mesa

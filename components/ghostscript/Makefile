@@ -41,7 +41,7 @@ $(SOLARIS_11_4_5_ONLY)COMPONENT_NAME_1=	tessdata_best
 $(SOLARIS_11_4_5_ONLY)GIT_REPO_1=		https://github.com/tesseract-ocr/$(COMPONENT_NAME_1)
 $(SOLARIS_11_4_5_ONLY)GIT_COMMIT_ID_1=	e2aad9b
 
-TPNO=			68553
+COMPONENT_BAID=		97960
 
 include $(WS_MAKE_RULES)/common.mk
 # some backup files are copied to proto
