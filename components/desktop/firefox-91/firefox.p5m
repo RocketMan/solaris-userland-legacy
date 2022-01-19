@@ -33,7 +33,6 @@ set name=pkg.fmri \
 set name=pkg.summary value="Mozilla Firefox Web browser"
 set name=pkg.depend.runpath value=usr/lib/firefox:$PKGDEPEND_RUNPATH
 set name=com.oracle.info.description value="Mozilla Firefox Web browser"
-set name=com.oracle.info.tpno value=$(TPNO)
 set name=info.classification \
     value=org.opensolaris.category.2008:Applications/Internet
 set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
