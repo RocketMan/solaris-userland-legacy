@@ -30,10 +30,10 @@ COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		vte
-COMPONENT_VERSION=	0.66.0
+COMPONENT_VERSION=	0.66.2
 COMPONENT_PROJECT_URL=  https://wiki.gnome.org/Apps/Terminal/VTE
 COMPONENT_ARCHIVE_HASH= \
-	sha256:d0813ac00fb1d74d88851e765f755d496c83e097097358ea1baadb38b37b7b33
+	sha256:e89974673a72a0a06edac6d17830b82bb124decf0cb3b52cebc92ec3ff04d976
 COMPONENT_BUGDB=        gnome/terminal
 COMPONENT_ANITYA_ID=	10895
 
