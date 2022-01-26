@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2022, Oracle and/or its affiliates.
 #
 
 <transform file path=usr.*/man/.+ -> \
@@ -39,7 +39,8 @@ set name=org.opensolaris.arc-caseid value=LSARC/2002/058 value=PSARC/2016/375
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file path=usr/bin/gnome-terminal
 $(SOLARIS_11_4_5_ONLY)file path=usr/lib/$(MACH64)/nautilus/extensions-3.0/libterminal-nautilus.so
-file path=usr/lib/gnome-terminal-server mode=0555
+file path=usr/lib/gnome-terminal-server mode=0555 \
+    pkg.linted.userland.action001.2=true
 file path=usr/lib/systemd/user/gnome-terminal-server.service
 file path=usr/share/applications/org.gnome.Terminal.desktop
 file path=usr/share/dbus-1/services/org.gnome.Terminal.service
@@ -884,9 +885,8 @@ file path=usr/share/locale/zh_TW/LC_MESSAGES/gnome-terminal.mo
 file path=usr/share/man/man1/gnome-terminal.1
 $(SOLARIS_11_4_5_ONLY)file path=usr/share/metainfo/org.gnome.Terminal.Nautilus.metainfo.xml
 file path=usr/share/metainfo/org.gnome.Terminal.metainfo.xml
-license COPYING license=GPLv3
+license gnome-terminal.license license=GPLv3,FDLv1.3
 depend type=require fmri=__TBD pkg.debug.depend.reason=src/terminal-app.c \
     pkg.tmp.gsettings-schema=org.gnome.desktop.interface
 depend type=require fmri=__TBD pkg.debug.depend.reason=src/terminal-app.c \
     pkg.tmp.gsettings-schema=org.gnome.system.proxy
-

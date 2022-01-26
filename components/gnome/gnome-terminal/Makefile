@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2022, Oracle and/or its affiliates.
 #
 
 BUILD_BITS=		64
@@ -36,7 +36,8 @@ COMPONENT_BUGDB=        gnome/terminal
 COMPONENT_ANITYA_ID=	10896
 BUILD_STYLE=		meson
 
-COMPONENT_BAID=		99715
+COMPONENT_BAID=		115294
+BUILD_STYLE=		meson
 
 MANIFEST_COMPARE=/usr/bin/true
 
@@ -61,6 +62,14 @@ CONFIGURE_OPTIONS += -Dnautilus_extension=false
 CONFIGURE_OPTIONS += -Dsearch_provider=false
 
 unexport SHELLOPTS
+
+COMPONENT_TEST_TRANSFORMS += \
+        '-n ' \
+        '-e "/Ok/p" ' \
+        '-e "/Fail/p" ' \
+        '-e "/Pass/p" ' \
+        '-e "/Skipped/p" ' \
+        '-e "/Timeout/p" '
 
 REQUIRED_PACKAGES += gnome/file-manager/nautilus
 REQUIRED_PACKAGES += gnome/gnome-shell
