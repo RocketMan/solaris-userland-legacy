@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2011, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2011, 2022, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64
 include ../../make-rules/shared-macros.mk
@@ -33,7 +33,7 @@ COMPONENT_ARCHIVE_HASH=	\
 COMPONENT_BUGDB=	utility/gnu-make
 COMPONENT_ANITYA_ID=	1877
 
-COMPONENT_BAID=		32517
+COMPONENT_BAID=		116561
 
 # the test suite needs to be configured first
 SYSTEM_TEST_TARGET= configure $(SYSTEM_TEST_64)
