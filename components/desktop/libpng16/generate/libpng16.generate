@@ -55,3 +55,5 @@
 <transform link path=usr/lib/\$\(MACH64\)/pkgconfig/libpng.pc -> set mediator libpng>
 <transform link path=usr/lib/\$\(MACH64\)/pkgconfig/libpng.pc -> set mediator-version 1.6>
 <transform link path=usr/lib/\$\(MACH64\)/pkgconfig/libpng.pc -> set pkg.linted.pkglint.dupaction010.2 true>
+
+<transform file path=usr/lib/llib-lpng -> drop>
