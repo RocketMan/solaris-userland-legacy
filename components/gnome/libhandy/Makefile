@@ -29,10 +29,10 @@ include ../../../make-rules/shared-macros.mk
 GCC_ROOT =		/usr/gcc/10
 
 COMPONENT_NAME=		libhandy
-COMPONENT_VERSION=	1.4.0
+COMPONENT_VERSION=	1.5.0
 COMPONENT_PROJECT_URL=	https://gitlab.gnome.org/GNOME/libhandy
 COMPONENT_ARCHIVE_HASH=	\
-	sha256:2676d51fa1fa40fdee7497d3e763fefa18b0338bffcd2ee32e7f7e633c885446
+	sha256:466b9e026c1f9eb3b65966f530d97703a8212daaf911748c145e9cb843dbd6fe
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	114486
 
