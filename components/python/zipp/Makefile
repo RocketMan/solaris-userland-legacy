@@ -40,6 +40,9 @@ COMPONENT_BAID=		107894
 
 PYTHON_VERSIONS = $(PYTHON3_VERSIONS)
 
+# JM 2022-04-03 seems not to detect version on 11.3
+COMPONENT_POST_UNPACK_ACTION= $(GSED) -i "s/setup()/setup(version = '$(COMPONENT_VERSION)')/" $(SOURCE_DIR)/setup.py
+
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
