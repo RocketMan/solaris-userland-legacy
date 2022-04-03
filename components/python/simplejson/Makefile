@@ -39,6 +39,8 @@ COMPONENT_ANITYA_ID=	4026
 
 COMPONENT_BAID=		108344
 
+MANIFEST_COMPARE=/usr/bin/true
+
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
