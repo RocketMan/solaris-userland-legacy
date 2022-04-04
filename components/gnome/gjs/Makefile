@@ -30,20 +30,24 @@ COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gjs
-COMPONENT_VERSION=	1.70.0
+COMPONENT_VERSION=	1.70.2
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/Gjs
 COMPONENT_ARCHIVE_HASH= \
-	sha256:4b0629341a318a02374e113ab97f9a9f3325423269fc1e0b043a5ffb01861c5f
+	sha256:5dd661910d38a6ccd5b75c09ea83319ac16ad06236b537e555415a70610015b0
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	9532
 
-COMPONENT_BAID=		109042
+COMPONENT_BAID=		118904
 BUILD_STYLE=		meson
 
 # Tests do not work in Solaris yet
 TEST_TARGET = $(SKIP_TEST)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
+
+# g-ir-scanner
+CC_PIC_MODE = $(CC_PIC_DISABLE)
+LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 
 CXXFLAGS += -std=c++17
 

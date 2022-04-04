@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2021, Oracle and/or its affiliates.
+# Copyright (c) 2021, 2022, Oracle and/or its affiliates.
 #
 
 COMPILER =		gcc
@@ -49,9 +49,10 @@ $(SOLARIS_11_3_ONLY)CFLAGS += -D_XPG6
 COMPONENT_POST_UNPACK_ACTION += (cp $(COMPONENT_DIR)/files/fontify.c \
 					$(SOURCE_DIR)/demos/gtk-demo)
 
-#gcc_OPT.i386.64 = -g
-#MESON_BUILDTYPE = debugoptimized
-#CONFIGURE_OPTIONS += -Ddebug=true
+# g-ir-scanner
+CC_PIC_MODE = $(CC_PIC_DISABLE)
+LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
+
 CONFIGURE_OPTIONS += -Dwayland-backend=false
 CONFIGURE_OPTIONS += -Dman-pages=true
 

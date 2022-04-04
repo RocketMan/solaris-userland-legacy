@@ -18,7 +18,7 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2020, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2020, 2022, Oracle and/or its affiliates.
 #
 
 # parfait is a bit unhappy (24796622)
@@ -58,6 +58,9 @@ include $(WS_MAKE_RULES)/common.mk
 
 # pick up the 64-bit nspr for 11.3
 PKG_CONFIG_PATH=/usr/lib/amd64/pkgconfig:/usr/lib/pkgconfig/amd64
+
+CC_PIC_MODE = $(CC_PIC_DISABLE)
+LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 
 # configure script is not at root of source tree.
 CONFIGURE_SCRIPT= $(SOURCE_DIR)/js/src/configure

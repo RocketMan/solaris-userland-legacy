@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2019, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2019, 2022, Oracle and/or its affiliates.
 #
 
 set name=pkg.fmri \
@@ -43,14 +43,20 @@ file path=usr/lib/python$(PYVER)/vendor-packages/pluggy-$(COMPONENT_VERSION)-py$
 file path=usr/lib/python$(PYVER)/vendor-packages/pluggy-$(COMPONENT_VERSION)-py$(PYVER).egg-info/requires.txt
 file path=usr/lib/python$(PYVER)/vendor-packages/pluggy-$(COMPONENT_VERSION)-py$(PYVER).egg-info/top_level.txt
 file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/__init__.py
+file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/_callers.py
+file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/_hooks.py
+file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/_manager.py
+file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/_result.py
 file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/_tracing.py
 file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/_version.py
-file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/callers.py
-file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/hooks.py
-file path=usr/lib/python$(PYVER)/vendor-packages/pluggy/manager.py
 #
 license LICENSE license=MIT
 
 # force a dependency on the Python runtime
 depend type=require fmri=__TBD pkg.debug.depend.file=python$(PYVER) \
     pkg.debug.depend.path=usr/bin
+
+# force a dependency on importlib-metadata; pkgdepend work is needed to flush
+# this out.
+$(PYTHON_3.7_ONLY)depend type=require \
+    fmri=library/python/importlib-metadata-$(PYV)

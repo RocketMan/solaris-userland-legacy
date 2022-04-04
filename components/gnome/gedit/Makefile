@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2022, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64
@@ -52,9 +52,15 @@ CONFIGURE_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
 
+# g-ir-scanner
+CC_PIC_MODE = $(CC_PIC_DISABLE)
+LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
+
 # Compile all python sources to .pyc files
 COMPONENT_POST_INSTALL_ACTION += \
-        $(PYTHON) -m compileall $(PROTO_DIR)/usr/lib/python3.7/site-packages/gi/overrides;
+        $(MV) $(PROTO_DIR)/usr/lib/python3.7/site-packages \
+              $(PROTO_DIR)/usr/lib/python3.7/vendor-packages; \
+        $(PYTHON) -m compileall $(PROTO_DIR)/usr/lib/python3.7/vendor-packages/gi/overrides;
 PLUGINS_DIR = snippets; quickopen; externaltools
 COMPONENT_POST_INSTALL_ACTION += $(foreach i,$(PLUGINS_DIR),\
         $(PYTHON) -m compileall $(PROTO_DIR)$(USRLIBDIR64)/gedit/plugins/$(i));

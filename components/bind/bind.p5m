@@ -18,7 +18,7 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2011, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2011, 2022, Oracle and/or its affiliates.
 #
 set name=pkg.fmri \
     value=pkg:/service/network/dns/bind@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)

@@ -20,20 +20,20 @@
 #
 
 #
-# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2022, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		help2man
-COMPONENT_VERSION=	1.47.4
+COMPONENT_VERSION=	1.49.1
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:d4ecf697d13f14dd1a78c5995f06459bff706fd1ce593d1c02d81667c0207753
+    sha256:fd99a664ec4be9a86a0dd89719989f14f367a9c079d75d0e1d71e18a7bb51b03
 COMPONENT_ARCHIVE_URL=	http://mirror.team-cymru.org/gnu/$(COMPONENT_NAME)/$(COMPONENT_ARCHIVE)
 COMPONENT_ANITYA_ID=	1309
 
-COMPONENT_BAID=		38697
+COMPONENT_BAID=		119701
 
 TEST_TARGET= $(NO_TESTS)
 include $(WS_MAKE_RULES)/gnu-component.mk

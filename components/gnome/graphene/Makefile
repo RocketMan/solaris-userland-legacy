@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2020, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2020, 2022, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =		64_and_32
@@ -41,6 +41,10 @@ BUILD_STYLE=		meson
 $(SOLARIS_11_3_ONLY)TEST_TARGET = $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/gnome-component.mk
+
+# g-ir-scanner
+CC_PIC_MODE = $(CC_PIC_DISABLE)
+LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 
 CONFIGURE_OPTIONS.32 += -Dintrospection=false
 CONFIGURE_OPTIONS += -Darm_neon=false

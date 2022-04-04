@@ -59,28 +59,21 @@ file usr/bin/$(MACH64)/gio path=usr/bin/gio pkg.linted.userland.action001.2=true
 file path=usr/bin/gio-launch-desktop
 file path=usr/bin/gio-querymodules
 file usr/bin/$(MACH64)/glib-compile-resources \
-    path=usr/bin/glib-compile-resources pkg.linted.userland.action001.2=true
-file usr/bin/$(MACH64)/glib-compile-schemas path=usr/bin/glib-compile-schemas \
-    pkg.linted.userland.action001.2=true
-file usr/bin/$(MACH64)/glib-genmarshal path=usr/bin/glib-genmarshal \
-    pkg.depend.bypass-generate=.*
+    path=usr/bin/glib-compile-resources
+file usr/bin/$(MACH64)/glib-compile-schemas path=usr/bin/glib-compile-schemas
+file usr/bin/$(MACH64)/glib-genmarshal path=usr/bin/glib-genmarshal
 file usr/bin/$(MACH64)/glib-gettextize path=usr/bin/glib-gettextize
-file usr/bin/$(MACH64)/glib-mkenums path=usr/bin/glib-mkenums \
-    pkg.depend.bypass-generate=.*
-file usr/bin/$(MACH64)/gobject-query path=usr/bin/gobject-query \
-    pkg.linted.userland.action001.2=true
-file usr/bin/$(MACH64)/gresource path=usr/bin/gresource \
-    pkg.linted.userland.action001.2=true
-file usr/bin/$(MACH64)/gsettings path=usr/bin/gsettings \
-    pkg.linted.userland.action001.2=true
-file usr/bin/$(MACH64)/gtester path=usr/bin/gtester \
-    pkg.depend.bypass-generate=.* pkg.linted.userland.action001.2=true
-# The bypass is necessary as glib supports optional Python modules that we
-# don't currently have available in Solaris (subunit and testtools).
+file usr/bin/$(MACH64)/glib-mkenums path=usr/bin/glib-mkenums
+file usr/bin/$(MACH64)/gobject-query path=usr/bin/gobject-query
+file usr/bin/$(MACH64)/gresource path=usr/bin/gresource
+file usr/bin/$(MACH64)/gsettings path=usr/bin/gsettings
+file usr/bin/$(MACH64)/gtester path=usr/bin/gtester
 file usr/bin/$(MACH64)/gtester-report path=usr/bin/gtester-report \
     pkg.depend.bypass-generate=.* pkg.depend.bypass-generate=.*content.* \
     pkg.depend.bypass-generate=.*subunit.* \
     pkg.depend.bypass-generate=.*testtools.*
+# The bypass is necessary as glib supports optional Python modules that we
+# don't currently have available in Solaris (subunit and testtools).
 file path=usr/include/gio-unix-2.0/gio/gdesktopappinfo.h
 file path=usr/include/gio-unix-2.0/gio/gfiledescriptorbased.h
 file path=usr/include/gio-unix-2.0/gio/gunixconnection.h
@@ -355,23 +348,23 @@ file path=usr/include/glib-2.0/gobject/gvaluetypes.h
 file path=usr/lib/$(MACH64)/gio/modules/libgiofam.so
 file path=usr/lib/$(MACH64)/glib-2.0/include/glibconfig.h
 link path=usr/lib/$(MACH64)/libgio-2.0.so target=libgio-2.0.so.0
-link path=usr/lib/$(MACH64)/libgio-2.0.so.0 target=libgio-2.0.so.0.7000.0
-file path=usr/lib/$(MACH64)/libgio-2.0.so.0.7000.0
+link path=usr/lib/$(MACH64)/libgio-2.0.so.0 target=libgio-2.0.so.0.7000.5
+file path=usr/lib/$(MACH64)/libgio-2.0.so.0.7000.5
 link path=usr/lib/$(MACH64)/libglib-2.0.so target=libglib-2.0.so.0
-link path=usr/lib/$(MACH64)/libglib-2.0.so.0 target=libglib-2.0.so.0.7000.0
-file path=usr/lib/$(MACH64)/libglib-2.0.so.0.7000.0
+link path=usr/lib/$(MACH64)/libglib-2.0.so.0 target=libglib-2.0.so.0.7000.5
+file path=usr/lib/$(MACH64)/libglib-2.0.so.0.7000.5
 link path=usr/lib/$(MACH64)/libgmodule-2.0.so target=libgmodule-2.0.so.0
 link path=usr/lib/$(MACH64)/libgmodule-2.0.so.0 \
-    target=libgmodule-2.0.so.0.7000.0
-file path=usr/lib/$(MACH64)/libgmodule-2.0.so.0.7000.0
+    target=libgmodule-2.0.so.0.7000.5
+file path=usr/lib/$(MACH64)/libgmodule-2.0.so.0.7000.5
 link path=usr/lib/$(MACH64)/libgobject-2.0.so target=libgobject-2.0.so.0
 link path=usr/lib/$(MACH64)/libgobject-2.0.so.0 \
-    target=libgobject-2.0.so.0.7000.0
-file path=usr/lib/$(MACH64)/libgobject-2.0.so.0.7000.0
+    target=libgobject-2.0.so.0.7000.5
+file path=usr/lib/$(MACH64)/libgobject-2.0.so.0.7000.5
 link path=usr/lib/$(MACH64)/libgthread-2.0.so target=libgthread-2.0.so.0
 link path=usr/lib/$(MACH64)/libgthread-2.0.so.0 \
-    target=libgthread-2.0.so.0.7000.0
-file path=usr/lib/$(MACH64)/libgthread-2.0.so.0.7000.0
+    target=libgthread-2.0.so.0.7000.5
+file path=usr/lib/$(MACH64)/libgthread-2.0.so.0.7000.5
 file path=usr/lib/$(MACH64)/pkgconfig/gio-2.0.pc
 file path=usr/lib/$(MACH64)/pkgconfig/gio-unix-2.0.pc
 file path=usr/lib/$(MACH64)/pkgconfig/glib-2.0.pc
@@ -383,20 +376,20 @@ file path=usr/lib/$(MACH64)/pkgconfig/gthread-2.0.pc
 file path=usr/lib/gio/modules/libgiofam.so
 file path=usr/lib/glib-2.0/include/glibconfig.h
 link path=usr/lib/libgio-2.0.so target=libgio-2.0.so.0
-link path=usr/lib/libgio-2.0.so.0 target=libgio-2.0.so.0.7000.0
-file path=usr/lib/libgio-2.0.so.0.7000.0
+link path=usr/lib/libgio-2.0.so.0 target=libgio-2.0.so.0.7000.5
+file path=usr/lib/libgio-2.0.so.0.7000.5
 link path=usr/lib/libglib-2.0.so target=libglib-2.0.so.0
-link path=usr/lib/libglib-2.0.so.0 target=libglib-2.0.so.0.7000.0
-file path=usr/lib/libglib-2.0.so.0.7000.0
+link path=usr/lib/libglib-2.0.so.0 target=libglib-2.0.so.0.7000.5
+file path=usr/lib/libglib-2.0.so.0.7000.5
 link path=usr/lib/libgmodule-2.0.so target=libgmodule-2.0.so.0
-link path=usr/lib/libgmodule-2.0.so.0 target=libgmodule-2.0.so.0.7000.0
-file path=usr/lib/libgmodule-2.0.so.0.7000.0
+link path=usr/lib/libgmodule-2.0.so.0 target=libgmodule-2.0.so.0.7000.5
+file path=usr/lib/libgmodule-2.0.so.0.7000.5
 link path=usr/lib/libgobject-2.0.so target=libgobject-2.0.so.0
-link path=usr/lib/libgobject-2.0.so.0 target=libgobject-2.0.so.0.7000.0
-file path=usr/lib/libgobject-2.0.so.0.7000.0
+link path=usr/lib/libgobject-2.0.so.0 target=libgobject-2.0.so.0.7000.5
+file path=usr/lib/libgobject-2.0.so.0.7000.5
 link path=usr/lib/libgthread-2.0.so target=libgthread-2.0.so.0
-link path=usr/lib/libgthread-2.0.so.0 target=libgthread-2.0.so.0.7000.0
-file path=usr/lib/libgthread-2.0.so.0.7000.0
+link path=usr/lib/libgthread-2.0.so.0 target=libgthread-2.0.so.0.7000.5
+file path=usr/lib/libgthread-2.0.so.0.7000.5
 file path=usr/lib/pkgconfig/gio-2.0.pc
 file path=usr/lib/pkgconfig/gio-unix-2.0.pc
 file path=usr/lib/pkgconfig/glib-2.0.pc
@@ -413,10 +406,10 @@ file path=usr/share/bash-completion/completions/gdbus
 file path=usr/share/bash-completion/completions/gio
 file path=usr/share/bash-completion/completions/gresource
 file path=usr/share/bash-completion/completions/gsettings
-file path=usr/share/gdb/auto-load/usr/lib/$(MACH64)/libglib-2.0.so.0.7000.0-gdb.py
-file path=usr/share/gdb/auto-load/usr/lib/$(MACH64)/libgobject-2.0.so.0.7000.0-gdb.py
-file path=usr/share/gdb/auto-load/usr/lib/libglib-2.0.so.0.7000.0-gdb.py
-file path=usr/share/gdb/auto-load/usr/lib/libgobject-2.0.so.0.7000.0-gdb.py
+file path=usr/share/gdb/auto-load/usr/lib/$(MACH64)/libglib-2.0.so.0.7000.5-gdb.py
+file path=usr/share/gdb/auto-load/usr/lib/$(MACH64)/libgobject-2.0.so.0.7000.5-gdb.py
+file path=usr/share/gdb/auto-load/usr/lib/libglib-2.0.so.0.7000.5-gdb.py
+file path=usr/share/gdb/auto-load/usr/lib/libgobject-2.0.so.0.7000.5-gdb.py
 file path=usr/share/gettext/its/gschema.its
 file path=usr/share/gettext/its/gschema.loc
 file path=usr/share/glib-2.0/codegen/__init__.py

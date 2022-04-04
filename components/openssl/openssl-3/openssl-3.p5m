@@ -30,6 +30,7 @@ set name=pkg.description \
     value="OpenSSL is a full-featured toolkit implementing the Transport Layer Security (TLS v1+) protocols as well as a full-strength general purpose cryptography library."
 set name=pkg.depend.runpath value=$PKGDEPEND_RUNPATH:/usr/openssl/3/lib
 set name=pkg.human-version value=$(COMPONENT_VERSION)
+set name=pkg.linted.userland.action001.PIE value=true
 set name=com.oracle.info.baid value=$(COMPONENT_BAID)
 set name=com.oracle.info.description value="OpenSSL 3.0.0"
 set name=info.classification value=org.opensolaris.category.2008:System/Security
@@ -1281,6 +1282,8 @@ link path=usr/openssl/3/share/man/man3/BN_mod_mul.3openssl \
 file path=usr/openssl/3/share/man/man3/BN_mod_mul_montgomery.3openssl
 file path=usr/openssl/3/share/man/man3/BN_mod_mul_reciprocal.3openssl
 link path=usr/openssl/3/share/man/man3/BN_mod_sqr.3openssl \
+    target=BN_add.3openssl
+link path=usr/openssl/3/share/man/man3/BN_mod_sqrt.3openssl \
     target=BN_add.3openssl
 link path=usr/openssl/3/share/man/man3/BN_mod_sub.3openssl \
     target=BN_add.3openssl
@@ -7893,6 +7896,7 @@ link path=usr/openssl/3/share/man/man3/SSL_get_app_data.3openssl \
     target=BIO_get_ex_new_index.3openssl
 link path=usr/openssl/3/share/man/man3/SSL_get_async_status.3openssl \
     target=SSL_set_async_callback.3openssl
+file path=usr/openssl/3/share/man/man3/SSL_get_certificate.3openssl
 link path=usr/openssl/3/share/man/man3/SSL_get_changed_async_fds.3openssl \
     target=SSL_get_all_async_fds.3openssl
 link path=usr/openssl/3/share/man/man3/SSL_get_cipher.3openssl \
@@ -7959,6 +7963,8 @@ link \
 file path=usr/openssl/3/share/man/man3/SSL_get_peer_tmp_key.3openssl
 link path=usr/openssl/3/share/man/man3/SSL_get_pending_cipher.3openssl \
     target=SSL_get_current_cipher.3openssl
+link path=usr/openssl/3/share/man/man3/SSL_get_privatekey.3openssl \
+    target=SSL_get_certificate.3openssl
 file path=usr/openssl/3/share/man/man3/SSL_get_psk_identity.3openssl
 link path=usr/openssl/3/share/man/man3/SSL_get_psk_identity_hint.3openssl \
     target=SSL_get_psk_identity.3openssl
@@ -8240,6 +8246,7 @@ link \
     target=SSL_CTX_set_record_padding_callback.3openssl
 link path=usr/openssl/3/share/man/man3/SSL_set_recv_max_early_data.3openssl \
     target=SSL_read_early_data.3openssl
+file path=usr/openssl/3/share/man/man3/SSL_set_retry_verify.3openssl
 link path=usr/openssl/3/share/man/man3/SSL_set_rfd.3openssl \
     target=SSL_set_fd.3openssl
 link path=usr/openssl/3/share/man/man3/SSL_set_security_callback.3openssl \
@@ -9104,6 +9111,8 @@ link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_new_ex.3openssl \
     target=X509_STORE_CTX_new.3openssl
 link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_print_verify_cb.3openssl \
     target=X509_STORE_CTX_set_verify_cb.3openssl
+link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_purpose_inherit.3openssl \
+    target=X509_STORE_CTX_new.3openssl
 link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_set0_crls.3openssl \
     target=X509_STORE_CTX_new.3openssl
 link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_set0_param.3openssl \
@@ -9131,6 +9140,10 @@ link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_set_error_depth.3openssl \
     target=X509_STORE_CTX_get_error.3openssl
 link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_set_ex_data.3openssl \
     target=BIO_get_ex_new_index.3openssl
+link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_set_purpose.3openssl \
+    target=X509_STORE_CTX_new.3openssl
+link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_set_trust.3openssl \
+    target=X509_STORE_CTX_new.3openssl
 link path=usr/openssl/3/share/man/man3/X509_STORE_CTX_set_verify.3openssl \
     target=X509_STORE_CTX_new.3openssl
 file path=usr/openssl/3/share/man/man3/X509_STORE_CTX_set_verify_cb.3openssl

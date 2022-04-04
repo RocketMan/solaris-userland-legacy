@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2022, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64_and_32
@@ -43,6 +43,10 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 $(SOLARIS_11_3_ONLY)MANIFEST_COMPARE = /usr/bin/true
 $(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS += -Denable-gtk-doc=false
+
+# g-ir-scanner
+CC_PIC_MODE = $(CC_PIC_DISABLE)
+LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 
 CONFIGURE_OPTIONS.32 += -Denable-introspection=false
 
