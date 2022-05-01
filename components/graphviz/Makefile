@@ -64,6 +64,8 @@ PATH =		/usr/php/7.4/bin:/usr/bin:/usr/gnu/bin
 # Java header files (--with-javaincludedir allows for only one directory)
 CPPFLAGS +=	-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/solaris
 
+$(SOLARIS_11_3_ONLY)LDFLAGS += -lsocket -lnsl
+
 # Make sure to use the right python, depending on the 32/64-bit build.
 CONFIGURE_ENV +=	PYTHON2=$(PYTHON.2.7)
 CONFIGURE_ENV +=	PYTHON3=$(PYTHON.3.9)

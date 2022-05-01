@@ -1,0 +1,31 @@
+--- graphviz-2.47.1/autogen.sh~	2021-04-17 20:19:13.000000000 +0000
++++ graphviz-2.47.1/autogen.sh	2022-05-01 20:13:14.797088278 +0000
+@@ -1,14 +1,14 @@
+ #! /bin/sh
+ 
+-if ! GRAPHVIZ_VERSION=$( python3 gen_version.py ) ; then
++if ! GRAPHVIZ_VERSION=$( python3.9 gen_version.py ) ; then
+     echo "Error: Failed to set version" >&2
+     exit 1
+ fi
+-GRAPHVIZ_VERSION_MAJOR=$( python3 gen_version.py --major )
+-GRAPHVIZ_VERSION_MINOR=$( python3 gen_version.py --minor )
+-GRAPHVIZ_VERSION_PATCH=$( python3 gen_version.py --patch )
++GRAPHVIZ_VERSION_MAJOR=$( python3.9 gen_version.py --major )
++GRAPHVIZ_VERSION_MINOR=$( python3.9 gen_version.py --minor )
++GRAPHVIZ_VERSION_PATCH=$( python3.9 gen_version.py --patch )
+ 
+-if ! GRAPHVIZ_GIT_DATE=$( python3 gen_version.py --committer-date-iso ) ; then
++if ! GRAPHVIZ_GIT_DATE=$( python3.9 gen_version.py --committer-date-iso ) ; then
+     echo "Error: Failed to set date" >&2
+     exit 1
+ fi
+@@ -36,7 +36,7 @@
+     echo "Graphviz: abbreviated hash of last commit: $GRAPHVIZ_VERSION_COMMIT"
+ fi
+ 
+-if ! GRAPHVIZ_COLLECTION=$( python3 gen_version.py --collection) ; then
++if ! GRAPHVIZ_COLLECTION=$( python3.9 gen_version.py --collection) ; then
+     echo "Error: Failed to set collection" >&2
+     exit 1
+ fi
