@@ -43,5 +43,6 @@ TEST_TARGET= $(SKIP_TEST)
 include $(WS_MAKE_RULES)/gnome-component.mk
 
 REQUIRED_PACKAGES += developer/documentation-tool/doxygen
+REQUIRED_PACKAGES += developer/graphviz
 REQUIRED_PACKAGES += image/graphviz
 REQUIRED_PACKAGES += library/glib2
