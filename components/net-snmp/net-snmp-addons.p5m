@@ -18,7 +18,7 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2010, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2010, 2022, Oracle and/or its affiliates.
 #
 
 set name=pkg.fmri \
@@ -37,6 +37,5 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 
 file $(MACH64)/sun/agent/modules/seaExtensions/libseaExtensions.so \
     path=usr/lib/$(MACH64)/libseaExtensions.so
-file $(MACH32)/sun/agent/modules/seaExtensions/libseaExtensions.so \
-    path=usr/lib/libseaExtensions.so
+file path=usr/lib/libseaExtensions.so
 license COPYING license="BSD, BSD-like"

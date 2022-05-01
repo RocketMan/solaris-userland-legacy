@@ -1125,4 +1125,3 @@ file path=usr/share/vala/vapi/gci-1.vapi
 license gnome-calculator.license license=GPLv3
 depend type=require fmri=__TBD pkg.debug.depend.reason=src/gnome-calculator.c \
     pkg.tmp.gsettings-schema=org.gnome.calculator
-
