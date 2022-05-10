@@ -100,6 +100,9 @@ ifdef DEBUG
 CONFIGURE_OPTIONS +=    --enable-debug
 endif
 
+# JM 2022-05-10 disable kerberos support
+CONFIGURE_OPTIONS +=	--without-kerberos
+
 # icu's switch to g++
 # 21090206 icu should build C++ to C++11
 # causes this in php forcing php to switch also
