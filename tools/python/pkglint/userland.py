@@ -695,3 +695,5 @@ class UserlandManifestChecker(base.ManifestChecker):
 					msgid="%s%s.2" % (self.name, pkglint_id))
 
 	check_package_arch.desc = _("Wrong architecture package.")
+
+# vim: expandtab sw=4 ts=4

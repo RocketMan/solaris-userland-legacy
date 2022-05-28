@@ -49,3 +49,12 @@
 
 # misc
 <transform file path=etc/openssl/3/.*.dist$ -> drop>
+
+# c_rehash is obsolete.
+<transform file path=.*c_rehash$ -> drop>
+<transform link path=.*c_rehash.* -> drop>
+
+# drop lint source (PSARC/2021/099)
+<transform file path=usr/openssl/3/lib/llib-lcrypto$ -> drop>
+<transform file path=usr/openssl/3/lib/llib-lssl$ -> drop>
+
