@@ -18,9 +18,16 @@
 #
 # CDDL HEADER END
 #
-
+# Copyright (c) 2022, Oracle and/or its affiliates.
 #
-# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
-#
+<transform link path=usr/share/man/man3/el_init_fd.3 -> drop>
 
-file llib-lpython37m path=usr/lib/llib-lpython3.7m
+<transform link path=usr/share/man/man3/tok_w(.*) -> set path usr/share/man/man3/el_tok_%<1>>
+<transform link path=usr/share/man/man3/tok_.* -> drop>
+
+<transform link path=usr/share/man/man3/history_w(.*) -> drop>
+<transform link path=usr/share/man/man3/history(.*) -> set path usr/share/man/man3/el_history%<1>>
+
+<transform link path=usr/share/man/man3/el_w.* -> drop>
+
+<transform file path=usr/share/man/man7/.* -> drop>
