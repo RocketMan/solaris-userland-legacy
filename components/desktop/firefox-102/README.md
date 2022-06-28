@@ -28,7 +28,7 @@
   is supplied in a later version of ffmpeg than the one we have (4.1.6).
   For now, we just disable this specific dependency.
 
-* Relative to Firefox 78, you will need to upgrade the following
+* Relative to Firefox 91, you will need to upgrade the following
   dependencies:
 
   * **icu** 69.1 > **71.1**
