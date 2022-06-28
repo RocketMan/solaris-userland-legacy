@@ -1,0 +1,11 @@
+--- a/toolkit/mozapps/installer/packager.mk	2020-06-30 21:22:46.000000000 +0000
++++ b/toolkit/mozapps/installer/packager.mk	2020-07-04 13:47:24.774734408 +0000
+@@ -124,7 +124,7 @@
+ 		--no-download \
+ 	  )
+ endif
+-ifdef MOZ_NORMANDY
++ifdef MOZ_NORMANDYx
+ ifndef CROSS_COMPILE
+ 	# Generate a file that describes the local Normandy client.
+ 	env LD_LIBRARY_PATH="$(LD_LIBRARY_PATH):$(DIST)/$(PKG_PATH)/bin" \

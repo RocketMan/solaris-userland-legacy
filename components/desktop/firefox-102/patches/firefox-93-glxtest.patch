@@ -1,0 +1,16 @@
+--- firefox-91.0.1/toolkit/xre/glxtest.cpp-	2021-08-16 19:14:44.000000000 +0000
++++ firefox-91.0.1/toolkit/xre/glxtest.cpp	2021-09-04 10:40:12.947228081 +0000
+@@ -1216,7 +1216,12 @@
+   glxtest_bufsize = bufsize;
+ 
+   // Get a list of all GPUs from the PCI bus.
+-  int pci_count = get_pci_status();
++  int pci_count = 1;
++  if (getenv("MOZ_AVOID_PCI_SCAN")) {
++    record_warning("PCI scan disabled");
++  } else {
++    pci_count = get_pci_status();
++  }
+ 
+ #ifdef MOZ_WAYLAND
+   if (IsWaylandEnabled()) {
