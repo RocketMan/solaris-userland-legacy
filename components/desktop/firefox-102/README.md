@@ -1,4 +1,4 @@
-## Firefox 102 for 11.3
+## Firefox 102 for 11.3 [Unstable]
 
 ### Notes
 
@@ -20,10 +20,6 @@
 
         GTK_CSD=1 GTK_THEME=slim-nimbus MOZ_AVOID_PCI_SCAN=1 firefox
 
-* By default, Firefox 91 uses a non-native theme, which displays Adwaita-
-  like scrollbars, etc.  You can disable this in about:config by changing
-  the property `widget.non-native-theme.enabled` to `false`.
-
 * During the build, it wants FFVPXRuntimeLinker.h, which
   is supplied in a later version of ffmpeg than the one we have (4.1.6).
   For now, we just disable this specific dependency.
@@ -38,6 +34,10 @@
 * **cups 1.6** or later is required at runtime for printing.  Firefox
   will build and run without this, but any attempt to print using an
   older CUPS will result in SIGSEGV.
+
+[Edit: Marked 'Unstable', as too many random sites are crashing,
+relative to Firefox 91.  Once upstream has migrated to 102, will
+review and adjust the patches as needed.]
 
 ### Firefox 102 esr
 
