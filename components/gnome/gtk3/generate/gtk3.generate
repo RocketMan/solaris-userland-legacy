@@ -94,3 +94,4 @@
 
 
 
+<transform file path=usr/share/gtk-doc/html/.+ -> drop>
