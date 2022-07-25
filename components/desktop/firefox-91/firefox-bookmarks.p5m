@@ -18,9 +18,7 @@
 #
 # CDDL HEADER END
 #
-
-#
-# Copyright (c) 2015, 2018, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2021, 2022, Oracle and/or its affiliates.
 #
 
 set name=pkg.fmri \
@@ -31,7 +29,7 @@ set name=info.classification \
     value=org.opensolaris.category.2008:Applications/Internet
 set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
-set name=org.opensolaris.arc-caseid value=PSARC/2014/085
+set name=org.opensolaris.arc-caseid value=PSARC/2022/059
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file $(MACH64)/dist/bin/browser/chrome/en-US/locale/browser/bookmarks.html \
     path=usr/lib/firefox/defaults/profile/bookmarks.html
