@@ -5,24 +5,22 @@ https://bugzilla.mozilla.org/show_bug.cgi?id=1450912
 
 --- firefox-91.0.1/browser/app/nsBrowserApp.cpp~	2021-08-16 19:14:33.000000000 +0000
 +++ firefox-91.0.1/browser/app/nsBrowserApp.cpp	2021-09-05 10:14:05.307734571 +0000
-@@ -257,6 +257,9 @@
+@@ -257,6 +257,8 @@
  #endif
  
  int main(int argc, char* argv[], char* envp[]) {
-+  setenv("LC_COLLATE", "C", 1);
-+  setenv("LC_TIME", "C", 1);
++  setenv("LC_ALL", "C", 1);
 +
  #if defined(MOZ_ENABLE_FORKSERVER)
    if (strcmp(argv[argc - 1], "forkserver") == 0) {
      nsresult rv = InitXPCOMGlue(LibLoadingStrategy::NoReadAhead);
 --- firefox-91.0.1/js/xpconnect/shell/xpcshell.cpp~	2021-08-16 19:14:37.000000000 +0000
 +++ firefox-91.0.1/js/xpconnect/shell/xpcshell.cpp	2021-09-05 10:15:16.998352904 +0000
-@@ -42,6 +42,9 @@
+@@ -42,6 +42,8 @@
  #endif
  
  int main(int argc, char** argv, char** envp) {
-+  setenv("LC_COLLATE", "C", 1);
-+  setenv("LC_TIME", "C", 1);
++  setenv("LC_ALL", "C", 1);
 +
  #ifdef MOZ_WIDGET_GTK
    // A default display may or may not be required for xpcshell tests, and so
