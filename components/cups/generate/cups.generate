@@ -48,3 +48,8 @@
 # manifest
 <transform file path=lib/svc/manifest/.+\.xml -> default mode 0444>
 <transform file path=lib/svc/manifest/.+\.xml -> default restart_fmri svc:/system/manifest-import:default>
+
+# for 11.3:
+<transform file path=etc/cups/.+.conf.N -> drop>
+<transform file path=usr/share/cups/mime/.+.convs.O -> drop>
+<transform file path=usr/share/cups/mime/.+.types.O -> drop>

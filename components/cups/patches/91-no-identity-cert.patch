@@ -1,0 +1,19 @@
+No svc:/system/identity:cert on 11.3
+
+--- cups-2.4.2/scheduler/cups.xml.in~	2022-05-26 07:17:21.000000000 +0000
++++ cups-2.4.2/scheduler/cups.xml.in	2022-07-25 17:52:50.654644447 +0000
+@@ -49,14 +49,6 @@
+         <service_fmri value='svc:/milestone/network' />
+     </dependency>
+ 
+-    <dependency
+-        name='identity-cert'
+-        grouping='require_all'
+-        restart_on='refresh'
+-        type='service'>
+-        <service_fmri value='svc:/system/identity:cert'/>
+-    </dependency>
+-
+     <exec_method
+         type='method'
+         name='stop'

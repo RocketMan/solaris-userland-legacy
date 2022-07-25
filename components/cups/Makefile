@@ -46,6 +46,8 @@ system-test:    	$(SYSTEM_TESTS_NOT_IMPLEMENTED)
 
 include $(WS_MAKE_RULES)/common.mk
 
+CFLAGS += -D_POSIX_PTHREAD_SEMANTICS
+
 $(CONFIGURE_32):	LDFLAGS += -m32
 $(CONFIGURE_64):	LDFLAGS += -m64
 
@@ -80,16 +82,6 @@ LD_OPTIONS.32 += -L /usr/lib/gnutls-3
 LD_OPTIONS.64 += -L /usr/lib/$(MACH64)/gnutls-3
 LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 LDFLAGS += -lsocket -lnsl
-
-# cups scheduler
-PKG_OBJ =	cups
-# cups API
-SUBPKG_OBJ =	cups-libs
-
-# - exclude lib.+\.{so[.<ver>[.<subver>]]|h} from $(HEAP_OBJ) actions into sub-pkg
-EXCLUSION_CRITERIA = usr/include/.*\.h|usr/lib.*/lib.*\.so.*
-# pkgobjs is used because manifest check do not support trash-can check
-include $(WS_MAKE_RULES)/pkgobjs.mk
 
 # Work in our test dir, not /tmp.
 COMPONENT_TEST_ENV += CUPS_TESTBASE=$(COMPONENT_TEST_DIR)/test/work

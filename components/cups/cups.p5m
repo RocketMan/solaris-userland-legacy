@@ -45,8 +45,8 @@ file path=etc/cups/snmp.conf.default group=lp mode=440
 dir  path=etc/cups/ssl group=lp mode=0700
 file path=etc/dbus-1/system.d/cups.conf
 # PAM configuration
-file Solaris/pam-cups path=etc/pam.d/cups mode=0644 overlay=allow \
-    preserve=renamenew
+# on 11.3, this is delivered by system/core-os
+#file Solaris/pam-cups path=etc/pam.d/cups mode=0644 overlay=allow preserve=renamenew
 file Solaris/auth_attr path=etc/security/auth_attr.d/cups
 file Solaris/prof_attr path=etc/security/prof_attr.d/cups
 file Solaris/user_attr path=etc/user_attr.d/cups

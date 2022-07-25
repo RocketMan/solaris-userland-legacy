@@ -41,8 +41,8 @@ dir path=var/log/cups group=lp
 dir path=var/spool/cups group=lp mode=0710
 dir path=var/spool/cups/tmp group=lp mode=1770
 # PAM configuration
-file Solaris/pam-cups path=etc/pam.d/cups mode=0644 overlay=allow \
-    preserve=renamenew
+# on 11.3, this is delievered by system/core-os
+#file Solaris/pam-cups path=etc/pam.d/cups mode=0644 overlay=allow preserve=renamenew
 # RBAC authotization and profiles
 file Solaris/auth_attr path=etc/security/auth_attr.d/cups
 file Solaris/prof_attr path=etc/security/prof_attr.d/cups
