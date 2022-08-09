@@ -42,9 +42,15 @@ include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
 
+COMPONENT_TEST_ENV +=	PYTHONPATH=$(PROTO_DIR)$(PYTHON_VENDOR_PACKAGES):$(SOURCE_DIR)
 COMPONENT_TEST_DIR =	$(SOURCE_DIR)/tests
 COMPONENT_TEST_CMD =	$(PYTHON) -m pytest
 COMPONENT_TEST_ARGS =
+
+COMPONENT_SYSTEM_TEST_ENV +=   PYTHONPATH=$(SOURCE_DIR)
+
+test: ENV += -i
+system-test: ENV += -i
 
 ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 
@@ -56,6 +62,8 @@ install:	$(INSTALL_NO_ARCH)
 test:		$(TEST_NO_ARCH)
 
 system-test:    $(SYSTEM_TEST_NO_ARCH)
+
+REQUIRED_PACKAGES += $(PYVS:%=library/python/pytest-%)
 
 # Testing related components
 REQUIRED_PACKAGES += library/python/django
