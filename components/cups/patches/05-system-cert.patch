@@ -10,8 +10,8 @@ Not for upstream.
  #ServerKeychain @CUPS_SERVERKEYCHAIN@
  
 +# TLS certificate and key to use...
-+TLSCertFile /etc/certs/localhost/host.crt
-+TLSKeyFile /etc/certs/localhost/host.key
++#TLSCertFile /etc/certs/localhost/host.crt
++#TLSKeyFile /etc/certs/localhost/host.key
 +
  # Location of other configuration files...
  #ServerRoot @CUPS_SERVERROOT@
