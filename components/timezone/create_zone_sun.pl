@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/perl5/5.32/bin/perl
 
 #
 # CDDL HEADER START
