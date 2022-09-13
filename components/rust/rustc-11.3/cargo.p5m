@@ -34,6 +34,7 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file etc/bash_completion.d/cargo \
     path=etc/bash/bash_completion.d/cargo.bashcomp.sh
 file path=usr/bin/cargo
+file path=usr/share/man/man1/cargo-add.1
 file path=usr/share/man/man1/cargo-bench.1
 file path=usr/share/man/man1/cargo-build.1
 file path=usr/share/man/man1/cargo-check.1

@@ -1,0 +1,16 @@
+Fixes error late in the build process:
+
+      error: `-Csplit-debuginfo` is unstable on this platform
+
+See https://github.com/rust-lang/rust/issues/99208
+
+--- rustc-1.62.1-src/src/bootstrap/builder.rs.~2~	2022-09-13 12:05:34.473239543 +0000
++++ rustc-1.62.1-src/src/bootstrap/builder.rs	2022-09-13 16:01:32.978552339 +0000
+@@ -1435,6 +1435,7 @@
+         // for this conditional to be removed.
+         if !target.contains("windows") || compiler.stage >= 1 {
+             let needs_unstable_opts = target.contains("linux")
++                || target.contains("solaris")
+                 || target.contains("windows")
+                 || target.contains("bsd")
+                 || target.contains("dragonfly");
