@@ -38,6 +38,8 @@ COMPONENT_BUGDB=	library/openssl
 COMPONENT_ANITYA_ID=	2566
 COMPONENT_BAID=		126434
 
+# in case /usr/bin/pod2man is not mediated in 11.3
+$(SOLARIS_11_3_ONLY)PATH=/usr/gnu/bin:/usr/bin:/usr/perl5/$(PERL_VERSION)/bin
 
 CONFIGURE_PREFIX = /usr/openssl/3
 CONFIGURE_OPTIONS = --openssldir=/etc/openssl/3
