@@ -142,9 +142,6 @@ LD_Z_IGNORE=
 # missing symbols from gtk3 during Firefox start
 LD_B_DIRECT=
 
-
-MANIFEST_COMPARE=/usr/bin/true
-
 # SPARC build seems to require more open files for "Reticulating splines" phase
 ENV := ulimit -n 16384; $(ENV)
 
@@ -219,7 +216,6 @@ COMPONENT_TEST_TRANSFORMS = \
 
 REQUIRED_PACKAGES += codec/libogg
 REQUIRED_PACKAGES += codec/libvorbis
-REQUIRED_PACKAGES += codec/ogg-vorbis
 REQUIRED_PACKAGES += codec/libvpx
 REQUIRED_PACKAGES += compress/bzip2
 REQUIRED_PACKAGES += compress/unzip
@@ -237,7 +233,6 @@ REQUIRED_PACKAGES += library/desktop/harfbuzz
 REQUIRED_PACKAGES += library/desktop/pango
 REQUIRED_PACKAGES += library/desktop/startup-notification
 REQUIRED_PACKAGES += library/glib2
-REQUIRED_PACKAGES += library/gnome/gnome-libs
 REQUIRED_PACKAGES += library/graphics/pixman
 REQUIRED_PACKAGES += library/icu
 REQUIRED_PACKAGES += library/libevent
