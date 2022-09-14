@@ -26,16 +26,16 @@
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		Django
-COMPONENT_VERSION=	3.2.14
+COMPONENT_VERSION=	3.2.15
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:82ba9b7649a4662cd6ac8c50013d2e4ce9b29566d56369b83183ea25801045d2
+    sha256:298bb9899ab0b09d6efcaaf8186213c97abd2be55dc844afe0e3ce8871745278
 COMPONENT_ARCHIVE_URL=	$(call pypi_url)
 COMPONENT_PROJECT_URL=	http://www.djangoproject.com/
 COMPONENT_BUGDB=	python-mod/django
 COMPONENT_ANITYA_ID=	3828
-COMPONENT_BAID=		126503
+COMPONENT_BAID=		128368
 
 
 COMPONENT_NAME_22=	$(COMPONENT_NAME)
@@ -71,11 +71,6 @@ $(TARGET_37).tested-and-compared: COMPONENT_TEST_DIR = $(SOURCE_DIR_22)/tests
 
 $(MANIFEST_BASE)-django-37.mogrified: COMPONENT_VERSION = $(COMPONENT_VERSION_22)
 $(MANIFEST_BASE)-django-37.mogrified: COMPONENT_BAID = $(COMPONENT_BAID_22)
-
-# Common generate transform for python uses files from the 3.7 variant as
-# a baseline; hence, to make it work as expected, we have to pass 3.7
-# related COMPONENT_VERSION to make it work correctly.
-$(MANIFEST_BASE)-django-PYVER.constructed: COMPONENT_VERSION = $(COMPONENT_VERSION_22)
 
 # Manifest convenience variables.
 $(MANIFEST_BASE)-django-37.mogrified: 32_ONLY = \#
