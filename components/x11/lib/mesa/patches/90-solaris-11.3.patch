@@ -1,0 +1,85 @@
+--- mesa-21.3.8/src/util/u_thread.h-	2022-03-18 19:26:47.000000000 +0000
++++ mesa-21.3.8/src/util/u_thread.h	2022-10-13 19:06:24.583157255 +0000
+@@ -242,7 +242,7 @@
+ static inline int64_t
+ util_thread_get_time_nano(thrd_t thread)
+ {
+-#if defined(HAVE_PTHREAD) && !defined(__APPLE__) && !defined(__HAIKU__)
++#if defined(HAVE_PTHREAD) && !defined(__sun) && !defined(__APPLE__) && !defined(__HAIKU__)
+    struct timespec ts;
+    clockid_t cid;
+ 
+--- mesa-21.3.8/src/util/memstream.c-	2022-03-18 19:26:47.000000000 +0000
++++ mesa-21.3.8/src/util/memstream.c	2022-10-13 19:07:20.424532559 +0000
+@@ -51,7 +51,7 @@
+    }
+ 
+    return success;
+-#elif defined(__APPLE__)
++#elif defined(__APPLE__) || defined(__sun)
+    return false;
+ #else
+    FILE *const f = open_memstream(bufp, sizep);
+--- mesa-21.3.8/src/egl/main/egldisplay.c-	2022-03-18 19:26:47.000000000 +0000
++++ mesa-21.3.8/src/egl/main/egldisplay.c	2022-10-13 19:08:10.750886750 +0000
+@@ -98,9 +98,6 @@
+    const char *plat_name;
+    EGLint i;
+ 
+-   static_assert(ARRAY_SIZE(egl_platforms) == _EGL_NUM_PLATFORMS,
+-                 "Missing platform");
+-
+    plat_name = getenv("EGL_PLATFORM");
+    /* try deprecated env variable */
+    if (!plat_name || !plat_name[0])
+--- mesa-21.3.8/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp-	2022-03-18 19:26:47.000000000 +0000
++++ mesa-21.3.8/src/gallium/auxiliary/gallivm/lp_bld_misc.cpp	2022-10-13 19:23:07.016488539 +0000
+@@ -39,6 +39,12 @@
+ #undef PACKAGE_TARNAME
+ #undef PACKAGE_VERSION
+ 
++#ifdef __sun
++#include <sys/regset.h>
++#undef CS
++#undef CE
++#undef FS
++#endif
+ 
+ #include <stddef.h>
+ 
+--- mesa-21.3.8/src/gallium/auxiliary/gallivm/lp_bld_debug.cpp-	2022-03-18 19:26:47.000000000 +0000
++++ mesa-21.3.8/src/gallium/auxiliary/gallivm/lp_bld_debug.cpp	2022-10-13 19:21:03.401357331 +0000
+@@ -25,6 +25,13 @@
+  *
+  **************************************************************************/
+ 
++#ifdef __sun
++#include <sys/regset.h>
++#undef CS
++#undef CE
++#undef FS
++#endif
++
+ #include <stddef.h>
+ #include <fstream>
+ #include <sstream>
+--- mesa-21.3.8/meson.build.~3~	2022-10-15 15:27:37.201760385 +0000
++++ mesa-21.3.8/meson.build	2022-10-15 15:29:19.381869437 +0000
+@@ -22,7 +22,7 @@
+   'mesa',
+   ['c', 'cpp'],
+   version : run_command(
+-    [find_program('python3', 'python'), 'bin/meson_get_version.py'],
++    [find_program('python3.7', 'python'), 'bin/meson_get_version.py'],
+     check : true
+   ).stdout(),
+   license : 'MIT',
+@@ -1005,7 +1005,7 @@
+   pre_args += '-DHAVE_HAIKU_PLATFORM'
+ endif
+ 
+-prog_python = import('python').find_installation('python3')
++prog_python = import('python').find_installation('python3.7')
+ has_mako = run_command(
+   prog_python, '-c',
+   '''

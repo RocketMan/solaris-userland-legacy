@@ -50,11 +50,11 @@ link path=usr/X11/lib/libglapi.so target=libglapi.so.0
 link path=usr/X11/lib/libglapi.so.0 target=libglapi.so.0.0.0
 link path=usr/X11/lib/libglapi.so.0.0.0 target=../../lib/GL/libglapi.so.0.0.0
 link path=usr/X11/lib/mesa target=../../lib/mesa
-file path=usr/include/EGL/egl.h
-file path=usr/include/EGL/eglext.h
-file path=usr/include/EGL/eglextchromium.h
-file path=usr/include/EGL/eglmesaext.h
-file path=usr/include/EGL/eglplatform.h
+#file path=usr/include/EGL/egl.h
+#file path=usr/include/EGL/eglext.h
+#file path=usr/include/EGL/eglextchromium.h
+#file path=usr/include/EGL/eglmesaext.h
+#file path=usr/include/EGL/eglplatform.h
 link path=usr/include/GL/glcorearb.h target=../mesa/glcorearb.h
 link path=usr/include/GL/internal/dri_interface.h \
     target=../../mesa/internal/dri_interface.h
@@ -184,8 +184,7 @@ file path=usr/lib/pkgconfig/gbm.pc
 file path=usr/lib/pkgconfig/gl.pc
 file path=usr/lib/pkgconfig/glesv1_cm.pc
 file path=usr/lib/pkgconfig/glesv2.pc
-#hardlink path=usr/lib/xorg/modules/dri/$(MACH64)/kms_swrast_dri.so \
-#    target=swrast_dri.so
+#hardlink path=usr/lib/xorg/modules/dri/$(MACH64)/kms_swrast_dri.so #    target=swrast_dri.so
 #file path=usr/lib/xorg/modules/dri/$(MACH64)/swrast_dri.so
 #file path=usr/lib/xorg/modules/dri/swrast_dri.so
 license mesa.license license=MIT,Other

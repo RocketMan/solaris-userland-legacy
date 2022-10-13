@@ -27,6 +27,8 @@ BUILD_BITS =            32_and_64
 COMPILER=		gcc
 include ../../../../make-rules/shared-macros.mk
 
+MANIFEST_COMPARE=/bin/true
+
 COMPONENT_NAME=		mesa
 COMPONENT_VERSION=	21.3.8
 COMPONENT_PROJECT_URL=  https://www.mesa3d.org
@@ -72,21 +74,11 @@ CONFIGURE_OPTIONS += -Dglx='auto'
 CONFIGURE_OPTIONS += -Degl='true'
 CONFIGURE_OPTIONS += -Ddri-drivers=''
 
-CONFIGURE_OPTIONS += --with-gallium-drivers=swrast
-CONFIGURE_OPTIONS += --enable-gbm
-CONFIGURE_OPTIONS += --disable-shader-cache
-CONFIGURE_OPTIONS.32 += --with-dri-driverdir='/usr/lib/xorg/modules/dri'
-CONFIGURE_OPTIONS.64 += --with-dri-driverdir='/usr/lib/xorg/modules/dri/$(MACH64)'
+CFLAGS += -D__EXTENSIONS__ -Wno-incompatible-pointer-types
 
-# Without these, we get pkgdepend failures with libEGL.so.1.0.0 
-LIBDRM_RUNPATH_32 = /usr/lib/xorg
-LIBDRM_RUNPATH_64 = /usr/lib/xorg/$(MACH64)
-LIBDRM_RUNPATH = $(LIBDRM_RUNPATH_$(BITS))
-CXXFLAGS += -std=c++11 -I/usr/include/llvm/Support/Solaris/sys
-CFLAGS += -D__EXTENSIONS__ -I/usr/include/llvm/Support/Solaris/sys -Wno-incompatible-pointer-types
 $(SOLARIS_11_3_ONLY)CFLAGS += -D_POSIX_PTHREAD_SEMANTICS
 CPPFLAGS += -D__STDC_CONSTANT_MACROS -D__STDC_LIMIT_MACROS
-LDFLAGS += -Wl,-zgnu-version-script-compat
+
 # This code has init cycles and multiple C++ libraries, and misbehaves
 # when lazy loading is used. Since we're unable to restructure third
 # party code at that level, we must instead disable lazy loading.
