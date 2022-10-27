@@ -20,40 +20,43 @@
 #
 
 #
-# Copyright (c) 2016, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2022, Oracle and/or its affiliates.
 #
 
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		mccabe
-COMPONENT_VERSION=	0.5.2
+COMPONENT_VERSION=	0.7.0
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:3473f06c8b757bbb5cdf295099bf64032e5f7d6fe0ec2f97ee9b23cb0a435aff
+    sha256:40a37f1bab2e8312d0671de162efefe76ca68e88a6cc099bab7cf9136bffa48f
 COMPONENT_ARCHIVE_URL=	$(call pypi_url)
 COMPONENT_PROJECT_URL=	https://pypi.python.org/pypi/mccabe
 COMPONENT_BUGDB=	python-mod/mccabe
 COMPONENT_ANITYA_ID=	6902
+COMPONENT_BAID=		129342
 
-COMPONENT_BAID=		35686
+# This component is delivered in two different versions because
+# the newer one is no longer Python 2.7 compatible.
+COMPONENT_VERSION_OLD=	0.5.2
+COMPONENT_SRC_OLD=	$(COMPONENT_NAME)-$(COMPONENT_VERSION_OLD)
+COMPONENT_ARCHIVE_OLD=	$(COMPONENT_SRC_OLD).tar.gz
+COMPONENT_ARCHIVE_HASH_OLD= \
+    sha256:3473f06c8b757bbb5cdf295099bf64032e5f7d6fe0ec2f97ee9b23cb0a435aff
+COMPONENT_ARCHIVE_URL_OLD=	$(call pypi_url,OLD)
+COMPONENT_BAID_OLD=	35686
 
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
+include $(WS_MAKE_RULES)/python-multiver.mk
 
 ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 
 COMPONENT_TEST_DIR =	$(SOURCE_DIR)
 COMPONENT_TEST_CMD =	$(PYTHON) -m pytest
 COMPONENT_TEST_ARGS =   test_mccabe.py
-COMPONENT_TEST_TARGETS =
-
-COMPONENT_TEST_TRANSFORMS += \
-	'-e "/^platform.*/d" ' \
-	'-e "/hypothesis/d" ' \
-	'-e "/^plugins.*/d" ' \
-	'-e "s|\(in \).*\(seconds\).*|\1 x \2|"'
 
 # common targets
 build:		$(BUILD_NO_ARCH)
@@ -62,4 +65,4 @@ install:	$(INSTALL_NO_ARCH)
 
 test:		$(TEST_NO_ARCH)
 
-system-test:	$(SYSTEM_TESTS_NOT_IMPLEMENTED)
+system-test:	$(SYSTEM_TEST_NO_ARCH)

@@ -37,6 +37,7 @@ COMPONENT_ANITYA_ID=	1174
 COMPONENT_BAID=		112396
 
 BUILD_STYLE=		meson
+PYTHON_VERSION=		3.7
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 include $(WS_MAKE_RULES)/test-x11.mk
@@ -59,6 +60,7 @@ COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 CONFIGURE_OPTIONS += -Dgtk_doc=true
 CONFIGURE_OPTIONS += -Dgladeui=true
 
+REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/desktop/gdk-pixbuf
 REQUIRED_PACKAGES += library/desktop/gjs

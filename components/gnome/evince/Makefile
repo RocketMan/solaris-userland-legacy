@@ -95,6 +95,7 @@ COMPONENT_BUILD_ENV += PATH="/usr/gnu/bin:$(PATH)"
 
 REQUIRED_PACKAGES += desktop/pdf-viewer/poppler
 REQUIRED_PACKAGES += desktop/pdf-viewer/poppler-viewer
+REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += gnome/file-manager/nautilus
 REQUIRED_PACKAGES += gnome/gsettings-desktop-schemas
 REQUIRED_PACKAGES += image/library/libtiff

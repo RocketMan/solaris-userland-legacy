@@ -23,21 +23,15 @@
 # Copyright (c) 2011, 2022, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64_and_32
+COMPILER= gcc
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		curl
-COMPONENT_VERSION=	7.83.1
-COMPONENT_BAID=		124440
+COMPONENT_VERSION=	7.85.0
+COMPONENT_ARCHIVE_HASH=	sha256:21a7e83628ee96164ac2b36ff6bf99d467c7b0b621c1f7e317d8f0d96011539c
+COMPONENT_BAID=		131409
 COMPONENT_PROJECT_URL=	http://curl.haxx.se/
-
-#GIT_REPO=	https://github.com/curl/curl.git
-## last tag we checkout to it
-#GIT_COMMIT_ID=	$(COMPONENT_VERSION)
-#GIT_HASH=	sha256:.......
-
-# git clone is fine but download of the archive is much faster
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.bz2
-COMPONENT_ARCHIVE_HASH=	sha256:f539a36fb44a8260ec5d977e4e0dbdd2eee29ed90fcedaa9bc3c9f78a113bff0
 COMPONENT_ARCHIVE_URL=	https://curl.se/download/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 
@@ -49,18 +43,22 @@ $(SKIP_TEST_AT_TOP_LEVEL)
 
 include $(WS_MAKE_RULES)/common.mk
 
+CPPFLAGS += $(CPP_LARGEFILES)
+CPPFLAGS += $(CC_PIC_ENABLE)
+CPPFLAGS += -DNAME_MAX=256
+
 CPPFLAGS += -I/usr/include/openldap
 CPPFLAGS += $(shell pkg-config --cflags libidn2)
 # GSS MECH's API is in /usr/include/kerberosv5/gssapi/
 CPPFLAGS += $(shell krb5-config --cflags)
-CPPFLAGS += $(CPP_LARGEFILES)
+LIBS	 += $(shell krb5-config --libs gssapi)
 
 # Community code uses different defs
 $(BUILD_DIR_32)/.configured:	CPPFLAGS += -D__ILP32=32
 $(BUILD_DIR_64)/.configured:	CPPFLAGS += -D__LP64=64
 
-LIBS += $(shell krb5-config --libs gssapi)
-LDFLAGS += -m$(BITS)
+LDFLAGS	+= -m$(BITS)
+LDFLAGS	+= $(LD_Z_DEFS)
 
 # Enable adiheap and adistack security extensions
 ADIHEAP_MODE =	$(ADIHEAP_ENABLE)
@@ -80,11 +78,10 @@ CONFIGURE_OPTIONS += --enable-manual --disable-libgcc
 CONFIGURE_OPTIONS += --enable-rtsp --enable-proxy
 CONFIGURE_OPTIONS += --enable-telnet --enable-tftp --enable-pop3
 CONFIGURE_OPTIONS += --enable-imap --enable-smtp
-CONFIGURE_OPTIONS += --enable-ipv6 --enable-nonblocking
-CONFIGURE_OPTIONS += --enable-thread --enable-verbose
+CONFIGURE_OPTIONS += --enable-ipv6
+CONFIGURE_OPTIONS += --enable-verbose
 CONFIGURE_OPTIONS += --disable-sspi --enable-crypto-auth
-CONFIGURE_OPTIONS += --enable-cookies --disable-hidden-symbols
-CONFIGURE_OPTIONS += --disable-soname-bump
+CONFIGURE_OPTIONS += --enable-cookies
 CONFIGURE_OPTIONS += --with-random=/dev/urandom
 CONFIGURE_OPTIONS += --with-zlib
 CONFIGURE_OPTIONS += --with-gssapi
@@ -107,6 +104,7 @@ CONFIGURE_OPTIONS += "curl_disallow_getifaddrs=yes"
 CONFIGURE_OPTIONS += MAKE=$(GMAKE)
 
 CONFIGURE_ENV +=	CPP="$(CC) -E"
+CONFIGURE_ENV +=	CPPFLAGS="$(CPPFLAGS)"
 CONFIGURE_ENV +=	CFLAGS="$(CFLAGS)"
 CONFIGURE_ENV +=	LIBS="$(LIBS)"
 CONFIGURE_ENV +=	LDFLAGS="$(LDFLAGS)"
@@ -124,7 +122,7 @@ COMPONENT_BUILD_ARGS += V=1
 endif
 
 COMPONENT_TEST_ENV += CC="$(CC)"
-COMPONENT_TEST_ENV += PATH="$(SPRO_VROOT)/bin:$(GNUBIN):$(PATH)"
+COMPONENT_TEST_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_TEST_ENV += CFLAGS="$(CFLAGS)"
 COMPONENT_TEST_ARGS+= -k -i
 
@@ -155,6 +153,5 @@ endif
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += security/kerberos-5
 REQUIRED_PACKAGES += shell/ksh93
-REQUIRED_PACKAGES += system/library/libc
 REQUIRED_PACKAGES += system/network/ldap/openldap
 REQUIRED_PACKAGES += library/openldap

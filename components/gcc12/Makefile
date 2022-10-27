@@ -35,16 +35,16 @@ endif
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gcc
-COMPONENT_VERSION=	12.1.0
+COMPONENT_VERSION=	12.2.0
 COMPONENT_PROJECT_URL=	https://gcc.gnu.org/
 COMPONENT_ARCHIVE_HASH= \
-    sha256:e88a004a14697bbbaba311f38a938c716d9a652fd151aaaa4cf1b5b99b90e2de
+    sha256:ac6b317eb4d25444d87cf29c0d141dedc1323a1833ec9995211b13e1a851261c
 COMPONENT_ARCHIVE_URL=	https://ftp.gnu.org/gnu/gcc/$(COMPONENT_SRC)/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
 COMPONENT_BUGDB=        utility/gnu-compiler
 COMPONENT_ANITYA_ID=	6502
 
-COMPONENT_BAID=		122408
+COMPONENT_BAID=		129710
 
 # Use gcc's default flags instead of userland's.
 CFLAGS=
@@ -130,6 +130,9 @@ CONFIGURE_OPTIONS +=	BOOT_CFLAGS='-g -O2'
 # This is the target and it must be last
 CONFIGURE_OPTIONS +=    $(GNU_ARCH)
 
+# Don't use gnatbind/gnatmake from /usr/bin.
+CONFIGURE_ENV     += GNATBIND="$(GCC_ROOT)/bin/gnatbind"
+CONFIGURE_ENV     += GNATMAKE="$(GCC_ROOT)/bin/gnatmake"
 
 CONFIGURE_ENV     += PYTHON="$(PYTHON)"
 
@@ -211,7 +214,7 @@ PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gccgo
 PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gfortran
 
 
-REQUIRED_PACKAGES += developer/gcc/gcc-gnat
+REQUIRED_PACKAGES += developer/gcc/gcc-gnat-12
 REQUIRED_PACKAGES += developer/test/dejagnu
 REQUIRED_PACKAGES += library/gmp
 REQUIRED_PACKAGES += library/isl
