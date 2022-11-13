@@ -38,7 +38,7 @@ set name=org.opensolaris.arc-caseid value=PSARC/2005/555 value=PSARC/2008/514 \
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 #
 file path=usr/lib/python3.11/idlelib/idle_test/tkinter_testing_utils.py
-file path=usr/lib/python3.11/lib-dynload/_tkinter.cpython-311.so
+file path=usr/lib/python3.11/lib-dynload/_tkinter.cpython-311_failed.so
 file path=usr/lib/python3.11/tkinter/__init__.py
 file path=usr/lib/python3.11/tkinter/__main__.py
 file path=usr/lib/python3.11/tkinter/colorchooser.py

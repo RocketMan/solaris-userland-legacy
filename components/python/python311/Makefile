@@ -70,6 +70,8 @@ CPPFLAGS += $(shell pkg-config --cflags-only-I libffi)
 # because python links with $(CC) ... $(LDFLAGS) ...
 LDFLAGS = $(CC_BITS) $(CC_PIC)
 
+$(SOLARIS_11_3_ONLY)LDFLAGS += -lnsl -lsocket
+
 # build pic
 CFLAGS += $(CC_PIC)
 CFLAGS += $(CFLAGS.$(MACH))

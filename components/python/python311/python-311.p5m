@@ -24,7 +24,7 @@
 #
 
 # Fix a problem with false positive unresolved dependency error.
-<transform file path=usr/lib/python3.11/(cProfile|platform|profile|pdb|trace|smtpd).py -> \
+<transform file path=usr/lib/python3.11/.*\.py -> \
     set pkg.depend.bypass-generate .*>
 <transform file path=usr/lib/python3.11/lib-dynload/.*\.so -> \
     add pkg.linted.userland.action001.2 true>
@@ -982,7 +982,6 @@ file path=usr/lib/python3.11/lib-dynload/array.cpython-311.so
 file path=usr/lib/python3.11/lib-dynload/audioop.cpython-311.so
 file path=usr/lib/python3.11/lib-dynload/binascii.cpython-311.so
 file path=usr/lib/python3.11/lib-dynload/cmath.cpython-311.so
-file path=usr/lib/python3.11/lib-dynload/dlpi.cpython-311.so
 file path=usr/lib/python3.11/lib-dynload/fcntl.cpython-311.so
 file path=usr/lib/python3.11/lib-dynload/grp.cpython-311.so
 file path=usr/lib/python3.11/lib-dynload/math.cpython-311.so
