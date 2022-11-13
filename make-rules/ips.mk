@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2010, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2010, 2022, Oracle and/or its affiliates.
 #
 
 #
@@ -136,6 +136,7 @@ PKG_MACROS +=		PYTHON_3.4_ONLY=\#
 PKG_MACROS +=		PYTHON_3.5_ONLY=\#
 PKG_MACROS +=		PYTHON_3.7_ONLY=\#
 PKG_MACROS +=		PYTHON_3.9_ONLY=\#
+PKG_MACROS +=		PYTHON_3.11_ONLY=\#
 
 # Convenience macros for quoting in manifests; necessary because pkgfmt will
 # drop literal quotes in attribute values if they do not contain whitespace

@@ -18,13 +18,15 @@
 # CDDL HEADER END
 #
 #
-# Copyright (c) 2019, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2019, 2022, Oracle and/or its affiliates.
 #
 
 <include generate/common.transform>
 
 # Drop everything not belonging to "x11-modeline-utilities"
 <transform dir file link hardlink pkg.type=(?!x11-modeline-utilities) -> drop>
+<transform file path=usr/bin/cvt -> drop>
+<transform file path=usr/share/man/man1/cvt.1 -> drop>
 
 # Remove the mark
 <transform dir file link hardlink -> delete pkg.type .*>

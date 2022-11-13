@@ -25,18 +25,17 @@ BUILD_BITS= 64_and_32
 COMPILER=gcc
 include ../../../make-rules/shared-macros.mk
 
-COMPONENT_VERSION=	3.0.5
-IPS_COMPONENT_VERSION=	3
-COMPONENT_NAME=		openssl-$(IPS_COMPONENT_VERSION)
+COMPONENT_NAME=		openssl-3
+COMPONENT_VERSION=	3.0.7
 COMPONENT_PROJECT_URL=	https://www.openssl.org/
 COMPONENT_SRC=		openssl-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH=	\
-	sha256:aa7d8d9bef71ad6525c55ba11e5f4397889ce49c2c9349dcea6d3e4f0b024a7a
+	sha256:83049d042a260e696f62406ac5c08bf706fd84383f945cf21bd61e9ed95c396e
 COMPONENT_ARCHIVE_URL=	$(COMPONENT_PROJECT_URL)source/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	library/openssl
 COMPONENT_ANITYA_ID=	2566
-COMPONENT_BAID=		126434
+COMPONENT_BAID=		132360
 
 # in case /usr/bin/pod2man is not mediated in 11.3
 $(SOLARIS_11_3_ONLY)PATH=/usr/gnu/bin:/usr/bin:/usr/perl5/$(PERL_VERSION)/bin
@@ -82,7 +81,7 @@ COMPONENT_POST_CONFIGURE_ACTION = \
 COMPONENT_INSTALL_ARGS += MANSUFFIX=openssl
 
 # 32 and 64 bits configuration.h headers need to be merged to the final one.
-# Note: because diff returns 1 when files are not equal, we have to supress
+# Note: because diff returns 1 when files are not equal, we have to suppress
 # gmake failure. It is reason why 'true' command was added.
 OPENSSLH=include/openssl/configuration.h
 $(INSTALL_64): COMPONENT_POST_INSTALL_ACTION += \

@@ -54,6 +54,9 @@ TPNO_OLD=		42611
 # This component is delivered in two different versions because
 # the newer one is no longer Python 2.7 compatible.
 
+# Numpy isn't compatible with Python 3.11 yet.
+PYTHON_VERSIONS = 3.7 3.9
+
 BUILD_STYLE= setup.py
 TEST_TARGET = $(BUILD_DIR)/$(MACH64)-3.7/.tested-and-compared \
 	$(BUILD_DIR)/$(MACH64)-3.9/.tested-and-compared
