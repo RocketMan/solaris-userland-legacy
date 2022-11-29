@@ -28,12 +28,12 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.63.0
+COMPONENT_VERSION =	1.64.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:8f44af6dc44cc4146634a4dd5e4cc5470b3052a2337019b870c0e025e8987e0c
+    sha256:e8170d318fac9d2fc17d5c3e648e7068f56e8db8d233d864aeffbef7c6542eac
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
 
@@ -69,10 +69,14 @@ CONFIGURE_OPTIONS +=	--disable-llvm-static-stdcpp
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
        $(GCC_ROOT)/bin/gcc -shared -DDEBUG=0 -o libepoll.so -fPIC -c epoll.c ; \
+       $(GCC_ROOT)/bin/gcc -DDEBUG=0 -c compat.c ; \
+       ar rcs libcompat.a compat.o ; \
        echo "\#!/bin/sh" > gcc ; \
-       echo "$(GCC_ROOT)/bin/gcc -L$(COMPONENT_DIR)/epoll -lepoll \$$@" >> gcc ; \
+       echo "$(GCC_ROOT)/bin/gcc \$$@ -L$(COMPONENT_DIR)/epoll -lepoll -lcompat" >> gcc ; \
        chmod a+x gcc ) ;
 
+CLEAN_PATHS += epoll/compat.o
+CLEAN_PATHS += epoll/libcompat.a
 CLEAN_PATHS += epoll/libepoll.so
 CLEAN_PATHS += epoll/gcc
 
