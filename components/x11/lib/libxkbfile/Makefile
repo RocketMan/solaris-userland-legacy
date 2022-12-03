@@ -20,22 +20,22 @@
 #
 
 #
-# Copyright (c) 2018, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2018, 2022, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64_and_32
 include ../../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libxkbfile
-COMPONENT_VERSION=	1.1.0
+COMPONENT_VERSION=	1.1.1
+COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH= \
-	sha256:758dbdaa20add2db4902df0b1b7c936564b7376c02a0acd1f2a331bd334b38c7
+	sha256:8623dc26e7aac3c5ad8a25e57b566f4324f5619e5db38457f0804ee4ed953443
 COMPONENT_BUGDB=        x11/libraries
 COMPONENT_ANITYA_ID=	1781
-COMPONENT_BAID=		61376
+COMPONENT_BAID=		132849
 
-# GNU Build System files have to be regenerated for automake 1.16.
-# It can be removed when the upstream starts to use a newer automake version.
+# required because of a patched Makefile.am
 COMPONENT_PREP_ACTION = (cd $(@D) ; autoreconf -fiv);
 
 TEST_TARGET = $(NO_TESTS)

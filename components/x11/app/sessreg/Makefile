@@ -20,19 +20,20 @@
 #
 
 #
-# Copyright (c) 2018, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2018, 2022, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64
 include ../../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		sessreg
-COMPONENT_VERSION=	1.1.2
+COMPONENT_VERSION=	1.1.3
+COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH= \
-	sha256:dfcb9e954273ace63879aec053c7880466f8755752a35aa9ced3fa5f04fd2c33
+	sha256:022acd5de8077dddc4f919961f79e102ecd5f3228a333681af5cd0e7344facc2
 COMPONENT_BUGDB=        x11/xclients
 COMPONENT_ANITYA_ID=	15040
-COMPONENT_BAID=		67913
+COMPONENT_BAID=		132585
 
 TEST_TARGET = $(NO_TESTS)
 
