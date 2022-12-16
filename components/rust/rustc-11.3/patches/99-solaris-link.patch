@@ -8,16 +8,16 @@
          extern "C" {}
      } else if #[cfg(target_os = "illumos")] {
          #[link(name = "socket")]
---- rustc-1.61.0-src/compiler/rustc_target/src/spec/solaris_base.rs	2022-05-18 02:29:36.000000000 +0000
-+++ rustc-1.61.0-src/compiler/rustc_target/src/spec/solaris_base.rs	2022-05-24 15:05:31.440432567 +0000
+--- rustc-1.66.0-src/compiler/rustc_target/src/spec/solaris_base.rs	2022-12-12 16:02:12.000000000 +0000
++++ rustc-1.66.0-src/compiler/rustc_target/src/spec/solaris_base.rs	2022-12-15 19:02:18.783814001 +0000
 @@ -1,6 +1,23 @@
--use crate::spec::{cvs, TargetOptions};
-+use crate::spec::{LinkArgs, LinkerFlavor, FramePointer, cvs, TargetOptions};
+-use crate::spec::{cvs, Cc, LinkerFlavor, TargetOptions};
++use crate::spec::{LinkArgs, FramePointer, cvs, Cc, LinkerFlavor, TargetOptions};
  
  pub fn opts() -> TargetOptions {
 +    let mut late_link_args = LinkArgs::new();
 +    late_link_args.insert(
-+        LinkerFlavor::Gcc,
++        LinkerFlavor::Unix(Cc::Yes),
 +        vec![
 +            // LLVM will insert calls to the stack protector functions
 +            // "__stack_chk_fail" and "__stack_chk_guard" into code in native
@@ -35,8 +35,8 @@
      TargetOptions {
          os: "solaris".into(),
          dynamic_linking: true,
-@@ -11,6 +28,8 @@
-         linker_is_gnu: false,
+@@ -10,6 +27,8 @@
+         linker_flavor: LinkerFlavor::Unix(Cc::Yes),
          limit_rdylib_exports: false, // Linker doesn't support this
          eh_frame_header: false,
 +        frame_pointer: FramePointer::Always,
