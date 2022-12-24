@@ -19,7 +19,7 @@
 # CDDL HEADER END
 
 #
-# Copyright (c) 2013, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2013, 2022, Oracle and/or its affiliates.
 #
 include ../../../make-rules/shared-macros.mk
 
@@ -48,6 +48,9 @@ $(SOLARIS_11_3_ONLY)PYTHON2_VERSIONS=
 $(SOLARIS_11_3_ONLY)PYTHON_VERSIONS= $(PYTHON3_VERSIONS)
 
 include $(WS_MAKE_RULES)/ips.mk
+
+$(MANIFEST_BASE)-pip-27.mogrified: \
+    PUBLISH_TRANSFORMS += $(COMPONENT_DIR)/py27-transform
 
 ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 
