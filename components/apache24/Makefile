@@ -77,12 +77,13 @@ CONFIGURE_OPTIONS +=	--enable-cgi
 CONFIGURE_OPTIONS +=	--enable-suexec
 CONFIGURE_OPTIONS +=	--enable-http2
 CONFIGURE_OPTIONS +=	--with-suexec-caller=webservd
-CONFIGURE_OPTIONS +=	--with-apr=$(USRDIR)/apr/1.5/bin/$(MACH64)/apr-1-config
-CONFIGURE_OPTIONS +=	--with-apr-util=$(USRDIR)/apr-util/1.5/bin/$(MACH64)/apu-1-config
+CONFIGURE_OPTIONS +=	--with-apr=$(USRDIR)/apr/1/bin/$(MACH64)/apr-1-config
+CONFIGURE_OPTIONS +=	--with-apr-util=$(USRDIR)/apr-util/1/bin/$(MACH64)/apu-1-config
 ifneq ($(strip $(OPENSSL3)),)
 CONFIGURE_OPTIONS +=	--with-ssl=/usr/openssl/3
 endif
-CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS) -D__EXTENSIONS__ -D_XOPEN_SOURCE=1 -D_XOPEN_SOURCE_EXTENDED=1"
+$(SOLARIS_11_4_5_ONLY)CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS)"
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS) -D__EXTENSIONS__ -D_XOPEN_SOURCE=1 -D_XOPEN_SOURCE_EXTENDED=1"
 CONFIGURE_OPTIONS +=	LTFLAGS="--silent --tag=CC"
 
 ifeq   ($(strip $(PARFAIT_BUILD)),yes)
@@ -98,17 +99,6 @@ REQUIRED_PACKAGES += library/apr-util-1
 REQUIRED_PACKAGES += library/apr-util-1/apr-ldap
 REQUIRED_PACKAGES += library/apr-util-1/dbd-mysql
 REQUIRED_PACKAGES += library/apr-util-1/dbd-sqlite
-# to be removed after apr-1 gets into repo
-REQUIRED_PACKAGES += library/apr-15
-REQUIRED_PACKAGES += library/apr-16
-REQUIRED_PACKAGES += library/apr-util-15
-REQUIRED_PACKAGES += library/apr-util-15/apr-ldap
-REQUIRED_PACKAGES += library/apr-util-15/dbd-mysql
-REQUIRED_PACKAGES += library/apr-util-15/dbd-sqlite
-REQUIRED_PACKAGES += library/apr-util-16
-REQUIRED_PACKAGES += library/apr-util-16/apr-ldap
-REQUIRED_PACKAGES += library/apr-util-16/dbd-mysql
-REQUIRED_PACKAGES += library/apr-util-16/dbd-sqlite
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/nghttp2
 REQUIRED_PACKAGES += library/openldap

@@ -60,9 +60,9 @@ TEST_TARGET= $(SKIP_TEST)
 include $(WS_MAKE_RULES)/common.mk
 
 # openssl 1.1
-#PKG_CONFIG_PATHS += /usr/openssl/1.1/pkgconfig/64
-CFLAGS += -I/usr/openssl/1.1/include
-LDFLAGS += -L/usr/openssl/1.1/lib/amd64
+PKG_CONFIG_PATHS += /usr/openssl/1.1/pkgconfig/64
+#CFLAGS += -I/usr/openssl/1.1/include
+#LDFLAGS += -L/usr/openssl/1.1/lib/amd64
 
 CFLAGS += -DSET_USE_PAM
 CFLAGS += -DDEPRECATE_SUNSSH_OPT
