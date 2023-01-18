@@ -46,7 +46,8 @@ file path=etc/pulse/client.conf
 file path=etc/pulse/daemon.conf
 file path=etc/pulse/default.pa
 file path=etc/pulse/system.pa
-file path=etc/xdg/autostart/pulseaudio.desktop
+# JM 2023-01-18 totem is silent on 11.3 when pulseaudio server is running
+#file path=etc/xdg/autostart/pulseaudio.desktop
 file path=usr/bin/pa-info
 file path=usr/bin/pacat
 file path=usr/bin/pacmd
