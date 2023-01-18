@@ -52,6 +52,10 @@ GOROOT_FINAL=		/usr/lib/golang/
 COMPONENT_BUILD_ENV +=	GOROOT_FINAL="$(GOROOT_FINAL)"
 COMPONENT_BUILD_ENV +=	GOOS="solaris"
 
+BOOTSTRAP=$(USRLIBDIR)/golang
+COMPONENT_BUILD_ENV += \
+	GOROOT_BOOTSTRAP="$(BOOTSTRAP)"
+
 BUILD_STYLE= justmake
 BUILD_64 += $(BUILD_DIR)/man1/go.1
 INSTALL_64 := build $(INSTALL_64)
@@ -137,7 +141,7 @@ REQUIRED_PACKAGES += developer/gcc
 REQUIRED_PACKAGES += developer/versioning/git
 # Go bootstraps itself using Go, so at least one previous version must already
 # be installed.
-REQUIRED_PACKAGES += developer/golang
+REQUIRED_PACKAGES += developer/go
 # Used in this Makefile.
 REQUIRED_PACKAGES += file/gnu-findutils
 REQUIRED_PACKAGES += text/gnu-sed
