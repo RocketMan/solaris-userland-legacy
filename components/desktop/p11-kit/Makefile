@@ -72,6 +72,7 @@ CONFIGURE_OPTIONS.64 += -Dmodule_path=/usr/lib/security/$(MACH64)
 CONFIGURE_OPTIONS += -Dtrust_paths=/etc/certs/ca-certificates.crt
 CONFIGURE_OPTIONS += --libexecdir=$(CONFIGURE_LIBDIR.$(BITS))
 
+$(SKIP_TEST_AT_TOP_LEVEL)
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
 COMPONENT_TEST_TRANSFORMS += \
         '-n ' \

@@ -57,10 +57,7 @@ $(SOLARIS_11_3_ONLY)CPPFLAGS += -D_XPG6
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
 COMPONENT_TEST_TRANSFORMS += \
-        '-n ' \
-        '-e "/Ok:/p" ' \
-        '-e "/Pass:/p" ' \
-        '-e "/Fail:/p" '
+        '-e "s/[0-9]* subtests passed/x subtests passed/"'
 
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += system/library

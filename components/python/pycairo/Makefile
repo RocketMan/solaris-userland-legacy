@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2023, Oracle and/or its affiliates.
 #
 
 COMPILER=		gcc
@@ -57,22 +57,9 @@ PYTHON_VERSIONS =	$(PYTHON3_VERSIONS)
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
-include $(WS_MAKE_RULES)/python-multiver.mk
-
-$(MANIFEST_BASE)-pycairo-27.mogrified: \
-    PUBLISH_TRANSFORMS += $(COMPONENT_DIR)/py27-transform
 
 # Disable tests since cairo fails to import.
 $(SKIP_TEST_AT_TOP_LEVEL)
-
-# Manifest convenience variables
-$(MANIFEST_BASE)-pycairo-27.mogrified: PYTHON3_ONLY = \#
-$(MANIFEST_BASE)-pycairo-37.mogrified: PYTHON2_ONLY = \#
-$(MANIFEST_BASE)-pycairo-39.mogrified: PYTHON2_ONLY = \#
-$(MANIFEST_BASE)-pycairo-311.mogrified: PYTHON2_ONLY = \#
-
-PKG_MACROS += PYTHON2_ONLY="$(PYTHON2_ONLY)"
-PKG_MACROS += PYTHON3_ONLY="$(PYTHON3_ONLY)"
 
 # Required to setup the prefix path to generate valid *.pc files.
 COMPONENT_INSTALL_ARGS+= --prefix $(PYTHON_VENDOR_PACKAGES_BASE)
@@ -91,11 +78,7 @@ build:		$(BUILD_32_and_64)
 
 install:	$(INSTALL_32_and_64)
 
-# We get spurious test failures with 64bit version of python 2.7
-test:		$(BUILD_DIR)/$(MACH32)-2.7/.tested \
-		$(BUILD_DIR)/$(MACH64)-3.7/.tested \
-		$(BUILD_DIR)/$(MACH64)-3.9/.tested \
-		$(BUILD_DIR)/$(MACH64)-3.11/.tested
+test:		$(TEST_32_and_64)
 
 system-test:    $(SYSTEM_TESTS_NOT_IMPLEMENTED)
 

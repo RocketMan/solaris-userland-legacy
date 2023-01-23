@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2019, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2019, 2023, Oracle and/or its affiliates.
 #
 
 include ../../../make-rules/shared-macros.mk
@@ -53,7 +53,6 @@ PYTHON_VERSIONS = $(PYTHON3_VERSIONS)
 include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
-include $(WS_MAKE_RULES)/python-multiver.mk
 
 COMPONENT_TEST_DIR =	$(SOURCE_DIR)/testing
 COMPONENT_TEST_CMD =	$(PYTHON) -m pytest
@@ -74,4 +73,3 @@ REQUIRED_PACKAGES += library/python/importlib-metadata-37
 
 # Setup related components
 REQUIRED_PACKAGES += library/python/setuptools_scm
-REQUIRED_PACKAGES += library/python/setuptools_scm-27

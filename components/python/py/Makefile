@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2013, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2013, 2023, Oracle and/or its affiliates.
 #
 
 include ../../../make-rules/shared-macros.mk
@@ -43,9 +43,6 @@ include $(WS_MAKE_RULES)/prep.mk
 include $(WS_MAKE_RULES)/setup.py.mk
 include $(WS_MAKE_RULES)/ips.mk
 
-$(MANIFEST_BASE)-py-27.mogrified: \
-    PUBLISH_TRANSFORMS += $(COMPONENT_DIR)/py27-transform
-
 COMPONENT_TEST_ENV +=	LC_ALL=en_US.UTF-8
 COMPONENT_TEST_DIR =	$(SOURCE_DIR)/testing
 COMPONENT_TEST_CMD =	$(PYTHON) -m pytest
@@ -63,5 +60,3 @@ install:	$(INSTALL_NO_ARCH)
 test:		$(NO_TESTS)
 
 system-test:    $(SYSTEM_TESTS_NOT_IMPLEMENTED)
-
-REQUIRED_PACKAGES += library/python/setuptools_scm-27

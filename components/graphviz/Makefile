@@ -50,14 +50,13 @@ PERL_VERSIONS = $(PERL_VERSION)
 # the install targets appropriately.
 INSTALL_TARGET = $(INSTALL_$(MK_BITS))
 INSTALL_TARGET += $(PROTOUSRLIBDIR)/graphviz/config6
-INSTALL_TARGET += $(PROTO_DIR)/$(PYTHON.2.7.VENDOR_PACKAGES)/gv.pyc
 INSTALL_TARGET += $(PROTO_DIR)/$(PYTHON.3.7.VENDOR_PACKAGES)/gv.pyc
 INSTALL_TARGET += $(PROTO_DIR)/$(PYTHON.3.9.VENDOR_PACKAGES)/gv.pyc
 INSTALL_TARGET += $(PROTO_DIR)/$(PYTHON.3.11.VENDOR_PACKAGES)/gv.pyc
 
 include $(WS_MAKE_RULES)/common.mk
 
-PATH =		/usr/php/8.1/bin:/usr/bin:/usr/gnu/bin
+PATH =		/usr/php/8.2/bin:/usr/bin:/usr/gnu/bin
 
 # GMP header files for the guile extension (no --with- flag)
 # The guile build is broken with studio (15732452), so we disable this for now.
@@ -68,14 +67,13 @@ CPPFLAGS +=	-I$(JAVA_HOME)/include -I$(JAVA_HOME)/include/solaris
 $(SOLARIS_11_3_ONLY)LDFLAGS += -lsocket -lnsl
 
 # Make sure to use the right python, depending on the 32/64-bit build.
-CONFIGURE_ENV +=	PYTHON2=$(PYTHON.2.7)
 CONFIGURE_ENV +=	PYTHON3=$(PYTHON.3.9)
 CONFIGURE_OPTIONS +=	--without-included-ltdl
 CONFIGURE_OPTIONS +=    --with-qt=no
 CONFIGURE_OPTIONS +=	--enable-go=no
 CONFIGURE_OPTIONS +=	--enable-ocaml=no
 CONFIGURE_OPTIONS +=	--enable-python=no
-CONFIGURE_OPTIONS +=	--enable-python2=yes
+CONFIGURE_OPTIONS +=	--enable-python2=no
 CONFIGURE_OPTIONS +=	--enable-python3=yes
 CONFIGURE_OPTIONS +=	--enable-tcl=yes
 CONFIGURE_OPTIONS +=	--x-libraries=$(CONFIGURE_LIBDIR.$(BITS))
@@ -115,6 +113,11 @@ PHP_80_INCLUDES := $(shell $(PHP_80_CONFIG) --includes)
 PHP_80_INSTALL_DIR := $(shell $(PHP_80_CONFIG) --extension-dir)
 PHP_80_LDFLAGS := $(shell $(PHP_80_CONFIG) --ldflags)
 PHP_80_LIBS := $(shell $(PHP_80_CONFIG) --libs)
+PHP_81_CONFIG = /usr/php/8.1/bin/php-config
+PHP_81_INCLUDES := $(shell $(PHP_81_CONFIG) --includes)
+PHP_81_INSTALL_DIR := $(shell $(PHP_81_CONFIG) --extension-dir)
+PHP_81_LDFLAGS := $(shell $(PHP_81_CONFIG) --ldflags)
+PHP_81_LIBS := $(shell $(PHP_81_CONFIG) --libs)
 
 PKG_CONFIG = /usr/bin/pkg-config
 PYTHON_37_INCLUDES := $(shell $(PKG_CONFIG) --cflags python-3.7)
@@ -128,6 +131,9 @@ $(CONFIGURE_64): COMPONENT_POST_CONFIGURE_ACTION += \
     (cd $(@D) ; cp -rp tclpkg/gv tclpkg/gv-additional ; \
     $(GSED) -i '/^SUBDIRS =/s|$$| gv-additional|' tclpkg/Makefile ; \
     $(GSED) -i \
+     -e '/^PHP_INCLUDES =/s|=.*$$|= $(PHP_81_INCLUDES)|' \
+     -e '/^PHP_INSTALL_DIR =/s|=.*$$|= $(PHP_81_INSTALL_DIR)|' \
+     -e '/^PHP_LIBS =/s|=.*$$|= $(PHP_81_LDFLAGS) $(PHP_81_LIBS)|' \
      -e '/^PYTHON3 =/s|=.*$$|= $(PYTHON.3.7)|' \
      -e '/^PYTHON3_INCLUDES =/s|=.*$$|= $(PYTHON_37_INCLUDES)|' \
      -e '/^PYTHON3_INSTALL_DIR =/s|=.*$$|= $(PYTHON_37_INSTALL_DIR)|' \
@@ -178,9 +184,6 @@ $(PROTOUSRLIBDIR)/graphviz/config6: $(INSTALL_32)
 # Once the build is complete, compile the .py file.  There's no need to compile
 # the one in the "64" directory, so don't recurse.  And make sure that the
 # build path doesn't get embedded in the .pyc file.
-$(PROTO_DIR)/$(PYTHON.2.7.VENDOR_PACKAGES)/gv.pyc: $(INSTALL_32)
-	$(PYTHON.2.7.32) -m compileall -l -d $(PYTHON.2.7.VENDOR_PACKAGES) \
-		$(PROTO_DIR)/$(PYTHON.2.7.VENDOR_PACKAGES)
 $(PROTO_DIR)/$(PYTHON.3.7.VENDOR_PACKAGES)/gv.pyc: $(INSTALL_64)
 	$(PYTHON.3.7) -m compileall -l -d $(PYTHON.3.7.VENDOR_PACKAGES) \
 		$(PROTO_DIR)/$(PYTHON.3.7.VENDOR_PACKAGES)
@@ -234,7 +237,6 @@ REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += print/filter/poppler
 REQUIRED_PACKAGES += runtime/lua
 REQUIRED_PACKAGES += $(PERL_PKG)
-REQUIRED_PACKAGES += runtime/python-27
 REQUIRED_PACKAGES += runtime/python-37
 REQUIRED_PACKAGES += runtime/python-39
 REQUIRED_PACKAGES += runtime/python-311

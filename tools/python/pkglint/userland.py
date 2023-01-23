@@ -21,7 +21,7 @@
 #
 
 #
-# Copyright (c) 2010, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2010, 2023, Oracle and/or its affiliates.
 #
 
 # Some userland consolidation specific lint checks

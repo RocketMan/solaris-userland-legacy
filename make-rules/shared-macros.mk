@@ -259,12 +259,10 @@ endif
 
 # The default version should go last.
 PYTHON_VERSION =	3.7
-PYTHON2_VERSIONS =	2.7
 PYTHON3_VERSIONS =	3.7 3.9 3.11
-PYTHON_VERSIONS =	$(PYTHON2_VERSIONS) $(PYTHON3_VERSIONS)
+PYTHON_VERSIONS =	$(PYTHON3_VERSIONS)
 
 # Convenience variable for builds without Python 3.7, 3.9 and 3.11
-WITHOUT_PYTHON3.7 = $(PYTHON2_VERSIONS)
 WITHOUT_PYTHON3.9 = 3.7 $(PYTHON2_VERSIONS)
 WITHOUT_PYTHON3.11 = 3.7 3.9 $(PYTHON2_VERSIONS)
 
@@ -721,10 +719,6 @@ RUBY_SCRIPT_FIX_FUNC = \
         '1s%^\#! */usr/bin/env ruby%\#!/usr/ruby/$(RUBY_VERSION)/bin/ruby%' \
         \{\}
 
-PYTHON.2.7.VENDOR_PACKAGES.32 = /usr/lib/python2.7/vendor-packages
-PYTHON.2.7.VENDOR_PACKAGES.64 = /usr/lib/python2.7/vendor-packages/64
-PYTHON.2.7.VENDOR_PACKAGES = $(PYTHON.2.7.VENDOR_PACKAGES.$(BITS))
-
 PYTHON.3.7.VENDOR_PACKAGES.32 =
 PYTHON.3.7.VENDOR_PACKAGES.64 = /usr/lib/python3.7/vendor-packages
 PYTHON.3.7.VENDOR_PACKAGES = $(PYTHON.3.7.VENDOR_PACKAGES.64)
@@ -744,7 +738,6 @@ PYTHON_VENDOR_PACKAGES.32 = $(PYTHON.$(PYTHON_VERSION).VENDOR_PACKAGES.32)
 PYTHON_VENDOR_PACKAGES.64 = $(PYTHON.$(PYTHON_VERSION).VENDOR_PACKAGES.64)
 PYTHON_VENDOR_PACKAGES = $(PYTHON.$(PYTHON_VERSION).VENDOR_PACKAGES)
 
-PYTHON.2.7.TEST = /usr/lib/python2.7/test
 PYTHON.3.7.TEST = /usr/lib/python3.7/test
 PYTHON.3.9.TEST = /usr/lib/python3.9/test
 PYTHON.3.11.TEST = /usr/lib/python3.11/test
@@ -756,10 +749,6 @@ USRBIN =	$(USRBIN.$(BITS))
 USRLIB.32 =	$(USRLIBDIR)
 USRLIB.64 =	$(USRLIBDIR64)
 USRLIB =	$(USRLIB.$(BITS))
-
-PYTHON.2.7.32 =	$(USRBIN.32)/python2.7
-PYTHON.2.7.64 =	$(USRBIN.64)/python2.7
-PYTHON.2.7 =	$(USRBIN)/python2.7
 
 # Although we build Python 3 64-bit only, the BUILD_NO_ARCH macro is written
 # in such a way that we still need the .32 macro below.  And since we build
@@ -885,10 +874,11 @@ COMPONENT_POST_INSTALL_ACTION += $(PERL_SCRIPTS_PROCESS)
 PHP_TOP_DIR = $(WS_COMPONENTS)/php
 
 # All versions of PHP for building extension packages.
-PHP_VERSIONS = 8.0 8.1
+PHP_VERSIONS = 8.0 8.1 8.2
 
 PHP.8.0 = /usr/php/8.0/bin/php
 PHP.8.1 = /usr/php/8.1/bin/php
+PHP.8.2 = /usr/php/8.2/bin/php
 
 # This is the default BUILD version of tcl
 # Not necessarily the system's default version, i.e. /usr/bin/tclsh

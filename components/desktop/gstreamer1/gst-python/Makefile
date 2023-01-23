@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2023, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =		64
@@ -43,7 +43,6 @@ COMPONENT_ANITYA_ID=	3881
 COMPONENT_BAID=		129020
 
 BUILD_STYLE=		meson
-PYTHON_VERSIONS= $(PYTHON3_VERSIONS)
 
 # Replicated from $(WS_MAKE_RULES)/setup.py.mk since this uses meson.
 CONFIGURE_64 = $(PYTHON_VERSIONS:%=$(BUILD_DIR)/$(MACH64)-%/.configured)
@@ -76,7 +75,6 @@ COMPONENT_POST_INSTALL_ACTION += \
 	$(PYTHON) -m compileall $(PROTO_DIR)$(PYTHON_VENDOR_PACKAGES_BASE)
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
-COMPONENT_TEST_TRANSFORMS += '-e "s/\s*[0-9]\+\.[0-9]\+s//" '
 
 REQUIRED_PACKAGES += library/desktop/gstreamer-1
 REQUIRED_PACKAGES += library/glib2
