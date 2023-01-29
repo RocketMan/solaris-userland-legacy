@@ -1,0 +1,11 @@
+--- a/include/freetype/config/ftoption.h	2022-01-27 07:43:19.000000000 +0000
++++ b/include/freetype/config/ftoption.h	2023-01-28 16:33:34.402551656 +0000
+@@ -706,7 +706,7 @@
+    * https://www.microsoft.com/typography/cleartype/truetypecleartype.aspx
+    */
+ /* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  1         */
+-#define TT_CONFIG_OPTION_SUBPIXEL_HINTING  2
++/* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  2 */
+ /* #define TT_CONFIG_OPTION_SUBPIXEL_HINTING  ( 1 | 2 ) */
+ 
+ 
