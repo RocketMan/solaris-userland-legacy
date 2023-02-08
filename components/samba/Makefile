@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2011, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2011, 2023, Oracle and/or its affiliates.
 #
 BUILD_BITS=	64_and_32
 COMPILER=	gcc
@@ -209,12 +209,12 @@ PERL_SCRIPTS   += $(PROTO_DIR)/usr/lib/samba/bin/pidl
 # List of python scripts can be obtained by:
 # ggrep -rlI '^\#!.*python' build/prototype/$(uname -p)/ | sed -e "s@build/prototype/$(uname -p)/@\$(PROTO_DIR)/@"
 PYTHON_SCRIPTS = \
-$(PROTO_DIR)/usr/lib/python3.7/vendor-packages/samba/samba/tests/dcerpc/raw_protocol.py \
-$(PROTO_DIR)/usr/lib/python3.7/vendor-packages/samba/samba/tests/krb5/simple_tests.py \
-$(PROTO_DIR)/usr/lib/python3.7/vendor-packages/samba/samba/tests/krb5/xrealm_tests.py \
-$(PROTO_DIR)/usr/lib/python3.7/vendor-packages/samba/samba/tests/krb5/s4u_tests.py \
-$(PROTO_DIR)/usr/lib/python3.7/vendor-packages/samba/samba/tests/krb5/kcrypto.py \
-$(PROTO_DIR)/usr/lib/python3.7/vendor-packages/samba/samba/subunit/run.py \
+$(PROTO_DIR)$(PYTHON_VENDOR_PACKAGES)/samba/samba/tests/dcerpc/raw_protocol.py \
+$(PROTO_DIR)$(PYTHON_VENDOR_PACKAGES)/samba/samba/tests/krb5/simple_tests.py \
+$(PROTO_DIR)$(PYTHON_VENDOR_PACKAGES)/samba/samba/tests/krb5/xrealm_tests.py \
+$(PROTO_DIR)$(PYTHON_VENDOR_PACKAGES)/samba/samba/tests/krb5/s4u_tests.py \
+$(PROTO_DIR)$(PYTHON_VENDOR_PACKAGES)/samba/samba/tests/krb5/kcrypto.py \
+$(PROTO_DIR)$(PYTHON_VENDOR_PACKAGES)/samba/samba/subunit/run.py \
 $(PROTO_DIR)/usr/lib/samba/sbin/samba-gpupdate
 
 COMPONENT_INSTALL_ENV += PATH="$(PATH)"
