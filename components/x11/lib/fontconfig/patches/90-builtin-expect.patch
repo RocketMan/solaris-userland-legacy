@@ -1,0 +1,14 @@
+__builtin_expect is not available before GCC 3 or Sun Studio 12.6
+
+--- a/src/fcint.h	2021-12-03 10:48:08.000000000 +0000
++++ b/src/fcint.h	2023-02-09 15:50:05.311230809 +0000
+@@ -61,6 +61,9 @@
+ #define FC_LIKELY(expr) (expr)
+ #define FC_UNLIKELY(expr) (expr)
+ #else
++#if defined(__GNUC_) && (__GNUC__ < 3) || defined(__SUNPRO_C) && (__SUNPRO_C < 0x5150)
++#define __builtin_expect(a, b) (a)
++#endif
+ #define FC_LIKELY(expr) (__builtin_expect (((expr) ? 1 : 0), 1))
+ #define FC_UNLIKELY(expr) (__builtin_expect (((expr) ? 1 : 0), 0))
+ #endif
