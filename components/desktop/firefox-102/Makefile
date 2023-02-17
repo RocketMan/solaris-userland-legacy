@@ -37,7 +37,7 @@ GCC_ROOT=/usr/gcc/10
 ESR = esr
 
 COMPONENT_NAME =	firefox
-COMPONENT_VERSION =	102.7.0
+COMPONENT_VERSION =	102.8.0
 COMPONENT_PROJECT_URL =	http://www.mozilla.com/firefox
 COMPONENT_SRC_NAME =	$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_SRC = 	$(COMPONENT_SRC_NAME)
@@ -118,12 +118,12 @@ COMPONENT_PRE_CONFIGURE_ACTION += \
 	echo "ac_add_options --enable-system-pixman" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --enable-update-channel=esr" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-intl-api" >> $(MOZCONFIG) ; \
-	echo "ac_add_options --with-system-icu" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-libevent" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-zlib" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-libvpx" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --without-wasm-sandboxed-libraries" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --host=x86_64-sun-solaris" >> $(MOZCONFIG) ;
+#	echo "ac_add_options --with-system-icu" >> $(MOZCONFIG) ; \
 #	echo "ac_add_options --enable-startup-notification" >> $(MOZCONFIG) ;
 #	echo "ac_add_options --enable-system-sqlite" >> $(MOZCONFIG) ;
 #	echo "ac_add_options --with-system-bz2" >> $(MOZCONFIG) ;
@@ -231,7 +231,7 @@ REQUIRED_PACKAGES += library/desktop/startup-notification
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/gnome/gnome-libs
 REQUIRED_PACKAGES += library/graphics/pixman
-REQUIRED_PACKAGES += library/icu
+#REQUIRED_PACKAGES += library/icu
 REQUIRED_PACKAGES += library/libevent
 REQUIRED_PACKAGES += library/libffi
 REQUIRED_PACKAGES += library/zlib
