@@ -1,0 +1,12 @@
+--- harfbuzz-3.1.2/src/hb-ot-shape-complex-use-table.hh~	2021-11-26 16:04:09.000000000 +0000
++++ harfbuzz-3.1.2/src/hb-ot-shape-complex-use-table.hh	2023-02-23 10:16:56.032106191 +0000
+@@ -48,6 +48,9 @@
+ #pragma GCC diagnostic ignored "-Wunused-macros"
+ #define B	USE(B)	/* BASE */
+ #define CGJ	USE(CGJ)	/* CGJ */
++#ifdef CS
++#undef CS
++#endif
+ #define CS	USE(CS)	/* CONS_WITH_STACKER */
+ #define G	USE(G)	/* HIEROGLYPH */
+ #define GB	USE(GB)	/* BASE_OTHER */
