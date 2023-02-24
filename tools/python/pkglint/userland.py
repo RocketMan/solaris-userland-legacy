@@ -534,6 +534,7 @@ class UserlandActionChecker(base.ActionChecker):
 	init_script.pkglint_desc = _(
 		"SVR4 startup scripts should not be delivered.")
 
+
 class UserlandManifestChecker(base.ManifestChecker):
         """An opensolaris.org-specific class to check manifests."""
 

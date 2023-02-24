@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2011, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2011, 2023, Oracle and/or its affiliates.
 #
 # 32-bit preferred as only *-config and source generation scripts delivered.
 BUILD_BITS= 32_and_64
@@ -47,8 +47,6 @@ COMPONENT_PREP_ACTION += (cd $(@D); autoconf);
 TEST_TARGET= $(NO_TESTS)
 
 include $(WS_MAKE_RULES)/common.mk
-
-PKG_PROTO_DIRS += $(COMPONENT_DIR)/man
 
 LDFLAGS += $(CC_BITS)
 

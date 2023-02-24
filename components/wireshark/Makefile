@@ -102,13 +102,14 @@ docs-generated:
 	cd $(COMPONENT_SRC); \
 	  for i in `find $(COMPONENT_DIR)/patches -name '*.patch'` ; do gpatch -p1 < $$i; done ; \
 	  $(ENV) $(CONFIGURE_ENV) HOME=$(SOURCE_DIR)/home \
-	    PATH="$(PATH):$(SOURCE_DIR)/home/.gem/ruby/2.6.0/bin" $(CMAKE) $(CMAKE_OPTIONS) . ; \
+	    PATH="$(PATH):$(SOURCE_DIR)/home/.gem/ruby/3.1.0/bin" $(CMAKE) $(CMAKE_OPTIONS) . ; \
 	  $(ENV) $(COMPONENT_BUILD_ENV) HOME=$(SOURCE_DIR)/home $(GMAKE) docs
 	TZ=UTC gtar cjvf $(USERLAND_ARCHIVES)$(COMPONENT_ARCHIVE_1) --sort=name \
 	  --mtime='1970-01-01' --owner=root --group=root $(COMPONENT_SRC)/doc/*.1 \
 	  $(COMPONENT_SRC)/doc/*.4 $(COMPONENT_SRC)/doc/*.html $(COMPONENT_SRC)/doc/AUTHORS-SHORT
 	/usr/bin/sha256sum $(USERLAND_ARCHIVES)$(COMPONENT_ARCHIVE_1)
 
+REQUIRED_PACKAGES += compress/zstd
 REQUIRED_PACKAGES += developer/lexer/flex
 REQUIRED_PACKAGES += developer/parser/bison
 REQUIRED_PACKAGES += diagnostic/wireshark/wireshark-common
@@ -124,7 +125,7 @@ REQUIRED_PACKAGES += library/security/libgpg-error
 REQUIRED_PACKAGES += library/snappy
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += compress/lz4
-REQUIRED_PACKAGES += runtime/ruby-26
+REQUIRED_PACKAGES += runtime/ruby-31
 REQUIRED_PACKAGES += security/kerberos-5
 REQUIRED_PACKAGES += service/security/kerberos-5
 REQUIRED_PACKAGES += system/library/libpcap

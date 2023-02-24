@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2023, Oracle and/or its affiliates.
 #
 
 <transform file path=usr.*/man/.+ -> \
@@ -57,12 +57,12 @@ file path=usr/include/json-glib-1.0/json-glib/json-version.h
 file path=usr/lib/$(MACH64)/girepository-1.0/Json-1.0.typelib
 link path=usr/lib/$(MACH64)/libjson-glib-1.0.so target=libjson-glib-1.0.so.0
 link path=usr/lib/$(MACH64)/libjson-glib-1.0.so.0 \
-    target=libjson-glib-1.0.so.0.600.2
-file path=usr/lib/$(MACH64)/libjson-glib-1.0.so.0.600.2
+    target=libjson-glib-1.0.so.0.600.6
+file path=usr/lib/$(MACH64)/libjson-glib-1.0.so.0.600.6
 file path=usr/lib/$(MACH64)/pkgconfig/json-glib-1.0.pc
 link path=usr/lib/libjson-glib-1.0.so target=libjson-glib-1.0.so.0
-link path=usr/lib/libjson-glib-1.0.so.0 target=libjson-glib-1.0.so.0.600.2
-file path=usr/lib/libjson-glib-1.0.so.0.600.2
+link path=usr/lib/libjson-glib-1.0.so.0 target=libjson-glib-1.0.so.0.600.6
+file path=usr/lib/libjson-glib-1.0.so.0.600.6
 file path=usr/lib/pkgconfig/json-glib-1.0.pc
 file path=usr/share/gir-1.0/Json-1.0.gir
 file path=usr/share/locale/as/LC_MESSAGES/json-glib-1.0.mo
@@ -124,4 +124,4 @@ file path=usr/share/locale/zh_HK/LC_MESSAGES/json-glib-1.0.mo
 file path=usr/share/locale/zh_TW/LC_MESSAGES/json-glib-1.0.mo
 file path=usr/share/man/man1/json-glib-format.1
 file path=usr/share/man/man1/json-glib-validate.1
-license COPYING license=LGPLv2.1
+license json-glib.license license=LGPLv2.1

@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2015, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2015, 2023, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64_and_32
@@ -30,14 +30,14 @@ COMPILER =              gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		json-glib
-COMPONENT_VERSION=	1.6.2
+COMPONENT_VERSION=	1.6.6
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/JsonGlib
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:a33d66c6d038bda46b910c6c6d59c4e15db014e363dc997a0414c2e07d134f24
+    sha256:96ec98be7a91f6dde33636720e3da2ff6ecbb90e76ccaa49497f31a6855a490e
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	13144
 
-COMPONENT_BAID=		88338
+COMPONENT_BAID=		137481
 BUILD_STYLE=		meson
 
 include $(WS_MAKE_RULES)/gnome-component.mk
@@ -46,8 +46,7 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 CC_PIC_MODE = $(CC_PIC_DISABLE)
 LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 
-CONFIGURE_OPTIONS += -Ddocs=false
-CONFIGURE_OPTIONS += -Dgtk_doc=false
+CONFIGURE_OPTIONS += -Dgtk_doc=disabled
 CONFIGURE_OPTIONS += -Dman=true
 CONFIGURE_OPTIONS.32 += -Dintrospection=disabled
 COMPONENT_BUILD_ENV +=  PATH="$(GNUBIN):$(PATH)"
