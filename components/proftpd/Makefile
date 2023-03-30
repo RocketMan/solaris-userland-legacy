@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2011, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2011, 2023, Oracle and/or its affiliates.
 #
 
 BUILD_BITS= 64
@@ -28,17 +28,16 @@ include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		proftpd
 COMPONENT_VERSION=	1.3.8
-COMPONENT_SUBVERSION=	rc4
-HUMAN_VERSION=		$(COMPONENT_VERSION)$(COMPONENT_SUBVERSION)
+HUMAN_VERSION=		$(COMPONENT_VERSION)
 COMPONENT_PROJECT_URL=	http://www.proftpd.org/
 COMPONENT_SRC=		$(COMPONENT_NAME)-$(HUMAN_VERSION)
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH=	\
-	sha256:63a91b2fb7a9ab1409f6ae315e90e2efefea8c98e00ada9b8d97b0fadb2abe5e
+	sha256:f7139e7377a2cb059b8b9b14d76a6df5f440e3181cb15ae890d43bbcae574748
 COMPONENT_ARCHIVE_URL= ftp://ftp.proftpd.org/distrib/source/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_BUGDB=	service/proftpd
-COMPONENT_BAID_PROFTPD=	128000
+COMPONENT_BAID_PROFTPD=	138794
 COMPONENT_ANITYA_ID=	7609
 
 # mod_gss subcomponent
@@ -99,6 +98,7 @@ COMPONENT_PRE_CONFIGURE_ACTION = \
 	($(CP) mod_solaris_audit.c $(SOURCE_DIR)/contrib ; \
 	$(CP) mod_solaris_priv.c $(SOURCE_DIR)/contrib ; \
 	cd $(SOURCE_DIR) ; \
+	cd locale && $(RM) *.po ; cd $(SOURCE_DIR) ; \
 	autoconf ; \
 	cd .. ; \
 	cd $(BUILD_DIR) ; \
