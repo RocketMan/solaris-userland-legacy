@@ -42,10 +42,13 @@ COMPONENT_BAID=		131204
 
 # As of 0.62.0, meson requires Python 3.7 or newer, and we only need
 # to build for a single version, not all of them.
-PYTHON_VERSION=    3.11
+$(SOLARIS_11_4_5_ONLY)PYTHON_VERSION=    3.11
+$(SOLARIS_11_3_ONLY)PYTHON_VERSION=    3.9
 PYTHON_VERSIONS=	$(PYTHON_VERSION)
 
 BUILD_STYLE= setup.py
+
+$(SOLARIS_11_3_ONLY)MANIFEST_COMPARE=/usr/bin/true
 
 include $(WS_MAKE_RULES)/common.mk
 

@@ -11,19 +11,12 @@
          if not self.info.is_windows() or self.info.is_cygwin():
 --- meson-0.59.2/mesonbuild/compilers/mixins/intel.py.~1~	2021-10-05 15:15:55.059919470 +0000
 +++ meson-0.59.2/mesonbuild/compilers/mixins/intel.py	2021-10-05 15:17:52.516409549 +0000
-@@ -81,7 +81,7 @@
+@@ -77,7 +77,7 @@
          # name of the output file) which break assumptions meson makes
          self.base_options = {mesonlib.OptionKey(o) for o in [
              'b_pch', 'b_lundef', 'b_asneeded', 'b_pgo', 'b_coverage',
 -            'b_ndebug', 'b_staticpic', 'b_pie']}
 +            'b_ndebug', 'b_staticpic']}
-         self.id = 'intel'
          self.lang_header = 'none'
  
-@@ -186,4 +186,4 @@
-         return self.OPTIM_ARGS[optimization_level]
- 
-     def get_pch_base_name(self, header: str) -> str:
--        return os.path.basename(header)
-\ No newline at end of file
-+        return os.path.basename(header)
+     def get_pch_suffix(self) -> str:
