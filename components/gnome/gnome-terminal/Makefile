@@ -28,10 +28,12 @@ COMPILER=		gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gnome-terminal
-COMPONENT_VERSION=	3.42.0
+COMPONENT_VERSION=	3.48.0
 COMPONENT_PROJECT_URL=  https://wiki.gnome.org/Apps/Terminal
+COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.bz2
+COMPONENT_ARCHIVE_URL=	https://gitlab.gnome.org/GNOME/$(COMPONENT_NAME)/-/archive/$(COMPONENT_VERSION)/$(COMPONENT_ARCHIVE)
 COMPONENT_ARCHIVE_HASH= \
-	sha256:b50e9e5664230e6ca290bcf38812a5b65e0baac66a486ee210894cf675f72e0b
+	sha256:fd24a8484d023ef1501f91fb5cd6f672ecad419fef8fc7db390142991ef84274
 COMPONENT_BUGDB=        gnome/terminal
 COMPONENT_ANITYA_ID=	10896
 BUILD_STYLE=		meson
@@ -57,6 +59,8 @@ LD_OPTIONS += $(LD_OPTIONS.$(BITS))
 
 PKG_CONFIG_PATHS += $(PKG_CONFIG_PATHS.$(BITS))
 LD_OPTIONS += $(LD_OPTIONS.$(BITS))
+
+$(SOLARIS_11_3_ONLY)LDFLAGS += -lssp -lsocket
 
 CONFIGURE_OPTIONS += -Dnautilus_extension=false
 CONFIGURE_OPTIONS += -Dsearch_provider=false
