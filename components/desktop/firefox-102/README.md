@@ -6,19 +6,13 @@
   falls back to libpci (part of pciutils) to detect the GPU.  This requires
   elevated priveges, which we really should not give to the browser.
 
-  **WORKAROUND:**
+  As a result, we disable GPU detection via PCI.  If you want to enable
+  it anyway, launch firefox with the MOZ_USE_PCI=1 environment variable.
 
-  Launch firefox with the locally added MOZ_AVOID_PCI_SCAN env variable:
-  
-        MOZ_AVOID_PCI_SCAN=1 firefox
-
-  This lets it get past the PCI scan; it then seems to continue OK;
-  one can successfuly run the WebAssembly tanks demo, for example.
-  
 * CSD and gtk3 theme are not being detected; if you want them, you will
   need to specify in the environment:
 
-        GTK_CSD=1 GTK_THEME=slim-nimbus MOZ_AVOID_PCI_SCAN=1 firefox
+        GTK_CSD=1 GTK_THEME=slim-nimbus firefox
 
 * During the build, it wants FFVPXRuntimeLinker.h, which
   is supplied in a later version of ffmpeg than the one we have (4.1.6).
