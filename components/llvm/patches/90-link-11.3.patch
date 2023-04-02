@@ -1,0 +1,36 @@
+--- llvm-13.0.1/tools/clang/tools/clang-shlib/CMakeLists.txt-	2022-01-20 21:31:59.000000000 +0000
++++ llvm-13.0.1/tools/clang/tools/clang-shlib/CMakeLists.txt	2023-04-02 17:16:39.145300208 +0000
+@@ -51,5 +51,5 @@
+ # Optimize function calls for default visibility definitions to avoid PLT and
+ # reduce dynamic relocations.
+ if (NOT APPLE AND NOT MINGW)
+-  target_link_options(clang-cpp PRIVATE LINKER:-Bsymbolic-functions)
++  # target_link_options(clang-cpp PRIVATE LINKER:-Bsymbolic-functions)
+ endif()
+--- llvm-13.0.1/tools/clang/tools/libclang/CMakeLists.txt-	2022-01-20 21:31:59.000000000 +0000
++++ llvm-13.0.1/tools/clang/tools/libclang/CMakeLists.txt	2023-04-02 18:02:41.637914391 +0000
+@@ -167,11 +167,11 @@
+     endif()
+   endif()
+   if (USE_VERSION_SCRIPT)
+-    target_link_options(libclang PRIVATE "-Wl,--version-script,${CMAKE_CURRENT_SOURCE_DIR}/libclang.map")
++    # target_link_options(libclang PRIVATE "-Wl,--version-script,${CMAKE_CURRENT_SOURCE_DIR}/libclang.map")
+     # The Solaris 11.4 linker supports a subset of GNU ld version scripts,
+     # but requires a special option to enable it.
+     if (${CMAKE_SYSTEM_NAME} MATCHES "SunOS")
+-      target_link_options(libclang PRIVATE "-Wl,-z,gnu-version-script-compat")
++      # target_link_options(libclang PRIVATE "-Wl,-z,gnu-version-script-compat")
+     endif()
+     # Ensure that libclang.so gets rebuilt when the linker script changes.
+     set_property(SOURCE ARCMigrate.cpp APPEND PROPERTY
+--- llvm-13.0.1/tools/llvm-shlib/CMakeLists.txt-	2022-01-20 21:31:59.000000000 +0000
++++ llvm-13.0.1/tools/llvm-shlib/CMakeLists.txt	2023-04-02 17:16:27.499409435 +0000
+@@ -55,7 +55,7 @@
+       # reduce dynamic relocations.
+       # Note: for -fno-pic default, the address of a function may be different from
+       # inside and outside libLLVM.so.
+-      target_link_options(LLVM PRIVATE LINKER:-Bsymbolic-functions)
++      # target_link_options(LLVM PRIVATE LINKER:-Bsymbolic-functions)
+     endif()
+   elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
+     set(LIB_NAMES -Wl,-all_load ${LIB_NAMES})
