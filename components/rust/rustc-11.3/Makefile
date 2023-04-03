@@ -65,6 +65,11 @@ CONFIGURE_OPTIONS =	--prefix=$(CONFIGURE_PREFIX)
 CONFIGURE_OPTIONS +=	--default-linker=gcc
 CONFIGURE_OPTIONS +=	--enable-local-rust
 CONFIGURE_OPTIONS +=	--disable-llvm-static-stdcpp
+CONFIGURE_OPTIONS +=	--disable-docs
+CONFIGURE_OPTIONS +=	--disable-compiler-docs
+CONFIGURE_OPTIONS +=	--disable-cargo-native-static
+CONFIGURE_OPTIONS +=	--enable-llvm-link-shared
+CONFIGURE_OPTIONS +=	--llvm-root=$(CONFIGURE_PREFIX)
 
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
@@ -127,6 +132,7 @@ COMPONENT_TEST_ARGS =	test --no-fail-fast -j 8
 COMPONENT_TEST_TARGETS =
 
 REQUIRED_PACKAGES += developer/llvm/llvm
+REQUIRED_PACKAGES += developer/llvm/llvm-libs
 REQUIRED_PACKAGES += developer/rust/rustc
 REQUIRED_PACKAGES += library/libssh2
 ifneq ($(strip $(OPENSSL3)),)
