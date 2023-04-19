@@ -1,0 +1,16 @@
+There is one issue that makes the code incompatible with newer Python runtimes.
+
+the missing reduce import was reported upstream:
+https://gitlab.freedesktop.org/xorg/proto/xcbproto/-/merge_requests/41
+
+--- xcb-proto-1.14/xcbgen/xtypes.py
++++ xcb-proto-1.14/xcbgen/xtypes.py
+@@ -12,6 +12,8 @@
+ 
+ import __main__
+ 
++from functools import reduce
++
+ verbose_align_log = False
+ true_values = ['true', '1', 'yes']
+ 

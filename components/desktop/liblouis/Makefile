@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2016, 2022, Oracle and/or its affiliates.
+# Copyright (c) 2016, 2023, Oracle and/or its affiliates.
 #
 
 BUILD_BITS= 		64
@@ -31,17 +31,18 @@ COMPONENT_MAKE_JOBS=1
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		liblouis
-COMPONENT_VERSION=	3.22.0
+COMPONENT_VERSION=	3.25.0
 COMPONENT_PROJECT_URL=	http://liblouis.org/
 COMPONENT_ARCHIVE_HASH= \
-	sha256:74391c4e6a10677c02fb64e652448df9ee430c96d9bcfe1cc1ae3e49f051c4f4
+	sha256:d720aa5fcd51de925a28ae801b8b2ca76ee67e2360b40055c679bce8e565f251
 COMPONENT_ARCHIVE_URL=	https://github.com/liblouis/liblouis/releases/download/v$(COMPONENT_VERSION)/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	gnome/accessibility
 COMPONENT_ANITYA_ID=	13112
-COMPONENT_BAID=		127635
+COMPONENT_BAID=		141830
 
-# Orca uses python 3.7, so we need to match
-PYTHON_VERSION=		3.7
+# Orca uses python 3.11, so we need to match
+PYTHON_VERSION=		3.11
+PKG_MACROS+=		PYVER="$(PYTHON_VERSION)"
 
 include $(WS_MAKE_RULES)/common.mk
 
@@ -87,6 +88,6 @@ COMPONENT_TEST_TRANSFORMS += \
 
 REQUIRED_PACKAGES += developer/documentation-tool/help2man
 REQUIRED_PACKAGES += $(PERL_PKG)
-REQUIRED_PACKAGES += runtime/python-37
+REQUIRED_PACKAGES += runtime/python-311
 REQUIRED_PACKAGES += system/core-os
 

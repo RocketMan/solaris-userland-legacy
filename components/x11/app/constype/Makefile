@@ -20,19 +20,20 @@
 #
 
 #
-# Copyright (c) 2018, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2018, 2023, Oracle and/or its affiliates.
 #
 
 BUILD_BITS =            64
 include ../../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		constype
-COMPONENT_VERSION=	1.0.4
+COMPONENT_VERSION=	1.0.5
+COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH= \
-	sha256:c1848a3af93200a6db8a5905e1d9a3ca152cf4eeec4e1e7a50a8fcc6b4a0049a
+	sha256:ec7d07204dd5abf8d21d0a89408be17ab316a017838c88b087b127082f02c051
 COMPONENT_BUGDB=        x11/xclients
 COMPONENT_ANITYA_ID=	17147
-COMPONENT_BAID=		52925
+COMPONENT_BAID=		139146
 
 TEST_TARGET = $(NO_TESTS)
 

@@ -20,52 +20,59 @@
 #
 
 #
-# Copyright (c) 2017, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2017, 2023, Oracle and/or its affiliates.
 #
 
 BUILD_BITS=             NO_ARCH
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		unifont
-COMPONENT_VERSION=	8.0.01
+COMPONENT_VERSION=	15.0.01
+IPS_COMPONENT_VERSION=	$(COMPONENT_VERSION:.01=.1)
 
-# due to 27244651 the IPS version should be the solaris version
-IPS_COMPONENT_VERSION=	$(PKG_SOLARIS_VERSION)
-
-COMPONENT_SRC=		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
-COMPONENT_ARCHIVE=	unifont-8.0.01.tar.gz
-COMPONENT_PROJECT_URL=	http://unifoundry.com/unifont.html
-COMPONENT_ARCHIVE_URL=	http://unifoundry.com/pub/$(COMPONENT_SRC)/$(COMPONENT_ARCHIVE)
+COMPONENT_PROJECT_URL=	https://unifoundry.com/unifont/index.html
+COMPONENT_ARCHIVE_URL=	https://unifoundry.com/pub/$(COMPONENT_NAME)/$(COMPONENT_SRC)/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).sig
 COMPONENT_ARCHIVE_HASH= \
-    sha256:4b20bfc6412bce9302cd321f39d7c0185c3c69f9deaf9ab7ea89c4e105fbcb9c
+    sha256:7d11a924bf3c63ea7fdf2da2b96d6d4986435bedfd1e6816c8ac2e6db47634d5
 COMPONENT_BUGDB=	g11n/font
-
-COMPONENT_BAID=		28016
+COMPONENT_BAID=		141717
 
 BUILD_STYLE=		justmake
 TEST_TARGET=		$(NO_TESTS)
 
 include $(WS_MAKE_RULES)/common.mk
+include $(WS_MAKE_RULES)/font.mk
 
-PROTOFONTSDIR=	$(PROTOUSRSHAREDIR)/fonts/TrueType
-PROTOFONTSX11DIR=	$(PROTOUSRSHAREDIR)/fonts/X11
-SRC_SUBDIR=     font/precompiled
+# We don't ship or use the tools needed to rebuild the font, so don't build them
+COMPONENT_BUILD_ACTION = print "Nothing to build"
 
-COMPONENT_BUILD_ACTION = \
-	$(GUNZIP) -c $(@D)/font/precompiled/unifont-$(COMPONENT_VERSION).pcf.gz > $(@D)/unifont.pcf; \
-	$(CP) $(@D)/font/precompiled/unifont-8.0.01.ttf $(@D)/unifont.ttf; \
-	$(CP) $(@D)/font/precompiled/unifont_upper-8.0.01.ttf $(@D)/unifont_upper.ttf; \
-	$(MKFONTSCALE) $(@D); \
-	$(MKFONTDIR) $(@D);
+COMPONENT_INSTALL_ARGS += -C font
+COMPONENT_INSTALL_ARGS += PCFDEST=$(PROTO_DIR)/$(COMPONENT_FONT_DEST_DIR)
+COMPONENT_INSTALL_ARGS += TTFDEST=$(PROTO_DIR)/$(COMPONENT_FONT_DEST_DIR)
+COMPONENT_INSTALL_ARGS += OTFDEST=$(PROTO_DIR)/$(COMPONENT_FONT_DEST_DIR)
 
-COMPONENT_INSTALL_ACTION = \
-	$(CP) $(@D)/COPYING $(@D)/ChangeLog $(@D)/README $(PROTOUSRSHAREDOCDIR)/ttf-$(COMPONENT_NAME); \
-        $(CP) $(@D)/*.ttf $(@D)/*.pcf $(@D)/fonts.dir $(@D)/fonts.scale $(PROTOFONTSDIR)/$(COMPONENT_NAME)/;
+COMPONENT_POST_INSTALL_ACTION += \
+	$(MKDIR) $(PROTO_DIR)$(COMPONENT_FONT_DOC_DEST_DIR) ; \
+	$(INSTALL) -m 0444 $(@D)/COPYING $(@D)/ChangeLog $(@D)/README \
+	    $(PROTO_DIR)$(COMPONENT_FONT_DOC_DEST_DIR) ;
 
-COMPONENT_PRE_INSTALL_ACTION += \
-	$(MKDIR) $(PROTOUSRSHAREDOCDIR)/ttf-$(COMPONENT_NAME); \
-	$(MKDIR) $(PROTOFONTSDIR)/$(COMPONENT_NAME)/; \
-	$(MKDIR) $(PROTOFONTSX11DIR)/$(COMPONENT_NAME)/;
+# For some reason we've never shipped unifont_{csur,sample} fonts
+COMPONENT_POST_INSTALL_ACTION += \
+	$(RM) $(PROTO_DIR)/$(COMPONENT_FONT_DEST_DIR)/unifont_*{csur,sample}.* ;
 
-REQUIRED_PACKAGES += x11/font-utilities
+# We ship pcf fonts uncompressed in Solaris, as explained in fonts.mk
+COMPONENT_POST_INSTALL_ACTION += \
+	$(GUNZIP) $(PROTO_DIR)/$(COMPONENT_FONT_DEST_DIR)/*.pcf.gz ;
+
+# Need to regenerate these after prior actions
+COMPONENT_POST_INSTALL_ACTION += \
+	$(MKFONTSCALE) $(PROTO_DIR)/$(COMPONENT_FONT_DEST_DIR) ; \
+	$(MKFONTDIR) $(PROTO_DIR)/$(COMPONENT_FONT_DEST_DIR) ;
+
+# And deliver license stuff
+COMPONENT_POST_INSTALL_ACTION += \
+	$(INSTALL) -m 0444 $(SOURCE_DIR)/OFL-1.1.txt \
+	    $(PROTO_DIR)$(COMPONENT_FONT_DOC_DEST_DIR) ; \
+	$(CAT) $(COMPONENT_DIR)/unifont.license $(SOURCE_DIR)/COPYING \
+		> $(@D)/../unifont.license ;

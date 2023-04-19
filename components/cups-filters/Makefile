@@ -76,6 +76,11 @@ CONFIGURE_OPTIONS +=	--with-gs-path=/usr/bin/gs
 # Use GNU make to avoid the configuration error when makefile fragments are processed.
 CONFIGURE_OPTIONS +=  MAKE=$(GMAKE)
 
+# Needed for compilation with libqpdf
+PKG_CONFIG_PATHS.64 = /usr/openssl/3/lib/64/pkgconfig
+PKG_CONFIG_PATHS.32 = /usr/openssl/3/lib/pkgconfig
+PKG_CONFIG_PATHS += $(PKG_CONFIG_PATHS.$(BITS))
+
 COMPONENT_BUILD_ENV  += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV+= PATH="$(GNUBIN):$(PATH)"
 

@@ -20,14 +20,12 @@
 #
 
 #
-# Copyright (c) 2018, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2018, 2023, Oracle and/or its affiliates.
 #
 
 <transform file path=usr/share/xcb/.*\.xml$ -> default facet.devel true>
 <transform file path=usr/lib/python.*/vendor-packages/xcbgen/.* -> \
     default facet.devel true>
-<transform file path=^(.*/xcbgen)/__pycache__/(.*)\.cpython-3.\.pyc$ -> \
-    set action.hash %<1>/%<2>.pyc>
 <transform file path=usr.*/man/.+ -> default mangler.man.stability volatile>
 set name=pkg.fmri \
     value=pkg:/x11/library/libxcb@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
@@ -61,7 +59,6 @@ file path=usr/include/xcb/sync.h
 file path=usr/include/xcb/xc_misc.h
 file path=usr/include/xcb/xcb.h
 file path=usr/include/xcb/xcbext.h
-file path=usr/include/xcb/xevie.h
 file path=usr/include/xcb/xf86dri.h
 file path=usr/include/xcb/xfixes.h
 file path=usr/include/xcb/xia.h
@@ -73,87 +70,83 @@ file path=usr/include/xcb/xproto.h
 file path=usr/include/xcb/xtest.h
 file path=usr/include/xcb/xv.h
 file path=usr/include/xcb/xvmc.h
-link path=usr/lib/$(MACH64)/libxcb-composite.so target=./libxcb-composite.so.0
+link path=usr/lib/$(MACH64)/libxcb-composite.so target=libxcb-composite.so.0.0.0
 link path=usr/lib/$(MACH64)/libxcb-composite.so.0 \
-    target=./libxcb-composite.so.0.0.0
+    target=libxcb-composite.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-composite.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-damage.so target=./libxcb-damage.so.0
-link path=usr/lib/$(MACH64)/libxcb-damage.so.0 target=./libxcb-damage.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-damage.so target=libxcb-damage.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-damage.so.0 target=libxcb-damage.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-damage.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-dpms.so target=./libxcb-dpms.so.0
-link path=usr/lib/$(MACH64)/libxcb-dpms.so.0 target=./libxcb-dpms.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-dpms.so target=libxcb-dpms.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-dpms.so.0 target=libxcb-dpms.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-dpms.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-dri2.so target=./libxcb-dri2.so.0
-link path=usr/lib/$(MACH64)/libxcb-dri2.so.0 target=./libxcb-dri2.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-dri2.so target=libxcb-dri2.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-dri2.so.0 target=libxcb-dri2.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-dri2.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-dri3.so target=./libxcb-dri3.so.0
-link path=usr/lib/$(MACH64)/libxcb-dri3.so.0 target=./libxcb-dri3.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-dri3.so target=libxcb-dri3.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-dri3.so.0 target=libxcb-dri3.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-dri3.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-glx.so target=./libxcb-glx.so.0
-link path=usr/lib/$(MACH64)/libxcb-glx.so.0 target=./libxcb-glx.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-glx.so target=libxcb-glx.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-glx.so.0 target=libxcb-glx.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-glx.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-present.so target=./libxcb-present.so.0
-link path=usr/lib/$(MACH64)/libxcb-present.so.0 target=./libxcb-present.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-present.so target=libxcb-present.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-present.so.0 target=libxcb-present.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-present.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-randr.so target=./libxcb-randr.so.0
-link path=usr/lib/$(MACH64)/libxcb-randr.so.0 target=./libxcb-randr.so.0.1.0
+link path=usr/lib/$(MACH64)/libxcb-randr.so target=libxcb-randr.so.0.1.0
+link path=usr/lib/$(MACH64)/libxcb-randr.so.0 target=libxcb-randr.so.0.1.0
 file path=usr/lib/$(MACH64)/libxcb-randr.so.0.1.0
-link path=usr/lib/$(MACH64)/libxcb-record.so target=./libxcb-record.so.0
-link path=usr/lib/$(MACH64)/libxcb-record.so.0 target=./libxcb-record.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-record.so target=libxcb-record.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-record.so.0 target=libxcb-record.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-record.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-render.so target=./libxcb-render.so.0
-link path=usr/lib/$(MACH64)/libxcb-render.so.0 target=./libxcb-render.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-render.so target=libxcb-render.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-render.so.0 target=libxcb-render.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-render.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-res.so target=./libxcb-res.so.0
-link path=usr/lib/$(MACH64)/libxcb-res.so.0 target=./libxcb-res.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-res.so target=libxcb-res.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-res.so.0 target=libxcb-res.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-res.so.0.0.0
 link path=usr/lib/$(MACH64)/libxcb-screensaver.so \
-    target=./libxcb-screensaver.so.0
+    target=libxcb-screensaver.so.0.0.0
 link path=usr/lib/$(MACH64)/libxcb-screensaver.so.0 \
-    target=./libxcb-screensaver.so.0.0.0
+    target=libxcb-screensaver.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-screensaver.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-shape.so target=./libxcb-shape.so.0
-link path=usr/lib/$(MACH64)/libxcb-shape.so.0 target=./libxcb-shape.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-shape.so target=libxcb-shape.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-shape.so.0 target=libxcb-shape.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-shape.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-shm.so target=./libxcb-shm.so.0
-link path=usr/lib/$(MACH64)/libxcb-shm.so.0 target=./libxcb-shm.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-shm.so target=libxcb-shm.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-shm.so.0 target=libxcb-shm.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-shm.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-sync.so target=./libxcb-sync.so.1
-link path=usr/lib/$(MACH64)/libxcb-sync.so.1 target=./libxcb-sync.so.1.0.0
+link path=usr/lib/$(MACH64)/libxcb-sync.so target=libxcb-sync.so.1.0.0
+link path=usr/lib/$(MACH64)/libxcb-sync.so.1 target=libxcb-sync.so.1.0.0
 file path=usr/lib/$(MACH64)/libxcb-sync.so.1.0.0
-link path=usr/lib/$(MACH64)/libxcb-xevie.so target=./libxcb-xevie.so.0
-link path=usr/lib/$(MACH64)/libxcb-xevie.so.0 target=./libxcb-xevie.so.0.0.0
-file path=usr/lib/$(MACH64)/libxcb-xevie.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-xf86dri.so target=./libxcb-xf86dri.so.0
-link path=usr/lib/$(MACH64)/libxcb-xf86dri.so.0 target=./libxcb-xf86dri.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xf86dri.so target=libxcb-xf86dri.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xf86dri.so.0 target=libxcb-xf86dri.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-xf86dri.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-xfixes.so target=./libxcb-xfixes.so.0
-link path=usr/lib/$(MACH64)/libxcb-xfixes.so.0 target=./libxcb-xfixes.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xfixes.so target=libxcb-xfixes.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xfixes.so.0 target=libxcb-xfixes.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-xfixes.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-xinerama.so target=./libxcb-xinerama.so.0
-link path=usr/lib/$(MACH64)/libxcb-xinerama.so.0 \
-    target=./libxcb-xinerama.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xinerama.so target=libxcb-xinerama.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xinerama.so.0 target=libxcb-xinerama.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-xinerama.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-xinput.so target=./libxcb-xinput.so.0
-link path=usr/lib/$(MACH64)/libxcb-xinput.so.0 target=./libxcb-xinput.so.0.1.0
+link path=usr/lib/$(MACH64)/libxcb-xinput.so target=libxcb-xinput.so.0.1.0
+link path=usr/lib/$(MACH64)/libxcb-xinput.so.0 target=libxcb-xinput.so.0.1.0
 file path=usr/lib/$(MACH64)/libxcb-xinput.so.0.1.0
-link path=usr/lib/$(MACH64)/libxcb-xkb.so target=./libxcb-xkb.so.1
-link path=usr/lib/$(MACH64)/libxcb-xkb.so.1 target=./libxcb-xkb.so.1.0.0
+link path=usr/lib/$(MACH64)/libxcb-xkb.so target=libxcb-xkb.so.1.0.0
+link path=usr/lib/$(MACH64)/libxcb-xkb.so.1 target=libxcb-xkb.so.1.0.0
 file path=usr/lib/$(MACH64)/libxcb-xkb.so.1.0.0
-link path=usr/lib/$(MACH64)/libxcb-xprint.so target=./libxcb-xprint.so.0
-link path=usr/lib/$(MACH64)/libxcb-xprint.so.0 target=./libxcb-xprint.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xprint.so target=libxcb-xprint.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xprint.so.0 target=libxcb-xprint.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-xprint.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-xtest.so target=./libxcb-xtest.so.0
-link path=usr/lib/$(MACH64)/libxcb-xtest.so.0 target=./libxcb-xtest.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xtest.so target=libxcb-xtest.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xtest.so.0 target=libxcb-xtest.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-xtest.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-xv.so target=./libxcb-xv.so.0
-link path=usr/lib/$(MACH64)/libxcb-xv.so.0 target=./libxcb-xv.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xv.so target=libxcb-xv.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xv.so.0 target=libxcb-xv.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-xv.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb-xvmc.so target=./libxcb-xvmc.so.0
-link path=usr/lib/$(MACH64)/libxcb-xvmc.so.0 target=./libxcb-xvmc.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xvmc.so target=libxcb-xvmc.so.0.0.0
+link path=usr/lib/$(MACH64)/libxcb-xvmc.so.0 target=libxcb-xvmc.so.0.0.0
 file path=usr/lib/$(MACH64)/libxcb-xvmc.so.0.0.0
-link path=usr/lib/$(MACH64)/libxcb.so target=./libxcb.so.1
-link path=usr/lib/$(MACH64)/libxcb.so.1 target=./libxcb.so.1.1.0
+link path=usr/lib/$(MACH64)/libxcb.so target=libxcb.so.1.1.0
+link path=usr/lib/$(MACH64)/libxcb.so.1 target=libxcb.so.1.1.0
 file path=usr/lib/$(MACH64)/libxcb.so.1.1.0
 #
 file path=usr/lib/$(MACH64)/pkgconfig/xcb-composite.pc
@@ -171,7 +164,6 @@ file path=usr/lib/$(MACH64)/pkgconfig/xcb-screensaver.pc
 file path=usr/lib/$(MACH64)/pkgconfig/xcb-shape.pc
 file path=usr/lib/$(MACH64)/pkgconfig/xcb-shm.pc
 file path=usr/lib/$(MACH64)/pkgconfig/xcb-sync.pc
-file path=usr/lib/$(MACH64)/pkgconfig/xcb-xevie.pc
 file path=usr/lib/$(MACH64)/pkgconfig/xcb-xf86dri.pc
 file path=usr/lib/$(MACH64)/pkgconfig/xcb-xfixes.pc
 file path=usr/lib/$(MACH64)/pkgconfig/xcb-xinerama.pc
@@ -183,83 +175,80 @@ file path=usr/lib/$(MACH64)/pkgconfig/xcb-xv.pc
 file path=usr/lib/$(MACH64)/pkgconfig/xcb-xvmc.pc
 file path=usr/lib/$(MACH64)/pkgconfig/xcb.pc
 #
-link path=usr/lib/libxcb-composite.so target=./libxcb-composite.so.0
-link path=usr/lib/libxcb-composite.so.0 target=./libxcb-composite.so.0.0.0
+link path=usr/lib/libxcb-composite.so target=libxcb-composite.so.0.0.0
+link path=usr/lib/libxcb-composite.so.0 target=libxcb-composite.so.0.0.0
 file path=usr/lib/libxcb-composite.so.0.0.0
-link path=usr/lib/libxcb-damage.so target=./libxcb-damage.so.0
-link path=usr/lib/libxcb-damage.so.0 target=./libxcb-damage.so.0.0.0
+link path=usr/lib/libxcb-damage.so target=libxcb-damage.so.0.0.0
+link path=usr/lib/libxcb-damage.so.0 target=libxcb-damage.so.0.0.0
 file path=usr/lib/libxcb-damage.so.0.0.0
-link path=usr/lib/libxcb-dpms.so target=./libxcb-dpms.so.0
-link path=usr/lib/libxcb-dpms.so.0 target=./libxcb-dpms.so.0.0.0
+link path=usr/lib/libxcb-dpms.so target=libxcb-dpms.so.0.0.0
+link path=usr/lib/libxcb-dpms.so.0 target=libxcb-dpms.so.0.0.0
 file path=usr/lib/libxcb-dpms.so.0.0.0
-link path=usr/lib/libxcb-dri2.so target=./libxcb-dri2.so.0
-link path=usr/lib/libxcb-dri2.so.0 target=./libxcb-dri2.so.0.0.0
+link path=usr/lib/libxcb-dri2.so target=libxcb-dri2.so.0.0.0
+link path=usr/lib/libxcb-dri2.so.0 target=libxcb-dri2.so.0.0.0
 file path=usr/lib/libxcb-dri2.so.0.0.0
-link path=usr/lib/libxcb-dri3.so target=./libxcb-dri3.so.0
-link path=usr/lib/libxcb-dri3.so.0 target=./libxcb-dri3.so.0.0.0
+link path=usr/lib/libxcb-dri3.so target=libxcb-dri3.so.0.0.0
+link path=usr/lib/libxcb-dri3.so.0 target=libxcb-dri3.so.0.0.0
 file path=usr/lib/libxcb-dri3.so.0.0.0
-link path=usr/lib/libxcb-glx.so target=./libxcb-glx.so.0
-link path=usr/lib/libxcb-glx.so.0 target=./libxcb-glx.so.0.0.0
+link path=usr/lib/libxcb-glx.so target=libxcb-glx.so.0.0.0
+link path=usr/lib/libxcb-glx.so.0 target=libxcb-glx.so.0.0.0
 file path=usr/lib/libxcb-glx.so.0.0.0
-link path=usr/lib/libxcb-present.so target=./libxcb-present.so.0
-link path=usr/lib/libxcb-present.so.0 target=./libxcb-present.so.0.0.0
+link path=usr/lib/libxcb-present.so target=libxcb-present.so.0.0.0
+link path=usr/lib/libxcb-present.so.0 target=libxcb-present.so.0.0.0
 file path=usr/lib/libxcb-present.so.0.0.0
-link path=usr/lib/libxcb-randr.so target=./libxcb-randr.so.0
-link path=usr/lib/libxcb-randr.so.0 target=./libxcb-randr.so.0.1.0
+link path=usr/lib/libxcb-randr.so target=libxcb-randr.so.0.1.0
+link path=usr/lib/libxcb-randr.so.0 target=libxcb-randr.so.0.1.0
 file path=usr/lib/libxcb-randr.so.0.1.0
-link path=usr/lib/libxcb-record.so target=./libxcb-record.so.0
-link path=usr/lib/libxcb-record.so.0 target=./libxcb-record.so.0.0.0
+link path=usr/lib/libxcb-record.so target=libxcb-record.so.0.0.0
+link path=usr/lib/libxcb-record.so.0 target=libxcb-record.so.0.0.0
 file path=usr/lib/libxcb-record.so.0.0.0
-link path=usr/lib/libxcb-render.so target=./libxcb-render.so.0
-link path=usr/lib/libxcb-render.so.0 target=./libxcb-render.so.0.0.0
+link path=usr/lib/libxcb-render.so target=libxcb-render.so.0.0.0
+link path=usr/lib/libxcb-render.so.0 target=libxcb-render.so.0.0.0
 file path=usr/lib/libxcb-render.so.0.0.0
-link path=usr/lib/libxcb-res.so target=./libxcb-res.so.0
-link path=usr/lib/libxcb-res.so.0 target=./libxcb-res.so.0.0.0
+link path=usr/lib/libxcb-res.so target=libxcb-res.so.0.0.0
+link path=usr/lib/libxcb-res.so.0 target=libxcb-res.so.0.0.0
 file path=usr/lib/libxcb-res.so.0.0.0
-link path=usr/lib/libxcb-screensaver.so target=./libxcb-screensaver.so.0
-link path=usr/lib/libxcb-screensaver.so.0 target=./libxcb-screensaver.so.0.0.0
+link path=usr/lib/libxcb-screensaver.so target=libxcb-screensaver.so.0.0.0
+link path=usr/lib/libxcb-screensaver.so.0 target=libxcb-screensaver.so.0.0.0
 file path=usr/lib/libxcb-screensaver.so.0.0.0
-link path=usr/lib/libxcb-shape.so target=./libxcb-shape.so.0
-link path=usr/lib/libxcb-shape.so.0 target=./libxcb-shape.so.0.0.0
+link path=usr/lib/libxcb-shape.so target=libxcb-shape.so.0.0.0
+link path=usr/lib/libxcb-shape.so.0 target=libxcb-shape.so.0.0.0
 file path=usr/lib/libxcb-shape.so.0.0.0
-link path=usr/lib/libxcb-shm.so target=./libxcb-shm.so.0
-link path=usr/lib/libxcb-shm.so.0 target=./libxcb-shm.so.0.0.0
+link path=usr/lib/libxcb-shm.so target=libxcb-shm.so.0.0.0
+link path=usr/lib/libxcb-shm.so.0 target=libxcb-shm.so.0.0.0
 file path=usr/lib/libxcb-shm.so.0.0.0
-link path=usr/lib/libxcb-sync.so target=./libxcb-sync.so.1
-link path=usr/lib/libxcb-sync.so.1 target=./libxcb-sync.so.1.0.0
+link path=usr/lib/libxcb-sync.so target=libxcb-sync.so.1.0.0
+link path=usr/lib/libxcb-sync.so.1 target=libxcb-sync.so.1.0.0
 file path=usr/lib/libxcb-sync.so.1.0.0
-link path=usr/lib/libxcb-xevie.so target=./libxcb-xevie.so.0
-link path=usr/lib/libxcb-xevie.so.0 target=./libxcb-xevie.so.0.0.0
-file path=usr/lib/libxcb-xevie.so.0.0.0
-link path=usr/lib/libxcb-xf86dri.so target=./libxcb-xf86dri.so.0
-link path=usr/lib/libxcb-xf86dri.so.0 target=./libxcb-xf86dri.so.0.0.0
+link path=usr/lib/libxcb-xf86dri.so target=libxcb-xf86dri.so.0.0.0
+link path=usr/lib/libxcb-xf86dri.so.0 target=libxcb-xf86dri.so.0.0.0
 file path=usr/lib/libxcb-xf86dri.so.0.0.0
-link path=usr/lib/libxcb-xfixes.so target=./libxcb-xfixes.so.0
-link path=usr/lib/libxcb-xfixes.so.0 target=./libxcb-xfixes.so.0.0.0
+link path=usr/lib/libxcb-xfixes.so target=libxcb-xfixes.so.0.0.0
+link path=usr/lib/libxcb-xfixes.so.0 target=libxcb-xfixes.so.0.0.0
 file path=usr/lib/libxcb-xfixes.so.0.0.0
-link path=usr/lib/libxcb-xinerama.so target=./libxcb-xinerama.so.0
-link path=usr/lib/libxcb-xinerama.so.0 target=./libxcb-xinerama.so.0.0.0
+link path=usr/lib/libxcb-xinerama.so target=libxcb-xinerama.so.0.0.0
+link path=usr/lib/libxcb-xinerama.so.0 target=libxcb-xinerama.so.0.0.0
 file path=usr/lib/libxcb-xinerama.so.0.0.0
-link path=usr/lib/libxcb-xinput.so target=./libxcb-xinput.so.0
-link path=usr/lib/libxcb-xinput.so.0 target=./libxcb-xinput.so.0.1.0
+link path=usr/lib/libxcb-xinput.so target=libxcb-xinput.so.0.1.0
+link path=usr/lib/libxcb-xinput.so.0 target=libxcb-xinput.so.0.1.0
 file path=usr/lib/libxcb-xinput.so.0.1.0
-link path=usr/lib/libxcb-xkb.so target=./libxcb-xkb.so.1
-link path=usr/lib/libxcb-xkb.so.1 target=./libxcb-xkb.so.1.0.0
+link path=usr/lib/libxcb-xkb.so target=libxcb-xkb.so.1.0.0
+link path=usr/lib/libxcb-xkb.so.1 target=libxcb-xkb.so.1.0.0
 file path=usr/lib/libxcb-xkb.so.1.0.0
-link path=usr/lib/libxcb-xprint.so target=./libxcb-xprint.so.0
-link path=usr/lib/libxcb-xprint.so.0 target=./libxcb-xprint.so.0.0.0
+link path=usr/lib/libxcb-xprint.so target=libxcb-xprint.so.0.0.0
+link path=usr/lib/libxcb-xprint.so.0 target=libxcb-xprint.so.0.0.0
 file path=usr/lib/libxcb-xprint.so.0.0.0
-link path=usr/lib/libxcb-xtest.so target=./libxcb-xtest.so.0
-link path=usr/lib/libxcb-xtest.so.0 target=./libxcb-xtest.so.0.0.0
+link path=usr/lib/libxcb-xtest.so target=libxcb-xtest.so.0.0.0
+link path=usr/lib/libxcb-xtest.so.0 target=libxcb-xtest.so.0.0.0
 file path=usr/lib/libxcb-xtest.so.0.0.0
-link path=usr/lib/libxcb-xv.so target=./libxcb-xv.so.0
-link path=usr/lib/libxcb-xv.so.0 target=./libxcb-xv.so.0.0.0
+link path=usr/lib/libxcb-xv.so target=libxcb-xv.so.0.0.0
+link path=usr/lib/libxcb-xv.so.0 target=libxcb-xv.so.0.0.0
 file path=usr/lib/libxcb-xv.so.0.0.0
-link path=usr/lib/libxcb-xvmc.so target=./libxcb-xvmc.so.0
-link path=usr/lib/libxcb-xvmc.so.0 target=./libxcb-xvmc.so.0.0.0
+link path=usr/lib/libxcb-xvmc.so target=libxcb-xvmc.so.0.0.0
+link path=usr/lib/libxcb-xvmc.so.0 target=libxcb-xvmc.so.0.0.0
 file path=usr/lib/libxcb-xvmc.so.0.0.0
-link path=usr/lib/libxcb.so target=./libxcb.so.1
-link path=usr/lib/libxcb.so.1 target=./libxcb.so.1.1.0
+link path=usr/lib/libxcb.so target=libxcb.so.1.1.0
+link path=usr/lib/libxcb.so.1 target=libxcb.so.1.1.0
 file path=usr/lib/libxcb.so.1.1.0
 #
 file path=usr/lib/pkgconfig/xcb-composite.pc
@@ -277,7 +266,6 @@ file path=usr/lib/pkgconfig/xcb-screensaver.pc
 file path=usr/lib/pkgconfig/xcb-shape.pc
 file path=usr/lib/pkgconfig/xcb-shm.pc
 file path=usr/lib/pkgconfig/xcb-sync.pc
-file path=usr/lib/pkgconfig/xcb-xevie.pc
 file path=usr/lib/pkgconfig/xcb-xf86dri.pc
 file path=usr/lib/pkgconfig/xcb-xfixes.pc
 file path=usr/lib/pkgconfig/xcb-xinerama.pc
@@ -541,6 +529,8 @@ file path=usr/share/man/man3xcb/xcb_dri3_pixmap_from_buffers_checked.3xcb
 file path=usr/share/man/man3xcb/xcb_dri3_query_version.3xcb
 file path=usr/share/man/man3xcb/xcb_dri3_query_version_reply.3xcb
 file path=usr/share/man/man3xcb/xcb_dri3_query_version_unchecked.3xcb
+file path=usr/share/man/man3xcb/xcb_dri3_set_drm_device_in_use.3xcb
+file path=usr/share/man/man3xcb/xcb_dri3_set_drm_device_in_use_checked.3xcb
 file path=usr/share/man/man3xcb/xcb_enter_notify_event_t.3xcb
 file path=usr/share/man/man3xcb/xcb_expose_event_t.3xcb
 file path=usr/share/man/man3xcb/xcb_fill_poly.3xcb
@@ -1123,6 +1113,8 @@ file path=usr/share/man/man3xcb/xcb_input_device_property_notify_event_t.3xcb
 file path=usr/share/man/man3xcb/xcb_input_device_state_notify_event_t.3xcb
 file path=usr/share/man/man3xcb/xcb_input_device_valuator_event_t.3xcb
 file path=usr/share/man/man3xcb/xcb_input_enter_event_t.3xcb
+file path=usr/share/man/man3xcb/xcb_input_gesture_pinch_begin_event_t.3xcb
+file path=usr/share/man/man3xcb/xcb_input_gesture_swipe_begin_event_t.3xcb
 file path=usr/share/man/man3xcb/xcb_input_get_device_button_mapping.3xcb
 file path=usr/share/man/man3xcb/xcb_input_get_device_button_mapping_map.3xcb
 file path=usr/share/man/man3xcb/xcb_input_get_device_button_mapping_map_end.3xcb
@@ -2085,21 +2077,6 @@ file path=usr/share/man/man3xcb/xcb_xc_misc_get_xid_list_unchecked.3xcb
 file path=usr/share/man/man3xcb/xcb_xc_misc_get_xid_range.3xcb
 file path=usr/share/man/man3xcb/xcb_xc_misc_get_xid_range_reply.3xcb
 file path=usr/share/man/man3xcb/xcb_xc_misc_get_xid_range_unchecked.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_end.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_end_reply.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_end_unchecked.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_query_version.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_query_version_reply.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_query_version_unchecked.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_select_input.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_select_input_reply.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_select_input_unchecked.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_send.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_send_reply.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_send_unchecked.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_start.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_start_reply.3xcb
-file path=usr/share/man/man3xcb/xcb_xevie_start_unchecked.3xcb
 file path=usr/share/man/man3xcb/xcb_xf86dri_auth_connection.3xcb
 file path=usr/share/man/man3xcb/xcb_xf86dri_auth_connection_reply.3xcb
 file path=usr/share/man/man3xcb/xcb_xf86dri_auth_connection_unchecked.3xcb
@@ -2181,6 +2158,9 @@ file path=usr/share/man/man3xcb/xcb_xfixes_fetch_region_rectangles_iterator.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_fetch_region_rectangles_length.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_fetch_region_reply.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_fetch_region_unchecked.3xcb
+file path=usr/share/man/man3xcb/xcb_xfixes_get_client_disconnect_mode.3xcb
+file path=usr/share/man/man3xcb/xcb_xfixes_get_client_disconnect_mode_reply.3xcb
+file path=usr/share/man/man3xcb/xcb_xfixes_get_client_disconnect_mode_unchecked.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_get_cursor_image.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_get_cursor_image_and_name.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_get_cursor_image_and_name_cursor_image.3xcb
@@ -2218,6 +2198,8 @@ file path=usr/share/man/man3xcb/xcb_xfixes_select_cursor_input_checked.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_select_selection_input.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_select_selection_input_checked.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_selection_notify_event_t.3xcb
+file path=usr/share/man/man3xcb/xcb_xfixes_set_client_disconnect_mode.3xcb
+file path=usr/share/man/man3xcb/xcb_xfixes_set_client_disconnect_mode_checked.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_set_cursor_name.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_set_cursor_name_checked.3xcb
 file path=usr/share/man/man3xcb/xcb_xfixes_set_gc_clip_region.3xcb
@@ -2487,6 +2469,7 @@ file path=usr/share/pkgconfig/xcb-proto.pc
 file path=usr/share/xcb/bigreq.xml
 file path=usr/share/xcb/composite.xml
 file path=usr/share/xcb/damage.xml
+file path=usr/share/xcb/dbe.xml
 file path=usr/share/xcb/dpms.xml
 file path=usr/share/xcb/dri2.xml
 file path=usr/share/xcb/dri3.xml
@@ -2503,7 +2486,6 @@ file path=usr/share/xcb/shm.xml
 file path=usr/share/xcb/sync.xml
 file path=usr/share/xcb/xc_misc.xml
 file path=usr/share/xcb/xcb.xsd
-file path=usr/share/xcb/xevie.xml
 file path=usr/share/xcb/xf86dri.xml
 file path=usr/share/xcb/xf86vidmode.xml
 file path=usr/share/xcb/xfixes.xml

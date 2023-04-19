@@ -43,6 +43,8 @@ COMPONENT_BAID=		87891
 # Disable the unit tests since they are broken (crashes, assertions).
 $(SKIP_TEST_AT_TOP_LEVEL)
 
+PYTHON_VERSION = 3.11
+
 include $(WS_MAKE_RULES)/gnome-component.mk
 
 # g-ir-scanner
@@ -73,3 +75,4 @@ REQUIRED_PACKAGES += library/python/pygobject-3
 REQUIRED_PACKAGES += runtime/lua
 REQUIRED_PACKAGES += runtime/python-35
 REQUIRED_PACKAGES += runtime/python-37
+REQUIRED_PACKAGES += runtime/python-311

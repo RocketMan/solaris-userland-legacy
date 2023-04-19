@@ -1,0 +1,95 @@
+Set the TLS protocol options and cipher suite to Oracle requirements.
+Note that the sendmail configuration files may be used to override
+these settings.
+
+Patch was developed in-house; it is Solaris specific and will not be
+contributed upstream.
+
+diff -r 35f2e411cf8b sendmail/conf.c
+--- a/sendmail/conf.c	Wed Mar 08 02:10:17 2023 -0800
++++ b/sendmail/conf.c	Wed Mar 08 03:00:00 2023 -0800
+@@ -382,7 +382,11 @@
+ # if _FFR_TLSFB2CLEAR
+ 	TLSFallbacktoClear = true;
+ # endif
+-	Srv_SSL_Options = SSL_OP_ALL;
++	Srv_SSL_Options = SSL_OP_ALL
++	    | SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1	/* Oracle. */
++	    | SSL_OP_NO_SSLv2 | SSL_OP_NO_SSLv3		/* Oracle. */
++	    ;
++
+ 	Clt_SSL_Options = SSL_OP_ALL
+ # ifdef SSL_OP_NO_SSLv2
+ 		| SSL_OP_NO_SSLv2
+@@ -390,6 +394,8 @@
+ # ifdef SSL_OP_NO_TICKET
+ 		| SSL_OP_NO_TICKET
+ # endif
++		| SSL_OP_NO_TLSv1 | SSL_OP_NO_TLSv1_1	/* Oracle. */
++		| SSL_OP_NO_SSLv3			/* Oracle. */
+ 		;
+ # ifdef SSL_OP_TLSEXT_PADDING
+ 	/* SSL_OP_TLSEXT_PADDING breaks compatibility with some sites */
+diff -r 35f2e411cf8b sendmail/readcf.c
+--- a/sendmail/readcf.c	Wed Mar 08 02:10:17 2023 -0800
++++ b/sendmail/readcf.c	Wed Mar 08 03:00:00 2023 -0800
+@@ -2379,6 +2379,17 @@
+ 	size_t len, i;
+ 	int ret, rv;
+ 
++	char *defaultCipherList =
++	    "ECDHE-ECDSA-AES256-GCM-SHA384"
++	    ":ECDHE-RSA-AES128-GCM-SHA256"
++	    ":ECDHE-ECDSA-AES128-GCM-SHA256"
++	    ":TLSv1.2:!aNULL:!eNULL"
++	    ":DHE-RSA-AES256-SHA"
++	    ":DHE-DSS-AES256-SHA"
++	    ":DHE-RSA-AES128-SHA"
++	    ":DHE-DSS-AES128-SHA";
++	char *cipherList = defaultCipherList;
++
+ # define who (srv ? "server" : "client")
+ # define NAME_C_S macvalue(macid(srv ? "{client_name}" : "{server_name}"), e)
+ # define ADDR_C_S macvalue(macid(srv ? "{client_addr}" : "{server_addr}"), e)
+@@ -2523,18 +2534,7 @@
+ 		}
+ 		else if (SM_STRCASEEQ(opt, "cipherlist"))
+ 		{
+-			if (SSL_set_cipher_list(ssl, val) <= 0)
+-			{
+-				if (LogLevel > 7)
+-				{
+-					sm_syslog(LOG_WARNING, NOQID,
+-						  "STARTTLS=%s, error: SSL_set_cipher_list(%s) failed",
+-						  who, val);
+-
+-					tlslogerr(LOG_WARNING, 9, who);
+-				}
+-				goto fail;
+-			}
++			cipherList = val;
+ 		}
+ # if MTA_HAVE_TLSv1_3
+ 		else if (SM_STRCASEEQ(opt, "ciphersuites"))
+@@ -2606,6 +2606,21 @@
+ 
+ 	} while (optionlist[i] != '\0' && i < len);
+ 
++	if (SSL_set_cipher_list(ssl, cipherList) <= 0)
++	{
++		if (LogLevel > 7)
++		{
++			sm_syslog(LOG_WARNING, NOQID,
++				  "STARTTLS=%s, error: SSL_set_cipher_list(%s) failed",
++				  who, cipherList);
++
++			if (LogLevel > 9)
++				tlslogerr(LOG_WARNING, 9, who);
++		}
++		goto fail;
++	}
++
++
+ 	/* need cert and key before we can use the options */
+ 	/* does not implement the "," hack for 2nd cert/key pair */
+ 	if (keyfile != NULL && certfile != NULL)

@@ -1,5 +1,5 @@
 #
-# Copyright (c) 2008, 2015, Oracle and/or its affiliates. All rights reserved.
+# Copyright (c) 2008, 2023, Oracle and/or its affiliates.
 #
 # Permission is hereby granted, free of charge, to any person obtaining a
 # copy of this software and associated documentation files (the "Software"),
@@ -21,7 +21,33 @@
 # DEALINGS IN THE SOFTWARE.
 #
 
-SUNW_1.1 {
+
+# [Note that the usr/src path below is found in the ON gate, not Userland]
+#
+# MAPFILE HEADER START
+#
+# WARNING:  STOP NOW.  DO NOT MODIFY THIS FILE.
+# Object versioning must comply with the rules detailed in
+#
+#	usr/src/lib/README.mapfiles
+#
+# You should not be making modifications here until you've read the most current
+# copy of that file. If you need help, contact a gatekeeper for guidance.
+#
+# MAPFILE HEADER END
+#
+
+#
+# README README README README README README: how to update this file
+#   1) All new public symbols go in SUNWpublic (not yet added)
+#   2) Any private symbols that need to be available to other objects
+#      go in SUNWprivate
+#   3) Do not remove or alter any other existing versions
+#
+
+$mapfile_version 2
+
+SYMBOL_VERSION SUNW_1.1 {
     global:
 
 # AllPlanes.c
@@ -32,7 +58,7 @@ SUNW_1.1 {
 	XAllPlanesDrawRectangles;
 	XAllPlanesDrawSegments;
 	XAllPlanesFillRectangles;
-	
+
 # DPMS.c
 	DPMSQueryExtension;
 	DPMSGetVersion;
@@ -44,20 +70,11 @@ SUNW_1.1 {
 	DPMSForceLevel;
 	DPMSInfo;
 
-# FBPM.c
-	FBPMQueryExtension;
-	FBPMGetVersion;
-	FBPMCapable;
-	FBPMDisable;
-	FBPMEnable;
-	FBPMForceLevel;
-	FBPMInfo;	
-
 # MITMisc.c
 	XMITMiscQueryExtension;
 	XMITMiscSetBugMode;
 	XMITMiscGetBugMode;
-	
+
 # TransOvl.c
 	XSolarisOvlQueryExtension;
 	XSolarisOvlQueryVersion;
@@ -93,7 +110,7 @@ SUNW_1.1 {
 
 # XGrabWin.c
 	XGetRetainedPath;
-	XGrabColormap;	
+	XGrabColormap;
 	XGrabRetainedWindow;
 	XGrabWindow;
 	XUnGrabColormap;
@@ -122,7 +139,7 @@ SUNW_1.1 {
 # XPanoramiX.c
 	XPanoramiXQueryExtension;
 	XPanoramiXQueryVersion;
-	XPanoramiXAllocInfo;	
+	XPanoramiXAllocInfo;
 	XPanoramiXGetScreenCount;
 	XPanoramiXGetScreenSize;
 	XPanoramiXGetState;
@@ -227,42 +244,35 @@ SUNW_1.1 {
 	XdbeFreeVisualInfo;
 	XdbeGetBackBufferAttributes;
 
-# Xevie extension moved to libXevie:
-	XevieQueryVersion = FUNCTION FILTER libXevie.so.1;
-	XevieStart = FUNCTION FILTER libXevie.so.1;
-	XevieSelectInput = FUNCTION FILTER libXevie.so.1;
-	XevieSendEvent = FUNCTION FILTER libXevie.so.1;	
-	XevieEnd = FUNCTION FILTER libXevie.so.1;
-
-# XScreenSaver extesion moved to libXss:
-	XScreenSaverQueryInfo = FUNCTION FILTER libXss.so.1;
-	XScreenSaverQueryVersion = FUNCTION FILTER libXss.so.1;
-	XScreenSaverQueryExtension = FUNCTION FILTER libXss.so.1;
-	XScreenSaverGetRegistered = FUNCTION FILTER libXss.so.1;
-	XScreenSaverSetAttributes = FUNCTION FILTER libXss.so.1;
-	XScreenSaverSelectInput = FUNCTION FILTER libXss.so.1;
-	XScreenSaverRegister = FUNCTION FILTER libXss.so.1;
-	XScreenSaverUnsetAttributes = FUNCTION FILTER libXss.so.1;
-	XScreenSaverUnregister = FUNCTION FILTER libXss.so.1;
-	XScreenSaverAllocInfo = FUNCTION FILTER libXss.so.1;
+# XScreenSaver extension moved to libXss:
+	XScreenSaverQueryInfo	    { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverQueryVersion    { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverQueryExtension  { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverGetRegistered   { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverSetAttributes   { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverSelectInput     { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverRegister 	    { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverUnsetAttributes { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverUnregister 	    { TYPE = FUNCTION; FILTER = libXss.so.1 };
+	XScreenSaverAllocInfo 	    { TYPE = FUNCTION; FILTER = libXss.so.1 };
 
     local:
 	*;
 };
 
-SUNWprivate {
+SYMBOL_VERSION SUNWprivate {
     global:
 
 # SolarisIA extension moved to libX11:
-	XSolarisIAQueryExtension = FUNCTION FILTER libX11.so.4;
-	XSolarisIAQueryVersion = FUNCTION FILTER libX11.so.4;
-	XSolarisIASetProcessInfo = FUNCTION FILTER libX11.so.4;
-	XSolarisIAGetProcessInfo = FUNCTION FILTER libX11.so.4;
+	XSolarisIAQueryExtension    { TYPE = FUNCTION; FILTER = libX11.so.4 };
+	XSolarisIAQueryVersion 	    { TYPE = FUNCTION; FILTER = libX11.so.4 };
+	XSolarisIASetProcessInfo    { TYPE = FUNCTION; FILTER = libX11.so.4 };
+	XSolarisIAGetProcessInfo    { TYPE = FUNCTION; FILTER = libX11.so.4 };
 
 # XPanoramix.c
 	XGetXineramaInfo;
 	XineramaGetInfo;
-	XineramaGetState;	
+	XineramaGetState;
 	XineramaGetCenterHint;
 
 # extutil.c
@@ -274,4 +284,3 @@ SUNWprivate {
 	XSetExtensionErrorHandler;
 	XMissingExtension;
 };
-
