@@ -139,7 +139,7 @@ SUNWcompiz-fusion-extra@5.12-11.4.0.0.1.9.0
 SUNWcompiz-fusion-main@5.12-11.4.0.0.1.9.0
 SUNWcompizconfig-gconf@5.12-11.4.0.0.1.9.0
 SUNWcompizconfig-python@5.12-11.4.0.0.1.9.0
-SUNWconflict@0.2004.9.1-0.133 shell/conflict@0.2004.9.1-0.133
+SUNWconflict@0.2004.9.1-AUTO_FMRI
 SUNWconman@0.2.4.1-11.4.0.0.1.9.0
 SUNWconsolekit@0.5.11-0.175.0.0.0.0.0 library/xdg/consolekit@0.4.1-0.133
 SUNWconsolekit-pam@0.5.11-0.175.0.0.0.0.0 library/security/pam/module/pam-consolekit@0.4.1-0.133
@@ -565,7 +565,7 @@ SUNWilmbase@1.0.1-11.4.13.0.1.2.0
 SUNWimagick@6.3.4.2-0.133 image/imagemagick@6.3.4.2-0.133
 SUNWiperf@2.0.5-11.4.0.0.1.9.0
 SUNWircii@0.2014.11.22-11.4.0.0.1.9.0
-SUNWirssi@0.5.11-0.175.0.0.0.0.0 network/chat/irssi@0.5.11-0.133
+SUNWirssi@0.5.11-AUTO_FMRI
 SUNWiso-codes@0.5.11-0.175.0.0.0.0.0 data/iso-codes@0.5.11-0.133
 SUNWjdhcm@5.12-11.4.0.0.1.9.0
 SUNWjdom@1.1-11.4.0.0.1.9.0
@@ -1099,9 +1099,8 @@ developer/java/jdepend@2.9-11.4.0.0.1.9.0
 developer/java/jpackage-utils@1.7.5-11.4.0.0.1.9.0
 developer/lexer/jflex@1.4.1-11.4.0.0.1.9.0
 developer/opensolaris/X@11.4-11.4.0.0.1.4.0 developer/opensolaris/userland@11.4-11.4.0.1.0.18.0 incorporate=consolidation/X/X-incorporation
-developer/oracle/odpi@2.3.0-AUTO_FMRI
-developer/oracle/odpi-230@2.3.0-AUTO_FMRI
-developer/oracle/odpi-312@3.1.2-AUTO_FMRI
+developer/oracle/odpi@2.3.0-AUTO_FMRI developer/oracle/odpi-230
+developer/oracle/odpi-230@2.3.0-AUTO_FMRI developer/oracle/odpi-312
 developer/parser/antlr-2@2.7.7-11.4.30.0.0.88.0
 developer/parser/byaccj@1.14-11.4.0.0.1.9.0
 developer/parser/java_cup@0.10-11.4.0.0.1.9.0
@@ -1317,8 +1316,6 @@ legacy/library/python/cov-core-34@1.15.0-11.4.33.0.1.94.0
 legacy/library/python/cov-core-35@1.15.0-11.4.33.0.1.94.0
 legacy/library/python/cssutils-34@1.0.1-11.4.33.0.1.94.0
 legacy/library/python/cssutils-35@1.0.1-11.4.33.0.1.94.0
-legacy/library/python/cx_oracle-34@7.1.1-11.4.27.0.1.82.0
-legacy/library/python/cx_oracle-35@7.1.1-11.4.30.0.0.88.0
 legacy/library/python/d2to1@0.2.12-11.4.27.0.1.82.0
 legacy/library/python/d2to1-27@0.2.12-11.4.27.0.1.82.0
 legacy/library/python/d2to1-34@0.2.12-11.4.27.0.1.82.0
@@ -1992,13 +1989,6 @@ library/python/cssutils-26@0.9.6-11.4.0.0.1.9.0
 library/python/cssutils-27@1.0.1-11.4.33.0.1.94.0
 library/python/cssutils-34@1.0.1-11.4.27.0.1.82.0
 library/python/cssutils-35@1.0.1-11.4.30.0.0.88.0
-library/python/cx_oracle@7.1.1-AUTO_FMRI
-library/python/cx_oracle-27@6.3-11.4.21.0.1.69.0
-library/python/cx_oracle-34@7.1.1-11.4.27.0.1.82.0
-library/python/cx_oracle-35@7.1.1-11.4.30.0.0.88.0
-library/python/cx_oracle-37@7.1.1-AUTO_FMRI
-library/python/cx_oracle-39@7.1.1-AUTO_FMRI
-library/python/cx_oracle-311@7.1.1-AUTO_FMRI
 library/python/d2to1@0.2.12-11.4.27.0.1.82.0
 library/python/d2to1-26@0.2.10-11.4.0.0.1.9.0
 library/python/d2to1-27@0.2.12-11.4.27.0.1.82.0
@@ -2587,6 +2577,7 @@ mail/thunderbird/locale/zh_tw@5.0-0.175.0.0.0.0.0
 media/dvd+rw-tools@7.1-11.4.0.0.1.9.0
 media/mtx@1.3.12-11.4.0.0.1.9.0
 network/chat/ircii@0.2014.11.22-11.4.0.0.1.9.0
+network/chat/irssi@1.4.2-AUTO_FMRI
 network/dhcp/dhcpmgr/locale/cs@5.12-11.4.0.0.1.9.0
 network/dhcp/dhcpmgr/locale/de@5.12-11.4.0.0.1.9.0
 network/dhcp/dhcpmgr/locale/es@5.12-11.4.0.0.1.9.0
@@ -2659,6 +2650,7 @@ security/openscap-python-26@0.8.1-11.4.0.0.1.9.0
 service/network/samba/samba36@3.6.25-11.4.0.0.1.9.0
 service/postrun@1.0-11.4.0.0.1.9.0
 service/storage/zfs-auto-snapshot@0.5.11-0.175.0.0.0.0.0 desktop/time-slider@0.2.96-0.142
+shell/conflict@0.2022.10.2-AUTO_FMRI
 system/desktop/ldtp@2.1.1-11.4.33.0.1.94.0
 system/desktop/ldtp-26@2.1.1-11.4.0.0.1.9.0
 system/desktop/ldtp-27@2.1.1-11.4.33.0.1.94.0
