@@ -49,7 +49,6 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file path=usr/bin/rust-gdb
 file path=usr/bin/rust-gdbgui
 file path=usr/bin/rustc
-file path=usr/bin/rustdoc
 file path=usr/lib/rustlib/components
 file path=usr/lib/rustlib/etc/gdb_load_rust_pretty_printers.py
 file path=usr/lib/rustlib/etc/gdb_lookup.py
@@ -60,7 +59,6 @@ file path=usr/lib/rustlib/etc/lldb_providers.py
 file path=usr/lib/rustlib/etc/rust_types.py
 file path=usr/lib/rustlib/rust-installer-version
 file path=usr/libexec/cargo-credential-1password
-file path=usr/libexec/rust-analyzer-proc-macro-srv
 file path=usr/share/doc/rust/COPYRIGHT
 file path=usr/share/doc/rust/LICENSE-APACHE
 file path=usr/share/doc/rust/LICENSE-APACHE.old

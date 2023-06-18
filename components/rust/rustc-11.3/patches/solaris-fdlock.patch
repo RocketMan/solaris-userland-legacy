@@ -62,10 +62,10 @@ index 3856bb64fb310..018f862fae37c 100644
 +    {
 +        let mut build_lock;
 +        let _build_lock_guard;
-         build_lock = fd_lock::RwLock::new(t!(std::fs::File::create(config.out.join("lock"))));
+         let path = config.out.join("lock");
+         build_lock = fd_lock::RwLock::new(t!(std::fs::File::create(&path)));
          _build_lock_guard = match build_lock.try_write() {
-             Ok(lock) => lock,
-@@ -25,9 +28,9 @@
+@@ -30,9 +33,9 @@
                  t!(build_lock.write())
              }
          };
@@ -77,3 +77,12 @@ index 3856bb64fb310..018f862fae37c 100644
  
      // check_version warnings are not printed during setup
      let changelog_suggestion =
+@@ -125,7 +128,7 @@
+     })
+ }
+ 
+-#[cfg(not(target_os = "linux"))]
++#[cfg(all(not(target_os = "linux"), not(target_os = "solaris")))]
+ fn get_lock_owner(_: &std::path::Path) -> Option<u64> {
+     // FIXME: Implement on other OS's
+     None
