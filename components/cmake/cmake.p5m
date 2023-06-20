@@ -3142,29 +3142,6 @@ file path=usr/share/emacs/site-lisp/cmake-mode.el
 # separately using configuration option --sphinx-man and are checked into
 # files/{man1,man7}/
 #
-file path=usr/share/man/man1/ccmake.1
-file path=usr/share/man/man1/cmake.1
-file path=usr/share/man/man1/cpack.1
-file path=usr/share/man/man1/ctest.1
-file path=usr/share/man/man7/cmake-buildsystem.7
-file path=usr/share/man/man7/cmake-commands.7
-file path=usr/share/man/man7/cmake-compile-features.7
-file path=usr/share/man/man7/cmake-developer.7
-file path=usr/share/man/man7/cmake-env-variables.7
-file path=usr/share/man/man7/cmake-file-api.7
-file path=usr/share/man/man7/cmake-generator-expressions.7
-file path=usr/share/man/man7/cmake-generators.7
-file path=usr/share/man/man7/cmake-language.7
-file path=usr/share/man/man7/cmake-modules.7
-file path=usr/share/man/man7/cmake-packages.7
-file path=usr/share/man/man7/cmake-policies.7
-file path=usr/share/man/man7/cmake-presets.7
-file path=usr/share/man/man7/cmake-properties.7
-file path=usr/share/man/man7/cmake-qt.7
-file path=usr/share/man/man7/cmake-server.7
-file path=usr/share/man/man7/cmake-toolchains.7
-file path=usr/share/man/man7/cmake-variables.7
-file path=usr/share/man/man7/cpack-generators.7
 file path=usr/share/vim/vimfiles/indent/cmake.vim
 file path=usr/share/vim/vimfiles/syntax/cmake.vim
 #

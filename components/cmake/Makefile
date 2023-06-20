@@ -82,7 +82,7 @@ CONFIGURE_ENV +=	LDFLAGS="$(LDFLAGS)"
 CONFIGURE_OPTIONS =
 CONFIGURE_OPTIONS +=	--prefix=$(CONFIGURE_PREFIX)
 CONFIGURE_OPTIONS +=	--mandir=/share/man
-CONFIGURE_OPTIONS +=	--sphinx-man
+#CONFIGURE_OPTIONS +=	--sphinx-man
 CONFIGURE_OPTIONS +=	--system-curl
 CONFIGURE_OPTIONS +=	--system-expat
 CONFIGURE_OPTIONS +=	--system-zlib
