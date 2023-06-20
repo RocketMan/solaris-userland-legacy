@@ -86,7 +86,6 @@ file path=usr/gnu/bin/size
 file path=usr/gnu/bin/strings
 file path=usr/gnu/include/ansidecl.h
 file path=usr/gnu/include/bfd.h
-file path=usr/gnu/include/bfd_stdint.h
 file path=usr/gnu/include/bfdlink.h
 file path=usr/gnu/include/diagnostics.h
 file path=usr/gnu/include/dis-asm.h
