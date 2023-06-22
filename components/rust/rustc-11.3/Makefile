@@ -28,12 +28,13 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.69.0
+COMPONENT_VERSION =	1.70.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:e533c903820b0c2ba10491b70105149d2243348f3b5e26bd7b6bdd022c7dbe75
+    sha256:bb8e9c564566b2d3228d95de9063a9254182446a161353f1d843bfbaf5c34639
+
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
 
@@ -68,8 +69,8 @@ CONFIGURE_OPTIONS +=	--disable-llvm-static-stdcpp
 CONFIGURE_OPTIONS +=	--disable-docs
 CONFIGURE_OPTIONS +=	--disable-compiler-docs
 CONFIGURE_OPTIONS +=	--disable-cargo-native-static
-#CONFIGURE_OPTIONS +=	--enable-llvm-link-shared
-#CONFIGURE_OPTIONS +=	--llvm-root=$(CONFIGURE_PREFIX)
+CONFIGURE_OPTIONS +=	--enable-llvm-link-shared
+CONFIGURE_OPTIONS +=	--llvm-root=$(CONFIGURE_PREFIX)
 
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \

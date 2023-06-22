@@ -2,8 +2,8 @@ Build and install also Cargo.
 
 Part of Solaris distribution configuration.
 
---- a/config.toml.example
-+++ b/config.toml.example
+--- a/config.example.toml
++++ b/config.example.toml
 @@ -287,6 +287,7 @@
  # default. The `tools` option (immediately below) specifies which tools should
  # be built if `extended = true`.
