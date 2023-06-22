@@ -33,3 +33,4 @@
 # delete everything not belonging to this package
 <transform file link hardlink pkg.type=(?!build-llvm) -> drop>
 <transform file link hardlink -> delete pkg.type .*>
+<transform file path=usr/lib/python3.9/.* -> drop>

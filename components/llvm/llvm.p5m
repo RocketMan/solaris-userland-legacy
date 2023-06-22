@@ -42,6 +42,7 @@ set name=org.opensolaris.arc-caseid value=PSARC/2013/188 value=PSARC/2018/097 \
     value=PSARC/2021/058
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file path=usr/bin/FileCheck
+file path=usr/bin/UnicodeNameMappingGenerator
 file path=usr/bin/bugpoint
 file path=usr/bin/count
 file path=usr/bin/dsymutil
@@ -63,10 +64,13 @@ file path=usr/bin/llvm-cvtres
 file path=usr/bin/llvm-cxxdump
 file path=usr/bin/llvm-cxxfilt
 file path=usr/bin/llvm-cxxmap
+file path=usr/bin/llvm-debuginfod
+file path=usr/bin/llvm-debuginfod-find
 file path=usr/bin/llvm-diff
 file path=usr/bin/llvm-dis
 link path=usr/bin/llvm-dlltool target=llvm-ar
 file path=usr/bin/llvm-dwarfdump
+file path=usr/bin/llvm-dwarfutil
 file path=usr/bin/llvm-dwp
 file path=usr/bin/llvm-exegesis
 file path=usr/bin/llvm-extract
@@ -99,6 +103,7 @@ file path=usr/bin/llvm-rc
 link path=usr/bin/llvm-readelf target=llvm-readobj
 file path=usr/bin/llvm-readobj
 file path=usr/bin/llvm-reduce
+file path=usr/bin/llvm-remark-size-diff
 file path=usr/bin/llvm-rtdyld
 file path=usr/bin/llvm-sim
 file path=usr/bin/llvm-size
@@ -109,6 +114,7 @@ link path=usr/bin/llvm-strip target=llvm-objcopy
 file path=usr/bin/llvm-symbolizer
 file path=usr/bin/llvm-tapi-diff
 file path=usr/bin/llvm-tblgen
+file path=usr/bin/llvm-tli-checker
 file path=usr/bin/llvm-undname
 link path=usr/bin/llvm-windres target=llvm-rc
 file path=usr/bin/llvm-xray
