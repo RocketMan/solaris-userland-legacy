@@ -42,10 +42,10 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 # removed with bugid 24288657.
 # gmake sample-config tries to pull this in.
 #file path=etc/dbus-1/system.d/pulseaudio-system.conf
-file path=etc/pulse/client.conf
-file path=etc/pulse/daemon.conf
-file path=etc/pulse/default.pa
-file path=etc/pulse/system.pa
+file path=etc/pulse/client.conf preserve=renamenew
+file path=etc/pulse/daemon.conf preserve=renamenew
+file path=etc/pulse/default.pa preserve=renamenew
+file path=etc/pulse/system.pa preserve=renamenew
 # JM 2023-01-18 totem is silent on 11.3 when pulseaudio server is running
 #file path=etc/xdg/autostart/pulseaudio.desktop
 file path=usr/bin/pa-info

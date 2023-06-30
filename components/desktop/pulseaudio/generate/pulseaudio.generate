@@ -50,3 +50,4 @@
 <transform path=usr/lib/\$\(MACH64\)/pulse-\$\(COMPONENT_VERSION\)/modules/module-solaris.so -> drop>
 
 <transform path=etc/xdg/autostart/pulseaudio.desktop -> drop>
+<transform path=etc/pulse/* -> default preserve renamenew>
