@@ -1,0 +1,34 @@
+Avoid dependency on system/library/c++-runtime (Studio)
+It's unknow now why it's being added.
+
+For the 11.3 linker, avoid inclusion of .SUNW_ldynsym sections,
+as llvm cannot read the linked SHT_SYMTAB_SHNDX.
+
+--- firefox-91.0.1/toolkit/library/moz.build.~1~	2021-09-02 15:32:06.152235516 +0000
++++ firefox-91.0.1/toolkit/library/moz.build	2021-09-02 15:32:49.229619527 +0000
+@@ -89,6 +89,9 @@
+     if CONFIG["MOZ_NEEDS_LIBATOMIC"]:
+         OS_LIBS += ["atomic"]
+ 
++    if CONFIG['OS_ARCH'] == 'SunOS':
++        LDFLAGS += ["-Wl,-znoldynsym"]
++
+     # TouchBar-related classes are only available in the 10.12.2 SDK and later.
+     # We need to weak link these classes until we've upgraded our SDK to at
+     # least 10.12.2.
+@@ -330,6 +333,15 @@
+ if CONFIG["MOZ_ENABLE_LIBPROXY"]:
+     OS_LIBS += CONFIG["MOZ_LIBPROXY_LIBS"]
+ 
++if CONFIG['OS_ARCH'] == 'SunOS':
++    OS_LIBS += [
++        'elf',
++    ]
++    if CONFIG['CC_TYPE'] in ('clang', 'gcc'):
++        OS_LIBS += [
++            'demangle',
++        ]
++
+ if CONFIG["OS_ARCH"] == "FreeBSD":
+     OS_LIBS += [
+         "util",
