@@ -7,10 +7,13 @@
 * If you are using GNOME 2 and want Firefox to detect your gtk3 theme,
 specify in the environment:
 
-	XDG_CURRENT_DESKTOP=MATE
+````
+	GTK_CSD=1 XDG_CURRENT_DESKTOP=MATE
+````
 
-(It is no longer necessary to specify the GTK_CSD and GTK_THEME environment
-variables.)
+  (It is no longer necessary to specify the GTK_THEME environment variable.)
+
+* Environment variables are not currently available in about:support.
 
 * EGL/glx probing seems to use a later version of EGL than we have, so
   falls back to libpci (part of pciutils) to detect the GPU.  This requires
