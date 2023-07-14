@@ -26,8 +26,8 @@
 <include generate/common.transform>
 
 # inistall some files into different location
-<transform file path=etc/bash_completion.d/cargo -> set action.hash %(path)>
-<transform file path=etc/bash_completion.d/cargo -> edit path bash_completion.d/cargo bash/bash_completion.d/cargo.bashcomp.sh>
+<transform file path=usr/src/etc/bash_completion.d/cargo -> set action.hash %(path)>
+<transform file path=usr/src/etc/bash_completion.d/cargo -> edit path usr/src/etc/bash_completion.d/cargo etc/bash/bash_completion.d/cargo.bashcomp.sh>
 <transform file path=usr/share/zsh/site-functions/_cargo -> set action.hash %(path)>
 <transform file path=usr/share/zsh/site-functions/_cargo -> edit path site-functions vendor-functions/Completion>
 

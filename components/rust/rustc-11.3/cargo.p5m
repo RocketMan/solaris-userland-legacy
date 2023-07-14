@@ -31,7 +31,7 @@ set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2018/120
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 #
-file etc/bash_completion.d/cargo \
+file usr/src/etc/bash_completion.d/cargo \
     path=etc/bash/bash_completion.d/cargo.bashcomp.sh
 file path=usr/bin/cargo
 file path=usr/share/man/man1/cargo-add.1

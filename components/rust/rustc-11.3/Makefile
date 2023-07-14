@@ -28,12 +28,12 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.70.0
+COMPONENT_VERSION =	1.71.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:bb8e9c564566b2d3228d95de9063a9254182446a161353f1d843bfbaf5c34639
+    sha256:5814699031aafdcc2e2f71fc9b389678cd7042350d1583da061463d8e88681c7
 
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
@@ -71,6 +71,8 @@ CONFIGURE_OPTIONS +=	--disable-compiler-docs
 CONFIGURE_OPTIONS +=	--disable-cargo-native-static
 CONFIGURE_OPTIONS +=	--enable-llvm-link-shared
 CONFIGURE_OPTIONS +=	--llvm-root=$(CONFIGURE_PREFIX)
+# from 1.71.0, the following is needed to use the system llvm
+CONFIGURE_OPTIONS +=	--build=x86_64-sun-solaris
 
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
