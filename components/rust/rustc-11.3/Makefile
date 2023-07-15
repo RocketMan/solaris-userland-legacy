@@ -58,7 +58,7 @@ PATH = $(COMPONENT_DIR)/epoll:/usr/gnu/bin:/usr/bin
 # LD_B_DIRECT breaks the build.
 LD_B_DIRECT =
 
-$(MANIFEST_BASE)-%.mogrified: RUST_PLATFORM = $(MACH64:amd64=x86_64)-sun-solaris
+RUST_PLATFORM = $(MACH64:amd64=x86_64)-sun-solaris
 
 # The configure Rust uses isn't autoconf; it's hand-rolled, and doesn't
 # recognize all the autoconf options, so we start from scratch.
@@ -72,7 +72,7 @@ CONFIGURE_OPTIONS +=	--disable-cargo-native-static
 CONFIGURE_OPTIONS +=	--enable-llvm-link-shared
 CONFIGURE_OPTIONS +=	--llvm-root=$(CONFIGURE_PREFIX)
 # from 1.71.0, the following is needed to use the system llvm
-CONFIGURE_OPTIONS +=	--build=x86_64-sun-solaris
+CONFIGURE_OPTIONS +=	--build=$(RUST_PLATFORM)
 
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
