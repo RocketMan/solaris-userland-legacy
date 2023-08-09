@@ -28,18 +28,18 @@ BUILD_BITS =            32_and_64
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		glib
-COMPONENT_VERSION=	2.70.5
+COMPONENT_VERSION=	2.76.4
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/GLib/
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:f70bf76ebcc84e0705722f038be8e2f9a58d17e1a700810c635fcc18b8974b7e
+    sha256:5a5a191c96836e166a7771f7ea6ca2b0069c603c7da3cba1cd38d1694a395dda
 COMPONENT_BUGDB=	gnome/glib
 COMPONENT_ANITYA_ID=	10024
 
-COMPONENT_BAID=		118899
+COMPONENT_BAID=		147282
 BUILD_STYLE=		meson
 
 # No need to build for older versions.
-PYTHON_VERSION= 3.11
+PYTHON_VERSION= 3.9
 
 # sparc specific patch to workaround the problem with Fujitsu running
 # Xorg AND VNC/XDMCP simultaneously
@@ -68,9 +68,11 @@ ENV := ulimit -n 16384; $(ENV)
 CONFIGURE_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
+COMPONENT_TEST_ENV += PATH="$(GNUBIN):$(PATH)"
 
 CONFIGURE_OPTIONS += -Druntime_libdir=$(USRLIBDIR)
 CONFIGURE_OPTIONS += -Dcharsetalias_dir=$(USRLIBDIR)
+CONFIGURE_OPTIONS += -Druntime_dir=$(VARDIR)/run
 CONFIGURE_OPTIONS += -Dselinux=disabled
 CONFIGURE_OPTIONS += -Dxattr=false
 CONFIGURE_OPTIONS += -Dlibmount=disabled
@@ -113,6 +115,8 @@ COMPONENT_POST_INSTALL_ACTION.64 += \
 # get rid of the timestamps from the test results
 COMPONENT_TEST_MASTER = \
 	$(COMPONENT_TEST_RESULTS_DIR)/results-$(MACH)-$(BITS).master
+COMPONENT_TEST_TRANSFORMS += \
+        '-e "s/[0-9]* subtests passed//"'
 
 REQUIRED_PACKAGES += $(PERL_PKG)
 REQUIRED_PACKAGES += data/docbook/docbook-dtds
@@ -125,9 +129,10 @@ REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += gnome/preferences/control-center
 REQUIRED_PACKAGES += library/file-monitor/gamin
 REQUIRED_PACKAGES += library/libffi
-REQUIRED_PACKAGES += library/pcre
+REQUIRED_PACKAGES += library/pcre2
 REQUIRED_PACKAGES += library/zlib
-REQUIRED_PACKAGES += runtime/python-311
+REQUIRED_PACKAGES += runtime/python-39
 REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/library/dbus
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
+REQUIRED_PACKAGES += system/library/math

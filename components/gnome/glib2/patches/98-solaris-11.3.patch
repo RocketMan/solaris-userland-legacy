@@ -1,14 +1,24 @@
---- a/meson.build	2020-01-21 18:58:00.975738487 +0000
-+++ b/meson.build	2020-01-21 18:58:11.903066835 +0000
-@@ -5,7 +5,6 @@
+--- glib-2.76.4/meson.build.~1~	2023-07-06 16:39:47.000000000 +0000
++++ glib-2.76.4/meson.build	2023-08-09 08:46:26.935638058 +0000
+@@ -5,14 +5,15 @@
    default_options : [
      'buildtype=debugoptimized',
-     'warning_level=1',
+     'warning_level=3',
 -    'c_std=gnu99'
++    'c_std=gnu11',
++    'cpp_std=c++98'
    ]
  )
  
-@@ -216,7 +216,8 @@
+ cc = meson.get_compiler('c')
+ c_standards = {}
+ 
+-foreach std : ['90', '99', '11', '17']
++foreach std : ['99', '11', '17']
+   arg = (cc.get_id() == 'msvc' ? '/std:' : '-std=') + 'c' + std
+   if cc.has_argument(arg)
+     c_standards += { std: arg }
+@@ -298,6 +297,7 @@
  #define G_WITH_CYGWIN'''
  else
    glib_os = '#define G_OS_UNIX'
@@ -16,7 +26,6 @@
  endif
  glibconfig_conf.set('glib_os', glib_os)
  
- # We need to know the CRT being used to determine what .lib files we need on
 --- glib-2.67.1/gio/glocalfile.c~	2020-12-16 19:24:11.006539800 +0000
 +++ glib-2.67.1/gio/glocalfile.c	2021-12-04 16:30:04.440365645 +0000
 @@ -25,7 +25,7 @@
