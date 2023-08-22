@@ -28,10 +28,10 @@ COMPILER=gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		glib-networking
-COMPONENT_VERSION=	2.66.0
+COMPONENT_VERSION=	2.70.0
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/GLib
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:c5d7be2437fdd196eebfb70c4517b96d3ba7ec13bd496318b8f02dea383e0099
+    sha256:66b408e7afa86c582fe38963db56133869ab4b57d34e48ec56aba621940d6f35
 COMPONENT_BUGDB=	gnome/glib
 COMPONENT_ANITYA_ID=	10024
 

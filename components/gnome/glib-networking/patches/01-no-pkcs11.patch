@@ -1,0 +1,74 @@
+Build for gnutls without PKCS#11
+
+Adapted from https://gitlab.gnome.org/GNOME/glib-networking/-/merge_requests/240
+
+--- glib-networking-2.70.0/meson.build~	2021-09-16 21:20:18.555776600 +0000
++++ glib-networking-2.70.0/meson.build	2023-08-22 18:34:59.279584675 +0000
+@@ -84,6 +84,10 @@
+ 
+ if gnutls_dep.found()
+   backends += ['gnutls']
++
++  if cc.has_function('gnutls_pkcs11_init', prefix: '#include <gnutls/pkcs11.h>', dependencies: gnutls_dep)
++    config_h.set('HAVE_GNUTLS_PKCS11', true)
++  endif
+ endif
+ 
+ # *** Checks for OpenSSL    ***
+--- glib-networking-2.70.0/tls/tests/certificate.c~	2021-09-16 21:20:18.576777000 +0000
++++ glib-networking-2.70.0/tls/tests/certificate.c	2023-08-22 18:38:12.359687447 +0000
+@@ -778,7 +778,7 @@
+ main (int   argc,
+       char *argv[])
+ {
+-#ifdef BACKEND_IS_GNUTLS
++#if defined(BACKEND_IS_GNUTLS) && HAVE_GNUTLS_PKCS11
+   char *module_path;
+ #endif
+ 
+@@ -788,7 +788,7 @@
+   g_setenv ("GIO_USE_TLS", BACKEND, TRUE);
+   g_assert_cmpint (g_ascii_strcasecmp (G_OBJECT_TYPE_NAME (g_tls_backend_get_default ()), "GTlsBackend" BACKEND), ==, 0);
+ 
+-#ifdef BACKEND_IS_GNUTLS
++#if defined(BACKEND_IS_GNUTLS) && HAVE_GNUTLS_PKCS11
+   module_path = g_test_build_filename (G_TEST_BUILT, "mock-pkcs11.so", NULL);
+   g_assert_true (g_file_test (module_path, G_FILE_TEST_EXISTS));
+ 
+@@ -809,12 +809,14 @@
+               setup_certificate, test_create_certificate_with_issuer, teardown_certificate);
+   g_test_add ("/tls/" BACKEND "/certificate/create-with-garbage-input", TestCertificate, NULL,
+               setup_certificate, test_create_certificate_with_garbage_input, teardown_certificate);
++#if HAVE_GNUTLS_PKCS11
+   g_test_add ("/tls/" BACKEND "/certificate/pkcs11", TestCertificate, NULL,
+               setup_certificate, test_create_certificate_pkcs11, teardown_certificate);
+   g_test_add ("/tls/" BACKEND "/certificate/private-key", TestCertificate, NULL,
+               setup_certificate, test_private_key, teardown_certificate);
+   g_test_add ("/tls/" BACKEND "/certificate/private-key-pkcs11", TestCertificate, NULL,
+               setup_certificate, test_private_key_pkcs11, teardown_certificate);
++#endif
+ 
+   g_test_add_func ("/tls/" BACKEND "/certificate/create-chain", test_create_certificate_chain);
+   g_test_add_func ("/tls/" BACKEND "/certificate/create-no-chain", test_create_certificate_no_chain);
+--- glib-networking-2.70.0/tls/tests/connection.c~	2021-09-16 21:20:18.577777100 +0000
++++ glib-networking-2.70.0/tls/tests/connection.c	2023-08-22 18:39:47.389129939 +0000
+@@ -3041,7 +3041,7 @@
+ 
+   g_assert_true (g_ascii_strcasecmp (G_OBJECT_TYPE_NAME (g_tls_backend_get_default ()), "GTlsBackend" BACKEND) == 0);
+ 
+-#ifdef BACKEND_IS_GNUTLS
++#if defined(BACKEND_IS_GNUTLS) && HAVE_GNUTLS_PKCS11
+   module_path = g_test_build_filename (G_TEST_BUILT, "mock-pkcs11.so", NULL);
+   g_assert_true (g_file_test (module_path, G_FILE_TEST_EXISTS));
+ 
+@@ -3099,8 +3099,10 @@
+               setup_connection, test_client_auth_request_fail, teardown_connection);
+   g_test_add ("/tls/" BACKEND "/connection/client-auth-request-none", TestConnection, NULL,
+               setup_connection, test_client_auth_request_none, teardown_connection);
++#if HAVE_GNUTLS_PKCS11
+   g_test_add ("/tls/" BACKEND "/connection/client-auth-pkcs11", TestConnection, NULL,
+               setup_connection, test_client_auth_pkcs11_connection, teardown_connection);
++#endif
+   g_test_add ("/tls/" BACKEND "/connection/no-database", TestConnection, NULL,
+               setup_connection, test_connection_no_database, teardown_connection);
+   g_test_add ("/tls/" BACKEND "/connection/failed", TestConnection, NULL,
