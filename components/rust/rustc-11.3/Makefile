@@ -20,7 +20,10 @@
 #
 
 #
-# Copyright (c) 2018, 2020, Oracle and/or its affiliates.
+# Copyright (c) 2020-2023 Jim Mason <jmason at ibinx dot com>.
+#
+# Adapted from original code Copyright (c) 2018, 2020, Oracle and/or its
+# affiliates. All rights reserved.
 #
 
 BUILD_BITS =	64
@@ -28,12 +31,12 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.71.0
+COMPONENT_VERSION =	1.72.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:5814699031aafdcc2e2f71fc9b389678cd7042350d1583da061463d8e88681c7
+    sha256:d307441f8ee78a7e94f72cb5c81383822f13027f79e67a5551bfd2c2d2db3014
 
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
@@ -77,7 +80,7 @@ CONFIGURE_OPTIONS +=	--build=$(RUST_PLATFORM)
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
        $(GCC_ROOT)/bin/gcc -shared -DDEBUG=0 -o libepoll.so -fPIC -c epoll.c ; \
-       $(GCC_ROOT)/bin/gcc -DDEBUG=0 -c compat.c ; \
+       $(GCC_ROOT)/bin/gcc -DDEBUG=0 -fPIC -c compat.c ; \
        ar rcs libcompat.a compat.o ; \
        echo "\#!/bin/sh" > gcc ; \
        echo "$(GCC_ROOT)/bin/gcc \$$@ -L$(COMPONENT_DIR)/epoll -lepoll -lcompat" >> gcc ; \
