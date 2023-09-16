@@ -40,6 +40,8 @@ COMPONENT_BAID=		100128
 
 BUILD_STYLE=		meson
 
+$(SOLARIS_11_3_ONLY)CFLAGS += -D_XPG6
+
 # Tests need work to compile
 TEST_TARGET = $(SKIP_TEST)
 
