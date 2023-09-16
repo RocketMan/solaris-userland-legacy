@@ -28,13 +28,12 @@ BUILD_BITS =		64
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gtk4
-COMPONENT_VERSION=	4.3.0
-IPS_COMPONENT_VERSION=	4.3.0.1
+COMPONENT_VERSION=	4.4.0
 COMPONENT_PROJECT_URL=	https://www.gtk.org/
 COMPONENT_SRC=		gtk-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:1f6ddacb549c80923e6a0600c2a795b38add73f75dc0d0780cdf8bad59589c19
-COMPONENT_ARCHIVE_URL=	https://download.gnome.org/sources/gtk/4.3/$(COMPONENT_ARCHIVE)
+    sha256:e0a1508f441686c3a20dfec48af533b19a4b2e017c18eaee31dccdb7d292505b
+COMPONENT_ARCHIVE_URL=	https://download.gnome.org/sources/gtk/4.4/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	gnome/gtk+
 COMPONENT_ANITYA_ID=	13942
 
@@ -47,7 +46,9 @@ include $(WS_MAKE_RULES)/test-x11.mk
 $(SOLARIS_11_3_ONLY)CFLAGS += -D_XPG6
 
 COMPONENT_POST_UNPACK_ACTION += (cp $(COMPONENT_DIR)/files/fontify.c \
-					$(SOURCE_DIR)/demos/gtk-demo)
+					$(SOURCE_DIR)/demos/gtk-demo ;\
+				 mkdir bin ; \
+				 ln -fs $(PYTHON) bin/python3)
 
 # g-ir-scanner
 CC_PIC_MODE = $(CC_PIC_DISABLE)
@@ -60,9 +61,9 @@ CONFIGURE_OPTIONS += -Dman-pages=true
 # with: 'ifunc' is not supported on this target.
 CONFIGURE_OPTIONS += -Df16c=disabled
 
-CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
-COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
-COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
+CONFIGURE_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
+COMPONENT_BUILD_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
+COMPONENT_INSTALL_ENV += PATH="$(COMPONENT_DIR)/bin:$(GNUBIN):$(PATH)"
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-$(MACH64).master
 
