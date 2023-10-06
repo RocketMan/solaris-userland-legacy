@@ -58,7 +58,6 @@ file path=usr/lib/rustlib/etc/lldb_lookup.py
 file path=usr/lib/rustlib/etc/lldb_providers.py
 file path=usr/lib/rustlib/etc/rust_types.py
 file path=usr/lib/rustlib/rust-installer-version
-file path=usr/libexec/cargo-credential-1password
 file path=usr/share/doc/rust/COPYRIGHT
 file path=usr/share/doc/rust/LICENSE-APACHE
 file path=usr/share/doc/rust/LICENSE-APACHE.old

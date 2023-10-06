@@ -44,20 +44,21 @@
  
          ..Default::default()
      }
---- a/src/bootstrap/builder.rs	2020-06-17 21:17:04.000000000 +0000
-+++ b/src/bootstrap/builder.rs	2020-08-12 18:42:32.832679461 +0000
-@@ -961,9 +961,13 @@
+--- rustc-1.73.0-src/src/bootstrap/builder.rs.~1~	2023-10-06 16:30:34.995920441 +0000
++++ rustc-1.73.0-src/src/bootstrap/builder.rs	2023-10-06 16:32:54.150743996 +0000
+@@ -1642,10 +1642,14 @@
                  None
              };
              if let Some(rpath) = rpath {
--                rustflags.arg(&format!("-Clink-args={}", rpath));
-+                rustflags.arg(&format!("-Clink-arg={}", rpath));
+-                rustflags.arg(&format!("-Clink-args={rpath}"));
++                rustflags.arg(&format!("-Clink-arg={rpath}"));
              }
          }
-+
+ 
 +        // Disable .SUNW_ldynsym sections on Solaris,
 +        // as llvm cannot read the linked SHT_SYMTAB_SHNDX
 +        rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
- 
-         // FIXME: Don't use LLD if we're compiling libtest, since it fails to link it.
-         // See https://github.com/rust-lang/rust/issues/68647.
++
+         if let Some(host_linker) = self.linker(compiler.host) {
+             cargo.env("RUSTC_HOST_LINKER", host_linker);
+         }
