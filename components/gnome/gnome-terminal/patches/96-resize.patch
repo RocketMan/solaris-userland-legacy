@@ -1,0 +1,51 @@
+Do not update geometry on new tab or font change
+
+Source: https://github.com/pop-os/gnome-terminal/pull/9
+
+Index: gnome-terminal/src/terminal-window.cc
+===================================================================
+--- gnome-terminal.orig/src/terminal-window.cc	2021-12-22 20:16:54.423756142 -0800
++++ gnome-terminal/src/terminal-window.cc	2021-12-22 20:22:51.412258193 -0800
+@@ -2196,10 +2196,11 @@
+   g_signal_connect_after (priv->mdi_container, "screens-reordered",
+                           G_CALLBACK (mdi_screens_reordered_cb), window);
+ 
+-  g_signal_connect_swapped (priv->mdi_container, "notify::tab-pos",
+-                            G_CALLBACK (terminal_window_update_geometry), window);
+-  g_signal_connect_swapped (priv->mdi_container, "notify::show-tabs",
+-                            G_CALLBACK (terminal_window_update_geometry), window);
++  // Don't update on Pop
++  // g_signal_connect_swapped (priv->mdi_container, "notify::tab-pos",
++  //                           G_CALLBACK (terminal_window_update_geometry), window);
++  // g_signal_connect_swapped (priv->mdi_container, "notify::show-tabs",
++  //                           G_CALLBACK (terminal_window_update_geometry), window);
+ 
+   /* FIXME hack hack! */
+   if (GTK_IS_NOTEBOOK (priv->mdi_container)) {
+@@ -2661,6 +2662,9 @@
+       return;
+     }
+ 
++  // Never resize on Pop
++  return;
++
+   /* be sure our geometry is up-to-date */
+   terminal_window_update_geometry (window);
+ 
+Index: gnome-terminal/src/terminal-screen.cc
+===================================================================
+--- gnome-terminal.orig/src/terminal-screen.cc	2021-12-22 20:29:33.836716829 -0800
++++ gnome-terminal/src/terminal-screen.cc	2021-12-22 20:30:11.604801566 -0800
+@@ -1142,10 +1142,8 @@
+ 
+   if ((window = terminal_screen_get_window (screen)))
+     {
+-      /* We need these in line for the set_size in
+-       * update_on_realize
+-       */
+-      terminal_window_update_geometry (window);
++      // Don't update on Pop
++      // terminal_window_update_geometry (window);
+     }
+ 
+   if (!prop_name || prop_name == I_(TERMINAL_PROFILE_SCROLLBAR_POLICY_KEY))

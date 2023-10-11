@@ -28,12 +28,12 @@ COMPILER=		gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gnome-terminal
-COMPONENT_VERSION=	3.48.0
+COMPONENT_VERSION=	3.50.0
 COMPONENT_PROJECT_URL=  https://wiki.gnome.org/Apps/Terminal
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.bz2
 COMPONENT_ARCHIVE_URL=	https://gitlab.gnome.org/GNOME/$(COMPONENT_NAME)/-/archive/$(COMPONENT_VERSION)/$(COMPONENT_ARCHIVE)
 COMPONENT_ARCHIVE_HASH= \
-	sha256:fd24a8484d023ef1501f91fb5cd6f672ecad419fef8fc7db390142991ef84274
+	sha256:5e1ba91281289dde2c9657510786213cb0d12cd841efd9e6f69abb29a4e62792
 COMPONENT_BUGDB=        gnome/terminal
 COMPONENT_ANITYA_ID=	10896
 BUILD_STYLE=		meson
@@ -73,6 +73,7 @@ REQUIRED_PACKAGES += gnome/gsettings-desktop-schemas
 REQUIRED_PACKAGES += library/desktop/atk
 REQUIRED_PACKAGES += library/desktop/gobject/gobject-introspection
 REQUIRED_PACKAGES += library/desktop/gtk3
+REQUIRED_PACKAGES += library/desktop/libhandy
 REQUIRED_PACKAGES += library/desktop/pango
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/gnome/dconf
