@@ -100,6 +100,9 @@ ifdef DEBUG
 CONFIGURE_OPTIONS +=    --enable-debug
 endif
 
+# JM 2022-05-10 disable kerberos support
+CONFIGURE_OPTIONS +=	--without-kerberos
+
 # icu's switch to g++
 # 21090206 icu should build C++ to C++11
 # causes this in php forcing php to switch also
@@ -200,14 +203,21 @@ COMPONENT_TEST_TRANSFORMS += \
 
 CLEAN_PATHS += proto-scripts
 
-clobber::
-	cd ../uw-imap; gmake clobber
+# test results are unstable between runs but still useful for humans.
+$(SKIP_TEST_AT_TOP_LEVEL)
+
+#clobber::
+#	cd ../uw-imap; gmake clobber
 
 # Add directory for generate check
 GENERATE_PROTO_DIRS += files^files
 
 REQUIRED_PACKAGES += database/sqlite-3
 REQUIRED_PACKAGES += developer/icu
+REQUIRED_PACKAGES += image/library/libpng
+REQUIRED_PACKAGES += library/libc-client
+REQUIRED_PACKAGES += library/libxml2
+REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/gd
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/oniguruma

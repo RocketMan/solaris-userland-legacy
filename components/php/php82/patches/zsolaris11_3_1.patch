@@ -1,0 +1,26 @@
+--- a/sapi/apache2handler/config.m4	2018-04-24 17:18:01.000000000 +0000
++++ b/sapi/apache2handler/config.m4	2018-05-29 18:11:24.374547783 +0000
+@@ -56,7 +56,7 @@
+     esac
+   done
+ 
+-  APACHE_CFLAGS="$APACHE_CPPFLAGS -I$APXS_INCLUDEDIR $APR_CFLAGS $APU_CFLAGS -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1"
++  APACHE_CFLAGS="$APACHE_CPPFLAGS -I$APXS_INCLUDEDIR $APR_CFLAGS $APU_CFLAGS -DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -D_XPG6"
+ 
+   # Test that we're trying to configure with apache 2.x
+   PHP_AP_EXTRACT_VERSION($APXS_HTTPD)
+Derived from upstream patch at
+https://bugs.php.net/patch-display.php?bug_id=66013&patch=ext_socket_config.m4.patch&revision=1391710634
+updated for new version and done properly.
+
+--- a/ext/sockets/config.m4	2019-03-12 11:35:57.195984373 +0000
++++ b/ext/sockets/config.m4	2019-03-12 11:37:35.504108658 +0000
+@@ -80,7 +80,7 @@
+     AC_DEFINE(HAVE_AI_IDN,1,[Whether you have AI_IDN])
+   fi
+ 
+-  PHP_SOCKETS_CFLAGS=-DZEND_ENABLE_STATIC_TSRMLS_CACHE=1
++  PHP_SOCKETS_CFLAGS="-DZEND_ENABLE_STATIC_TSRMLS_CACHE=1 -D_XOPEN_SOURCE=600"
+   case $host_alias in
+   *darwin*) PHP_SOCKETS_CFLAGS="$PHP_SOCKETS_CFLAGS -D__APPLE_USE_RFC_3542"
+   esac
