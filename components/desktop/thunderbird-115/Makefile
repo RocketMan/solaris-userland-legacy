@@ -35,7 +35,7 @@ include ../../../make-rules/shared-macros.mk
 GCC_ROOT=/usr/gcc/10
 
 COMPONENT_NAME =	thunderbird
-COMPONENT_VERSION =	115.4.0
+COMPONENT_VERSION =	115.4.2
 COMPONENT_PROJECT_URL =	https://www.thunderbird.net/
 COMPONENT_ARCHIVE = 	$(COMPONENT_SRC).source.tar.xz
 #COMPONENT_ARCHIVE_HASH= \
