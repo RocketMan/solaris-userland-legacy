@@ -1,0 +1,16 @@
+Apparently stock Solaris 11.3 does not support /usr/bin/uname -o
+either.  (Note that /usr/gnu/bin/uname is OK.)
+
+See https://github.com/mesonbuild/meson/pull/12269
+
+--- meson-1.2.2/mesonbuild/environment.py~	2023-09-29 10:27:20.000000000 +0000
++++ meson-1.2.2/mesonbuild/environment.py	2023-11-18 14:09:11.514794528 +0000
+@@ -413,7 +413,7 @@
+         # Solaris 5.10 uname doesn't support the -o switch, and illumos started
+         # with version 5.11 so shortcut the logic to report 'solaris' in such
+         # cases where the version is 5.10 or below.
+-        if mesonlib.version_compare(platform.uname().release, '<=5.10'):
++        if mesonlib.version_compare(platform.uname().release, '<=5.11'):
+             return 'solaris'
+         # This needs to be /usr/bin/uname because gnu-uname could be installed and
+         # won't provide the necessary information
