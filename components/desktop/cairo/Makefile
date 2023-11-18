@@ -46,10 +46,12 @@ TEST_TARGET= $(NO_TESTS)
 include $(WS_MAKE_RULES)/common.mk
 
 LDFLAGS += $(CC_BITS)
+$(SOLARIS_11_3_ONLY)LDFLAGS += -lsocket -lnsl
 
-CONFIGURE_OPTIONS += -Dgtk_doc=true
+CONFIGURE_OPTIONS += -Dgtk_doc=false
 CONFIGURE_OPTIONS += -Dtee=enabled
 CONFIGURE_OPTIONS += -Dtests=disabled
+CONFIGURE_OPTIONS += -Dxlib-xcb=enabled
 
 COMPONENT_POST_INSTALL_ACTION.64 += \
         $(INSTALL) -D -m 0444 $(COMPONENT_DIR)/files/libcairo.3lib\

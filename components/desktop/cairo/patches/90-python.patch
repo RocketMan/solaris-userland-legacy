@@ -1,0 +1,8 @@
+--- cairo-1.17.8/version.py~	2023-02-02 07:37:29.000000000 +0000
++++ cairo-1.17.8/version.py	2023-11-18 16:21:44.185977720 +0000
+@@ -1,4 +1,4 @@
+-#!/usr/bin/env python3
++#!/usr/bin/env python3.7
+ #
+ # cairo version.py
+ #
