@@ -28,6 +28,7 @@ set name=pkg.fmri \
 set name=pkg.summary value="Docutils - Python Documentation Utilities"
 set name=pkg.description \
     value="Docutils is an open-source text processing system for processing plaintext documentation into useful formats, such as HTML, LaTeX, man-pages, OpenDocument, or XML. It includes reStructuredText, the easy to read, easy to use, what-you-see-is-what-you-get plaintext markup language."
+set name=pkg.depend.bypass-generate value=.*unicodedata.*
 set name=com.oracle.info.baid value=$(COMPONENT_BAID)
 set name=com.oracle.info.description value="the Docutils developer tool"
 set name=info.classification \
