@@ -41,19 +41,20 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file files/desktop-mime-cache.xml \
     path=lib/svc/manifest/application/desktop-cache/desktop-mime-cache.xml
 file files/desktop-mime-cache path=lib/svc/method/desktop-mime-cache
-link path=usr/bin/desktop-file-edit target=desktop-file-install
-file path=usr/bin/desktop-file-install
-file path=usr/bin/desktop-file-validate
-file path=usr/bin/update-desktop-database
+## for 11.3, these will continue to come from control-center
+##link path=usr/bin/desktop-file-edit target=desktop-file-install
+##file path=usr/bin/desktop-file-install
+##file path=usr/bin/desktop-file-validate
+##file path=usr/bin/update-desktop-database
 file path=usr/share/emacs/site-lisp/desktop-entry-mode.el
-file path=usr/share/man/man1/desktop-file-edit.1
-file path=usr/share/man/man1/desktop-file-install.1
-file path=usr/share/man/man1/desktop-file-validate.1
-file path=usr/share/man/man1/update-desktop-database.1
+##file path=usr/share/man/man1/desktop-file-edit.1
+##file path=usr/share/man/man1/desktop-file-install.1
+##file path=usr/share/man/man1/desktop-file-validate.1
+##file path=usr/share/man/man1/update-desktop-database.1
 license COPYING license=GPLv2
 # This package was split out of the GNOME 2 control-center package, so we
 # depend on the post-split GNOME 3 package to avoid conflicts.
-depend type=optional fmri=gnome/preferences/control-center@3.18.2
+##depend type=optional fmri=gnome/preferences/control-center@3.18.2
 # The desktop-mime-cache service was moved from the desktop-cache package,
 # so we depend on the post-split version to avoid conflicts
 depend type=optional fmri=service/gnome/desktop-cache@0.4.0
