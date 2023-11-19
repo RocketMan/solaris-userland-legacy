@@ -24,26 +24,24 @@ index a781549..b134789 100644
        case TYPE_CHAR:
          ap->a.a_char = va_arg (args, int);
          break;
-diff --git a/lib/priority.c b/lib/priority.c
-index 0a284ae..773160d 100644
---- a/lib/priority.c
-+++ b/lib/priority.c
-@@ -1302,6 +1302,7 @@ static int cfg_ini_handler(void *_ctx, const char *section, const char *name, co
+--- gnutls-3.7.10/lib/priority.c.~1~	2023-08-03 15:42:26.000000000 +0000
++++ gnutls-3.7.10/lib/priority.c	2023-11-19 18:41:00.937450716 +0000
+@@ -2166,6 +2166,7 @@
  
- static void _gnutls_update_system_priorities(void)
+ static int _gnutls_update_system_priorities(bool defer_system_wide)
  {
 +#ifdef HAVE_FMEMOPEN
- 	int ret;
+ 	int ret, err = 0;
  	struct stat sb;
  	FILE *fp;
-@@ -1343,6 +1344,7 @@ static void _gnutls_update_system_priorities(void)
- 			  (unsigned long long)sb.st_mtime);
+@@ -2284,6 +2285,7 @@
+ 	}
  
- 	system_priority_last_mod = sb.st_mtime;
+ 	return ret;
 +#endif
  }
  
- void _gnutls_load_system_priorities(void)
+ void _gnutls_prepare_to_load_system_priorities(void)
 diff --git a/lib/random.c b/lib/random.c
 index 605fc8d..25a67a1 100644
 --- a/lib/random.c

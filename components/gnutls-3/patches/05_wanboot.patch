@@ -58,16 +58,14 @@ index d59553b..521ddea 100644
  
  AM_CONDITIONAL(HAVE_FORK, test "$ac_cv_func_fork" != "no")
  
-diff --git a/lib/Makefile.am b/lib/Makefile.am
-index f55f298..bb30590 100644
---- a/lib/Makefile.am
-+++ b/lib/Makefile.am
-@@ -81,7 +81,7 @@ COBJECTS = range.c record.c compress.c debug.c cipher.c gthreads.h handshake-tls
+--- gnutls-3.7.10/lib/Makefile.am.~1~	2023-11-19 16:19:13.335426340 +0000
++++ gnutls-3.7.10/lib/Makefile.am	2023-11-19 16:20:00.117578662 +0000
+@@ -83,7 +83,7 @@
  	cert-session.c handshake-checks.c dtls-sw.c dh-primes.c openpgp_compat.c \
  	crypto-selftests.c crypto-selftests-pk.c secrets.c extv.c extv.h \
  	hello_ext_lib.c hello_ext_lib.h ocsp-api.c stek.c cert-cred-rawpk.c \
--	iov.c iov.h
-+	iov.c iov.h system/inet_ntop.c
+-	iov.c iov.h system/ktls.c system/ktls.h
++	iov.c iov.h system/ktls.c system/ktls.h system/inet_ntop.c
  
  if ENABLE_GOST
  COBJECTS += vko.c

@@ -31,7 +31,6 @@ set name=pkg.summary value="GNU transport layer security command line tools"
 set name=pkg.description \
     value="This package contains a commandline interface to the GNU TLS library, which can be used to set up secure connections from e.g. shell scripts, debugging connection issues or managing certificates."
 set name=com.oracle.info.description value="GnuTLS command line tools"
-set name=com.oracle.info.tpno value=$(TPNO)
 set name=info.classification \
     value="org.opensolaris.category.2008:Applications/System Utilities"
 set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
