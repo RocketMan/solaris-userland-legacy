@@ -39,3 +39,5 @@
 # unexpand the PERL_VERSION and PERL_ARCH strings
 <transform file -> edit path $(PERL_VERSION) \$\(PERL_VERSION\)>
 <transform file -> edit path $(PERL_ARCH) \$\(PERL_ARCH\)>
+
+<transform file path=usr/lib/python3.11/vendor-packages/libproxy.py -> add pkg.tmp.autopyc false>

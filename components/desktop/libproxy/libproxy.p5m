@@ -52,7 +52,7 @@ file path=usr/lib/libproxy.so.1.0.0
 file path=usr/lib/libproxy/$(COMPONENT_VERSION)/modules/config_pacrunner.so
 file path=usr/lib/pkgconfig/libproxy-1.0.pc
 file path=usr/lib/pxgsettings mode=0555
-file path=usr/lib/python3.11/vendor-packages/libproxy.py
+file path=usr/lib/python3.11/vendor-packages/libproxy.py pkg.tmp.autopyc=false
 file path=usr/perl5/vendor_perl/$(PERL_VERSION)/$(PERL_ARCH)/Net/Libproxy.pm
 file path=usr/perl5/vendor_perl/$(PERL_VERSION)/$(PERL_ARCH)/auto/Net/Libproxy/Libproxy.so
 file usr/share/cmake/Modules/Findlibproxy.cmake \
