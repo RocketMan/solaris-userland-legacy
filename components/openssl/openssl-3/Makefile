@@ -25,20 +25,10 @@ BUILD_BITS= 64_and_32
 COMPILER=gcc
 include ../../../make-rules/shared-macros.mk
 
-COMPONENT_NAME=		openssl-3
-COMPONENT_VERSION=	3.0.8
-COMPONENT_PROJECT_URL=	https://www.openssl.org/
-COMPONENT_SRC=		openssl-$(COMPONENT_VERSION)
-COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.gz
-COMPONENT_ARCHIVE_HASH=	\
-	sha256:6c13d2bf38fdf31eac3ce2a347073673f5d63263398f1f69d0df4a41253e4b3e
-COMPONENT_ARCHIVE_URL=	$(COMPONENT_PROJECT_URL)source/$(COMPONENT_ARCHIVE)
-COMPONENT_BUGDB=	library/openssl
-COMPONENT_ANITYA_ID=	2566
-COMPONENT_BAID=		137926
-
 # in case /usr/bin/pod2man is not mediated in 11.3
 $(SOLARIS_11_3_ONLY)PATH=/usr/gnu/bin:/usr/bin:/usr/perl5/$(PERL_VERSION)/bin
+
+include Makefile.com
 
 CONFIGURE_PREFIX = /usr/openssl/3
 CONFIGURE_OPTIONS = --openssldir=/etc/openssl/3
@@ -53,6 +43,7 @@ CONFIGURE_OPTIONS += no-afalgeng
 CONFIGURE_OPTIONS += no-capieng
 CONFIGURE_OPTIONS += no-padlockeng
 
+
 CONFIGURE_OPTIONS.32 += --libdir=$(CONFIGURE_PREFIX)/lib no-asm
 CONFIGURE_OPTIONS.64 += --libdir=$(CONFIGURE_PREFIX)/lib/$(MACH64)
 CONFIGURE_OPTIONS.i386.32  +=	solaris-x86-gcc
@@ -60,20 +51,17 @@ CONFIGURE_OPTIONS.sparc.32 +=	solaris-sparcv9-gcc
 CONFIGURE_OPTIONS.i386.64  +=	solaris64-x86_64-gcc
 CONFIGURE_OPTIONS.sparc.64 +=	solaris64-sparcv9-gcc
 
-CONFIGURE_DEFAULT_DIRS = no
-
 PROTOUSRLIBDIR = $(PROTO_DIR)$(CONFIGURE_PREFIX)/lib
 PROTOUSRLIBDIR64 = $(PROTO_DIR)/$(CONFIGURE_PREFIX)/lib/$(MACH64)
 include $(WS_MAKE_RULES)/common.mk
 
-# OpenSSL does not use autoconf but its own configure system.
-CONFIGURE_SCRIPT= $(SOURCE_DIR)/config
+CONFIGURE_ENV += PERL=$(PERL)
 
-# Alsways be super careful when appending to POST/PRE actions.
+# Always be super careful when appending to POST/PRE actions.
 # We need to make sure that if any sub-action fails, the whole recipe fails,
 # hence explicit exit is added to each append.
 COMPONENT_POST_BUILD_ACTION += \
-    ../common/verify_build.sh $(@D) $(CC) $(BITS) openssl-3.p5m || exit 1;
+    ../common/verify_build.sh $(@D) $(CC) $(BITS) openssl-3.p5m regular || exit 1;
 
 COMPONENT_POST_CONFIGURE_ACTION = \
       $(GPATCH) -p1 --verbose $(@D)/Makefile patches-post-config/Makefile.patch
@@ -108,9 +96,3 @@ LINT_FLAGS += -I$(@D)/include -erroff=E_STATIC_UNUSED
 #
 COMPONENT_TEST_TARGETS = test
 system-test:    $(SYSTEM_TESTS_NOT_IMPLEMENTED)
-
-
-REQUIRED_PACKAGES += developer/build/makedepend
-# Perl is needed for Configure, tests and the distributed CA.pl script.
-REQUIRED_PACKAGES += $(PERL_PKG)
-REQUIRED_PACKAGES += system/core-os
