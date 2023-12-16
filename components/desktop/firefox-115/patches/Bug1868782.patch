@@ -1,0 +1,36 @@
+Avoid unnecessary error from glxtest on Solaris and BSDs
+
+Subsumes and replaces former patches `10-pci-direct-port-access.patch` and
+`15-libpci-use-not-default.patch`.
+
+See https://bugzilla.mozilla.org/show_bug.cgi?id=1868782
+
+diff --git a/toolkit/xre/glxtest/glxtest.cpp b/toolkit/xre/glxtest/glxtest.cpp
+--- a/toolkit/xre/glxtest/glxtest.cpp
++++ b/toolkit/xre/glxtest/glxtest.cpp
+@@ -190,10 +190,12 @@
+ #define PCI_BASE_CLASS_DISPLAY 0x03
+ 
+ static void get_pci_status() {
+   log("GLX_TEST: get_pci_status start\n");
+ 
++#if !defined(XP_FREEBSD) && !defined(XP_NETBSD) && !defined(XP_OPENBSD) && \
++    !defined(XP_SOLARIS)
+   if (access("/sys/bus/pci/", F_OK) != 0 &&
+       access("/sys/bus/pci_express/", F_OK) != 0) {
+     record_warning("cannot access /sys/bus/pci");
+     return;
+   }
+@@ -270,10 +272,11 @@
+                    dev->vendor_id, dev->device_id);
+     }
+   }
+ 
+   pci_cleanup(pacc);
++#endif
+ 
+   log("GLX_TEST: get_pci_status finished\n");
+ }
+ 
+ static void set_render_device_path(const char* render_device_path) {
+
