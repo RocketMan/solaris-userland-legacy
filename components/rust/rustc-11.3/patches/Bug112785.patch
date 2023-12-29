@@ -1,0 +1,28 @@
+Avoids unnecessary assertion during bootstrap in uncertain conditions.
+
+https://github.com/rust-lang/rust/issues/112785
+
+Rocketman: I have never encountered this issue on 11.3, but
+including the upstream patch just to be sure.
+
+--- rustc-1.70.0-src/src/bootstrap/src/lib.rs
++++ rustc-1.70.0-src/src/bootstrap/src/lib.rs
+@@ -405,11 +405,17 @@
+             .expect("failed to read src/version");
+         let version = version.trim();
+ 
+-        let bootstrap_out = std::env::current_exe()
++        let mut bootstrap_out = std::env::current_exe()
+             .expect("could not determine path to running process")
+             .parent()
+             .unwrap()
+             .to_path_buf();
++        // Since boostrap is hardlink to deps/boostrap-*, Solaris can sometimes give
++        // us path with deps/ which is bad and need to be avoided.
++        if bootstrap_out.ends_with("deps") {
++           println!("XXX Removing deps! Got: {:?}", bootstrap_out);
++           bootstrap_out.pop();
++        }
+         if !bootstrap_out.join(exe("rustc", config.build)).exists() && !cfg!(test) {
+             // this restriction can be lifted whenever https://github.com/rust-lang/rfcs/pull/3028 is implemented
+             panic!(

@@ -31,12 +31,12 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.74.0
+COMPONENT_VERSION =	1.75.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:ce1a115f6aafa912b4622906a92b626354973afa9288e2c7750df4dcf3390fc0
+    sha256:4526f786d673e4859ff2afa0bab2ba13c918b796519a25c1acce06dba9542340
 
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
@@ -107,12 +107,23 @@ COMPONENT_BUILD_ENV +=	CARGO_HOME=$(BUILD_DIR)/.cargo
 COMPONENT_INSTALL_ENV +=	CARGO_HOME=$(BUILD_DIR)/.cargo
 COMPONENT_TEST_ENV +=	CARGO_HOME=$(BUILD_DIR)/.cargo
 
-ifneq ($(strip $(OPENSSL3)),)
+ifeq ($(strip $(OPENSSL3)),)
+# From rust 1.75.0, OpenSSL 1.x or later is required
+COMPONENT_BUILD_ENV += OPENSSL_LIB_DIR=/usr/openssl/1.1/lib/64
+COMPONENT_BUILD_ENV += OPENSSL_INCLUDE_DIR=/usr/openssl/1.1/include
+COMPONENT_INSTALL_ENV += OPENSSL_LIB_DIR=/usr/openssl/1.1/lib/64
+COMPONENT_INSTALL_ENV += OPENSSL_INCLUDE_DIR=/usr/openssl/1.1/include
+else
 # Use OpenSSL 3
 COMPONENT_BUILD_ENV += OPENSSL_LIB_DIR=/usr/openssl/3/lib/64
 COMPONENT_BUILD_ENV += OPENSSL_INCLUDE_DIR=/usr/openssl/3/include
 COMPONENT_INSTALL_ENV += OPENSSL_LIB_DIR=/usr/openssl/3/lib/64
 COMPONENT_INSTALL_ENV += OPENSSL_INCLUDE_DIR=/usr/openssl/3/include
+
+COMPONENT_PRE_BUILD_ACTION += \
+	( $(MKDIR) $(@D)/pkgconfig-my; \
+	$(GSED) 's;-L.* ;;' $(USRLIBDIR)/64/pkgconfig/zlib.pc > $(@D)/pkgconfig-my/zlib.pc ) ;
+PKG_CONFIG_PATHS += $(@D)/pkgconfig-my
 endif
 
 # Rust library names contain hash which differs between intel and sparc.
@@ -144,7 +155,7 @@ REQUIRED_PACKAGES += library/libssh2
 ifneq ($(strip $(OPENSSL3)),)
 REQUIRED_PACKAGES += library/security/openssl-3
 else
-REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += library/security/openssl-11
 endif
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime

@@ -8,8 +8,8 @@
          extern "C" {}
      } else if #[cfg(target_os = "illumos")] {
          #[link(name = "socket")]
---- rustc-1.66.0-src/compiler/rustc_target/src/spec/solaris_base.rs	2022-12-12 16:02:12.000000000 +0000
-+++ rustc-1.66.0-src/compiler/rustc_target/src/spec/solaris_base.rs	2022-12-15 19:02:18.783814001 +0000
+--- rustc-1.66.0-src/compiler/rustc_target/src/spec/base/solaris.rs	2022-12-12 16:02:12.000000000 +0000
++++ rustc-1.66.0-src/compiler/rustc_target/src/spec/base/solaris.rs	2022-12-15 19:02:18.783814001 +0000
 @@ -1,6 +1,23 @@
 -use crate::spec::{cvs, Cc, LinkerFlavor, TargetOptions};
 +use crate::spec::{LinkArgs, FramePointer, cvs, Cc, LinkerFlavor, TargetOptions};
@@ -44,9 +44,9 @@
  
          ..Default::default()
      }
---- rustc-1.73.0-src/src/bootstrap/builder.rs.~1~	2023-10-06 16:30:34.995920441 +0000
-+++ rustc-1.73.0-src/src/bootstrap/builder.rs	2023-10-06 16:32:54.150743996 +0000
-@@ -1642,10 +1642,14 @@
+--- rustc-1.75.0-src/src/bootstrap/src/core/builder.rs~	2023-12-21 16:55:28.000000000 +0000
++++ rustc-1.75.0-src/src/bootstrap/src/core/builder.rs	2023-12-28 19:39:57.841140009 +0000
+@@ -1683,10 +1683,14 @@
                  None
              };
              if let Some(rpath) = rpath {
@@ -60,5 +60,5 @@
 +        rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
 +
          if let Some(host_linker) = self.linker(compiler.host) {
-             cargo.env("RUSTC_HOST_LINKER", host_linker);
+             hostflags.arg(format!("-Clinker={}", host_linker.display()));
          }
