@@ -20,16 +20,18 @@
 #
 
 #
-# Copyright (c) 2011, 2023, Oracle and/or its affiliates.
+# Copyright (c) 2011, 2024, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64_and_32
 COMPILER= gcc
+# debug build? uncomment next line
+# GMAKE= /usr/gnu/bin/make V=1
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		curl
-COMPONENT_VERSION=	7.87.0
-COMPONENT_ARCHIVE_HASH=	sha256:5d6e128761b7110946d1276aff6f0f266f2b726f5e619f7e0a057a474155f307
-COMPONENT_BAID=		135919
+COMPONENT_VERSION=	8.6.0
+COMPONENT_ARCHIVE_HASH=	sha256:b4785f2d8877fa92c0e45d7155cf8cc6750dbda961f4b1a45bcbec990cf2fa9b
+COMPONENT_BAID=		158375
 COMPONENT_PROJECT_URL=	http://curl.haxx.se/
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.bz2
 COMPONENT_ARCHIVE_URL=	https://curl.se/download/$(COMPONENT_ARCHIVE)
@@ -92,6 +94,7 @@ CONFIGURE_OPTIONS += --with-ssl
 endif
 CONFIGURE_OPTIONS += --with-ca-path=$(ETCDIR)/openssl/certs
 CONFIGURE_OPTIONS += --enable-ldap --with-ldap-lib=ldap_r --with-lber-lib=lber
+CONFIGURE_OPTIONS += --disable-ntlm
 CONFIGURE_OPTIONS += --with-libidn2
 CONFIGURE_OPTIONS += --with-pic
 CONFIGURE_OPTIONS += --with-libssh2

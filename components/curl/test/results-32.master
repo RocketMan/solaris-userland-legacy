@@ -1,10 +1,2 @@
-TESTDONE: 1559 tests were considered
-TESTDONE: 1291 tests out of 1293 reported OK: 99%
-TESTFAIL: These test cases failed: 1119 1167 
-# TOTAL: 2
-# PASS:  2
-# SKIP:  0
-# XFAIL: 0
-# FAIL:  0
-# XPASS: 0
-# ERROR: 0
+TESTDONE: 1673 tests were considered
+TESTDONE: 1239 tests out of 1239 reported OK: 100%
