@@ -43,6 +43,7 @@ set name=org.opensolaris.arc-caseid value=PSARC/2013/188 value=PSARC/2018/097 \
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file path=usr/bin/FileCheck
 file path=usr/bin/UnicodeNameMappingGenerator
+file path=usr/bin/amdgpu-arch
 file path=usr/bin/bugpoint
 file path=usr/bin/count
 file path=usr/bin/dsymutil
@@ -64,6 +65,7 @@ file path=usr/bin/llvm-cvtres
 file path=usr/bin/llvm-cxxdump
 file path=usr/bin/llvm-cxxfilt
 file path=usr/bin/llvm-cxxmap
+file path=usr/bin/llvm-debuginfo-analyzer
 file path=usr/bin/llvm-debuginfod
 file path=usr/bin/llvm-debuginfod-find
 file path=usr/bin/llvm-diff
@@ -104,6 +106,7 @@ link path=usr/bin/llvm-readelf target=llvm-readobj
 file path=usr/bin/llvm-readobj
 file path=usr/bin/llvm-reduce
 file path=usr/bin/llvm-remark-size-diff
+file path=usr/bin/llvm-remarkutil
 file path=usr/bin/llvm-rtdyld
 file path=usr/bin/llvm-sim
 file path=usr/bin/llvm-size
@@ -119,6 +122,7 @@ file path=usr/bin/llvm-undname
 link path=usr/bin/llvm-windres target=llvm-rc
 file path=usr/bin/llvm-xray
 file path=usr/bin/not
+file path=usr/bin/nvptx-arch
 file path=usr/bin/obj2yaml
 file path=usr/bin/opt
 file path=usr/bin/sancov
