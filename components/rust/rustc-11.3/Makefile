@@ -32,6 +32,7 @@ include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
 COMPONENT_VERSION =	1.75.0
+IPS_COMPONENT_VERSION = 1.75.0.1
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
@@ -61,7 +62,8 @@ PATH = $(COMPONENT_DIR)/epoll:/usr/gnu/bin:/usr/bin
 # LD_B_DIRECT breaks the build.
 LD_B_DIRECT =
 
-RUST_PLATFORM = $(MACH64:amd64=x86_64)-sun-solaris
+RUST_NATIVE = $(MACH64:amd64=x86_64)-sun-solaris
+RUST_PLATFORM = $(MACH64:amd64=x86_64)-pc-solaris
 
 # The configure Rust uses isn't autoconf; it's hand-rolled, and doesn't
 # recognize all the autoconf options, so we start from scratch.
@@ -75,7 +77,11 @@ CONFIGURE_OPTIONS +=	--disable-cargo-native-static
 CONFIGURE_OPTIONS +=	--enable-llvm-link-shared
 CONFIGURE_OPTIONS +=	--llvm-root=$(CONFIGURE_PREFIX)
 # from 1.71.0, the following is needed to use the system llvm
-CONFIGURE_OPTIONS +=	--build=$(RUST_PLATFORM)
+CONFIGURE_OPTIONS +=	--build=$(RUST_NATIVE)
+# in preparation for 1.76.0, cross-compile from *-sun-solaris to *-pc-solaris
+CONFIGURE_OPTIONS +=	--host=$(RUST_PLATFORM)
+CONFIGURE_OPTIONS +=	--target=$(RUST_PLATFORM)
+CONFIGURE_OPTIONS +=	--set target.$(RUST_PLATFORM).llvm-config='/usr/bin/llvm-config'
 
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
