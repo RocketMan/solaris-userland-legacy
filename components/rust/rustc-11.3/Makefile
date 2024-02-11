@@ -31,13 +31,12 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.75.0
-IPS_COMPONENT_VERSION = 1.75.0.1
+COMPONENT_VERSION =	1.76.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:4526f786d673e4859ff2afa0bab2ba13c918b796519a25c1acce06dba9542340
+    sha256:805482b436442a6786d270cacbab8f00529e06141b27b7fb01909b97ce4f3464
 
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
@@ -62,7 +61,6 @@ PATH = $(COMPONENT_DIR)/epoll:/usr/gnu/bin:/usr/bin
 # LD_B_DIRECT breaks the build.
 LD_B_DIRECT =
 
-RUST_NATIVE = $(MACH64:amd64=x86_64)-sun-solaris
 RUST_PLATFORM = $(MACH64:amd64=x86_64)-pc-solaris
 
 # The configure Rust uses isn't autoconf; it's hand-rolled, and doesn't
@@ -77,19 +75,31 @@ CONFIGURE_OPTIONS +=	--disable-cargo-native-static
 CONFIGURE_OPTIONS +=	--enable-llvm-link-shared
 CONFIGURE_OPTIONS +=	--llvm-root=$(CONFIGURE_PREFIX)
 # from 1.71.0, the following is needed to use the system llvm
-CONFIGURE_OPTIONS +=	--build=$(RUST_NATIVE)
-# in preparation for 1.76.0, cross-compile from *-sun-solaris to *-pc-solaris
-CONFIGURE_OPTIONS +=	--host=$(RUST_PLATFORM)
-CONFIGURE_OPTIONS +=	--target=$(RUST_PLATFORM)
-CONFIGURE_OPTIONS +=	--set target.$(RUST_PLATFORM).llvm-config='/usr/bin/llvm-config'
+CONFIGURE_OPTIONS +=	--build=$(RUST_PLATFORM)
 
+ifeq ($(strip $(OPENSSL3)),)
+# From rust 1.75.0, OpenSSL 1.x or later is required
+OPENSSL_LIB_DIR=/usr/openssl/1.1/lib/64
+OPENSSL_INCLUDE_DIR=/usr/openssl/1.1/include
+else
+# Use OpenSSL 3
+OPENSSL_LIB_DIR=/usr/openssl/3/lib/64
+OPENSSL_INCLUDE_DIR=/usr/openssl/3/include
+endif
+
+COMPONENT_BUILD_ENV += OPENSSL_LIB_DIR=$(OPENSSL_LIB_DIR)
+COMPONENT_BUILD_ENV += OPENSSL_INCLUDE_DIR=$(OPENSSL_INCLUDE_DIR)
+COMPONENT_INSTALL_ENV += OPENSSL_LIB_DIR=$(OPENSSL_LIB_DIR)
+COMPONENT_INSTALL_ENV += OPENSSL_INCLUDE_DIR=$(OPENSSL_INCLUDE_DIR)
+
+# From rust 1.76.0, it is not picking up OPENSSL_LIB_DIR, so we force it
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
        $(GCC_ROOT)/bin/gcc -shared -DDEBUG=0 -o libepoll.so -fPIC -c epoll.c ; \
        $(GCC_ROOT)/bin/gcc -DDEBUG=0 -fPIC -c compat.c ; \
        ar rcs libcompat.a compat.o ; \
        echo "\#!/bin/sh" > gcc ; \
-       echo "$(GCC_ROOT)/bin/gcc \$$@ -L$(COMPONENT_DIR)/epoll -lepoll -lcompat" >> gcc ; \
+       echo "$(GCC_ROOT)/bin/gcc -L$(OPENSSL_LIB_DIR) \$$@ -L$(COMPONENT_DIR)/epoll -lepoll -lcompat" >> gcc ; \
        chmod a+x gcc ) ;
 
 CLEAN_PATHS += epoll/compat.o
@@ -113,19 +123,7 @@ COMPONENT_BUILD_ENV +=	CARGO_HOME=$(BUILD_DIR)/.cargo
 COMPONENT_INSTALL_ENV +=	CARGO_HOME=$(BUILD_DIR)/.cargo
 COMPONENT_TEST_ENV +=	CARGO_HOME=$(BUILD_DIR)/.cargo
 
-ifeq ($(strip $(OPENSSL3)),)
-# From rust 1.75.0, OpenSSL 1.x or later is required
-COMPONENT_BUILD_ENV += OPENSSL_LIB_DIR=/usr/openssl/1.1/lib/64
-COMPONENT_BUILD_ENV += OPENSSL_INCLUDE_DIR=/usr/openssl/1.1/include
-COMPONENT_INSTALL_ENV += OPENSSL_LIB_DIR=/usr/openssl/1.1/lib/64
-COMPONENT_INSTALL_ENV += OPENSSL_INCLUDE_DIR=/usr/openssl/1.1/include
-else
-# Use OpenSSL 3
-COMPONENT_BUILD_ENV += OPENSSL_LIB_DIR=/usr/openssl/3/lib/64
-COMPONENT_BUILD_ENV += OPENSSL_INCLUDE_DIR=/usr/openssl/3/include
-COMPONENT_INSTALL_ENV += OPENSSL_LIB_DIR=/usr/openssl/3/lib/64
-COMPONENT_INSTALL_ENV += OPENSSL_INCLUDE_DIR=/usr/openssl/3/include
-
+ifneq ($(strip $(OPENSSL3)),)
 COMPONENT_PRE_BUILD_ACTION += \
 	( $(MKDIR) $(@D)/pkgconfig-my; \
 	$(GSED) 's;-L.* ;;' $(USRLIBDIR)/64/pkgconfig/zlib.pc > $(@D)/pkgconfig-my/zlib.pc ) ;

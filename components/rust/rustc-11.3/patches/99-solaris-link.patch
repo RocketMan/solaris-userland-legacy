@@ -44,9 +44,16 @@
  
          ..Default::default()
      }
---- rustc-1.75.0-src/src/bootstrap/src/core/builder.rs~	2023-12-21 16:55:28.000000000 +0000
-+++ rustc-1.75.0-src/src/bootstrap/src/core/builder.rs	2023-12-28 19:39:57.841140009 +0000
-@@ -1683,10 +1683,14 @@
+--- rustc-1.76.0-src/src/bootstrap/src/core/builder.rs.~1~	2024-02-09 11:09:32.003538292 +0000
++++ rustc-1.76.0-src/src/bootstrap/src/core/builder.rs	2024-02-09 11:18:28.879449249 +0000
+@@ -1686,16 +1686,20 @@
+                 rustflags.arg("-Zosx-rpath-install-name");
+                 Some(format!("-Wl,-rpath,@loader_path/../{libdir}"))
+             } else if !target.is_windows() && !target.contains("aix") && !target.contains("xous") {
+-                rustflags.arg("-Clink-args=-Wl,-z,origin");
++                rustflags.arg("-Clink-arg=-Wl,-z,origin");
+                 Some(format!("-Wl,-rpath,$ORIGIN/../{libdir}"))
+             } else {
                  None
              };
              if let Some(rpath) = rpath {
@@ -59,6 +66,6 @@
 +        // as llvm cannot read the linked SHT_SYMTAB_SHNDX
 +        rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
 +
-         if let Some(host_linker) = self.linker(compiler.host) {
-             hostflags.arg(format!("-Clinker={}", host_linker.display()));
-         }
+         cargo.env(profile_var("STRIP"), self.config.rust_strip.to_string());
+ 
+         if let Some(stack_protector) = &self.config.rust_stack_protector {
