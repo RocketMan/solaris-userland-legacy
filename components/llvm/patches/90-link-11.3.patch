@@ -1,3 +1,45 @@
+Starting with llvm 16 on 11.3, the following error appears during
+build install:
+
+````
+CMake Error at tools/clang/tools/clang-shlib/cmake_install.cmake:50 (file):
+  file RPATH_CHANGE could not write new RPATH:
+
+    $ORIGIN/../lib/amd64
+
+  to the file:
+
+    /build/userland/components/llvm/build/prototype/i386/usr/lib/amd64/libclang-cpp.so.17
+
+  No valid ELF RPATH or RUNPATH entry exists in the file;
+Call Stack (most recent call first):
+  tools/clang/tools/cmake_install.cmake:122 (include)
+  tools/clang/cmake_install.cmake:72 (include)
+  tools/cmake_install.cmake:72 (include)
+  cmake_install.cmake:117 (include)
+````
+
+$ readelf -a build/prototype/i386/usr/lib/amd64/libclang-cpp.so.17|grep PATH
+ 0x000000000000001d (RUNPATH)            Library runpath: [/usr/gcc/10/lib/amd64:/build/userland/components/llvm/build/amd64/lib/amd64:]
+ 0x000000000000000f (RPATH)              Library rpath: [/usr/gcc/10/lib/amd64:/build/userland/components/llvm/build/amd64/lib/amd64:]
+
+$ patchelf --print-rpath build/prototype/i386/usr/lib/amd64/libclang-cpp.so.17
+Assertion failed: shstrtabIndex < shdrs.size(), file patchelf.cc, line 292
+
+$ /usr/bin/elfedit -e "dyn:runpath /usr/gcc/10/lib/amd64:\$ORIGIN/../lib/amd64" build/prototype/i386/usr/lib/amd64/libclang-cpp.so.17
+Segmentation Fault
+
+
+In other cases (such as rust), larger .so files resulted in the
+inclusion of Solais .SUNW_ldynsym sections, which had presented
+similar problems; however, adding the -znoldynsym switch to suppress
+those sections did not clear the issue here.
+
+As a workaround, this patch adds NO_INSTALL_PATH to prevent patching
+the RPATH/RUNPATH.  CAUTION: This means the build directory will be
+left in the RPATH!
+
+
 --- llvm-16.0.6/tools/clang/tools/clang-shlib/CMakeLists.txt.~1~	2023-06-10 23:58:16.000000000 +0000
 +++ llvm-16.0.6/tools/clang/tools/clang-shlib/CMakeLists.txt	2024-02-09 18:34:47.809275408 +0000
 @@ -42,7 +42,7 @@
@@ -9,12 +51,13 @@
                    ${INSTALL_WITH_TOOLCHAIN}
                    clang-shlib.cpp
                    ${_OBJECTS}
-@@ -51,5 +51,5 @@
+@@ -51,5 +51,6 @@
  # Optimize function calls for default visibility definitions to avoid PLT and
  # reduce dynamic relocations.
  if (NOT APPLE AND NOT MINGW)
 -  target_link_options(clang-cpp PRIVATE LINKER:-Bsymbolic-functions)
-+  # target_link_options(clang-cpp PRIVATE LINKER:-Bsymbolic-functions)
++  target_link_options(clang-cpp PRIVATE LINKER:-Bsymbolic)
++  target_link_options(clang-cpp PRIVATE LINKER:-znoldynsym)
  endif()
 --- llvm-13.0.1/tools/clang/tools/libclang/CMakeLists.txt-	2022-01-20 21:31:59.000000000 +0000
 +++ llvm-13.0.1/tools/clang/tools/libclang/CMakeLists.txt	2023-04-02 18:02:41.637914391 +0000
@@ -43,12 +86,13 @@
  
    list(REMOVE_DUPLICATES LIB_NAMES)
    if(("${CMAKE_SYSTEM_NAME}" STREQUAL "Linux") OR (MINGW) OR (HAIKU)
-@@ -56,7 +56,7 @@
+@@ -56,7 +56,8 @@
        # reduce dynamic relocations.
        # Note: for -fno-pic default, the address of a function may be different from
        # inside and outside libLLVM.so.
 -      target_link_options(LLVM PRIVATE LINKER:-Bsymbolic-functions)
-+      # target_link_options(LLVM PRIVATE LINKER:-Bsymbolic-functions)
++      target_link_options(LLVM PRIVATE LINKER:-Bsymbolic)
++      target_link_options(LLVM PRIVATE LINKER:-znoldynsym)
      endif()
    elseif("${CMAKE_SYSTEM_NAME}" STREQUAL "Darwin")
      set(LIB_NAMES -Wl,-all_load ${LIB_NAMES})
