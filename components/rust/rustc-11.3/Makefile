@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2020-2023 Jim Mason <jmason at ibinx dot com>.
+# Copyright (c) 2020-2024 Jim Mason <jmason at ibinx dot com>.
 #
 # Adapted from original code Copyright (c) 2018, 2020, Oracle and/or its
 # affiliates. All rights reserved.
@@ -135,8 +135,8 @@ endif
 COMPONENT_POST_INSTALL_ACTION += \
 	(cd $(PROTO_DIR); \
 	ls -1 usr/lib/lib* \
-	  usr/lib/rustlib/$(MACH64:amd64=x86_64)-sun-solaris/codegen-backends/lib* \
-	  usr/lib/rustlib/$(MACH64:amd64=x86_64)-sun-solaris/lib/lib* | \
+	  usr/lib/rustlib/$(MACH64:amd64=x86_64)-pc-solaris/codegen-backends/lib* \
+	  usr/lib/rustlib/$(MACH64:amd64=x86_64)-pc-solaris/lib/lib* | \
 	  awk '{ print "file path="$$1 " variant.arch=$(MACH)" }' > ../../libraries-hashed.$(MACH64); )
 
 # pkg-report requires *.p5m files to be processed by pkgmogrify. Since the
