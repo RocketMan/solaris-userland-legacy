@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2018-2023 Jim Mason <jmason at ibinx doc com>.
+# Copyright (c) 2018-2024 Jim Mason <jmason at ibinx doc com>.
 #
 # Adapted from original code Copyright (c) 2015, 2020, Oracle and/or its
 # affiliates. All rights reserved.
@@ -37,7 +37,7 @@ GCC_ROOT=/usr/gcc/10
 ESR = esr
 
 COMPONENT_NAME =	firefox
-COMPONENT_VERSION =	115.7.0
+COMPONENT_VERSION =	115.8.0
 COMPONENT_PROJECT_URL =	http://www.mozilla.com/firefox
 COMPONENT_SRC_NAME =	$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_SRC = 	$(COMPONENT_SRC_NAME)
@@ -121,8 +121,8 @@ COMPONENT_PRE_CONFIGURE_ACTION += \
 	echo "ac_add_options --with-system-libevent" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-zlib" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-libvpx" >> $(MOZCONFIG) ; \
-	echo "ac_add_options --without-wasm-sandboxed-libraries" >> $(MOZCONFIG) ; \
-	echo "ac_add_options --host=x86_64-sun-solaris" >> $(MOZCONFIG) ;
+	echo "ac_add_options --without-wasm-sandboxed-libraries" >> $(MOZCONFIG) ;
+#	echo "ac_add_options --host=x86_64-pc-solaris" >> $(MOZCONFIG) ;
 #	echo "ac_add_options --with-system-icu" >> $(MOZCONFIG) ; \
 #	echo "ac_add_options --enable-startup-notification" >> $(MOZCONFIG) ;
 #	echo "ac_add_options --enable-system-sqlite" >> $(MOZCONFIG) ;
