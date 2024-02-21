@@ -35,7 +35,7 @@ include ../../../make-rules/shared-macros.mk
 GCC_ROOT=/usr/gcc/10
 
 COMPONENT_NAME =	thunderbird
-COMPONENT_VERSION =	115.6.0
+COMPONENT_VERSION =	115.8.0
 COMPONENT_PROJECT_URL =	https://www.thunderbird.net/
 COMPONENT_ARCHIVE = 	$(COMPONENT_SRC).source.tar.xz
 #COMPONENT_ARCHIVE_HASH= \
@@ -129,8 +129,7 @@ COMPONENT_PRE_CONFIGURE_ACTION += \
 	echo "ac_add_options --with-system-libevent" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-zlib" >> $(MOZCONFIG) ; \
 	echo "ac_add_options --with-system-libvpx" >> $(MOZCONFIG) ; \
-	echo "ac_add_options --without-wasm-sandboxed-libraries" >> $(MOZCONFIG) ; \
-	echo "ac_add_options --host=x86_64-sun-solaris" >> $(MOZCONFIG) ;
+	echo "ac_add_options --without-wasm-sandboxed-libraries" >> $(MOZCONFIG) ;
 
 CXXFLAGS += -Wno-invalid-offsetof -fpermissive
 
