@@ -45,3 +45,4 @@ file usr/bin/$(MACH64)/gtester-report path=usr/bin/gtester-report \
     pkg.depend.bypass-generate=.*subunit.* \
     pkg.depend.bypass-generate=.*testtools.*
 link path=usr/bin/64 target=amd64
+link path=usr/bin/gio-launch-desktop target=../lib/gio-launch-desktop

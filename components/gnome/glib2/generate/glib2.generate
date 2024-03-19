@@ -44,6 +44,7 @@
 <transform file path=usr/bin/glib-mkenums -> drop>
 <transform file path=usr/bin/gapplication -> drop>
 <transform file path=usr/bin/gio$ -> drop>
+<transform file path=usr/share/doc/glib-2.0 -> drop>
 
 # Drop the 64-bit versions (delivery into /usr/bin added in static)
 <transform file path=usr/bin/\$\(MACH64\)/* -> drop>
