@@ -1,5 +1,5 @@
---- rustc-1.50.0-src/library/std/src/sys/unix/mod.rs	2021-02-10 17:36:44.000000000 +0000
-+++ rustc-1.50.0-src/library/std/src/sys/unix/mod.rs	2021-03-05 15:47:24.847514661 +0000
+--- rustc-1.50.0-src/library/std/src/sys/pal/unix/mod.rs	2021-02-10 17:36:44.000000000 +0000
++++ rustc-1.50.0-src/library/std/src/sys/pal/unix/mod.rs	2021-03-05 15:47:24.847514661 +0000
 @@ -259,6 +259,7 @@
          #[link(name = "posix4")]
          #[link(name = "pthread")]

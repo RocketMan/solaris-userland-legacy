@@ -27,7 +27,7 @@
 
 # libraries contain hash in their names and thus are included automatically
 <transform path=usr/lib/lib.*\.so$ -> drop>
-<transform path=usr/lib/rustlib/(sparcv9|x86_64)-sun-solaris/.* -> drop>
+<transform path=usr/lib/rustlib/(sparcv9|x86_64)-pc-solaris/.* -> drop>
 
 # no need to package these
 <transform path=usr/lib/rustlib/uninstall.sh -> drop>
