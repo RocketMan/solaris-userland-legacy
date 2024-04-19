@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2018-2023 Jim Mason <jmason at ibinx doc com>.
+# Copyright (c) 2018-2024 Jim Mason <jmason at ibinx doc com>.
 #
 # Adapted from original code Copyright (c) 2015, 2020, Oracle and/or its
 # affiliates. All rights reserved.
@@ -35,7 +35,7 @@ include ../../../make-rules/shared-macros.mk
 GCC_ROOT=/usr/gcc/10
 
 COMPONENT_NAME =	thunderbird
-COMPONENT_VERSION =	115.8.0
+COMPONENT_VERSION =	115.10.1
 COMPONENT_PROJECT_URL =	https://www.thunderbird.net/
 COMPONENT_ARCHIVE = 	$(COMPONENT_SRC).source.tar.xz
 #COMPONENT_ARCHIVE_HASH= \
