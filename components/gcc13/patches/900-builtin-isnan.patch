@@ -1,0 +1,16 @@
+--- a/libstdc++-v3/include/tr1/special_function_util.h	2020-05-07 11:50:02.000000000 +0000
++++ b/libstdc++-v3/include/tr1/special_function_util.h	2020-07-05 18:05:48.274953396 +0000
+@@ -123,11 +123,11 @@
+ 
+     template<>
+     inline bool __isnan<float>(float __x)
+-    { return __builtin_isnanf(__x); }
++    { return __builtin_isnan(__x); }
+ 
+     template<>
+     inline bool __isnan<long double>(long double __x)
+-    { return __builtin_isnanl(__x); }
++    { return __builtin_isnan(__x); }
+ 
+ #endif
+   } // namespace __detail

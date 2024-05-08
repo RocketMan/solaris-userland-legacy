@@ -9,7 +9,7 @@ https://gcc.gnu.org/bugzilla/show_bug.cgi?id=106813
 +#elif defined(__x86_64__) && defined(__sun__)
 +	ret.sigpc = ((ucontext_t*)(context))->uc_mcontext.gregs[REG_RIP];
 +#elif defined(__i386__) && defined(__sun__)
-+	ret.sigpc = ((ucontext_t*)(context))->uc_mcontext.gregs[REG_EIP];
++      ret.sigpc = ((ucontext_t*)(context))->uc_mcontext.gregs[EIP];
 +#elif defined(__sparc__) && defined(__sun__)
 +	ret.sigpc = ((ucontext_t*)(context))->uc_mcontext.gregs[REG_PC];
  #endif

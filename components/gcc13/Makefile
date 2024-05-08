@@ -62,7 +62,7 @@ include $(WS_MAKE_RULES)/common.mk
 CC_PIC_MODE = $(CC_PIC_DISABLE)
 LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 
-PYTHON_VERSION = 3.11
+PYTHON_VERSION = 3.9
 
 # The GNU compiler wants the GNU utilities.
 PATH=$(GNUBIN):$(USRBINDIR):$(USRDIR)/perl5/bin:$(GCC_ROOT)/bin
@@ -111,7 +111,7 @@ CONFIGURE_LIBDIR.64 = $(CONFIGURE_PREFIX)/lib
 
 CONFIGURE_OPTIONS +=	--infodir=$(CONFIGURE_INFODIR)
 CONFIGURE_OPTIONS +=	--libexecdir=$(CONFIGURE_PREFIX)/lib
-CONFIGURE_OPTIONS +=	--enable-languages="ada,c,c++,fortran,go,objc"
+CONFIGURE_OPTIONS +=	--enable-languages="c,c++,fortran,go,objc"
 CONFIGURE_OPTIONS +=	--enable-shared
 CONFIGURE_OPTIONS +=	--enable-initfini-array
 CONFIGURE_OPTIONS +=	--disable-rpath
@@ -119,6 +119,10 @@ CONFIGURE_OPTIONS +=	--with-system-zlib
 CONFIGURE_OPTIONS +=	--with-build-config=no
 CONFIGURE_OPTIONS +=	--without-gnu-ld --with-ld=$(USRBINDIR)/ld
 CONFIGURE_OPTIONS +=	--with-gnu-as --with-as=$(GNUBIN)/as
+
+# *** Configuration x86_64-pc-solaris2.11.3 is obsolete.
+# *** Specify --enable-obsolete to build it anyway.
+CONFIGURE_OPTIONS +=	--enable-obsolete
 
 # If the compiler used to build matches the compiler being built, there is no
 # need for a 3 stage build.
