@@ -44,28 +44,28 @@
  
          ..Default::default()
      }
---- rustc-1.76.0-src/src/bootstrap/src/core/builder.rs.~1~	2024-02-09 11:09:32.003538292 +0000
-+++ rustc-1.76.0-src/src/bootstrap/src/core/builder.rs	2024-02-09 11:18:28.879449249 +0000
-@@ -1686,16 +1686,20 @@
-                 rustflags.arg("-Zosx-rpath-install-name");
+--- rustc-1.78.0-src/src/bootstrap/src/core/builder.rs.~1~	2024-05-10 19:48:28.821487288 +0000
++++ rustc-1.78.0-src/src/bootstrap/src/core/builder.rs	2024-05-10 19:50:54.674454903 +0000
+@@ -2415,16 +2415,20 @@
+                 self.rustflags.arg("-Zosx-rpath-install-name");
                  Some(format!("-Wl,-rpath,@loader_path/../{libdir}"))
              } else if !target.is_windows() && !target.contains("aix") && !target.contains("xous") {
--                rustflags.arg("-Clink-args=-Wl,-z,origin");
-+                rustflags.arg("-Clink-arg=-Wl,-z,origin");
+-                self.rustflags.arg("-Clink-args=-Wl,-z,origin");
++                self.rustflags.arg("-Clink-arg=-Wl,-z,origin");
                  Some(format!("-Wl,-rpath,$ORIGIN/../{libdir}"))
              } else {
                  None
              };
              if let Some(rpath) = rpath {
--                rustflags.arg(&format!("-Clink-args={rpath}"));
-+                rustflags.arg(&format!("-Clink-arg={rpath}"));
+-                self.rustflags.arg(&format!("-Clink-args={rpath}"));
++                self.rustflags.arg(&format!("-Clink-arg={rpath}"));
              }
          }
  
 +        // Disable .SUNW_ldynsym sections on Solaris,
 +        // as llvm cannot read the linked SHT_SYMTAB_SHNDX
-+        rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
++        self.rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
 +
-         cargo.env(profile_var("STRIP"), self.config.rust_strip.to_string());
- 
-         if let Some(stack_protector) = &self.config.rust_stack_protector {
+         for arg in linker_args(builder, compiler.host, LldThreads::Yes) {
+             self.hostflags.arg(&arg);
+         }
