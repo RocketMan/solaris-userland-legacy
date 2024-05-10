@@ -44,8 +44,10 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 
 $(SOLARIS_11_3_ONLY)CFLAGS += -D__EXTENSIONS__ -D_XOPEN_SOURCE=600 -D_XPG6
 
-CONFIGURE_OPTIONS += -Denable_docs=true
-CONFIGURE_OPTIONS.32 += -Dgir=false
+#CONFIGURE_OPTIONS += -Denable_docs=true
+#CONFIGURE_OPTIONS.32 += -Dgir=false
+
+CONFIGURE_OPTIONS += -Dfontconfig=disabled
 
 # doc build requires python modules we don't have (markdown, typogrify)
 CONFIGURE_OPTIONS += -Dgtk_doc=false

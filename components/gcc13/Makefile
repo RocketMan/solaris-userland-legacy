@@ -25,6 +25,7 @@
 export PARFAIT_BUILD=no
 BUILD_BITS= 64
 COMPILER= gcc
+GCC_ROOT= /usr/gcc/10
 
 # Gcc often fails when it is _not_ built in mulitple parallel jobs. This can
 # happen when full gate is built.
@@ -111,7 +112,7 @@ CONFIGURE_LIBDIR.64 = $(CONFIGURE_PREFIX)/lib
 
 CONFIGURE_OPTIONS +=	--infodir=$(CONFIGURE_INFODIR)
 CONFIGURE_OPTIONS +=	--libexecdir=$(CONFIGURE_PREFIX)/lib
-CONFIGURE_OPTIONS +=	--enable-languages="c,c++,fortran,go,objc"
+CONFIGURE_OPTIONS +=	--enable-languages="c,c++,go"
 CONFIGURE_OPTIONS +=	--enable-shared
 CONFIGURE_OPTIONS +=	--enable-initfini-array
 CONFIGURE_OPTIONS +=	--disable-rpath
@@ -218,7 +219,7 @@ PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gcc-ar
 PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gcc-nm
 PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gcc-ranlib
 PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gccgo
-PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gfortran
+#PKG_HARDLINKS += usr/gcc/$(GCC_MAJOR_VERSION)/bin/gfortran
 
 
 REQUIRED_PACKAGES += compress/zstd

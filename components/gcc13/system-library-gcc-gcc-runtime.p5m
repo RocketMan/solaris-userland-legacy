@@ -37,5 +37,3 @@ set name=org.opensolaris.arc-caseid value=PSARC/2023/054
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 depend type=group fmri=pkg:/system/library/gcc/gcc-c++-runtime
 depend type=group fmri=pkg:/system/library/gcc/gcc-c-runtime
-depend type=group fmri=pkg:/system/library/gcc/gcc-gfortran-runtime
-depend type=group fmri=pkg:/system/library/gcc/gcc-gobjc-runtime
