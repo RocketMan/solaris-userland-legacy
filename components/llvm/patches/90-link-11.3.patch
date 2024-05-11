@@ -31,9 +31,9 @@ Segmentation Fault
 
 
 In other cases (such as rust), larger .so files resulted in the
-inclusion of Solaris .SUNW_ldynsym sections, which had presented
-similar problems; however, adding the -znoldynsym linker switch to
-suppress those sections did not clear the issue here.
+inclusion of Solais .SUNW_ldynsym sections, which had presented
+similar problems; however, adding the -znoldynsym switch to suppress
+those sections did not clear the issue here.
 
 As a workaround, this patch adds NO_INSTALL_PATH to prevent patching
 the RPATH/RUNPATH.  CAUTION: This means the build directory will be
