@@ -1,0 +1,10 @@
+--- harfbuzz-7.1.0/src/hb-string-array.hh~	2023-03-02 23:07:04.000000000 +0000
++++ harfbuzz-7.1.0/src/hb-string-array.hh	2024-05-25 15:28:17.895250919 +0000
+@@ -45,6 +45,7 @@
+  * but C++ does not allow that.
+  * https://stackoverflow.com/q/28433862
+  */
++#undef _S
+ #define _S(s) char HB_PASTE (str, __LINE__)[sizeof (s)];
+ #include HB_STRING_ARRAY_LIST
+ #undef _S
