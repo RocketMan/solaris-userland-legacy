@@ -24,11 +24,15 @@
 dir  path=etc/fonts group=sys
 dir  path=etc/fonts/conf.avail group=sys
 file files/20-indic.conf path=etc/fonts/conf.avail/20-indic.conf
+file files/35-prefer-nimbus.conf \
+    path=etc/fonts/conf.avail/35-prefer-nimbus.conf
 file files/49-sun-preuser.conf path=etc/fonts/conf.avail/49-sun-preuser.conf
 file files/90-sun-prefer-bitmap.conf \
     path=etc/fonts/conf.avail/90-sun-prefer-bitmap.conf
 dir  path=etc/fonts/conf.d group=sys
 link path=etc/fonts/conf.d/20-indic.conf target=../conf.avail/20-indic.conf
+link path=etc/fonts/conf.d/35-prefer-nimbus.conf \
+    target=../conf.avail/35-prefer-nimbus.conf
 link path=etc/fonts/conf.d/49-sun-preuser.conf \
     target=../conf.avail/49-sun-preuser.conf
 link path=etc/fonts/conf.d/90-sun-prefer-bitmap.conf \

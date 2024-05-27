@@ -67,6 +67,7 @@ file path=etc/fonts/conf.avail/20-unhint-small-vera.conf
 file path=etc/fonts/conf.avail/25-unhint-nonlatin.conf
 file path=etc/fonts/conf.avail/30-metric-aliases.conf
 file path=etc/fonts/conf.avail/35-lang-normalize.conf
+file files/35-prefer-nimbus.conf path=etc/fonts/conf.avail/35-prefer-nimbus.conf
 file path=etc/fonts/conf.avail/40-nonlatin.conf
 file path=etc/fonts/conf.avail/45-generic.conf
 file path=etc/fonts/conf.avail/45-latin.conf
@@ -99,6 +100,8 @@ link path=etc/fonts/conf.d/20-unhint-small-vera.conf \
     target=../conf.avail/20-unhint-small-vera.conf
 link path=etc/fonts/conf.d/30-metric-aliases.conf \
     target=../conf.avail/30-metric-aliases.conf
+link path=etc/fonts/conf.d/35-prefer-nimbus.conf \
+    target=../conf.avail/35-prefer-nimbus.conf
 link path=etc/fonts/conf.d/40-nonlatin.conf \
     target=../conf.avail/40-nonlatin.conf
 link path=etc/fonts/conf.d/45-generic.conf target=../conf.avail/45-generic.conf
