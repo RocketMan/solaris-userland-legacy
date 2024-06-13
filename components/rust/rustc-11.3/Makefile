@@ -31,12 +31,12 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.78.0
+COMPONENT_VERSION =	1.79.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:8065824f0255faa3901db8206e6f9423f6f8c07cec28bc6f2797c6c948310ece
+    sha256:ab826e84b8d48ec6eda3370065034dea8c006f6a946d78a9ba12bcb50e6d3c7a
 
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
@@ -109,10 +109,10 @@ CLEAN_PATHS += epoll/gcc
 
 VENDORED_SOURCES_ENFORCE = \
         cd $(BUILD_DIR); mkdir -p .cargo; \
-        echo "[source.crates-io]" > .cargo/config; \
-        echo "replace-with = \"vendored-sources\"" >> .cargo/config; \
-        echo "[source.vendored-sources]" >> .cargo/config; \
-        echo "directory = \"$(SOURCE_DIR)/vendor\"" >> .cargo/config;
+        echo "[source.crates-io]" > .cargo/config.toml; \
+        echo "replace-with = \"vendored-sources\"" >> .cargo/config.toml; \
+        echo "[source.vendored-sources]" >> .cargo/config.toml; \
+        echo "directory = \"$(SOURCE_DIR)/vendor\"" >> .cargo/config.toml;
 
 COMPONENT_PRE_BUILD_ACTION = $(VENDORED_SOURCES_ENFORCE)
 
