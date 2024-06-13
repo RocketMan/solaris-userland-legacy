@@ -932,6 +932,7 @@ ENV =		/usr/bin/env
 FIND =		/usr/bin/find
 INSTALL =	/usr/bin/ginstall
 GNU_GREP =	/usr/gnu/bin/grep
+GNU_MV =	/usr/gnu/bin/mv
 CHMOD =		/usr/bin/chmod
 NAWK =		/usr/bin/nawk
 TAR =		/usr/bin/tar
