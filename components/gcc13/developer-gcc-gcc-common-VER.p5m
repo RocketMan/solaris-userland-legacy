@@ -102,7 +102,6 @@ file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/dat/dat_platform_specific.h
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/fribidi/fribidi-types.h
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/gc/gc_config_macros.h
-file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/harfbuzz/hb-common.h
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/iso/math_iso.h
 file path=$(GCC_BASEDIR)/lib/gcc/$(GNU_ARCH)/$(COMPONENT_VERSION)/include-fixed/iso/stdio_iso.h
 file \
