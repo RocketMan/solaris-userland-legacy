@@ -104,8 +104,8 @@ link path=usr/bin/llvm-ranlib target=llvm-ar
 file path=usr/bin/llvm-rc
 link path=usr/bin/llvm-readelf target=llvm-readobj
 file path=usr/bin/llvm-readobj
+file path=usr/bin/llvm-readtapi
 file path=usr/bin/llvm-reduce
-file path=usr/bin/llvm-remark-size-diff
 file path=usr/bin/llvm-remarkutil
 file path=usr/bin/llvm-rtdyld
 file path=usr/bin/llvm-sim
@@ -115,7 +115,6 @@ file path=usr/bin/llvm-stress
 file path=usr/bin/llvm-strings
 link path=usr/bin/llvm-strip target=llvm-objcopy
 file path=usr/bin/llvm-symbolizer
-file path=usr/bin/llvm-tapi-diff
 file path=usr/bin/llvm-tblgen
 file path=usr/bin/llvm-tli-checker
 file path=usr/bin/llvm-undname

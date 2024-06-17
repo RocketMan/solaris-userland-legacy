@@ -3,10 +3,10 @@ https://reviews.llvm.org/D35755?id=110190
 
 --- a/tools/clang/lib/Driver/ToolChains/Solaris.cpp
 +++ b/tools/clang/lib/Driver/ToolChains/Solaris.cpp
-@@ -193,7 +193,7 @@
+@@ -328,7 +328,7 @@
    // If we are currently running Clang inside of the requested system root,
    // add its parent library path to those searched.
-   if (StringRef(D.Dir).startswith(D.SysRoot))
+   if (StringRef(D.Dir).starts_with(D.SysRoot))
 -    addPathIfExists(D, D.Dir + "/../lib", Paths);
 +    addPathIfExists(D, D.Dir + "/../lib" + LibSuffix, Paths);
  
