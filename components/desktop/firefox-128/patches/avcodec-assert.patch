@@ -1,0 +1,18 @@
+--- firefox-128.0/media/ffvpx/libavcodec/version.c-	2024-07-04 17:20:32.000000000 +0000
++++ firefox-128.0/media/ffvpx/libavcodec/version.c	2024-07-09 21:17:33.570893756 +0000
+@@ -31,6 +31,7 @@
+ 
+ unsigned avcodec_version(void)
+ {
++#if !defined(__sun)
+     static_assert(AV_CODEC_ID_LEAD         ==   269 &&
+                   AV_CODEC_ID_PCM_SGA      == 65572 &&
+                   AV_CODEC_ID_ADPCM_XMD    == 69683 &&
+@@ -40,6 +41,7 @@
+                   AV_CODEC_ID_SMPTE_2038   == 98315,
+                   "Don't insert new codec ids in the middle of a list");
+     static_assert(LIBAVCODEC_VERSION_MICRO >= 100, "micro version starts at 100");
++#endif
+ 
+     return LIBAVCODEC_VERSION_INT;
+ }

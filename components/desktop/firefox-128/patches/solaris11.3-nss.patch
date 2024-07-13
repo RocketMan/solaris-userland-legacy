@@ -1,0 +1,26 @@
+--- firefox-128.0/security/nss/lib/freebl/blapi.h-	2024-07-11 23:54:48.878226582 +0000
++++ firefox-128.0/security/nss/lib/freebl/blapi.h	2024-07-12 12:13:24.107234257 +0000
+@@ -14,6 +14,23 @@
+ #include "alghmac.h"
+ #include "kyber.h"
+ 
++// On Solaris 11.3, the runtime loader prefers the (stale) system
++// libucrypto.so for these symbols rather than local.
++//
++// Rename the local implementations and references so there is no ambiguity.
++#if defined(__sun)
++#define EC_NewKey __wrap_EC_NewKey
++#define EC_NewKeyFromSeed __wrap_EC_NewKeyFromSeed
++#define EC_ValidatePublicKey __wrap_EC_ValidatePublicKey
++#define EC_FillParams __wrap_EC_FillParams
++#define EC_DecodeParams __wrap_EC_DecodeParams
++#define EC_CopyParams __wrap_EC_CopyParams
++#define ECDH_Derive __wrap_ECDH_Derive
++#define ECDSA_SignDigest __wrap_ECDSA_SignDigest
++#define ECDSA_VerifyDigest __wrap_ECDSA_VerifyDigest 
++#define ECDSA_SignDigestWithSeed __wrap_ECDSA_SignDigestWithSeed
++#endif
++
+ SEC_BEGIN_PROTOS
+ 
+ /*

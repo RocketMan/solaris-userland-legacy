@@ -1,0 +1,20 @@
+--- firefox-115.0/build/cargo-linker~	2023-06-29 16:58:49.000000000 +0000
++++ firefox-115.0/build/cargo-linker	2023-07-01 17:05:28.738913533 +0000
+@@ -41,17 +41,6 @@
+ for arg in sys.argv[1:]:
+     if arg in ["-lc++", "-lstdc++"]:
+         wrap_ld = os.environ["MOZ_CARGO_WRAP_LD_CXX"]
+-    elif use_clang_sanitizer and arg.endswith("san.a"):
+-        # When clang is newer than rustc's LLVM, we replace rust's sanitizer
+-        # runtimes with clang's.
+-        filename = os.path.basename(arg)
+-        prefix, dot, suffix = filename[:-2].rpartition(".")
+-        if (
+-            prefix.startswith("librustc-")
+-            and prefix.endswith("_rt") and dot == "."
+-        ):
+-            args.append(f"-fsanitize={SANITIZERS[suffix]}")
+-            continue
+     args.append(arg)
+ 
+ wrap_ld = wrap_ld.split()
