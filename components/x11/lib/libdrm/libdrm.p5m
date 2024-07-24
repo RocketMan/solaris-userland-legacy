@@ -63,8 +63,10 @@ file path=usr/include/libkms/libkms.h
 file path=usr/include/libsync.h
 file path=usr/include/xf86drm.h
 file path=usr/include/xf86drmMode.h
+link path=usr/lib/$(MACH64)/libdrm.so.2 target=../xorg/$(MACH64)/libdrm.so.2
 file path=usr/lib/$(MACH64)/pkgconfig/libdrm.pc
 file path=usr/lib/$(MACH64)/pkgconfig/libkms.pc
+link path=usr/lib/libdrm.so.2 target=xorg/libdrm.so.2
 file path=usr/lib/pkgconfig/libdrm.pc
 file path=usr/lib/pkgconfig/libkms.pc
 link path=usr/lib/xorg/$(MACH64)/libdrm.so target=libdrm.so.2.4.0
