@@ -82,7 +82,7 @@ INSTALL_32_and_64 = $(INSTALL_64)
 endif
 
 PYTHON_ENV =	CC="$(CC)"
-ifeq ($(COMPILER),gcc)
+ifneq (,$(filter $(COMPILER),gcc clang))
 PYTHON_ENV +=	CXX="$(CXX)"
 PYTHON_ENV +=	LDSHARED="$(CC) -shared"
 PYTHON_ENV +=	LDCXXSHARED="$(CXX) -shared"

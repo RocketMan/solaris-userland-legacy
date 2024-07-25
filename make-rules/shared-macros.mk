@@ -680,6 +680,12 @@ CXX.gcc.32 =	$(GCC_ROOT)/bin/g++
 CC.gcc.64 =	$(GCC_ROOT)/bin/gcc
 CXX.gcc.64 =	$(GCC_ROOT)/bin/g++
 
+CC.clang.32 =	/usr/bin/clang
+CXX.clang.32 =	/usr/bin/clang++
+
+CC.clang.64 =	/usr/bin/clang
+CXX.clang.64 =	/usr/bin/clang++
+
 lint.32 =	$(SPRO_VROOT)/bin/lint -m32
 lint.64 =	$(SPRO_VROOT)/bin/lint -m64
 
@@ -1142,7 +1148,9 @@ CXXFLAGS.studio +=	$(studio_OPT) $(studio_XBITS) $(studio_XREGS) \
 # and may segv on instructions like MOVAPS that require correct alignment,
 # so we override the gcc defaults until gcc fixes - see Oracle bug 21393975
 # or upstream bug https://gcc.gnu.org/bugzilla/show_bug.cgi?id=62281
+ifeq ($(COMPILER),gcc)
 gcc_STACK_ALIGN.i386.32 += -mincoming-stack-boundary=2
+endif
 
 # GCC Compiler optimization flag
 gcc_OPT.sparc.32 ?=	-O3
@@ -1182,6 +1190,18 @@ CFLAGS.gcc +=	$(gcc_FIX_PATH)
 CXXFLAGS.gcc +=		$(gcc_OPT)
 CXXFLAGS.gcc +=		$(gcc_XREGS)
 CXXFLAGS.gcc +=		$(gcc_FIX_PATH)
+
+# Default clang to use gcc flags
+clang_PIC +=		$(gcc_PIC)
+CFLAGS.clang +=		$(CFLAGS.gcc)
+CXXFLAGS.clang +=	$(CXXFLAGS.gcc)
+
+# If you have not built clang from the
+# https://github.com/RocketMan/solaris-userland-legacy or
+# https://github.com/RocketMan/solaris-ports repos,
+# you may need these as well:
+#CFLAGS.clang += -fno-use-cxa-atexit -Wa,-mrelax-relocations=no
+#CXXFLAGS.clang += -fno-use-cxa-atexit -Wa,-mrelax-relocations=no
 
 # Build 32 or 64 bit objects.
 CFLAGS +=	$(CC_BITS)
