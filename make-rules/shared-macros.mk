@@ -258,7 +258,7 @@ endif
 # BUILD_STYLE=
 
 # The default version should go last.
-PYTHON_VERSION =	3.7
+PYTHON_VERSION =	3.9
 PYTHON3_VERSIONS =	3.7 3.9 3.11
 PYTHON_VERSIONS =	$(PYTHON3_VERSIONS)
 
