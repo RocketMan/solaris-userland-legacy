@@ -29,14 +29,16 @@
 BUILD_BITS =	64
 COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
+# match version of libstdc++.so linked to libLLVM-nn.so
+GCC_ROOT =	/usr/gcc/13
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.79.0
+COMPONENT_VERSION =	1.80.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:ab826e84b8d48ec6eda3370065034dea8c006f6a946d78a9ba12bcb50e6d3c7a
+    sha256:0b9ca1e2e45b8a5f0b58db140af0dc92f8311faeb0ad883c5b71a72c02dc6e80
 
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
