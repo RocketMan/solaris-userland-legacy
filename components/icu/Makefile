@@ -53,7 +53,7 @@ PATH=$(GCC_ROOT)/bin:$(GNUBIN):$(USRBINDIR)
 
 include $(WS_MAKE_RULES)/common.mk
 
-CONFIGURE_SCRIPT = $(SOURCE_DIR)/icu/source/runConfigureICU Solaris/GCC
+CONFIGURE_SCRIPT = $(SOURCE_DIR)/icu/source/runConfigureICU Solaris/clang
 
 CONFIGURE_OPTIONS += --sysconfdir=$(ETCDIR)
 CONFIGURE_OPTIONS += --with-data-packaging=library
@@ -64,8 +64,8 @@ CONFIGURE_OPTIONS += --disable-renaming
 
 COMPILER = gcc
 
-CFLAGS += -D__EXTENSIONS__ -DDECCHECK -D_XOPEN_SOURCE=600
-CXXFLAGS += -D__EXTENSIONS__ -DDECCHECK -D_XOPEN_SOURCE=600 -std=c++11
+CFLAGS += -D__EXTENSIONS__ -DDECCHECK -U_XOPEN_SOURCE -D_XOPEN_SOURCE=600 -D_STDC_C99
+CXXFLAGS += -D__EXTENSIONS__ -DDECCHECK -U_XOPEN_SOURCE -D_XOPEN_SOURCE=600 -D_STDC_C99 -std=c++11
 
 include ../../make-rules/shared-targets.mk
 
@@ -78,4 +78,5 @@ COMPONENT_TEST_TRANSFORMS += \
 
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
+REQUIRED_PACKAGES += system/library/llvm/clang-c++-runtime
 REQUIRED_PACKAGES += system/library/math
