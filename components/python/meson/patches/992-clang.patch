@@ -1,0 +1,40 @@
+Solaris test needs to preceed test for apple clang, as clang on both
+platforms gives same message
+
+
+--- meson-1.2.2/mesonbuild/linkers/detect.py-	2023-09-29 10:27:13.000000000 +0000
++++ meson-1.2.2/mesonbuild/linkers/detect.py	2024-08-03 11:18:27.966657839 +0000
+@@ -185,6 +185,16 @@
+             v = search_version(o)
+ 
+         linker = linkers.LLVMDynamicLinker(compiler, for_machine, comp_class.LINKER_PREFIX, override, version=v)
++    elif 'Solaris' in e or 'Solaris' in o:
++        for line in (o+e).split('\n'):
++            if 'ld: Software Generation Utilities' in line:
++                v = line.split(':')[2].lstrip()
++                break
++        else:
++            v = 'unknown version'
++        linker = linkers.SolarisDynamicLinker(
++            compiler, for_machine, comp_class.LINKER_PREFIX, override,
++            version=v)
+     # first might be apple clang, second is for real gcc, the third is icc
+     elif e.endswith('(use -v to see invocation)\n') or 'macosx_version' in e or 'ld: unknown option:' in e:
+         if isinstance(comp_class.LINKER_PREFIX, str):
+@@ -211,16 +221,6 @@
+         else:
+             gnu_cls = linkers.GnuBFDDynamicLinker
+         linker = gnu_cls(compiler, for_machine, comp_class.LINKER_PREFIX, override, version=v)
+-    elif 'Solaris' in e or 'Solaris' in o:
+-        for line in (o+e).split('\n'):
+-            if 'ld: Software Generation Utilities' in line:
+-                v = line.split(':')[2].lstrip()
+-                break
+-        else:
+-            v = 'unknown version'
+-        linker = linkers.SolarisDynamicLinker(
+-            compiler, for_machine, comp_class.LINKER_PREFIX, override,
+-            version=v)
+     elif 'ld: 0706-012 The -- flag is not recognized' in e:
+         if isinstance(comp_class.LINKER_PREFIX, str):
+             _, _, e = Popen_safe(compiler + [comp_class.LINKER_PREFIX + '-V'] + extra_args)
