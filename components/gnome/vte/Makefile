@@ -26,7 +26,7 @@
 BUILD_BITS =            64
 # All components using gobject-introspection must be built with gcc as
 # gobject-introspection does not produce correct results when using Studio.
-COMPILER =              gcc
+COMPILER =              clang
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		vte
@@ -47,6 +47,13 @@ include $(WS_MAKE_RULES)/gnome-component.mk
 # g-ir-scanner
 CC_PIC_MODE = $(CC_PIC_DISABLE)
 LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
+
+ifeq ($(COMPILER),clang)
+CXXFLAGS += -D_XPG6 -D_STDC_C99
+CXXFLAGS += -stdlib=libc++
+CXXFLAGS += -Wno-cast-function-type-strict -Wno-macro-redefined
+CFLAGS += -Wno-cast-function-type-strict -Wno-macro-redefined
+endif
 
 # Assumes GNU xgettext in PATH
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
@@ -72,6 +79,10 @@ CONFIGURE_OPTIONS += -D_systemd=false
 #CONFIGURE_OPTIONS += -Ddebugg=true
 #CONFIGURE_OPTIONS += --buildtype debug
 
+CONFIGURE_OPTIONS.32 += -Dgtk4=false
+CONFIGURE_OPTIONS.32 += -Dgir=false
+CONFIGURE_OPTIONS.32 += -Dvapi=false
+
 REQUIRED_PACKAGES += developer/documentation-tool/gtk-doc
 REQUIRED_PACKAGES += developer/vala
 REQUIRED_PACKAGES += library/desktop/atk
@@ -89,4 +100,5 @@ REQUIRED_PACKAGES += library/pcre2
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
+REQUIRED_PACKAGES += system/library/llvm/clang-c++-runtime
 REQUIRED_PACKAGES += system/library/math
