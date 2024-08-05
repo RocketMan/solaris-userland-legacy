@@ -24,7 +24,7 @@
 #
 
 BUILD_BITS=		64
-COMPILER=		gcc
+COMPILER=		clang
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gnome-terminal
@@ -44,6 +44,12 @@ BUILD_STYLE=		meson
 MANIFEST_COMPARE=/usr/bin/true
 
 include $(WS_MAKE_RULES)/gnome-component.mk
+
+ifeq ($(COMPILER),clang)
+CXXFLAGS += -D_XPG6 -D_STDC_C99  -stdlib=libc++
+CXXFLAGS += -Wno-cast-function-type-strict -Wno-macro-redefined
+CFLAGS += -Wno-cast-function-type-strict -Wno-macro-redefined
+endif
 
 CONFIGURE_ENV += PATH=$(GNUBIN):$(PATH)
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
@@ -81,5 +87,6 @@ REQUIRED_PACKAGES += library/gnome/vte3
 REQUIRED_PACKAGES += library/gnutls-3
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
+REQUIRED_PACKAGES += system/library/llvm/clang-c++-runtime
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += x11/library/libx11
