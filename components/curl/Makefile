@@ -146,6 +146,7 @@ COMPONENT_TEST_TRANSFORMS += \
 	'-e "/ XPASS:/p" ' \
 	'-e "/ ERROR:/p" '
 
+REQUIRED_PACKAGES += library/brotli
 REQUIRED_PACKAGES += library/libidn2
 REQUIRED_PACKAGES += library/libssh2
 REQUIRED_PACKAGES += library/nghttp2
