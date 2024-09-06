@@ -1,0 +1,22 @@
+Revert to legacy initialisation of the standard stream objects.
+
+The 'new way' of initialising the streams, via the shared library,
+does not seem to get invoked on 11.3.  Ideally, we would find out
+why not and fix it.  For now, this patch reverts to the legacy
+behaviour.
+
+See https://developers.redhat.com/articles/2023/04/03/leaner-libstdc-gcc-13
+for a description of the problem space.
+
+
+--- gcc-13.2.0/libstdc++-v3/configure~	2023-07-27 09:13:08.000000000 +0000
++++ gcc-13.2.0/libstdc++-v3/configure	2024-06-16 12:51:57.116596132 +0000
+@@ -71768,7 +71768,7 @@
+   if test "$ac_init_priority" = yes; then
+ 
+ cat >>confdefs.h <<_ACEOF
+-#define _GLIBCXX_USE_INIT_PRIORITY_ATTRIBUTE 1
++#define _GLIBCXX_USE_INIT_PRIORITY_ATTRIBUTE 0
+ _ACEOF
+ 
+   fi
