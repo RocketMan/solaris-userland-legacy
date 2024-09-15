@@ -29,15 +29,15 @@ COMPILER= gcc
 include ../../../make-rules/shared-macros.mk
 
 MAJOR_VERSION=8.3
-MICRO_VERSION=0
+MICRO_VERSION=11
 
 COMPONENT_NAME=		php
 COMPONENT_VERSION=	$(MAJOR_VERSION).$(MICRO_VERSION)
 UL_PHP_MINOR_VERSION=	$(MAJOR_VERSION)
 COMPONENT_PROJECT_URL=	http://php.net/
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
-COMPONENT_ARCHIVE_HASH=\
-    sha256:1db84fec57125aa93638b51bb2b15103e12ac196e2f960f0d124275b2687ea54
+#COMPONENT_ARCHIVE_HASH=\
+#    sha256:1db84fec57125aa93638b51bb2b15103e12ac196e2f960f0d124275b2687ea54
 COMPONENT_ARCHIVE_URL=	http://php.net/get/$(COMPONENT_ARCHIVE)/from/this/mirror
 COMPONENT_ANITYA_ID=	57896
 
@@ -214,9 +214,6 @@ CLEAN_PATHS += proto-scripts
 
 # test results are unstable between runs but still useful for humans.
 $(SKIP_TEST_AT_TOP_LEVEL)
-
-clobber::
-	cd ../uw-imap; gmake clobber
 
 # Add directory for generate check
 GENERATE_PROTO_DIRS += files^files
