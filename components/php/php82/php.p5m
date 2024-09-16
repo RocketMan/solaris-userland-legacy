@@ -422,7 +422,6 @@ file path=usr/php/$(MAJOR_VERSION)/lib/extensions/$(EXTENSIONS)/exif.so
 file path=usr/php/$(MAJOR_VERSION)/lib/extensions/$(EXTENSIONS)/ftp.so
 file path=usr/php/$(MAJOR_VERSION)/lib/extensions/$(EXTENSIONS)/gettext.so
 file path=usr/php/$(MAJOR_VERSION)/lib/extensions/$(EXTENSIONS)/gmp.so
-file path=usr/php/$(MAJOR_VERSION)/lib/extensions/$(EXTENSIONS)/imap.so
 file path=usr/php/$(MAJOR_VERSION)/lib/extensions/$(EXTENSIONS)/intl.so
 file path=usr/php/$(MAJOR_VERSION)/lib/extensions/$(EXTENSIONS)/ldap.so
 file path=usr/php/$(MAJOR_VERSION)/lib/extensions/$(EXTENSIONS)/mbstring.so
