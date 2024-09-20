@@ -23,15 +23,15 @@
 # Copyright (c) 2015, 2022, Oracle and/or its affiliates.
 #
 
-BUILD_BITS = 32_and_64
+BUILD_BITS = 64
 COMPILER=gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		vala
-COMPONENT_VERSION=	0.56.13
+COMPONENT_VERSION=	0.56.17
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/Vala
 COMPONENT_ARCHIVE_HASH= \
-	sha256:4988223036c7e1e4874c476d0de8bd9cbe500ee25ef19a76e560dc0b6d56ae07
+	sha256:26100c4e4ef0049c619275f140d97cf565883d00c7543c82bcce5a426934ed6a
 COMPONENT_BUGDB=        gnome/dev-tools
 COMPONENT_ANITYA_ID=	5065
 
