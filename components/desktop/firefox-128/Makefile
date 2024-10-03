@@ -37,7 +37,7 @@ GCC_ROOT=/usr/gcc/10
 ESR = esr
 
 COMPONENT_NAME =	firefox
-COMPONENT_VERSION =	128.2.0
+COMPONENT_VERSION =	128.3.0
 COMPONENT_PROJECT_URL =	http://www.mozilla.com/firefox
 COMPONENT_SRC_NAME =	$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_SRC = 	$(COMPONENT_SRC_NAME)
@@ -139,8 +139,20 @@ LD_MAP_NOEXBSS.sparc=
 # libmozgtk needs to link to gtk3 and others
 LD_Z_IGNORE=
 
-# missing symbols from gtk3 during Firefox start
-LD_B_DIRECT=
+# JM 2024-10-03 Firefox in the upstream gate and OI userland
+# supply an empty LD_B_DIRECT to disable -Bdirect, ostensibly on
+# account of 'missing symbols from gtk3 during Firefox start'.
+#
+# This does not seem to the case anymore, and probably has not been
+# for many years.
+#
+# Removed the empty LD_B_DIRECT here so -Bdirect is automatically
+# appended by the gate.  This allows Firefox to link to its local NSS
+# symbols rather than stale ones in the system libucrypt.so, which is
+# otherwise a problem in 128esr on 11.3.  More importantly, it helps prevent
+# similar issues going forward.
+#
+# With this change, we can deprecate the erstwhile `solaris11.3-nss.patch`.
 
 MANIFEST_COMPARE=/usr/bin/true
 
