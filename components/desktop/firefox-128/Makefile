@@ -30,9 +30,8 @@
 export PARFAIT_BUILD=no
 
 BUILD_BITS = 64
-COMPILER = gcc
+COMPILER = clang
 include ../../../make-rules/shared-macros.mk
-GCC_ROOT=/usr/gcc/10
 
 ESR = esr
 
@@ -129,6 +128,8 @@ COMPONENT_PRE_CONFIGURE_ACTION += \
 #	echo "ac_add_options --disable-memory-sanitizer" >> $(MOZCONFIG) ;
 
 CXXFLAGS += -Wno-invalid-offsetof -fpermissive
+CXXFLAGS += -stdlib=libc++
+LDFLAGS += -lc++
 #CXXFLAGS += -fno-use-cxa-atexit
 
 LD_SECEXT_OPTIONS += $(SSBD_ENABLE)
@@ -257,6 +258,7 @@ REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/libdbus
 REQUIRED_PACKAGES += system/library/libdbus-glib
+REQUIRED_PACKAGES += system/library/llvm/clang-c++-runtime
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += web/browser/lynx
 REQUIRED_PACKAGES += x11/library/libx11
