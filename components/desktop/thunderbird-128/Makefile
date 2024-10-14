@@ -30,14 +30,13 @@
 export PARFAIT_BUILD=no
 
 BUILD_BITS = 64
-COMPILER = gcc
+COMPILER = clang
 include ../../../make-rules/shared-macros.mk
-GCC_ROOT=/usr/gcc/10
 
 ESR = esr
 
 COMPONENT_NAME =	thunderbird
-COMPONENT_VERSION =	128.1.1
+COMPONENT_VERSION =	128.3.1
 COMPONENT_PROJECT_URL =	https://www.thunderbird.net/
 COMPONENT_ARCHIVE = 	$(COMPONENT_SRC)$(ESR).source.tar.xz
 #COMPONENT_ARCHIVE_HASH= \
@@ -133,6 +132,8 @@ COMPONENT_PRE_CONFIGURE_ACTION += \
 	echo "ac_add_options --without-wasm-sandboxed-libraries" >> $(MOZCONFIG) ;
 
 CXXFLAGS += -Wno-invalid-offsetof -fpermissive
+CXXFLAGS += -stdlib=libc++
+LDFLAGS += -lc++
 
 # 28395728
 LD_MAP_NOEXBSS.sparc=
@@ -140,8 +141,20 @@ LD_MAP_NOEXBSS.sparc=
 # libmozgtk needs to link to gtk3 and others
 LD_Z_IGNORE=
 
-# missing symbols from gtk3 during Firefox start
-LD_B_DIRECT=
+# JM 2024-10-03 Firefox in the upstream gate and OI userland
+# supply an empty LD_B_DIRECT to disable -Bdirect, ostensibly on
+# account of 'missing symbols from gtk3 during Firefox start'.
+#
+# This does not seem to the case anymore, and probably has not been
+# for many years.
+#
+# Removed the empty LD_B_DIRECT here so -Bdirect is automatically
+# appended by the gate.  This allows Firefox to link to its local NSS
+# symbols rather than stale ones in the system libucrypt.so, which is
+# otherwise a problem in 128esr on 11.3.  More importantly, it helps prevent
+# similar issues going forward.
+#
+# With this change, we can deprecate the erstwhile `solaris11.3-nss.patch`.
 
 # SPARC build seems to require more open files for "Reticulating splines" phase
 ENV := ulimit -n 16384; $(ENV)
@@ -244,6 +257,7 @@ REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/libdbus
 REQUIRED_PACKAGES += system/library/libdbus-glib
+REQUIRED_PACKAGES += system/library/llvm/clang-c++-runtime
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += web/browser/lynx
 REQUIRED_PACKAGES += x11/library/libx11
