@@ -49,7 +49,6 @@ CC_PIC_MODE = $(CC_PIC_DISABLE)
 LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 
 ifeq ($(COMPILER),clang)
-CXXFLAGS += -D_XPG6 -D_STDC_C99
 CXXFLAGS += -stdlib=libc++
 CXXFLAGS += -Wno-cast-function-type-strict -Wno-macro-redefined
 CFLAGS += -Wno-cast-function-type-strict -Wno-macro-redefined
