@@ -2,13 +2,14 @@ Avoids name collision with definitions from Solaris header sys/regset.h.
 
 --- rustc-1.76.0-src/compiler/rustc_llvm/llvm-wrapper/LLVMWrapper.h.~1~	2024-02-09 11:21:24.747442329 +0000
 +++ rustc-1.76.0-src/compiler/rustc_llvm/llvm-wrapper/LLVMWrapper.h	2024-02-09 11:22:39.752528767 +0000
-@@ -1,3 +1,14 @@
+@@ -1,3 +1,15 @@
 +// Avoid collision in llvm header files with constants defined
 +// in Solaris regset.h header (intel only issue + built with gcc).
 +#if defined(__sun__) && !defined(__sparc__)
 +#include <sys/regset.h>
 +#undef CS
 +#undef DS
++#undef ES
 +#undef FS
 +#undef OS
 +#undef SS

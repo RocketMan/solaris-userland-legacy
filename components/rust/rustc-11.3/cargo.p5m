@@ -44,6 +44,7 @@ file path=usr/share/man/man1/cargo-fetch.1
 file path=usr/share/man/man1/cargo-fix.1
 file path=usr/share/man/man1/cargo-generate-lockfile.1
 file path=usr/share/man/man1/cargo-help.1
+file path=usr/share/man/man1/cargo-info.1
 file path=usr/share/man/man1/cargo-init.1
 file path=usr/share/man/man1/cargo-install.1
 file path=usr/share/man/man1/cargo-locate-project.1
