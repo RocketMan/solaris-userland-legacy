@@ -44,6 +44,9 @@ include $(WS_MAKE_RULES)/test-x11.mk
 COMPONENT_BUILD_ENV += PATH="$(GNUBIN):$(PATH)"
 COMPONENT_INSTALL_ENV += PATH="$(GNUBIN):$(PATH)"
 
+# tests have link error on 11.3
+CONFIGURE_OPTIONS += -Dtests=false
+
 # g-ir-scanner
 CC_PIC_MODE = $(CC_PIC_DISABLE)
 LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
