@@ -1,0 +1,15 @@
+GL flashes during initial window display on NVIDIA/Solaris
+
+Use cairo as default for now.
+
+--- gtk-4.12.4/gsk/gskrenderer.c~	2023-11-17 20:29:11.000000000 +0000
++++ gtk-4.12.4/gsk/gskrenderer.c	2024-10-25 16:32:38.427962510 +0000
+@@ -572,7 +572,7 @@
+ static GType
+ get_renderer_for_backend (GdkSurface *surface)
+ {
+-#ifdef GDK_WINDOWING_X11
++#if defined(GDK_WINDOWING_X11) && !defined(__sun)
+   if (GDK_IS_X11_SURFACE (surface))
+     return GSK_TYPE_GL_RENDERER;
+ #endif

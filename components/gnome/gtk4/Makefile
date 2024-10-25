@@ -68,6 +68,7 @@ COMPONENT_TEST_TRANSFORMS += \
         '-e "/Timeout:/p" '
 
 REQUIRED_PACKAGES += image/library/libjpeg
+REQUIRED_PACKAGES += image/library/libpng14
 REQUIRED_PACKAGES += image/library/libpng16
 REQUIRED_PACKAGES += image/library/librsvg
 REQUIRED_PACKAGES += image/library/libtiff
