@@ -1,3 +1,4 @@
+
 #
 # CDDL HEADER START
 #
@@ -98,7 +99,7 @@ file path=usr/lib/$(MACH64)/libgirepository-1.0.so.1.0.0
 file path=usr/lib/$(MACH64)/pkgconfig/gobject-introspection-1.0.pc
 file path=usr/lib/$(MACH64)/pkgconfig/gobject-introspection-no-export-1.0.pc
 file path=usr/lib/gobject-introspection/giscanner/__init__.py
-file path=usr/lib/gobject-introspection/giscanner/_giscanner.cpython-311.so \
+file path=usr/lib/gobject-introspection/giscanner/_giscanner.cpython-39.so \
     pkg.linted.userland.action001.2=true
 file path=usr/lib/gobject-introspection/giscanner/_version.py
 file path=usr/lib/gobject-introspection/giscanner/annotationmain.py

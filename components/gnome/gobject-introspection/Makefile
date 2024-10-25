@@ -31,17 +31,17 @@ BUILD_BITS =		64
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gobject-introspection
-COMPONENT_VERSION=	1.70.0
+COMPONENT_VERSION=	1.76.1
 COMPONENT_PROJECT_URL=	https://wiki.gnome.org/Projects/GObjectIntrospection
 COMPONENT_ARCHIVE_HASH= \
-    sha256:902b4906e3102d17aa2fcb6dad1c19971c70f2a82a159ddc4a94df73a3cafc4a
+    sha256:196178bf64345501dcdc4d8469b36aa6fe80489354efe71cb7cb8ab82a3738bf
 COMPONENT_BUGDB=        gnome/libraries
 COMPONENT_ANITYA_ID=	1223
 
 COMPONENT_BAID=		109048
 BUILD_STYLE=		meson
 
-PYTHON_VERSION = 3.11
+PYTHON_VERSION = 3.9
 
 include $(WS_MAKE_RULES)/gnome-component.mk
 
@@ -110,7 +110,7 @@ REQUIRED_PACKAGES += developer/parser/bison
 REQUIRED_PACKAGES += library/desktop/cairo
 REQUIRED_PACKAGES += library/glib2
 REQUIRED_PACKAGES += library/libffi
-REQUIRED_PACKAGES += runtime/python-311
+REQUIRED_PACKAGES += runtime/python-39
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/iconv/iconv-core
 REQUIRED_PACKAGES += system/library/math
