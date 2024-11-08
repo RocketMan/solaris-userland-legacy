@@ -29,12 +29,12 @@ BUILD_BITS =            64_and_32
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		cairo
-COMPONENT_VERSION=	1.17.8
+COMPONENT_VERSION=	1.18.2
 COMPONENT_PROJECT_URL=	http://cairographics.org
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH= \
-    sha256:5b10c8892d1b58d70d3f0ba5b47863a061262fa56b9dc7944161f8c8b783bc64
-COMPONENT_ARCHIVE_URL=	https://cairographics.org/snapshots/$(COMPONENT_ARCHIVE)
+    sha256:a62b9bb42425e844cc3d6ddde043ff39dbabedd1542eba57a2eb79f85889d45a
+COMPONENT_ARCHIVE_URL=	https://cairographics.org/releases/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	library/cairo
 COMPONENT_ANITYA_ID=	247
 
