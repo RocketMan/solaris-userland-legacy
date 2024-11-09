@@ -30,10 +30,10 @@ BUILD_BITS =		64_and_32
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		pango
-COMPONENT_VERSION=	1.50.11
+COMPONENT_VERSION=	1.54.0
 COMPONENT_PROJECT_URL=	http://www.pango.org/
 COMPONENT_ARCHIVE_HASH= \
-    sha256:8800f812d89ee61388188703203f3a7878963c22f8695aaf1fa0a1a1428d17ae
+    sha256:8a9eed75021ee734d7fc0fdf3a65c3bba51dfefe4ae51a9b414a60c70b2d1ed8
 COMPONENT_BUGDB=	gnome/pango
 COMPONENT_ANITYA_ID=	11783
 
@@ -47,12 +47,12 @@ $(SOLARIS_11_3_ONLY)CFLAGS += -D__EXTENSIONS__ -D_XOPEN_SOURCE=600 -D_XPG6
 #CONFIGURE_OPTIONS += -Denable_docs=true
 #CONFIGURE_OPTIONS.32 += -Dgir=false
 
-CONFIGURE_OPTIONS += -Dfontconfig=disabled
+#CONFIGURE_OPTIONS += -Dfontconfig=disabled
 
 # doc build requires python modules we don't have (markdown, typogrify)
-CONFIGURE_OPTIONS += -Dgtk_doc=false
+CONFIGURE_OPTIONS += -Ddocumentation=false
 CONFIGURE_OPTIONS.32 += -Dintrospection=disabled
-CONFIGURE_OPTIONS += -Dinstall-tests=true
+#CONFIGURE_OPTIONS += -Dinstall-tests=true
 
 # Workaround for build failures due to pango Makefiles not passing CFLAGS or
 # LDFLAGS, especially the -m32/64 flag, to g-ir-scanner
