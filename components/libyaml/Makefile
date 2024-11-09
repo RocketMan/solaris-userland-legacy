@@ -27,6 +27,7 @@ BUILD_BITS= 64
 
 # The Makefile of this component does not support multiple build jobs.
 COMPONENT_MAKE_JOBS=1
+COMPILER=clang
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libyaml
