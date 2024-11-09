@@ -28,12 +28,12 @@ BUILD_BITS =		64
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		gtk4
-COMPONENT_VERSION=	4.12.4
+COMPONENT_VERSION=	4.16.5
 COMPONENT_PROJECT_URL=	https://www.gtk.org/
 COMPONENT_SRC=		gtk-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:ba67c6498e5599f928edafb9e08a320adfaa50ab2f0da6fc6ab2252fc2d57520
-COMPONENT_ARCHIVE_URL=	https://download.gnome.org/sources/gtk/4.12/$(COMPONENT_ARCHIVE)
+    sha256:302d6813fbed95c419fb3ab67c5da5e214882b6a645c3eab9028dfb91ab418a4
+COMPONENT_ARCHIVE_URL=	https://download.gnome.org/sources/gtk/4.16/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	gnome/gtk+
 COMPONENT_ANITYA_ID=	13942
 
@@ -57,6 +57,9 @@ LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 CONFIGURE_OPTIONS += -Dwayland-backend=false
 CONFIGURE_OPTIONS += -Dman-pages=true
 CONFIGURE_OPTIONS += -Dintrospection=enabled
+CONFIGURE_OPTIONS += -Dvulkan=disabled
+# temporary until we upgrade gstreamer to 1.24.0 or later
+CONFIGURE_OPTIONS += -Dmedia-gstreamer=disabled
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-$(MACH64).master
 COMPONENT_TEST_TRANSFORMS += \
