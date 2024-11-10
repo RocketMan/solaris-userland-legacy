@@ -22,7 +22,7 @@ This makes libadwaita more like libhandy for gtk4.
  
 -    if (!adw_is_granite_present () && !g_getenv ("GTK_THEME")) {
 +    // respect non-Adwaita themes
-+    if (!adw_is_granite_present () && !g_getenv ("GTK_THEME") && strcasestr (theme_name, "adwaita")) {
++    if (!adw_is_granite_present () && strcasestr (g_getenv ("GTK_THEME") ?: theme_name, "default")) {
        g_object_set (gtk_settings_get_for_display (self->display),
                      "gtk-theme-name", "Adwaita-empty",
                      NULL);

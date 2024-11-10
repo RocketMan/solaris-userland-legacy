@@ -28,10 +28,10 @@ COMPILER =		gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		libadwaita
-COMPONENT_VERSION=	1.3.6
+COMPONENT_VERSION=	1.6.1
 COMPONENT_PROJECT_URL=	https://gitlab.gnome.org/GNOME/libhandy
 COMPONENT_ARCHIVE_HASH=	\
-	sha256:cb8313dabe78a128415b93891d9aff2aba88ad58e3d5a54562e1f05fc9222979
+	sha256:d00ac845a4545d92e6805e31095a51c68f9f4e02426900472084b0cddce3f833
 COMPONENT_BUGDB=	gnome/libraries
 COMPONENT_ANITYA_ID=	234898
 
@@ -55,6 +55,7 @@ CFLAGS += -Wstack-protector -fdata-sections -fstack-protector-all
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-all.master
 
+REQUIRED_PACKAGES += library/desktop/appstream
 REQUIRED_PACKAGES += library/desktop/fribidi
 REQUIRED_PACKAGES += library/desktop/graphene
 REQUIRED_PACKAGES += library/desktop/gtk4
