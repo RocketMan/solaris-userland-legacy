@@ -59,7 +59,7 @@ CONFIGURE_OPTIONS += -Dman-pages=true
 CONFIGURE_OPTIONS += -Dintrospection=enabled
 CONFIGURE_OPTIONS += -Dvulkan=disabled
 # temporary until we upgrade gstreamer to 1.24.0 or later
-CONFIGURE_OPTIONS += -Dmedia-gstreamer=disabled
+#CONFIGURE_OPTIONS += -Dmedia-gstreamer=disabled
 
 COMPONENT_TEST_MASTER = $(COMPONENT_TEST_RESULTS_DIR)/results-$(MACH64).master
 COMPONENT_TEST_TRANSFORMS += \
