@@ -1,0 +1,18 @@
+Now that GIRepository has moved into the glib tree, there's a newer,
+incompatible version around.  That version will be picked by default,
+so we explicitly specify the correct version here.
+
+See:
+
+https://gitlab.gnome.org/GNOME/gjs/-/merge_requests/910
+
+--- gjs-1.70.2/modules/script/package.js~	2022-03-19 18:17:38.850943600 +0000
++++ gjs-1.70.2/modules/script/package.js	2024-11-13 19:55:38.508816594 +0000
+@@ -9,6 +9,7 @@
+  * This module provides a set of convenience APIs for building packaged
+  * applications.
+  */
++imports.gi.versions.GIRepository = '2.0';
+ 
+ const GLib = imports.gi.GLib;
+ const GIRepository = imports.gi.GIRepository;
