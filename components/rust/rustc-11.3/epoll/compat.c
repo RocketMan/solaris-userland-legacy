@@ -18,15 +18,17 @@
  *
  * CDDL HEADER END
  *
- * Copyright (c) 2022-2023 Jim Mason <jmason@ibinx.com>
+ * Copyright (c) 2022-2024 Jim Mason <jmason@ibinx.com>
  *
  * This file contains static shims for rust.
  */
 
+#include <sys/random.h>
 #include <sys/types.h>
 #include <unistd.h>
 #include <fcntl.h>
 #include <errno.h>
+#include <stdio.h>
 
 
 /**
@@ -58,4 +60,28 @@ int pipe2(int fd[2], int flags) {
   }
 
   return 0;
+}
+
+/**
+ * shim for arc4random_buf(3)
+ *
+ * like glibc, this function is a wrapper for getrandom(2)
+ */
+void arc4random_buf(void *buf, size_t n) {
+  while (n > 0) {
+    // max buffer size for getrandom(2) on Solaris is 1024
+    int ret = getrandom(buf, n > 1024 ? 1024 : n, GRND_RANDOM);
+    if (ret <= 0) {
+      // no entropy available; try again
+      if (errno == EAGAIN)
+        continue;
+
+      // the only possible failure mode here is EFAULT (bad address)
+      perror("arc4random_buf");
+      return;
+    }
+
+    buf = (char *)buf + ret;
+    n -= ret;
+  }
 }

@@ -1,6 +1,6 @@
---- a/vendor/stacker-0.1.15/src/lib.rs	2020-08-14 14:49:47.142682493 +0000
-+++ b/vendor/stacker-0.1.15/src/lib.rs	2020-08-14 14:58:30.363074986 +0000
-@@ -355,7 +355,7 @@
+--- rustc-1.83.0-src/vendor/stacker-0.1.17/src/lib.rs.orig	2024-11-26 10:12:09.000000000 +0000
++++ rustc-1.83.0-src/vendor/stacker-0.1.17/src/lib.rs	2024-11-28 17:06:58.764862229 +0000
+@@ -405,7 +405,7 @@
              );
              Some(mi.assume_init().AllocationBase as usize + get_thread_stack_guarantee() + 0x1000)
          }
@@ -9,7 +9,7 @@
          unsafe fn guess_os_stack_limit() -> Option<usize> {
              let mut attr = std::mem::MaybeUninit::<libc::pthread_attr_t>::uninit();
              assert_eq!(libc::pthread_attr_init(attr.as_mut_ptr()), 0);
-@@ -393,6 +393,12 @@
+@@ -443,6 +443,12 @@
              Some(libc::pthread_get_stackaddr_np(libc::pthread_self()) as usize -
                  libc::pthread_get_stacksize_np(libc::pthread_self()) as usize)
          }
@@ -22,9 +22,9 @@
      } else {
          // fallback for other platforms is to always increase the stack if we're on
          // the root stack. After we increased the stack once, we know the new stack
---- rustc-1.67.1-src/vendor/stacker-0.1.15/.cargo-checksum.json~	2023-02-07 09:07:51.000000000 +0000
-+++ rustc-1.67.1-src/vendor/stacker-0.1.15/.cargo-checksum.json	2023-03-31 18:43:03.704702265 +0000
+--- rustc-1.83.0-src/vendor/stacker-0.1.17/.cargo-checksum.json~	2024-11-26 10:12:09.000000000 +0000
++++ rustc-1.83.0-src/vendor/stacker-0.1.17/.cargo-checksum.json	2024-11-28 17:09:21.039941588 +0000
 @@ -1 +1 @@
--{"files":{"Cargo.toml":"60bfff5e991ac892e755d65611b9676971fbafbc144e1f929999a1b677b66a0e","Cross.toml":"b5f300c31f4522caba733582f4957f693a4017f4728a69805390b63ad69eff67","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"c9071baf1061060b97f9ebaf7c70b1d85eef76042b53e520109d331a40a15092","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/lib.rs":"59ca847887cf19387119d18c57f08d5a8520d714876ca0142b8f1c001ecde06b","tests/simple.rs":"18fbb3e891ab486c58aa011698f755945818db8799c564f2fa8cfe5ac8d8f0dc","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"c886bd4480155fd3ef527d45e9ac8dd7118a898a46530b7b94c3e21866259fce"}
+-{"files":{"Cargo.toml":"b492a77f0c67627676a08d84051be38b274cd153bb3120322f0f81290916d2e5","Cross.toml":"b5f300c31f4522caba733582f4957f693a4017f4728a69805390b63ad69eff67","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"3b4db90523bcff7d1381367418fdbdb3c866d13c95f1c4aa8185f2280ae33abb","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/lib.rs":"e232de861e208e6cf6a95214d0fa190d404fe0118327f3154afbf62b9f23da62","tests/simple.rs":"672b92078462d762441c7d50c076bdb9135ccb2d9858314af41c43925d237e55","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"799c883d55abdb5e98af1a7b3f23b9b6de8ecada0ecac058672d7635eb48ca7b"}
 \ No newline at end of file
-+{"files":{"Cargo.toml":"60bfff5e991ac892e755d65611b9676971fbafbc144e1f929999a1b677b66a0e","Cross.toml":"b5f300c31f4522caba733582f4957f693a4017f4728a69805390b63ad69eff67","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"c9071baf1061060b97f9ebaf7c70b1d85eef76042b53e520109d331a40a15092","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/lib.rs":"a8105c442a526a21339339347dd13e699642301af04cebea9190e7fadf6ab892","tests/simple.rs":"18fbb3e891ab486c58aa011698f755945818db8799c564f2fa8cfe5ac8d8f0dc","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"c886bd4480155fd3ef527d45e9ac8dd7118a898a46530b7b94c3e21866259fce"}
++{"files":{"Cargo.toml":"b492a77f0c67627676a08d84051be38b274cd153bb3120322f0f81290916d2e5","Cross.toml":"b5f300c31f4522caba733582f4957f693a4017f4728a69805390b63ad69eff67","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"3b4db90523bcff7d1381367418fdbdb3c866d13c95f1c4aa8185f2280ae33abb","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/lib.rs":"7a2663cba80281e1f45b43c48ca1780ef8fb4887eb186db42a6ec00d0ac8f076","tests/simple.rs":"672b92078462d762441c7d50c076bdb9135ccb2d9858314af41c43925d237e55","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"799c883d55abdb5e98af1a7b3f23b9b6de8ecada0ecac058672d7635eb48ca7b"}
