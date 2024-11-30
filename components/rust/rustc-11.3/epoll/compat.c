@@ -70,7 +70,7 @@ int pipe2(int fd[2], int flags) {
 void arc4random_buf(void *buf, size_t n) {
   while (n > 0) {
     // max buffer size for getrandom(2) on Solaris is 1024
-    int ret = getrandom(buf, n > 1024 ? 1024 : n, GRND_RANDOM);
+    int ret = getrandom(buf, n > 1024 ? 1024 : n, 0);
     if (ret <= 0) {
       // no entropy available; try again
       if (errno == EAGAIN)
