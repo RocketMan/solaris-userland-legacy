@@ -1,0 +1,17 @@
+Prevent vcs_tag from picking up the gate repository git information.
+
+See https://lists.busybox.net/pipermail/buildroot/2022-May/705059.html
+for a discussion of this issue.
+
+
+--- meson-1.2.2/mesonbuild/utils/universal.py~	2023-09-29 10:27:20.000000000 +0000
++++ meson-1.2.2/mesonbuild/utils/universal.py	2024-12-01 18:54:59.469111333 +0000
+@@ -763,7 +763,7 @@
+             'name': 'git',
+             'cmd': 'git',
+             'repo_dir': '.git',
+-            'get_rev': 'git describe --dirty=+ --always',
++            'get_rev': 'git --git-dir=.git describe --dirty=+ --always',
+             'rev_regex': '(.*)',
+             'dep': '.git/logs/HEAD'
+         },
