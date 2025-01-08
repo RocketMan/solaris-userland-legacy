@@ -74,6 +74,7 @@ CONFIGURE_OPTIONS +=	--disable-llvm-static-stdcpp
 CONFIGURE_OPTIONS +=	--disable-docs
 CONFIGURE_OPTIONS +=	--disable-compiler-docs
 CONFIGURE_OPTIONS +=	--disable-cargo-native-static
+CONFIGURE_OPTIONS +=	--disable-lld
 CONFIGURE_OPTIONS +=	--enable-llvm-link-shared
 CONFIGURE_OPTIONS +=	--llvm-root=$(CONFIGURE_PREFIX)
 # from 1.71.0, the following is needed to use the system llvm
