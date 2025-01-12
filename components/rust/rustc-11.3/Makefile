@@ -48,11 +48,6 @@ COMPONENT_ANITYA_ID =	7635
 
 PKG_VARS += RUST_PLATFORM
 
-# Workaround for https://github.com/rust-lang/rust/issues/74551
-ifeq ($(MACH), sparc)
-ADDITIONAL_PATCHES += patches/Bug74551.patch-SPARC
-endif
-
 include $(WS_MAKE_RULES)/common.mk
 
 $(SOURCE_DIR_crates)/.patched: PATCH_LEVEL=0

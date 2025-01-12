@@ -1,3 +1,6 @@
+Stack limit on 11.3 is determined via stack_getbounds(3C)
+
+
 --- rustc-1.83.0-src/vendor/stacker-0.1.17/src/lib.rs.orig	2024-11-26 10:12:09.000000000 +0000
 +++ rustc-1.83.0-src/vendor/stacker-0.1.17/src/lib.rs	2024-11-28 17:06:58.764862229 +0000
 @@ -405,7 +405,7 @@
