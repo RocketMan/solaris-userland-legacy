@@ -44,9 +44,9 @@
  
          ..Default::default()
      }
---- rustc-1.78.0-src/src/bootstrap/src/core/builder.rs.~1~	2024-05-10 19:48:28.821487288 +0000
-+++ rustc-1.78.0-src/src/bootstrap/src/core/builder.rs	2024-05-10 19:50:54.674454903 +0000
-@@ -2415,16 +2415,20 @@
+--- rustc-1.84.0-src/src/bootstrap/src/core/builder/cargo.rs~	2025-01-07 01:26:09.000000000 +0000
++++ rustc-1.84.0-src/src/bootstrap/src/core/builder/cargo.rs	2025-01-09 16:38:24.342479011 +0000
+@@ -237,16 +237,20 @@
                  self.rustflags.arg("-Zosx-rpath-install-name");
                  Some(format!("-Wl,-rpath,@loader_path/../{libdir}"))
              } else if !target.is_windows() && !target.contains("aix") && !target.contains("xous") {

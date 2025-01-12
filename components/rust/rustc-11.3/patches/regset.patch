@@ -1,8 +1,11 @@
 Avoids name collision with definitions from Solaris header sys/regset.h.
 
---- rustc-1.76.0-src/compiler/rustc_llvm/llvm-wrapper/LLVMWrapper.h.~1~	2024-02-09 11:21:24.747442329 +0000
-+++ rustc-1.76.0-src/compiler/rustc_llvm/llvm-wrapper/LLVMWrapper.h	2024-02-09 11:22:39.752528767 +0000
-@@ -1,3 +1,15 @@
+--- rustc-1.84.0-src/compiler/rustc_llvm/llvm-wrapper/LLVMWrapper.h.~1~	2025-01-09 17:06:59.404171048 +0000
++++ rustc-1.84.0-src/compiler/rustc_llvm/llvm-wrapper/LLVMWrapper.h	2025-01-09 17:08:46.906894026 +0000
+@@ -1,6 +1,18 @@
+ #ifndef INCLUDED_RUSTC_LLVM_LLVMWRAPPER_H
+ #define INCLUDED_RUSTC_LLVM_LLVMWRAPPER_H
+ 
 +// Avoid collision in llvm header files with constants defined
 +// in Solaris regset.h header (intel only issue + built with gcc).
 +#if defined(__sun__) && !defined(__sparc__)
@@ -17,21 +20,7 @@ Avoids name collision with definitions from Solaris header sys/regset.h.
 +
  #include "SuppressLLVMWarnings.h"
  
- #include "llvm-c/BitReader.h"
---- rustc-1.81.0-src/compiler/rustc_llvm/llvm-wrapper/Linker.cpp.~1~	2024-09-05 19:16:38.034842051 +0000
-+++ rustc-1.81.0-src/compiler/rustc_llvm/llvm-wrapper/Linker.cpp	2024-09-05 19:17:46.035651828 +0000
-@@ -1,3 +1,11 @@
-+// Avoid collision in llvm header files with CS and FS as these are
-+// defined in Solaris regset.h header (intel only issue + built with gcc).
-+#if defined(__sun__) && !defined(__sparc__)
-+#include <sys/regset.h>
-+#undef CS
-+#undef FS
-+#endif
-+
- #include "llvm/Linker/Linker.h"
- #include "SuppressLLVMWarnings.h"
- 
+ #include "llvm/Config/llvm-config.h"  // LLVM_VERSION_MAJOR, LLVM_VERSION_MINOR
 --- rustc-1.60.0-src/src/llvm-project/llvm/include/llvm/IR/DiagnosticInfo.h~	2022-03-09 08:50:54.000000000 +0000
 +++ rustc-1.60.0-src/src/llvm-project/llvm/include/llvm/IR/DiagnosticInfo.h	2022-05-02 17:46:58.873277776 +0000
 @@ -31,6 +31,12 @@
