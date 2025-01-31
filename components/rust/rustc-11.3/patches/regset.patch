@@ -21,35 +21,3 @@ Avoids name collision with definitions from Solaris header sys/regset.h.
  #include "SuppressLLVMWarnings.h"
  
  #include "llvm/Config/llvm-config.h"  // LLVM_VERSION_MAJOR, LLVM_VERSION_MINOR
---- rustc-1.60.0-src/src/llvm-project/llvm/include/llvm/IR/DiagnosticInfo.h~	2022-03-09 08:50:54.000000000 +0000
-+++ rustc-1.60.0-src/src/llvm-project/llvm/include/llvm/IR/DiagnosticInfo.h	2022-05-02 17:46:58.873277776 +0000
-@@ -31,6 +31,12 @@
- #include <iterator>
- #include <string>
- 
-+#if defined(__sun__) && !defined(__sparc__)
-+#include <sys/regset.h>
-+#undef DS
-+#undef SS
-+#endif
-+
- namespace llvm {
- 
- // Forward declarations.
---- rustc-1.67.1-src/src/llvm-project/llvm/include/llvm/IR/LLVMContext.h-	2023-02-07 06:45:04.000000000 +0000
-+++ rustc-1.67.1-src/src/llvm-project/llvm/include/llvm/IR/LLVMContext.h	2023-03-31 18:50:18.098920938 +0000
-@@ -14,6 +14,14 @@
- #ifndef LLVM_IR_LLVMCONTEXT_H
- #define LLVM_IR_LLVMCONTEXT_H
- 
-+// Avoid collision in llvm header files with CS and FS as these are
-+// defined in Solaris regset.h header (intel only issue + built with gcc).
-+#if defined(__sun__) && !defined(__sparc__)
-+#include <sys/regset.h>
-+#undef CS
-+#undef FS
-+#endif
-+
- #include "llvm-c/Types.h"
- #include "llvm/ADT/Optional.h"
- #include "llvm/IR/DiagnosticHandler.h"
