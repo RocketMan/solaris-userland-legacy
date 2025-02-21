@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2020-2024 Jim Mason <jmason at ibinx dot com>.
+# Copyright (c) 2020-2025 Jim Mason <jmason at ibinx dot com>.
 #
 # Adapted from original code Copyright (c) 2018, 2020, Oracle and/or its
 # affiliates. All rights reserved.
@@ -33,12 +33,12 @@ include ../../../make-rules/shared-macros.mk
 GCC_ROOT =	/usr/gcc/13
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.84.1
+COMPONENT_VERSION =	1.85.0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:e23ec747a06ffd3e94155046f40b6664ac152c9ee3c2adfd90353a7ccff24226
+    sha256:d542c397217b5ba5bac7eb274f5ca62d031f61842c3ba4cc5328c709c38ea1e7
 
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
