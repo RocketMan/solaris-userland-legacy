@@ -20,7 +20,7 @@
 #
 
 #
-# Copyright (c) 2018-2024 Jim Mason <jmason at ibinx doc com>.
+# Copyright (c) 2018-2025 Jim Mason <jmason at ibinx doc com>.
 #
 # Adapted from original code Copyright (c) 2015, 2020, Oracle and/or its
 # affiliates. All rights reserved.
@@ -36,7 +36,7 @@ include ../../../make-rules/shared-macros.mk
 ESR = esr
 
 COMPONENT_NAME =	firefox
-COMPONENT_VERSION =	128.7.0
+COMPONENT_VERSION =	128.8.0
 COMPONENT_PROJECT_URL =	http://www.mozilla.com/firefox
 COMPONENT_SRC_NAME =	$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_SRC = 	$(COMPONENT_SRC_NAME)
