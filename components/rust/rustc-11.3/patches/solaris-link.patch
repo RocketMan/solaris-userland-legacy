@@ -1,11 +1,11 @@
---- rustc-1.50.0-src/library/std/src/sys/pal/unix/mod.rs	2021-02-10 17:36:44.000000000 +0000
-+++ rustc-1.50.0-src/library/std/src/sys/pal/unix/mod.rs	2021-03-05 15:47:24.847514661 +0000
-@@ -259,6 +259,7 @@
+--- rustc-1.86.0-src/library/std/src/sys/pal/unix/mod.rs.~1~	2025-04-03 11:06:13.094850783 +0000
++++ rustc-1.86.0-src/library/std/src/sys/pal/unix/mod.rs	2025-04-03 11:07:36.928278011 +0000
+@@ -390,6 +390,7 @@
          #[link(name = "posix4")]
          #[link(name = "pthread")]
          #[link(name = "resolv")]
 +        #[link(name = "nsl")]
-         extern "C" {}
+         unsafe extern "C" {}
      } else if #[cfg(target_os = "illumos")] {
          #[link(name = "socket")]
 --- rustc-1.83.0-src/compiler/rustc_target/src/spec/base/solaris.rs.~1~	2024-11-26 10:12:09.000000000 +0000
@@ -44,12 +44,12 @@
  
          ..Default::default()
      }
---- rustc-1.84.0-src/src/bootstrap/src/core/builder/cargo.rs~	2025-01-07 01:26:09.000000000 +0000
-+++ rustc-1.84.0-src/src/bootstrap/src/core/builder/cargo.rs	2025-01-09 16:38:24.342479011 +0000
-@@ -237,16 +237,20 @@
-                 self.rustflags.arg("-Zosx-rpath-install-name");
-                 Some(format!("-Wl,-rpath,@loader_path/../{libdir}"))
-             } else if !target.is_windows() && !target.contains("aix") && !target.contains("xous") {
+--- rustc-1.86.0-src/src/bootstrap/src/core/builder/cargo.rs.~1~	2025-04-03 11:06:13.095925084 +0000
++++ rustc-1.86.0-src/src/bootstrap/src/core/builder/cargo.rs	2025-04-03 11:09:55.384348659 +0000
+@@ -250,16 +250,20 @@
+                 && !target.contains("aix")
+                 && !target.contains("xous")
+             {
 -                self.rustflags.arg("-Clink-args=-Wl,-z,origin");
 +                self.rustflags.arg("-Clink-arg=-Wl,-z,origin");
                  Some(format!("-Wl,-rpath,$ORIGIN/../{libdir}"))
