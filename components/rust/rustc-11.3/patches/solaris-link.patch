@@ -44,8 +44,8 @@
  
          ..Default::default()
      }
---- rustc-1.86.0-src/src/bootstrap/src/core/builder/cargo.rs.~1~	2025-04-03 11:06:13.095925084 +0000
-+++ rustc-1.86.0-src/src/bootstrap/src/core/builder/cargo.rs	2025-04-03 11:09:55.384348659 +0000
+--- rustc-1.87.0-src/src/bootstrap/src/core/builder/cargo.rs.~1~	2025-05-15 19:00:36.231860091 +0000
++++ rustc-1.87.0-src/src/bootstrap/src/core/builder/cargo.rs	2025-05-15 19:04:34.800556658 +0000
 @@ -250,16 +250,20 @@
                  && !target.contains("aix")
                  && !target.contains("xous")
@@ -66,6 +66,6 @@
 +        // as llvm cannot read the linked SHT_SYMTAB_SHNDX
 +        self.rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
 +
-         for arg in linker_args(builder, compiler.host, LldThreads::Yes) {
+         for arg in linker_args(builder, compiler.host, LldThreads::Yes, 0) {
              self.hostflags.arg(&arg);
          }

@@ -2,21 +2,22 @@ Build and install also Cargo.
 
 Part of Solaris distribution configuration.
 
---- a/config.example.toml
-+++ b/config.example.toml
-@@ -287,6 +287,7 @@
- # default. The `tools` option (immediately below) specifies which tools should
- # be built if `extended = true`.
- #extended = false
+--- a/bootstrap.example.toml~	2025-05-09 21:37:37.000000000 +0000
++++ b/bootstrap.example.toml	2025-05-15 18:52:27.966264706 +0000
+@@ -351,7 +351,7 @@
+ # which tools should be built if `extended = true`.
+ #
+ # This is disabled by default.
+-#extended = false
 +extended = true
  
  # Set of tools to be included in the installation.
  #
-@@ -306,6 +307,7 @@
- #    "src",
- #    "rust-demangler",  # if profiler = true
+@@ -372,6 +372,7 @@
+ #    "wasm-component-ld",
+ #    "miri", "cargo-miri" # for dev/nightly channels
  #]
 +tools = ["cargo"]
  
- # Verbosity level: 0 == not verbose, 1 == verbose, 2 == very verbose
+ # Verbosity level: 0 == not verbose, 1 == verbose, 2 == very verbose, 3 == print environment variables on each rustc invocation
  #verbose = 0
