@@ -1,0 +1,20 @@
+#!/bin/sh
+
+# Get service FMRI
+FMRI=$SMF_FMRI
+
+# Fetch configured paths from SMF properties
+PHP_INI=$(svcprop -p php/php_ini "$FMRI")
+FPM_CONF=$(svcprop -p php/fpm_conf "$FMRI")
+
+# Directory for socket
+SOCKET_DIR="/system/volatile/php/8.4"
+SOCKET_FILE="$SOCKET_DIR/fpm.sock"
+
+# Create socket directory
+mkdir -p "$SOCKET_DIR"
+chown webservd:webservd "$SOCKET_DIR"
+chmod 755 "$SOCKET_DIR"
+
+# Start PHP-FPM with the specified configuration
+exec /usr/php/8.4/sbin/php-fpm -c "$PHP_INI" -y "$FPM_CONF"

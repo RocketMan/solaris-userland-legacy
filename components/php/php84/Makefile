@@ -29,7 +29,7 @@ COMPILER= gcc
 include ../../../make-rules/shared-macros.mk
 
 MAJOR_VERSION=8.4
-MICRO_VERSION=5
+MICRO_VERSION=7
 
 COMPONENT_NAME=		php
 COMPONENT_VERSION=	$(MAJOR_VERSION).$(MICRO_VERSION)
@@ -37,7 +37,7 @@ UL_PHP_MINOR_VERSION=	$(MAJOR_VERSION)
 COMPONENT_PROJECT_URL=	http://php.net/
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH=\
-    sha256:0d3270bbce4d9ec617befce52458b763fd461d475f1fe2ed878bb8573faed327
+    sha256:e29f4c23be2816ed005aa3f06bbb8eae0f22cc133863862e893515fc841e65e3
 COMPONENT_ARCHIVE_URL=	http://php.net/get/$(COMPONENT_ARCHIVE)/from/this/mirror
 COMPONENT_ANITYA_ID=	57896
 
@@ -235,10 +235,12 @@ REQUIRED_PACKAGES += library/security/openssl-3
 else
 REQUIRED_PACKAGES += library/security/openssl-11
 endif
+REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/dtrace
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += system/management/snmp/net-snmp
+REQUIRED_PACKAGES += system/network
 REQUIRED_PACKAGES += system/network/ldap/openldap
 REQUIRED_PACKAGES += text/gnu-sed

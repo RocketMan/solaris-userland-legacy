@@ -45,6 +45,8 @@ set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2023/125
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+file files/php-fpm.conf \
+    path=etc/apache2/2.4/samples-conf.d/php$(MAJOR_VERSION)-fpm.conf
 file files/php.conf path=etc/apache2/2.4/samples-conf.d/php$(MAJOR_VERSION).conf
 file files/extensions.ini path=etc/php/$(MAJOR_VERSION)/conf.d/extensions.ini \
     preserve=renamenew
@@ -54,6 +56,10 @@ file path=etc/php/$(MAJOR_VERSION)/php-fpm.d/www.conf.default
 file php.ini-production path=etc/php/$(MAJOR_VERSION)/php.ini preserve=renamenew
 file php.ini-development path=etc/php/$(MAJOR_VERSION)/php.ini-development
 file php.ini-production path=etc/php/$(MAJOR_VERSION)/php.ini-production
+file files/auth_attr path=etc/security/auth_attr.d/php-fpm-84
+file files/prof_attr path=etc/security/prof_attr.d/php-fpm-84
+file files/php-fpm.xml path=lib/svc/manifest/network/php-fpm-84.xml
+file files/php-fpm-84 path=lib/svc/method/php-fpm-84
 file usr/apache2/2.4/libexec/libphp.so \
     path=usr/apache2/2.4/libexec/libphp$(MAJOR_VERSION).so \
     pkg.linted.userland.action001.2=true
@@ -465,7 +471,7 @@ link path=usr/php/lib target=$(MAJOR_VERSION)/lib mediator=php \
     mediator-version=$(MAJOR_VERSION)
 link path=usr/php/sbin target=$(MAJOR_VERSION)/sbin mediator=php \
     mediator-version=$(MAJOR_VERSION)
-dir  path=var/php/$(MAJOR_VERSION)/log
+dir  path=var/php/$(MAJOR_VERSION)/log owner=webservd group=webservd
 file path=var/php/$(MAJOR_VERSION)/pear/.channels/.alias/pear.txt
 file path=var/php/$(MAJOR_VERSION)/pear/.channels/.alias/pecl.txt
 file path=var/php/$(MAJOR_VERSION)/pear/.channels/.alias/phpdocs.txt
