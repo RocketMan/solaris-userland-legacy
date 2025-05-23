@@ -1,0 +1,2 @@
+file config-dir/mods-available/lua.load \
+    path=etc/apache2/2.4/mods-available/lua.load

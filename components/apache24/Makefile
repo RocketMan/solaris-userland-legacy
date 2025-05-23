@@ -27,12 +27,12 @@ BUILD_BITS= 64
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		apache2
-COMPONENT_VERSION=	2.4.58
+COMPONENT_VERSION=	2.4.62
 COMPONENT_BAID=		152891
 COMPONENT_PROJECT_URL=	https://httpd.apache.org/
 COMPONENT_SRC_NAME=	httpd
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:503a7da4a4a27fd496037998b17078dc9fe004db32c657c96cce8356b8aa2eb6
+    sha256:3e2404d762a2da03560d7ada379ba1599d32f04a0d70ad6ff86f44325f2f062d
 COMPONENT_ARCHIVE_URL=	https://archive.apache.org/dist/httpd/$(COMPONENT_ARCHIVE)
 #COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_BUGDB=	utility/apache
@@ -71,6 +71,7 @@ CONFIGURE_PREFIX =	$(USRDIR)/apache2/2.4
 CONFIGURE_OPTIONS +=	--enable-layout=Solaris
 CONFIGURE_OPTIONS +=	--enable-mpms-shared=all
 CONFIGURE_OPTIONS +=	--enable-mods-shared=all
+CONFIGURE_OPTIONS +=	--enable-mods-static="unixd logio log_config watchdog version"
 CONFIGURE_OPTIONS +=	--enable-proxy-fdpass
 CONFIGURE_OPTIONS +=	--enable-exception-hook
 CONFIGURE_OPTIONS +=	--enable-cgi
@@ -92,13 +93,12 @@ else
 PATH=$(SPRO_VROOT)/bin:$(USRBINDIR):$(GNUBIN)
 endif
 
-COMPONENT_POST_INSTALL_ACTION += ($(KSH93) Solaris/customization.sh $(PROTO_DIR))
-
 REQUIRED_PACKAGES += library/apr-1
 REQUIRED_PACKAGES += library/apr-util-1
 REQUIRED_PACKAGES += library/apr-util-1/apr-ldap
 REQUIRED_PACKAGES += library/apr-util-1/dbd-mysql
 REQUIRED_PACKAGES += library/apr-util-1/dbd-sqlite
+REQUIRED_PACKAGES += library/brotli
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/nghttp2
 REQUIRED_PACKAGES += library/openldap

@@ -1,0 +1,73 @@
+#! /bin/bash
+
+# Apache postinstallation script
+
+# adapted from debian apache2.postinst
+# see https://packages.debian.org/source/stable/apache2
+
+APACHE_ETC_ROOT=/etc/apache2
+APACHE_VERSION=`echo ${SMF_FMRI} | sed 's/[^0-9]//g;s/./\.&/g;s/^\.//'` 
+echo "Apache ${APACHE_VERSION} postinstallation"
+
+. $APACHE_ETC_ROOT/$APACHE_VERSION/envvars
+
+# empty `mods-enabled` indicates fresh install
+if [ -z "$(ls -A $APACHE_CONF/mods-enabled)" ]; then
+	FRESH_INSTALL=1
+else
+	FRESH_INSTALL=0
+fi
+
+A2ENMOD="$APACHE_HOME/bin/a2enmod"
+A2ENCONF="$APACHE_HOME/bin/a2enconf"
+A2ENSITE="$APACHE_HOME/bin/a2ensite"
+
+set -e
+
+enable_default_mpm()
+{
+	$A2ENMOD -m -q mpm_event
+}
+
+enable_default_modules()
+{
+	for module in authz_host auth_basic access_compat authn_file authz_user \
+			alias dir autoindex \
+			env mime negotiation setenvif \
+			filter deflate rewrite \
+			status reqtimeout ; do
+		$A2ENMOD -m -q $module
+	done
+}
+
+enable_default_conf()
+{
+	for conf in charset localized-error-pages \
+			security serve-cgi-bin ; do
+		$A2ENCONF -m -q $conf
+	done
+}
+
+install_default_site()
+{
+	if [ ! -L $APACHE_CONF/sites-enabled/000-default.conf -a \
+		! -f $APACHE_CONF/sites-enabled/000-default.conf ]; then
+			$A2ENSITE -q 000-default
+	fi
+}
+
+mkdir -p /system/volatile/apache2
+
+if [ $FRESH_INSTALL -eq 1 ] ; then
+	echo "Apache ${APACHE_VERSION} fresh install"
+	enable_default_mpm
+	enable_default_modules
+	enable_default_conf
+	install_default_site
+fi
+
+chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP /system/volatile/apache2
+
+/usr/sbin/svcadm disable "$SMF_FMRI"
+
+exit 0

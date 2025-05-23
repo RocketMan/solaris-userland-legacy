@@ -1,0 +1,2 @@
+# Depends: cache
+LoadModule file_cache_module modules/mod_file_cache.so

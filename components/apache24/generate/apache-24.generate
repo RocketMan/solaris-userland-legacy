@@ -50,9 +50,6 @@
 <transform file path=.*/bin/suexec$ -> set action.hash %(path)>
 <transform file path=.*/bin/suexec$ -> edit path suexec suexec.disabled>
 
-<transform file path=etc/apache2/2.4/httpd.conf$ -> set action.hash %(path)>
-<transform file path=etc/apache2/2.4/httpd.conf$ -> edit path httpd.conf original/httpd.conf>
-
 # move and rename some conf file to samples-conf.d/
 <transform file path=.*/extra/.*$ -> set action.hash %(path)>
 <transform file path=.*/extra/httpd-.*$ -> edit path extra/httpd- samples-conf.d/>
@@ -61,3 +58,5 @@
 # delete everything not belonging to this package
 <transform file link pkg.type=(?!apache) -> drop>
 <transform file link -> delete pkg.type .*>
+<transform file path=etc/apache2/2.4/samples-conf.d.* -> drop>
+<transform file path=etc/apache2/2.4/(envvars|httpd.conf|magic) -> drop>

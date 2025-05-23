@@ -1,0 +1,24 @@
+# /etc/apache2/2.4/envvars
+# Environment variables for Apache HTTP Server 2.4 on Solaris
+
+# Apache configuration base
+export APACHE_CONF=/etc/apache2/2.4
+
+# Apache binary root
+export APACHE_HOME=/usr/apache2/2.4
+
+# Runtime directories
+export APACHE_RUN_DIR=/var/run/apache2/2.4
+export APACHE_PID_FILE=$APACHE_RUN_DIR/httpd.pid
+export APACHE_LOG_DIR=/var/apache2/2.4/logs
+
+# Default htdocs
+export APACHE_DEFAULT_SITE=/var/apache2/2.4/htdocs
+
+# Set user and group
+export APACHE_RUN_USER=webservd
+export APACHE_RUN_GROUP=webservd
+
+# Extra options for invoking apache2ctl
+export APACHE_HTTPD="$APACHE_HOME/bin/httpd"
+export APACHE_ARGUMENTS=""

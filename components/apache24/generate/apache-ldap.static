@@ -1,0 +1,7 @@
+file config-dir/mods-available/authnz_ldap.load \
+    path=etc/apache2/2.4/mods-available/authnz_ldap.load
+file config-dir/mods-available/ldap.conf \
+    path=etc/apache2/2.4/mods-available/ldap.conf mode=0644 overlay=allow \
+    preserve=renamenew
+file config-dir/mods-available/ldap.load \
+    path=etc/apache2/2.4/mods-available/ldap.load

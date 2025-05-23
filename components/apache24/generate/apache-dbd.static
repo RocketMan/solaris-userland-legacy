@@ -1,0 +1,8 @@
+file config-dir/mods-available/authn_dbd.load \
+    path=etc/apache2/2.4/mods-available/authn_dbd.load
+file config-dir/mods-available/authz_dbd.load \
+    path=etc/apache2/2.4/mods-available/authnz_dbd.load
+file config-dir/mods-available/dbd.load \
+    path=etc/apache2/2.4/mods-available/dbd.load
+file config-dir/mods-available/session_dbd.load \
+    path=etc/apache2/2.4/mods-available/session_dbd.load

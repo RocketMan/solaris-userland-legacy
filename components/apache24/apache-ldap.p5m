@@ -38,6 +38,13 @@ set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2014/253
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
+file config-dir/mods-available/authnz_ldap.load \
+    path=etc/apache2/2.4/mods-available/authnz_ldap.load
+file config-dir/mods-available/ldap.conf \
+    path=etc/apache2/2.4/mods-available/ldap.conf mode=0644 overlay=allow \
+    preserve=renamenew
+file config-dir/mods-available/ldap.load \
+    path=etc/apache2/2.4/mods-available/ldap.load
 file path=usr/apache2/2.4/libexec/mod_authnz_ldap.so
 file path=usr/apache2/2.4/libexec/mod_ldap.so
 license apache.license license="Apache v2.0"

@@ -23,4 +23,8 @@
 # Copyright (c) 2018, Oracle and/or its affiliates. All rights reserved.
 #
 
-file mod_auth_gss/gss.conf path=etc/apache2/2.4/samples-conf.d/gss.conf
+file config-dir/mods-available/auth_gss.conf \
+    path=etc/apache2/2.4/mods-available/auth_gss.conf mode=0644 overlay=allow \
+    preserve=renamenew
+file config-dir/mods-available/auth_gss.load \
+    path=etc/apache2/2.4/mods-available/auth_gss.load

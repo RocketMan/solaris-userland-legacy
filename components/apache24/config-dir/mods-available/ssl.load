@@ -1,0 +1,2 @@
+# Depends: setenvif mime socache_shmcb
+LoadModule ssl_module modules/mod_ssl.so

@@ -4,11 +4,14 @@ Patch status: Solaris-specific; not suitable for upstream
 Allows SMF method to override Apache binary and provide additional
 arguments and thus select desired MPM.
 
+Updated 2025-05-25:
+* set default value of APACHE_USER_ENVVARS
+
 diff --git a/support/apachectl.in b/support/apachectl.in
 index 3281c2e..4951991 100644
 --- a/support/apachectl.in
 +++ b/support/apachectl.in
-@@ -42,7 +42,7 @@ ARGV="$@"
+@@ -42,9 +42,10 @@
  # --------------------                              --------------------
  # 
  # the path to your httpd binary, including options if necessary
@@ -16,4 +19,7 @@ index 3281c2e..4951991 100644
 +HTTPD=${HTTPD:-@exp_sbindir@/@progname@}
  #
  # pick up any necessary environment variables
++APACHE_USER_ENVVARS=${APACHE_USER_ENVVARS:-@exp_sysconfdir@/envvars}
  if test -f @exp_sbindir@/envvars; then
+   . @exp_sbindir@/envvars
+ fi
