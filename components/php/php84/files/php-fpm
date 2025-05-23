@@ -7,8 +7,11 @@ FMRI=$SMF_FMRI
 PHP_INI=$(svcprop -p php/php_ini "$FMRI")
 FPM_CONF=$(svcprop -p php/fpm_conf "$FMRI")
 
+# Version
+PHP_VER=`echo $FMRI | sed 's/[^0-9]//g;s/./\.&/g;s/^\.//'` 
+
 # Directory for socket
-SOCKET_DIR="/system/volatile/php/8.4"
+SOCKET_DIR="/system/volatile/php/$PHP_VER"
 SOCKET_FILE="$SOCKET_DIR/fpm.sock"
 
 # Create socket directory
@@ -17,4 +20,4 @@ chown webservd:webservd "$SOCKET_DIR"
 chmod 755 "$SOCKET_DIR"
 
 # Start PHP-FPM with the specified configuration
-exec /usr/php/8.4/sbin/php-fpm -c "$PHP_INI" -y "$FPM_CONF"
+exec /usr/php/$PHP_VER/sbin/php-fpm -c "$PHP_INI" -y "$FPM_CONF"
