@@ -69,6 +69,7 @@ COMPONENT_PREP_ACTION += (cd $(SOURCE_DIR) ; autoreconf) ;
 include enable-extensions.mk
 
 CONFIGURE_OPTIONS += --enable-dtrace
+CONFIGURE_OPTIONS += --enable-maintainer-zts
 
 # Without this, the build seems to interrogate GCC for potential library
 # search path information and then embed it into the RUNPATH of selected ELF
@@ -198,11 +199,13 @@ REQUIRED_PACKAGES += library/oniguruma
 REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/pcre2
 REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/dtrace
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += system/management/snmp/net-snmp
+REQUIRED_PACKAGES += system/network
 REQUIRED_PACKAGES += system/network/ldap/openldap
 REQUIRED_PACKAGES += text/gnu-sed
 REQUIRED_PACKAGES += web/php/extension/php-imap

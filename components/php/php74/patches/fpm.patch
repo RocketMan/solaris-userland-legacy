@@ -1,0 +1,20 @@
+--- php-8.4.7/sapi/fpm/www.conf.in.~1~	2025-05-06 13:31:58.000000000 +0000
++++ php-8.4.7/sapi/fpm/www.conf.in	2025-05-18 16:22:23.787826248 +0000
+@@ -38,7 +38,7 @@
+ ;                            (IPv6 and IPv4-mapped) on a specific port;
+ ;   '/path/to/unix/socket' - to listen on a unix socket.
+ ; Note: This value is mandatory.
+-listen = 127.0.0.1:9000
++listen = /system/volatile/php/7.4/fpm.sock
+ 
+ ; Set listen(2) backlog.
+ ; Default Value: 511 (-1 on Linux, FreeBSD and OpenBSD)
+@@ -255,7 +255,7 @@
+ ;       anything, but it may not be a good idea to use the .php extension or it
+ ;       may conflict with a real PHP file.
+ ; Default Value: not set
+-;pm.status_path = /status
++pm.status_path = /fpm-status
+ 
+ ; The address on which to accept FastCGI status request. This creates a new
+ ; invisible pool that can handle requests independently. This is useful

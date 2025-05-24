@@ -1,0 +1,2 @@
+# Conflicts: php8.4 php8.3 php8.2 php8.1 php8.0
+LoadModule php7_module modules/libphp7.4.so

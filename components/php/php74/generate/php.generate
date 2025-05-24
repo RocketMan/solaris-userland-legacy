@@ -44,13 +44,34 @@
 # Add several files from files directory (not in proto area)
 # Set action hash to current path so that IPS can find it
 <transform file path=files/php.conf -> set action.hash %(path)>
+<transform file path=files/php-fpm.conf -> set action.hash %(path)>
+<transform file path=files/php-mod.load -> set action.hash %(path)>
 <transform file path=files/extensions.ini -> set action.hash %(path)>
+<transform file path=etc/php/\$\(MAJOR_VERSION\)/php-fpm.conf.default -> set action.hash %(path)>
+<transform file path=etc/php/\$\(MAJOR_VERSION\)/php-fpm.d/www.conf.default -> set action.hash %(path)>
 <transform file path=usr/apache2/2.4/libexec/libphp7.so -> set action.hash %(path)>
+<transform file path=files/php-fpm.xml -> set action.hash %(path)>
+<transform file path=files/php-fpm -> set action.hash %(path)>
+<transform file path=files/auth_attr -> set action.hash %(path)>
+<transform file path=files/prof_attr -> set action.hash %(path)>
 
 # "Move" the file to it's new location
 <transform file path=files/php.conf -> edit path files/php.conf etc/apache2/2.4/samples-conf.d/php\$\(MAJOR_VERSION\).conf>
+<transform file path=files/php-fpm.conf -> default mode 0644>
+<transform file path=files/php-fpm.conf -> default overlay allow>
+<transform file path=files/php-fpm.conf -> default preserve renamenew>
+<transform file path=files/php-fpm.conf -> edit path files/php-fpm.conf etc/apache2/2.4/conf-available/php\$\(MAJOR_VERSION\)-fpm.conf>
+<transform file path=files/php-mod.load -> edit path files/php-mod.load etc/apache2/2.4/mods-available/php\$\(MAJOR_VERSION\).load>
 <transform file path=files/extensions.ini -> edit path files etc/php/\$\(MAJOR_VERSION\)/conf.d>
+<transform file path=etc/php/\$\(MAJOR_VERSION\)/php-fpm.conf.default -> set preserve renamenew>
+<transform file path=etc/php/\$\(MAJOR_VERSION\)/php-fpm.conf.default -> edit path .default >
+<transform file path=etc/php/\$\(MAJOR_VERSION\)/php-fpm.d/www.conf.default -> set preserve renamenew>
+<transform file path=etc/php/\$\(MAJOR_VERSION\)/php-fpm.d/www.conf.default -> edit path .default >
 <transform file path=usr/apache2/2.4/libexec/libphp7.so -> edit path libphp7 libphp\$\(MAJOR_VERSION\)>
+<transform file path=files/php-fpm.xml -> set path lib/svc/manifest/network/php-fpm-74.xml>
+<transform file path=files/php-fpm -> set path lib/svc/method/php-fpm-74>
+<transform file path=files/auth_attr -> set path etc/security/auth_attr.d/php-fpm-74>
+<transform file path=files/prof_attr -> set path etc/security/prof_attr.d/php-fpm-74>
 
 # prevent 64-bit object in 32-bit path errors
 <transform path=usr/apache2/2.4/libexec/libphp\$\(MAJOR_VERSION\).so -> set pkg.linted.userland.action001.2 true>

@@ -43,6 +43,8 @@
 # CLI and CGI are enabled by default.
 
 CONFIGURE_OPTIONS += --enable-fpm
+CONFIGURE_OPTIONS += --with-fpm-user=webservd
+CONFIGURE_OPTIONS += --with-fpm-group=webservd
 
 # Apache SAPI.
 CONFIGURE_OPTIONS += --with-apxs2=/usr/apache2/2.4/bin/apxs
