@@ -25,7 +25,7 @@
 
 # directories which are empty but we want them created
 dir  path=usr/php/$(MAJOR_VERSION)/include/php/include
-dir  path=var/php/$(MAJOR_VERSION)/log
+dir  path=var/php/$(MAJOR_VERSION)/log owner=webservd group=webservd
 dir  path=var/php/$(MAJOR_VERSION)/pear/.registry/.channel.__uri
 dir  path=var/php/$(MAJOR_VERSION)/pear/.registry/.channel.doc.php.net
 dir  path=var/php/$(MAJOR_VERSION)/pear/.registry/.channel.pecl.php.net
