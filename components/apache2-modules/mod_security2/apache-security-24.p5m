@@ -38,11 +38,13 @@ set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2008/090
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file modsecurity-24.conf-recommended \
-    path=etc/apache2/2.4/samples-conf.d/security2.conf
-file unicode.mapping path=etc/apache2/2.4/samples-conf.d/unicode.mapping
+    path=etc/apache2/2.4/mods-available/security2.conf mode=0644 \
+    overlay=allow preserve=renamenew
+file Solaris/security2.load path=etc/apache2/2.4/mods-available/security2.load
 file build/apache24/$(MACH64)/apache2/.libs/mod_security2.so \
     path=usr/apache2/2.4/libexec/mod_security2.so \
     pkg.linted.userland.action001.2=true
+file unicode.mapping path=var/apache2/2.4/modsec//unicode.mapping
 dir  path=var/apache2/2.4/modsec/tmp/ owner=webservd group=webservd mode=770
 
 

@@ -1,0 +1,2 @@
+# Depends: unique_id
+LoadModule security2_module modules/mod_security2.so
