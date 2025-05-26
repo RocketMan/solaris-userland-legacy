@@ -48,9 +48,11 @@ set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file files/php-fpm.conf \
     path=etc/apache2/2.4/conf-available/php$(MAJOR_VERSION)-fpm.conf \
     mode=0644 overlay=allow preserve=renamenew
+file files/php-mod.conf \
+    path=etc/apache2/2.4/mods-available/php$(MAJOR_VERSION).conf mode=0644 \
+    overlay=allow preserve=renamenew
 file files/php-mod.load \
     path=etc/apache2/2.4/mods-available/php$(MAJOR_VERSION).load
-file files/php.conf path=etc/apache2/2.4/samples-conf.d/php$(MAJOR_VERSION).conf
 file files/extensions.ini path=etc/php/$(MAJOR_VERSION)/conf.d/extensions.ini \
     preserve=renamenew
 file path=etc/php/$(MAJOR_VERSION)/pear.conf preserve=renamenew

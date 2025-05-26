@@ -43,8 +43,8 @@
 
 # Add several files from files directory (not in proto area)
 # Set action hash to current path so that IPS can find it
-<transform file path=files/php.conf -> set action.hash %(path)>
 <transform file path=files/php-fpm.conf -> set action.hash %(path)>
+<transform file path=files/php-mod.conf -> set action.hash %(path)>
 <transform file path=files/php-mod.load -> set action.hash %(path)>
 <transform file path=files/extensions.ini -> set action.hash %(path)>
 <transform file path=etc/php/\$\(MAJOR_VERSION\)/php-fpm.conf.default -> set action.hash %(path)>
@@ -56,7 +56,10 @@
 <transform file path=files/prof_attr -> set action.hash %(path)>
 
 # "Move" the file to it's new location
-<transform file path=files/php.conf -> edit path files/php.conf etc/apache2/2.4/samples-conf.d/php\$\(MAJOR_VERSION\).conf>
+<transform file path=files/php-mod.conf -> default mode 0644>
+<transform file path=files/php-mod.conf -> default overlay allow>
+<transform file path=files/php-mod.conf -> default preserve renamenew>
+<transform file path=files/php-mod.conf -> edit path files/php-mod.conf etc/apache2/2.4/mods-available/php\$\(MAJOR_VERSION\).conf>
 <transform file path=files/php-fpm.conf -> default mode 0644>
 <transform file path=files/php-fpm.conf -> default overlay allow>
 <transform file path=files/php-fpm.conf -> default preserve renamenew>
