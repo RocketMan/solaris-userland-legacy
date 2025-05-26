@@ -72,6 +72,7 @@ COMPONENT_PREP_ACTION += (cd $(SOURCE_DIR) ; autoreconf) ;
 include enable-extensions.mk
 
 CONFIGURE_OPTIONS += --enable-dtrace
+CONFIGURE_OPTIONS += --enable-zts
 
 # Without this, the build seems to interrogate GCC for potential library
 # search path information and then embed it into the RUNPATH of selected ELF
