@@ -56,7 +56,7 @@ install_default_site()
 	fi
 }
 
-mkdir -p /system/volatile/apache2
+mkdir -p /var/apache2/2.4
 
 if [ $FRESH_INSTALL -eq 1 ] ; then
 	echo "Apache ${APACHE_VERSION} fresh install"
@@ -65,8 +65,6 @@ if [ $FRESH_INSTALL -eq 1 ] ; then
 	enable_default_conf
 	install_default_site
 fi
-
-chown -R $APACHE_RUN_USER:$APACHE_RUN_GROUP /system/volatile/apache2
 
 /usr/sbin/svcadm disable "$SMF_FMRI"
 

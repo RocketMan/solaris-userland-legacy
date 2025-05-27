@@ -57,7 +57,7 @@ CDDL HEADER END
 			<method_context>
 			<method_credential
 			  user='root'
-			  privileges='basic,proc_exec,proc_fork,proc_info,proc_session,sys_admin,sys_config,file_dac_read,file_dac_write,file_dac_search,file_dac_execute,file_owner,file_chown,file_chown_self,{zone}:/system/volatile/apache2,{zone}:/system/volatile/apache2/2.4'/>
+			  privileges='basic,proc_exec,proc_fork,proc_info,proc_session,sys_admin,sys_config,{zone}:/var/apache2,{zone}:/var/apache2/2.4'/>
 			</method_context>
 		</exec_method>
 		<!--

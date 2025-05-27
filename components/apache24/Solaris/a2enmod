@@ -9,13 +9,10 @@
 
 use strict;
 use Cwd 'realpath';
-use File::Find;
 use File::Spec;
 use File::Basename;
 use File::Path;
 use Getopt::Long;
-use User::pwent;
-use User::grent;
 use 5.014;
 no if $] >= 5.017011, warnings => 'experimental::smartmatch';
 
@@ -79,7 +76,7 @@ my $confdir = $ENV{APACHE_CONFDIR} || "/etc/apache2$dir_suffix";
 my $availdir = $ENV{ uc("APACHE_${dir}_AVAILABLE") }
     || "$confdir/$dir-available";
 my $enabldir = $ENV{ uc("APACHE_${dir}_ENABLED") } || "$confdir/$dir-enabled";
-my $statedir = $ENV{ uc("APACHE_STATE_DIRECTORY") } || "/system/volatile/apache2/2.4";
+my $statedir = $ENV{ uc("APACHE_STATE_DIRECTORY") } || "/var/apache2/2.4";
 
 $statedir .= "/$obj";
 
@@ -122,17 +119,6 @@ $apache_reload = "  svcadm $reload $apache_service\n";
 info(  "To activate the new configuration, you need to run:\n"
      . $apache_reload
 ) if $request_reload;
-
-my $uid = getpwnam($ENV{ uc("APACHE_RUN_USER") })->uid;
-my $gid = getgrnam($ENV{ uc("APACHE_RUN_GROUP") })->gid;
-
-sub change_ownership {
-    my $file = $_;
-    chown $uid, $gid, $file or warn "Failed to chown $file: $!\n";
-}
-
-my $state_dir = $ENV{ uc("APACHE_STATE_DIRECTORY") } || "/system/volatile/apache2/2.4";
-find(\&change_ownership, $state_dir);
 
 exit($rc);
 
