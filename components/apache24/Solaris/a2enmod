@@ -9,10 +9,13 @@
 
 use strict;
 use Cwd 'realpath';
+use File::Find;
 use File::Spec;
 use File::Basename;
 use File::Path;
 use Getopt::Long;
+use User::pwent;
+use User::grent;
 use 5.014;
 no if $] >= 5.017011, warnings => 'experimental::smartmatch';
 
@@ -119,6 +122,17 @@ $apache_reload = "  svcadm $reload $apache_service\n";
 info(  "To activate the new configuration, you need to run:\n"
      . $apache_reload
 ) if $request_reload;
+
+my $uid = getpwnam($ENV{ uc("APACHE_RUN_USER") })->uid;
+my $gid = getgrnam($ENV{ uc("APACHE_RUN_GROUP") })->gid;
+
+sub change_ownership {
+    my $file = $_;
+    chown $uid, $gid, $file or warn "Failed to chown $file: $!\n";
+}
+
+my $state_dir = $ENV{ uc("APACHE_STATE_DIRECTORY") } || "/system/volatile/apache2/2.4";
+find(\&change_ownership, $state_dir);
 
 exit($rc);
 
@@ -430,8 +444,8 @@ sub remove_link {
 
 sub threaded {
     my $result = "";
-    $result = qx{/usr/sbin/apache2ctl -V | grep 'threaded'}
-        if -x '/usr/sbin/apache2ctl';
+    $result = qx{/usr/apache2/2.4/bin/apachectl -V | grep 'threaded'}
+        if -x '/usr/apache2/2.4/bin/apachectl';
     if ( $? != 0 ) {
 
         # config doesn't work
