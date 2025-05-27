@@ -1,0 +1,10 @@
+--- mod_qos-11.76/apache2/mod_qos.c~	2025-01-03 15:59:00.000000000 +0000
++++ mod_qos-11.76/apache2/mod_qos.c	2025-05-27 14:42:08.890019815 +0000
+@@ -51,6 +51,7 @@
+ /* std */
+ #include <ctype.h>
+ #include <time.h>
++#include <sys/loadavg.h>
+ 
+ #ifndef WIN32
+ #    include <arpa/inet.h>
