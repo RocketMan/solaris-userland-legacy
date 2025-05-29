@@ -27,6 +27,7 @@
 #
 
 BUILD_BITS= 64
+COMPILER=clang
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		mod_qos

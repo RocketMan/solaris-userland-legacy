@@ -29,7 +29,6 @@ APXS=apxs
 
 CC=`$(APXS) -q CC`
 CFLAGS=`$(APXS) -q CFLAGS`
-LDFLAGS_SHLIB=`$(APXS) -q LDFLAGS_SHLIB`
 
 all: .libs/mod_qos.so
 
@@ -37,4 +36,4 @@ all: .libs/mod_qos.so
 	$(APXS) -c -o mod_qos.so mod_qos.c && rm .libs/mod_qos.so
 
 .libs/mod_qos.so: .libs/mod_qos.o
-	$(CC) $(CFLAGS) -KPIC -G $(LDFLAGS_SHLIB) -o .libs/mod_qos.so .libs/mod_qos.o -lcrypto
+	$(CC) $(CFLAGS) -shared -o .libs/mod_qos.so .libs/mod_qos.o -lcrypto

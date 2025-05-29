@@ -23,6 +23,7 @@
 # Copyright (c) 2011, 2023, Oracle and/or its affiliates.
 #
 BUILD_BITS= 64
+COMPILER=clang
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		modsecurity

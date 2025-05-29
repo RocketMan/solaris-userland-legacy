@@ -24,6 +24,7 @@
 #
 
 BUILD_BITS= 64
+COMPILER=clang
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		apache2
@@ -84,7 +85,7 @@ ifneq ($(strip $(OPENSSL3)),)
 CONFIGURE_OPTIONS +=	--with-ssl=/usr/openssl/3
 endif
 $(SOLARIS_11_4_5_ONLY)CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS)"
-$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS) -D__EXTENSIONS__ -D_XOPEN_SOURCE=1 -D_XOPEN_SOURCE_EXTENDED=1"
+$(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS) $(XPG6MODE)"
 CONFIGURE_OPTIONS +=	LTFLAGS="--silent --tag=CC"
 
 ifeq   ($(strip $(PARFAIT_BUILD)),yes)
