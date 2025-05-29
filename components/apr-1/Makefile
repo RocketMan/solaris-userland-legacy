@@ -25,17 +25,18 @@
 
 # Prefer 32-bit over 64-bit as apr has its own custom package layout.
 BUILD_BITS= 32_and_64
+COMPILER=clang
 include ../../make-rules/shared-macros.mk
 
 APR_VERSION=1
 MINOR_VERSION=7
-MICRO_VERSION=2
+MICRO_VERSION=5
 
 COMPONENT_NAME=		apr
 COMPONENT_VERSION=	$(APR_VERSION).$(MINOR_VERSION).$(MICRO_VERSION)
 COMPONENT_PROJECT_URL=	https://apr.apache.org/
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:3d8999b216f7b6235343a4e3d456ce9379aa9a380ffb308512f133f0c5eb2db9
+    sha256:3375fa365d67bcf945e52b52cba07abea57ef530f40b281ffbe977a9251361db
 COMPONENT_ARCHIVE_URL=	https://archive.apache.org/dist/apr/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	utility/apache
 #COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
@@ -75,6 +76,11 @@ COMPONENT_TEST_TRANSFORMS += \
 	'-e "/^APR Lock Performance Test/,/make\[2\]: Leaving directory/p" ' \
 	'-e "/.*/d" '
 
+COMPONENT_POST_UNPACK_ACTION += \
+	$(GSED) -i 's/-KPIC/-fPIC/' \
+		$(SOURCE_DIR)/Makefile.in \
+		$(SOURCE_DIR)/build/libtool.m4
+
 # Some patches need configure script recreation; autoreconf is not used here as
 # it will overwrite the patch to the libtool scripts.
 COMPONENT_PREP_ACTION += (cd $(@D); autoconf);
@@ -95,3 +101,4 @@ ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 REQUIRED_PACKAGES += developer/documentation-tool/doxygen
 REQUIRED_PACKAGES += shell/bash
 REQUIRED_PACKAGES += shell/ksh93
+REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
