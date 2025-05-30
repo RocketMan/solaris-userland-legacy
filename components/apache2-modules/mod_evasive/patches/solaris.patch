@@ -1,0 +1,28 @@
+--- mod_evasive-2.4.0/mod_evasive24.c.~3~	2025-05-30 10:39:27.375942167 +0000
++++ mod_evasive-2.4.0/mod_evasive24.c	2025-05-30 10:41:25.714896109 +0000
+@@ -32,7 +32,9 @@
+ #include <unistd.h>  // getpid(2)
+ 
+ #define PCRE2_CODE_UNIT_WIDTH 8
+-#include <pcre2.h>
++#include <pcre/pcre2.h>
++#include <stdint.h>
++#include <arpa/inet.h>
+ 
+ #include "httpd.h"
+ #include "http_core.h"
+@@ -41,6 +43,14 @@
+ #include "http_main.h"
+ #include "http_request.h"
+ 
++#if defined(AF_INET6) && !defined(s6_addr32)
++#  define s6_addr32   _S6_un._S6_u32
++#endif
++
++static inline uint32_t htobe32(uint32_t host_32bits) {
++  return htonl(host_32bits);
++}
++
+ /* BEGIN DoS Evasive Maneuvers Definitions */
+ 
+ AP_DECLARE_MODULE(evasive);
