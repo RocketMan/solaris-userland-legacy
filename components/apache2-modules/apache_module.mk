@@ -22,18 +22,18 @@
 #
 # Copyright (c) 2025 Jim Mason <jmason at ibinx doc com>.
 #
-# Adapted from original code Copyright (c) 2011 Oracle and/or its affiliates.
-#
 
-APXS=apxs
+# Defaults (can be overridden by the including Makefile)
+APACHE_MODULE_SRC      ?= mod_example.c
+APACHE_MODULE_OBJ      ?= $(patsubst %.c,.libs/%.o,$(APACHE_MODULE_SRC))
+APACHE_MODULE_NAME     ?= $(firstword $(APACHE_MODULE_SRC:.c=))
+APACHE_MODULE_SO       ?= $(APACHE_MODULE_NAME).so
+APACHE_MODULE_LDFLAGS  ?=
+APACHE_MODULE_SUBDIR   ?= .
 
-CC=`$(APXS) -q CC`
-CFLAGS=`$(APXS) -q CFLAGS`
-
-all: .libs/mod_qos.so
-
-.libs/mod_qos.o: mod_qos.c
-	$(APXS) -c -o mod_qos.so mod_qos.c && rm .libs/mod_qos.so
-
-.libs/mod_qos.so: .libs/mod_qos.o
-	$(CC) $(CFLAGS) -shared -o .libs/mod_qos.so .libs/mod_qos.o -lcrypto
+COMPONENT_BUILD_ACTION = \
+	cd $(@D)/$(APACHE_MODULE_SUBDIR); \
+	$(ENV) $(COMPONENT_BUILD_ENV) \
+	$(APXS) -c -o .libs/$(APACHE_MODULE_SO) $(APACHE_MODULE_SRC) && rm -f .libs/$(APACHE_MODULE_SO) ; \
+	$(ENV) $(COMPONENT_BUILD_ENV) \
+	$(CC) $(CFLAGS) -shared -o .libs/$(APACHE_MODULE_SO) $(APACHE_MODULE_OBJ) $(APACHE_MODULE_LDFLAGS)

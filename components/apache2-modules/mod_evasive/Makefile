@@ -47,5 +47,8 @@ MODULES_TEST= $(TEST_AND_COMPARE_64)
 
 include ../modules.mk
 
-COMPONENT_PREP_ACTION += \
-	$(CP) files/build.mk $(@D)/Makefile
+APACHE_MODULE_SRC= mod_evasive24.c
+APACHE_MODULE_NAME= mod_evasive
+APACHE_MODULE_LDFLAGS= -lsocket -lnsl
+
+include ../apache_module.mk

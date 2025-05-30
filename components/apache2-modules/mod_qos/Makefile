@@ -48,10 +48,10 @@ MODULES_TEST= $(TEST_AND_COMPARE_64)
 
 include ../modules.mk
 
-MODULE_DIR= apache2
+APACHE_MODULE_SRC= mod_qos.c
+APACHE_MODULE_LDFLAGS= -lcrypto
+APACHE_MODULE_SUBDIR= apache2
 
-COMPONENT_PREP_ACTION += \
-	$(CP) files/build.mk $(@D)/$(MODULE_DIR)/Makefile
-COMPONENT_BUILD_ARGS += --directory=$(MODULE_DIR)
+include ../apache_module.mk
 
 REQUIRED_PACKAGES += library/security/openssl
