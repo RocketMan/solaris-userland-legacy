@@ -38,7 +38,8 @@ set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2014/253
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-file files/perl.conf path=etc/apache2/2.4/mods-available/perl.conf
+file files/perl.conf path=etc/apache2/2.4/mods-available/perl.conf mode=0644 \
+    overlay=allow preserve=renamenew
 file files/perl.load path=etc/apache2/2.4/mods-available/perl.load
 file path=usr/apache2/2.4/bin/mp2bug
 file path=usr/apache2/2.4/include/mod_perl.h

@@ -24,4 +24,5 @@
 #
 
 file files/perl.load path=etc/apache2/2.4/mods-available/perl.load
-file files/perl.conf path=etc/apache2/2.4/mods-available/perl.conf
+file files/perl.conf path=etc/apache2/2.4/mods-available/perl.conf mode=0644 \
+    overlay=allow preserve=renamenew
