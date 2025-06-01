@@ -36,7 +36,7 @@ include ../../../make-rules/shared-macros.mk
 ESR = esr
 
 COMPONENT_NAME =	thunderbird
-COMPONENT_VERSION =	128.9.1
+COMPONENT_VERSION =	128.11.0
 COMPONENT_PROJECT_URL =	https://www.thunderbird.net/
 COMPONENT_ARCHIVE = 	$(COMPONENT_SRC)$(ESR).source.tar.xz
 #COMPONENT_ARCHIVE_HASH= \
