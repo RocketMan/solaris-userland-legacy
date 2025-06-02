@@ -38,8 +38,6 @@ set name=org.opensolaris.arc-caseid value=PSARC/2012/162
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 file path=usr/apache2/2.4/libexec/mod_wsgi-3.7.so \
     pkg.linted.userland.action001.2=true
-link path=usr/apache2/2.4/libexec/mod_wsgi.so target=mod_wsgi-3.7.so \
-    mediator=python mediator-version=3.7
 file files/wsgi3.7.load path=usr/apache2/2.4/mods-available/wsgi3.7.load
 license mod_wsgi.license license=Apache2.0
 
