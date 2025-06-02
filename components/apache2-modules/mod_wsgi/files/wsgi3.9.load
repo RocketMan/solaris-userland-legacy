@@ -1,0 +1,2 @@
+# Conflicts: wsgi3.7 wsgi3.11
+LoadModule wsgi_module libexec/mod_wsgi-3.9.so

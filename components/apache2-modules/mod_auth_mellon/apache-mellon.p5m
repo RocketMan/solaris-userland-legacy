@@ -36,7 +36,10 @@ set name=info.source-url value=$(COMPONENT_ARCHIVE_URL)
 set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2019/036
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
-file sample-mellon.conf path=etc/apache2/2.4/samples-conf.d/mellon.conf
+file files/auth_mellon.conf \
+    path=etc/apache2/2.4/mods-available/auth_mellon.conf mode=0644 \
+    overlay=allow preserve=renamenew
+file files/auth_mellon.load path=etc/apache2/2.4/mods-available/auth_mellon.load
 file build/apache24/$(MACH64)/mellon_create_metadata.sh \
     path=usr/apache2/2.4/bin/mellon_create_metadata.sh
 file build/apache24/$(MACH64)/.libs/mod_auth_mellon.so \
