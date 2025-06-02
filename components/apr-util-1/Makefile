@@ -25,6 +25,7 @@
 
 # Prefer 32-bit over 64-bit as apr-util has its own custom package layout.
 BUILD_BITS= 32_and_64
+COMPILER= clang
 include ../../make-rules/shared-macros.mk
 
 APU_VERSION=1
@@ -53,7 +54,7 @@ PATCH_LEVEL=0
 
 CONFIGURE_PREFIX=$(USRDIR)/apr-util/1
 
-CONFIGURE_OPTIONS.64 +=	--with-mysql=$(USRDIR)/mysql/8.0
+CONFIGURE_OPTIONS.64 +=	--with-mysql=$(USRDIR)/mysql/5.5
 CONFIGURE_OPTIONS +=	--with-expat=$(USRDIR)
 CONFIGURE_OPTIONS +=	--with-sqlite3=$(USRDIR)
 CONFIGURE_OPTIONS +=	--with-ldap=ldap_r-2.4
@@ -89,12 +90,15 @@ COMPONENT_PREP_ACTION += (cd $(@D); autoreconf -fi);
 
 ASLR_MODE = $(ASLR_NOT_APPLICABLE)
 
+REQUIRED_PACKAGES += database/mysql-55
+REQUIRED_PACKAGES += database/mysql-55/library
 REQUIRED_PACKAGES += database/mysql-80
 REQUIRED_PACKAGES += database/mysql-80/library
 REQUIRED_PACKAGES += database/sqlite-3
 REQUIRED_PACKAGES += developer/documentation-tool/doxygen
 REQUIRED_PACKAGES += library/apr-1
 REQUIRED_PACKAGES += library/expat
+REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += shell/ksh93
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += system/network/ldap/openldap

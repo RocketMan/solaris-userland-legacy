@@ -1,0 +1,15 @@
+--- apr-util-1.6.3/dbd/apr_dbd_mysql.c-	2023-01-27 13:32:52.000000000 +0000
++++ apr-util-1.6.3/dbd/apr_dbd_mysql.c	2025-06-02 16:34:13.272858438 +0000
+@@ -34,12 +34,8 @@
+ #include <mysql/mysql.h>
+ #include <mysql/errmsg.h>
+ #else /* !defined(HAVE_MYSQL_MYSQL_H) */
+-#if defined(HAVE_MY_GLOBAL_H) 
+ #include <my_global.h>
+-#if defined(HAVE_MY_SYS_H)
+ #include <my_sys.h>
+-#endif
+-#endif
+ #include <mysql.h>
+ #include <errmsg.h>
+ #endif
