@@ -347,7 +347,6 @@ file config-dir/mods-available/vhost_alias.load \
 file config-dir/mods-available/xml2enc.load \
     path=etc/apache2/2.4/mods-available/xml2enc.load
 dir  path=etc/apache2/2.4/mods-enabled
-file etc/apache2/2.4/httpd.conf path=etc/apache2/2.4/original/httpd.conf
 file config-dir/ports.conf path=etc/apache2/2.4/ports.conf mode=0644 \
     overlay=allow preserve=renameold
 file config-dir/sites-available/000-default.conf \
