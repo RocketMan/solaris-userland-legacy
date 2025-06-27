@@ -1,0 +1,11 @@
+--- firefox-140.0/media/ffvpx/libavcodec/version.c~	2025-06-17 17:15:19.000000000 +0000
++++ firefox-140.0/media/ffvpx/libavcodec/version.c	2025-06-24 22:50:37.534430038 +0000
+@@ -29,6 +29,8 @@
+ #include "libavutil/ffversion.h"
+ const char av_codec_ffversion[] = "FFmpeg version " FFMPEG_VERSION;
+ 
++#define static_assert(x, y)
++
+ unsigned avcodec_version(void)
+ {
+     static_assert(AV_CODEC_ID_DNXUC        ==   270 &&

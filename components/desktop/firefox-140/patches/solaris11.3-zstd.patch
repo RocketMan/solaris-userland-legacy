@@ -1,0 +1,35 @@
+On Solaris 11.3, the new ZSTD compression is raising an exception:
+
+````
+Thread 21 received signal SIGSEGV, Segmentation fault.
+[Switching to Thread 5 (LWP 5)]
+0x00007fefffe00047 in ?? ()
+(gdb) bt
+#0  0x00007fefffe00047 in  ()
+#1  0x00007ff0047c675b in ZSTD_decompressBegin () at /usr/lib/firefox/libxul.so
+#2  0x00007ff0047c68b9 in ZSTD_decompressBegin_usingDDict ()
+    at /usr/lib/firefox/libxul.so
+#3  0x00007ff0047cbfc9 in ZSTD_decompressStream ()
+    at /usr/lib/firefox/libxul.so
+#4  0x00007ff0047a51b5 in mozilla::net::nsHTTPCompressConv::ZstdHandler(nsIInputStream*, void*, char const*, unsigned int, unsigned int, unsigned int*) ()
+    at /usr/lib/firefox/libxul.so
+#5  0x00007ff004403b9a in  () at /usr/lib/firefox/libxul.so
+#6  0x00007ff0047a553d in mozilla::net::nsHTTPCompressConv::OnDataAvailable(nsIRequest*, nsIInputStream*, unsigned long, unsigned int) ()
+    at /usr/lib/firefox/libxul.so
+#7  0x00007ff004897f68 in mozilla::net::HttpChannelChild::DoOnDataAvailable(nsIRequest*, nsIInputStream*, unsigned long, unsigned int) ()
+    at /usr/lib/firefox/libxul.so
+````	    
+
+This patch removes zstd as a default compression algorithm.
+
+--- firefox-128.0/modules/libpref/init/all.js~	2024-07-04 17:20:34.000000000 +0000
++++ firefox-128.0/modules/libpref/init/all.js	2024-07-15 10:34:04.634177878 +0000
+@@ -1180,7 +1180,7 @@
+ // NOTE: support for "compress" has been disabled per bug 196406.
+ // NOTE: separate values with comma+space (", "): see bug 576033
+ pref("network.http.accept-encoding", "gzip, deflate");
+-pref("network.http.accept-encoding.secure", "gzip, deflate, br, zstd");
++pref("network.http.accept-encoding.secure", "gzip, deflate, br");
+ 
+ // Prompt for redirects resulting in unsafe HTTP requests
+ pref("network.http.prompt-temp-redirect", false);

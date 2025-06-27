@@ -1,0 +1,25 @@
+Hack to deal with `(STT_TLS) is defined in a non-SHF_TLS section when linking opentelemetry-cpp`
+
+Clang is generating STT_TLS symbols, but they're not placed in SHF_TLS
+sections, which Solaris ld expects in order to handle TLS correctly.
+
+This is a known problem when building with clang on Solaris, when
+thread_local static initialisers appear inline in C++ headers.
+
+A more long-term fix would be to move the thread_local static
+initialisers into non-inline C++ source files, or update clang to
+handle the situation gracefully (i.e., emit SHF_TLS markers for such
+variables when generated from inline code, as gcc does).
+
+
+--- firefox-140.0/third_party/opentelemetry-cpp/api/include/opentelemetry/context/runtime_context.h~	2025-06-17 17:15:29.000000000 +0000
++++ firefox-140.0/third_party/opentelemetry-cpp/api/include/opentelemetry/context/runtime_context.h	2025-06-25 16:11:33.221111707 +0000
+@@ -327,7 +327,7 @@
+ 
+   OPENTELEMETRY_API_SINGLETON Stack &GetStack()
+   {
+-    static thread_local Stack stack_ = Stack();
++    static Stack stack_ = Stack();
+     return stack_;
+   }
+ };

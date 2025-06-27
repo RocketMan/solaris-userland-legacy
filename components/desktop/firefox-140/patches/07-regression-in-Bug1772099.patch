@@ -1,0 +1,20 @@
+shows up on stderr when performing about:plugins:
+[fluent][resolver] errors in en-US/file-dd: Resolver error: Unknown variable: $pluginLibraries
+[fluent][resolver] errors in en-US/path-dd: Resolver error: Unknown variable: $pluginFullPath
+[fluent][resolver] errors in en-US/version-dd: Resolver error: Unknown variable: $version
+
+This patch is too aggresive since it doesn't show the OpenH264 Video Codec
+plugin, not that it is even available for OpenIndiana/Solaris. And not that
+any of DRM plugins are available either.
+
+--- firefox-128.0/toolkit/mozapps/extensions/internal/GMPProvider.sys.mjs.~1~	2024-07-09 10:39:13.803789314 +0000
++++ firefox-128.0/toolkit/mozapps/extensions/internal/GMPProvider.sys.mjs	2024-07-09 10:40:54.934724841 +0000
+@@ -76,7 +76,7 @@
+ ];
+ 
+ ChromeUtils.defineLazyGetter(
+-  lazy,
++  this,
+   "addonsBundle",
+   () => new Localization(["toolkit/about/aboutAddons.ftl"], true)
+ );

@@ -1,0 +1,52 @@
+Patch for building with clang
+
+1. Removes broken -Wa,--noexecstack (regression in Solaris clang since 18.1.0)
+
+2. Replaces #pragma visibility hidden with -fvisibility=hidden to work around
+the issue described here:  https://github.com/llvm/llvm-project/issues/79027
+
+3. Removes -fstack-clash-protection (not supported by clang)
+
+4. Fixes throwness on various memory allocation function signatures
+
+--- firefox-128.2.0/build/moz.configure/flags.configure~	2024-08-26 15:23:32.000000000 +0000
++++ firefox-128.2.0/build/moz.configure/flags.configure	2024-09-08 16:46:13.194401705 +0000
+@@ -200,7 +200,6 @@
+ check_and_add_linker_flag("-Wl,--build-id=uuid", when=check_build_id_uuid)
+ check_and_add_linker_flag("-Wl,--build-id=sha1", when=check_build_id_sha1)
+ 
+-check_and_add_asm_flag("-Wa,--noexecstack", when=building_with_gnu_compatible_cc)
+ check_and_add_linker_flag("-Wl,-z,noexecstack", when=building_with_gnu_compatible_cc)
+ check_and_add_linker_flag("-Wl,-z,text", when=building_with_gnu_compatible_cc)
+ check_and_add_linker_flag("-Wl,-z,relro", when=building_with_gnu_compatible_cc)
+--- firefox-128.3.1/build/moz.configure/toolchain.configure.~3~	2024-10-10 19:04:58.508761610 +0000
++++ firefox-128.3.1/build/moz.configure/toolchain.configure	2024-10-11 13:04:54.286088594 +0000
+@@ -2290,7 +2290,7 @@
+ @depends(target, build_environment)
+ def visibility_flags(target, env):
+     if target.os != "WINNT":
+-        if target.kernel == "Darwin":
++        if target.kernel == "Darwin" or target.os == "SunOS":
+             return ("-fvisibility=hidden", "-fvisibility-inlines-hidden")
+         return (
+             "-I%s/system_wrappers" % os.path.join(env.dist),
+@@ -2693,7 +2693,7 @@
+             if (
+                 c_compiler.type == "clang"
+                 and c_compiler.version >= "11.0.1"
+-                and target.os not in ("WINNT", "OSX", "OpenBSD")
++                and target.os not in ("WINNT", "OSX", "OpenBSD", "SunOS")
+                 and target.cpu in ("x86", "x86_64", "ppc64", "s390x")
+             ):
+                 flags.append("-fstack-clash-protection")
+--- firefox-128.3.1/memory/build/malloc_decls.h.~2~	2024-10-10 19:04:57.886778299 +0000
++++ firefox-128.3.1/memory/build/malloc_decls.h	2024-10-11 14:08:48.270599513 +0000
+@@ -39,7 +39,7 @@
+ // consistent declare certain functions as `throw()`, though.
+ 
+ // Bionic and OS X don't seem to care about `throw()`ness.
+-#  if defined(ANDROID) || defined(XP_DARWIN)
++#  if defined(ANDROID) || defined(XP_DARWIN) || defined(__sun)
+ #    undef NOTHROW_MALLOC_DECL
+ #    define NOTHROW_MALLOC_DECL MALLOC_DECL
+ // Some places don't care about the distinction.

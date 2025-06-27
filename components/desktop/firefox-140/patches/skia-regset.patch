@@ -1,0 +1,14 @@
+--- firefox-128.0/gfx/skia/skia/src/core/SkMeshPriv.h-	2024-07-04 17:20:27.000000000 +0000
++++ firefox-128.0/gfx/skia/skia/src/core/SkMeshPriv.h	2024-07-09 19:58:37.164008271 +0000
+@@ -12,6 +12,11 @@
+ #include "include/core/SkMesh.h"
+ #include "src/core/SkSLTypeShared.h"
+ 
++#if defined(__sun)
++#include <sys/regset.h>
++#undef FS
++#endif
++
+ struct SkMeshSpecificationPriv {
+     using Varying   = SkMeshSpecification::Varying;
+     using Attribute = SkMeshSpecification::Attribute;

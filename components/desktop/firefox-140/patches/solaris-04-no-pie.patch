@@ -1,0 +1,11 @@
+--- firefox-140.0/build/moz.configure/flags.configure.~2~	2025-06-25 10:42:01.244215466 +0000
++++ firefox-140.0/build/moz.configure/flags.configure	2025-06-25 12:31:20.213659972 +0000
+@@ -519,7 +519,7 @@
+ # ---------------------------------
+ @depends(building_with_gnu_compatible_cc, target)
+ def moz_program_ldflags(building_with_gnu_compatible_cc, target):
+-    if building_with_gnu_compatible_cc and target.kernel not in ("Darwin", "WASI"):
++    if building_with_gnu_compatible_cc and target.kernel not in ("Darwin", "SunOS", "WASI"):
+         return ["-pie"]
+ 
+ 

@@ -1,0 +1,216 @@
+--- firefox-140.0/tools/profiler/rust-api/src/json_writer.rs~	2025-06-17 17:15:30.000000000 +0000
++++ firefox-140.0/tools/profiler/rust-api/src/json_writer.rs	2025-06-24 19:27:45.267654830 +0000
+@@ -26,7 +26,7 @@
+             bindings::gecko_profiler_json_writer_int_property(
+                 self.0,
+                 name.as_ptr() as *const c_char,
+-                name.len(),
++                name.len() as u64,
+                 value,
+             );
+         }
+@@ -39,7 +39,7 @@
+             bindings::gecko_profiler_json_writer_float_property(
+                 self.0,
+                 name.as_ptr() as *const c_char,
+-                name.len(),
++                name.len() as u64,
+                 value,
+             );
+         }
+@@ -52,7 +52,7 @@
+             bindings::gecko_profiler_json_writer_bool_property(
+                 self.0,
+                 name.as_ptr() as *const c_char,
+-                name.len(),
++                name.len() as u64,
+                 value,
+             );
+         }
+@@ -65,9 +65,9 @@
+             bindings::gecko_profiler_json_writer_string_property(
+                 self.0,
+                 name.as_ptr() as *const c_char,
+-                name.len(),
++                name.len() as u64,
+                 value.as_ptr() as *const c_char,
+-                value.len(),
++                value.len() as u64,
+             );
+         }
+     }
+@@ -79,9 +79,9 @@
+             bindings::gecko_profiler_json_writer_unique_string_property(
+                 self.0,
+                 name.as_ptr() as *const c_char,
+-                name.len(),
++                name.len() as u64,
+                 value.as_ptr() as *const c_char,
+-                value.len(),
++                value.len() as u64,
+             );
+         }
+     }
+@@ -93,7 +93,7 @@
+             bindings::gecko_profiler_json_writer_null_property(
+                 self.0,
+                 name.as_ptr() as *const c_char,
+-                name.len(),
++                name.len() as u64,
+             );
+         }
+     }
+--- firefox-140.0/tools/profiler/rust-api/src/marker/mod.rs~	2025-06-17 17:15:31.000000000 +0000
++++ firefox-140.0/tools/profiler/rust-api/src/marker/mod.rs	2025-06-24 19:39:34.436479139 +0000
+@@ -148,7 +148,7 @@
+     unsafe {
+         bindings::gecko_profiler_add_marker_untyped(
+             name.as_ptr() as *const c_char,
+-            name.len(),
++            name.len() as u64,
+             category.to_cpp_enum_value(),
+             options.timing.0.as_mut_ptr(),
+             options.stack,
+@@ -172,12 +172,12 @@
+     unsafe {
+         bindings::gecko_profiler_add_marker_text(
+             name.as_ptr() as *const c_char,
+-            name.len(),
++            name.len() as u64,
+             category.to_cpp_enum_value(),
+             options.timing.0.as_mut_ptr(),
+             options.stack,
+             text.as_ptr() as *const c_char,
+-            text.len(),
++            text.len() as u64,
+         )
+     }
+ }
+@@ -337,13 +337,13 @@
+     unsafe {
+         bindings::gecko_profiler_add_marker(
+             name.as_ptr() as *const c_char,
+-            name.len(),
++            name.len() as u64,
+             category.to_cpp_enum_value(),
+             options.timing.0.as_mut_ptr(),
+             options.stack,
+             marker_tag,
+             encoded_payload.as_ptr(),
+-            encoded_payload.len(),
++            encoded_payload.len() as u64,
+         );
+     }
+ }
+--- firefox-140.0/tools/profiler/rust-api/src/marker/schema.rs~	2025-06-17 17:15:31.000000000 +0000
++++ firefox-140.0/tools/profiler/rust-api/src/marker/schema.rs	2025-06-24 19:40:53.848281458 +0000
+@@ -34,7 +34,7 @@
+             ptr: unsafe {
+                 bindings::gecko_profiler_construct_marker_schema(
+                     locations.as_ptr(),
+-                    locations.len(),
++                    locations.len() as u64,
+                 )
+             },
+         }
+@@ -59,7 +59,7 @@
+             bindings::gecko_profiler_marker_schema_set_chart_label(
+                 self.ptr,
+                 label.as_ptr() as *const c_char,
+-                label.len(),
++                label.len() as u64,
+             );
+         }
+         self
+@@ -74,7 +74,7 @@
+             bindings::gecko_profiler_marker_schema_set_tooltip_label(
+                 self.ptr,
+                 label.as_ptr() as *const c_char,
+-                label.len(),
++                label.len() as u64,
+             );
+         }
+         self
+@@ -89,7 +89,7 @@
+             bindings::gecko_profiler_marker_schema_set_table_label(
+                 self.ptr,
+                 label.as_ptr() as *const c_char,
+-                label.len(),
++                label.len() as u64,
+             );
+         }
+         self
+@@ -104,7 +104,7 @@
+             bindings::gecko_profiler_marker_schema_set_all_labels(
+                 self.ptr,
+                 label.as_ptr() as *const c_char,
+-                label.len(),
++                label.len() as u64,
+             );
+         }
+         self
+@@ -127,7 +127,7 @@
+             bindings::gecko_profiler_marker_schema_add_key_format(
+                 self.ptr,
+                 key.as_ptr() as *const c_char,
+-                key.len(),
++                key.len() as u64,
+                 format,
+             );
+         }
+@@ -143,9 +143,9 @@
+             bindings::gecko_profiler_marker_schema_add_key_label_format(
+                 self.ptr,
+                 key.as_ptr() as *const c_char,
+-                key.len(),
++                key.len() as u64,
+                 label.as_ptr() as *const c_char,
+-                label.len(),
++                label.len() as u64,
+                 format,
+             );
+         }
+@@ -165,7 +165,7 @@
+             bindings::gecko_profiler_marker_schema_add_key_format_searchable(
+                 self.ptr,
+                 key.as_ptr() as *const c_char,
+-                key.len(),
++                key.len() as u64,
+                 format,
+                 searchable,
+             );
+@@ -190,9 +190,9 @@
+             bindings::gecko_profiler_marker_schema_add_key_label_format_searchable(
+                 self.ptr,
+                 key.as_ptr() as *const c_char,
+-                key.len(),
++                key.len() as u64,
+                 label.as_ptr() as *const c_char,
+-                label.len(),
++                label.len() as u64,
+                 format,
+                 searchable,
+             );
+@@ -208,9 +208,9 @@
+             bindings::gecko_profiler_marker_schema_add_static_label_value(
+                 self.ptr,
+                 label.as_ptr() as *const c_char,
+-                label.len(),
++                label.len() as u64,
+                 value.as_ptr() as *const c_char,
+-                value.len(),
++                value.len() as u64,
+             );
+         }
+         self
+--- firefox-140.0/tools/profiler/rust-api/src/gecko_bindings/glue.rs~	2025-06-17 17:15:30.000000000 +0000
++++ firefox-140.0/tools/profiler/rust-api/src/gecko_bindings/glue.rs	2025-06-24 19:41:57.761113469 +0000
+@@ -44,7 +44,7 @@
+         bindings::gecko_profiler_marker_schema_stream(
+             json_writer,
+             marker_name.as_ptr() as *const c_char,
+-            marker_name.len(),
++            marker_name.len() as u64,
+             marker_schema.ptr,
+             streamed_names_set,
+         )
