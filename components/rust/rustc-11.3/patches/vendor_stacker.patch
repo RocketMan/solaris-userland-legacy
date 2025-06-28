@@ -1,33 +1,24 @@
 Stack limit on 11.3 is determined via stack_getbounds(3C)
 
 
---- rustc-1.83.0-src/vendor/stacker-0.1.18/src/lib.rs.orig	2024-11-26 10:12:09.000000000 +0000
-+++ rustc-1.83.0-src/vendor/stacker-0.1.18/src/lib.rs	2024-11-28 17:06:58.764862229 +0000
-@@ -405,7 +405,7 @@
-             );
-             Some(mi.assume_init().AllocationBase as usize + get_thread_stack_guarantee() + 0x1000)
-         }
--    } else if #[cfg(any(target_os = "linux", target_os="solaris", target_os = "netbsd"))] {
-+    } else if #[cfg(any(target_os = "linux", target_os = "netbsd"))] {
-         unsafe fn guess_os_stack_limit() -> Option<usize> {
-             let mut attr = std::mem::MaybeUninit::<libc::pthread_attr_t>::uninit();
-             assert_eq!(libc::pthread_attr_init(attr.as_mut_ptr()), 0);
-@@ -443,6 +443,12 @@
-             Some(libc::pthread_get_stackaddr_np(libc::pthread_self()) as usize -
-                 libc::pthread_get_stacksize_np(libc::pthread_self()) as usize)
-         }
+--- rustc-1.88.0-src/vendor/stacker-0.1.21/src/backends/mod.rs~	2025-06-23 20:24:54.000000000 +0000
++++ rustc-1.88.0-src/vendor/stacker-0.1.21/src/backends/mod.rs	2025-06-28 10:52:34.199914085 +0000
+@@ -5,6 +5,12 @@
+     } else if #[cfg(windows)] {
+         pub(crate) mod windows;
+         pub use windows::guess_os_stack_limit;
 +    } else if #[cfg(target_os = "solaris")] {
-+        unsafe fn guess_os_stack_limit() -> Option<usize> {
++        pub unsafe fn guess_os_stack_limit() -> Option<usize> {
 +            let mut current_stack: libc::stack_t = std::mem::zeroed();
 +            assert_eq!(libc::stack_getbounds(&mut current_stack), 0);
 +            Some(current_stack.ss_sp as usize)
 +        }
-     } else {
-         // fallback for other platforms is to always increase the stack if we're on
-         // the root stack. After we increased the stack once, we know the new stack
---- rustc-1.87.0-src/vendor/stacker-0.1.18/.cargo-checksum.json~	2025-05-09 21:37:37.000000000 +0000
-+++ rustc-1.87.0-src/vendor/stacker-0.1.18/.cargo-checksum.json	2025-05-15 19:16:31.927883357 +0000
+     } else if #[cfg(any(
+         target_os = "linux",
+         target_os = "solaris",
+--- rustc-1.88.0-src/vendor/stacker-0.1.21/.cargo-checksum.json.~1~	2025-06-23 20:24:54.000000000 +0000
++++ rustc-1.88.0-src/vendor/stacker-0.1.21/.cargo-checksum.json	2025-06-28 11:21:26.459843820 +0000
 @@ -1 +1 @@
--{"files":{"Cargo.toml":"ee00517fb1ba5c070b05e1beb554c909f9423851b941ea6e530732cb695c2ffb","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"3b4db90523bcff7d1381367418fdbdb3c866d13c95f1c4aa8185f2280ae33abb","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/lib.rs":"0cd86e2f90c4aba6e89112220e67f6431b22e05da90a3c4d518dc4d325c99fd7","tests/simple.rs":"672b92078462d762441c7d50c076bdb9135ccb2d9858314af41c43925d237e55","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"1d08feb8f695b465baed819b03c128dc23f57a694510ab1f06c77f763975685e"}
+-{"files":{"Cargo.lock":"173c0612229ed8202ec68bc97c952948e9f2e9c26f92c541c3c79ec9414fc0fa","Cargo.toml":"8542687e73de565bfba6df183503c77ac80453211cca98779dca9ca01e76b7bd","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"3b4db90523bcff7d1381367418fdbdb3c866d13c95f1c4aa8185f2280ae33abb","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/alloc_stack_restore_guard.rs":"5bc62493772e407494ad48b9bf316688b7eb1b9c85f1f7a8fc183c80903697b6","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/backends/fallback.rs":"9314cb7646b0542bf7bafd576c4aa98d6e1dd0e0e0e3632618165487062f6f18","src/backends/macos.rs":"f6a504461e951c14e1cb7c4dc5153c516a2a62039e1293ad3e66cf38a660f878","src/backends/mod.rs":"09286439a8458121cbba1aefc2893951004de40b1863e0cbcbc3dfc6665f58aa","src/backends/openbsd.rs":"bf5f1f9ff35e8b514aadf430004dc5994a8c36a6ca445d30c02595c287d1bef8","src/backends/unix.rs":"547ed9dd5facb3ea15b77f75ce64c1889dec98c3516fff73bb1c6a49be357d26","src/backends/windows.rs":"5224401ef6a157a1caaee4eda3d8a55f3337d73a31b7b0d36ba25ed1d62b66db","src/lib.rs":"509bc15f5f83a74c2bc674631ead30a0737fcc9689c0ca5b6e619cf9081a3be2","src/mmap_stack_restore_guard.rs":"73c578f5345c12263ba693837b0bfd14f32bba333448f54e3c2bd9b4d7d721f1","tests/simple.rs":"672b92078462d762441c7d50c076bdb9135ccb2d9858314af41c43925d237e55","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"cddb07e32ddb770749da91081d8d0ac3a16f1a569a18b20348cd371f5dead06b"}
 \ No newline at end of file
-+{"files":{"Cargo.toml":"ee00517fb1ba5c070b05e1beb554c909f9423851b941ea6e530732cb695c2ffb","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"3b4db90523bcff7d1381367418fdbdb3c866d13c95f1c4aa8185f2280ae33abb","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/lib.rs":"952c0fb06dba3c16d1efa780e7c9a1358f0d5661f90574b0e5e7764559769116","tests/simple.rs":"672b92078462d762441c7d50c076bdb9135ccb2d9858314af41c43925d237e55","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"1d08feb8f695b465baed819b03c128dc23f57a694510ab1f06c77f763975685e"}
++{"files":{"Cargo.lock":"173c0612229ed8202ec68bc97c952948e9f2e9c26f92c541c3c79ec9414fc0fa","Cargo.toml":"8542687e73de565bfba6df183503c77ac80453211cca98779dca9ca01e76b7bd","LICENSE-APACHE":"a60eea817514531668d7e00765731449fe14d059d3249e0bc93b36de45f759f2","LICENSE-MIT":"378f5840b258e2779c39418f3f2d7b2ba96f1c7917dd6be0713f88305dbda397","README.md":"3b4db90523bcff7d1381367418fdbdb3c866d13c95f1c4aa8185f2280ae33abb","build.rs":"8a9274309128a737566386f2534a93c69d2991da19a4543113790bc819448a53","src/alloc_stack_restore_guard.rs":"5bc62493772e407494ad48b9bf316688b7eb1b9c85f1f7a8fc183c80903697b6","src/arch/asm.h":"4c4db945e854e4ce3f0b7ba8da3755613c0e4513a7aab0604bd6a67c0ff2192d","src/arch/windows.c":"e98e08f6b5102480b8fa4dfa7ee13441845202f5ba81c60b13da2800e0a8630c","src/backends/fallback.rs":"9314cb7646b0542bf7bafd576c4aa98d6e1dd0e0e0e3632618165487062f6f18","src/backends/macos.rs":"f6a504461e951c14e1cb7c4dc5153c516a2a62039e1293ad3e66cf38a660f878","src/backends/mod.rs":"f8b29b7a69a13d6b70400ef39a594dabda24ef76241189b7b93088ebcbd8b039","src/backends/openbsd.rs":"bf5f1f9ff35e8b514aadf430004dc5994a8c36a6ca445d30c02595c287d1bef8","src/backends/unix.rs":"547ed9dd5facb3ea15b77f75ce64c1889dec98c3516fff73bb1c6a49be357d26","src/backends/windows.rs":"5224401ef6a157a1caaee4eda3d8a55f3337d73a31b7b0d36ba25ed1d62b66db","src/lib.rs":"509bc15f5f83a74c2bc674631ead30a0737fcc9689c0ca5b6e619cf9081a3be2","src/mmap_stack_restore_guard.rs":"73c578f5345c12263ba693837b0bfd14f32bba333448f54e3c2bd9b4d7d721f1","tests/simple.rs":"672b92078462d762441c7d50c076bdb9135ccb2d9858314af41c43925d237e55","tests/smoke.rs":"db4fd5b210123d9643aefd703be324d626d4b0f9398d7cae7f30871fba71f65b"},"package":"cddb07e32ddb770749da91081d8d0ac3a16f1a569a18b20348cd371f5dead06b"}
