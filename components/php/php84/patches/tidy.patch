@@ -1,0 +1,16 @@
+Older versions of Tidy do not have `TidyInternalCategory`
+
+--- php-8.4.10/ext/tidy/tidy.c	2025-07-02 03:22:42.000000000 +0000
++++ php-8.4.8/ext/tidy/tidy.c	2025-06-03 17:29:26.000000000 +0000
+@@ -234,11 +234,7 @@
+ 		return FAILURE;
+ 	}
+ 
+-#if defined(HAVE_TIDYOPTGETCATEGORY)
+-	if (tidyOptGetCategory(opt) == TidyInternalCategory) {
+-#else
+ 	if (tidyOptIsReadOnly(opt)) {
+-#endif
+ 		php_error_docref(NULL, E_WARNING, "Attempting to set read-only option \"%s\"", optname);
+ 		return FAILURE;
+ 	}
