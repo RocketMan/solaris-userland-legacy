@@ -69,8 +69,14 @@ Updated 2025-05-26 for Apache2 modular configuration
  
  # Improve the quality of ModSecurity by sharing information about your
  # current ModSecurity version and dependencies versions.
-@@ -238,3 +240,4 @@
+@@ -238,3 +240,10 @@
  # setting On, as there is no active receiver for the information.
  SecStatusEngine Off
  
++# Include all the *.conf files in /etc/modsecurity.
++IncludeOptional /etc/modsecurity/*.conf
++
++# Include OWASP ModSecurity CRS rules if installed
++IncludeOptional /usr/share/modsecurity-crs/*.load
++
 +</IfModule>

@@ -18,7 +18,10 @@
 #
 # CDDL HEADER END
 #
-# Copyright (c) 2011, 2021, Oracle and/or its affiliates.
+# Copyright (c) 2025 Jim Mason <jmason at ibinx dot com>
+#
+# Adapted from original code Copyright (c) 2011, 2021, Oracle and/or its
+# affiliates.
 #
 # temporary workaround till updated APR/APR-util get into repo
 <transform file path=.*\.so -> \
@@ -41,11 +44,12 @@ file modsecurity-24.conf-recommended \
     path=etc/apache2/2.4/mods-available/security2.conf mode=0644 \
     overlay=allow preserve=renamenew
 file Solaris/security2.load path=etc/apache2/2.4/mods-available/security2.load
+dir  path=etc/modsecurity
 file build/apache24/$(MACH64)/apache2/.libs/mod_security2.so \
     path=usr/apache2/2.4/libexec/mod_security2.so \
     pkg.linted.userland.action001.2=true
 dir  path=var/apache2/2.4/modsec/tmp/ owner=webservd group=webservd mode=770
 file unicode.mapping path=var/apache2/2.4/modsec/unicode.mapping
-
-
 license apache-security.license license="Apache v2.0"
+# bring along the modsecurity CRS rules
+depend type=require fmri=library/security/modsecurity-crs

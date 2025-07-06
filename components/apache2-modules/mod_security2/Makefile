@@ -20,18 +20,23 @@
 #
 
 #
-# Copyright (c) 2011, 2023, Oracle and/or its affiliates.
+# Copyright (c) 2025 Jim Mason <jmason at ibinx dot com>
 #
+# Adapted from original code Copyright (c) 2011, 2023, Oracle and/or its
+# affiliates.
+#
+
 BUILD_BITS= 64
 COMPILER=clang
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		modsecurity
-COMPONENT_VERSION=	2.9.7
+COMPONENT_VERSION=	2.9.11
 COMPONENT_BAID=		142176
-COMPONENT_PROJECT_URL=	https://github.com/SpiderLabs/ModSecurity
+COMPONENT_PROJECT_URL=	https://github.com/owasp-modsecurity/ModSecurity
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:2a28fcfccfef21581486f98d8d5fe0397499749b8380f60ec7bb1c08478e1839
+    sha256:1fe16eb96b6093f062cef73ec8b7ae481a59813766d49a7f5e4d1b85900e239e
+COMPONENT_SRC=		modsecurity-v$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE_URL= \
     $(COMPONENT_PROJECT_URL)/releases/download/v$(COMPONENT_VERSION)/$(COMPONENT_ARCHIVE)
 COMPONENT_BUGDB=	utility/apache
@@ -65,5 +70,6 @@ REQUIRED_PACKAGES += library/apr-1
 REQUIRED_PACKAGES += library/apr-util-1
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/pcre2
+REQUIRED_PACKAGES += library/yajl
 REQUIRED_PACKAGES += runtime/lua
 REQUIRED_PACKAGES += web/curl
