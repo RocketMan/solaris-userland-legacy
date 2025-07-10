@@ -1,25 +1,45 @@
-Hack to deal with `(STT_TLS) is defined in a non-SHF_TLS section when linking opentelemetry-cpp`
+Due to strict TLS validation in Solaris ld, using `static thread_local`
+variables inside header-only functions can result in linker errors:
 
-Clang is generating STT_TLS symbols, but they're not placed in SHF_TLS
-sections, which Solaris ld expects in order to handle TLS correctly.
+    fatal: symbol <name> (STT_TLS) is defined in a non-SHF_TLS section
 
-This is a known problem when building with clang on Solaris, when
-thread_local static initialisers appear inline in C++ headers.
+Clang often emits function-local `static thread_local` variables into COMDAT
+sections to allow deduplication across translation units.  Unfortunately,
+Solaris ld requires that any STT_TLS symbol reside in a properly marked
+TLS section (i.e. with SHF_TLS), and COMDAT-wrapped TLS symbols may not be.
 
-A more long-term fix would be to move the thread_local static
-initialisers into non-inline C++ source files, or update clang to
-handle the situation gracefully (i.e., emit SHF_TLS markers for such
-variables when generated from inline code, as gcc does).
+In the opentelemetry-cpp header-only codebase, we cannot relocate the
+variable definition into a .cpp file to avoid multiple instantiations,
+and using thread_local inline (even with pointer indirection) may still
+emit TLS symbols.
+
+As an alternative, we use POSIX-compliant pthread_key_t to effect
+thread-local storage without relying on compiler-emitted TLS sections.
 
 
---- firefox-140.0/third_party/opentelemetry-cpp/api/include/opentelemetry/context/runtime_context.h~	2025-06-17 17:15:29.000000000 +0000
-+++ firefox-140.0/third_party/opentelemetry-cpp/api/include/opentelemetry/context/runtime_context.h	2025-06-25 16:11:33.221111707 +0000
-@@ -327,7 +327,7 @@
+--- firefox-140.0/third_party/opentelemetry-cpp/api/include/opentelemetry/context/runtime_context.h.~1~	2025-06-17 17:15:29.000000000 +0000
++++ firefox-140.0/third_party/opentelemetry-cpp/api/include/opentelemetry/context/runtime_context.h	2025-07-09 21:58:54.839928130 +0000
+@@ -327,8 +327,21 @@
  
    OPENTELEMETRY_API_SINGLETON Stack &GetStack()
    {
 -    static thread_local Stack stack_ = Stack();
-+    static Stack stack_ = Stack();
-     return stack_;
+-    return stack_;
++    static pthread_key_t key;
++    static pthread_once_t once = PTHREAD_ONCE_INIT;
++
++    pthread_once(&once, []() {
++      pthread_key_create(&key, [](void* ptr) {
++        delete static_cast<Stack*>(ptr); // automatic cleanup on thread exit
++      });
++    });
++
++    Stack* stack = static_cast<Stack*>(pthread_getspecific(key));
++    if (!stack) {
++      stack = new Stack();
++      pthread_setspecific(key, stack);
++    }
++    return *stack;
    }
  };
+ 
