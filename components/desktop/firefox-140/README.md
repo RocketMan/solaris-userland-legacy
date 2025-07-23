@@ -12,3 +12,6 @@ specify in the environment `GTK_CSD=1` and `XDG_CURRENT_DESKTOP=MATE`.
 Using [slim-nimbus](https://github.com/RocketMan/solaris-ports/tree/master/components/look-and-feel/slim-nimbus)
 and [firefox-nimbus-theme](https://github.com/RocketMan/firefox-nimbus-theme).
 ![screenshot](https://raw.githubusercontent.com/RocketMan/solaris-userland-legacy/master/components/desktop/firefox-140/screenshot.png "Firefox 140.0 esr")
+
+Build configuration:
+![buildconfig](https://raw.githubusercontent.com/RocketMan/solaris-userland-legacy/master/components/desktop/firefox-140/buildconfig.png "about:buildconfig")
