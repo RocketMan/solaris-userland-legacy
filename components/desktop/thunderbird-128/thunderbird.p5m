@@ -34,6 +34,8 @@ set name=pkg.fmri \
     value=pkg:/mail/thunderbird@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
 set name=pkg.summary value="Mozilla Thunderbird Email/Newsgroup Client"
 set name=pkg.depend.runpath value=usr/lib/thunderbird:$PKGDEPEND_RUNPATH
+# pkg.linted dupaction needed to prevent conflict with version 140
+set name=pkg.linted.pkglint.dupaction001.1 value=true
 set name=com.oracle.info.description \
     value="Mozilla Thunderbird Standalone E-mail and Newsgroup Client"
 set name=info.classification \
