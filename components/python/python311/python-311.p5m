@@ -26,6 +26,8 @@
 # Fix a problem with false positive unresolved dependency error.
 <transform file path=usr/lib/python3.11/.*\.py -> \
     set pkg.depend.bypass-generate .*>
+<transform file path=usr/bin/.* -> set pkg.depend.bypass-generate .*>
+<transform file path=usr/lib/python3.11/idlelib/idle_test/example_noext -> set pkg.depend.bypass-generate .*>
 <transform file path=usr/lib/python3.11/lib-dynload/.*\.so -> \
     add pkg.linted.userland.action001.2 true>
 <transform file path=usr.*/man/.+ -> default mangler.man.stability uncommitted>
@@ -2581,4 +2583,4 @@ link path=usr/share/man/man1/python3.1 target=python3.11.1 mediator=python \
     mediator-version=3.11
 file path=usr/share/man/man1/python3.11.1
 license python311.license license=PSFv2
-depend type=require fmri=pkg:/system/library/iconv
+#depend type=require fmri=pkg:/system/library/iconv
