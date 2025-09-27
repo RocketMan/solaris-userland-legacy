@@ -30,6 +30,7 @@ include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		cairo
 COMPONENT_VERSION=	1.18.2
+PLATNUM=		1
 COMPONENT_PROJECT_URL=	http://cairographics.org
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.xz
 COMPONENT_ARCHIVE_HASH= \
