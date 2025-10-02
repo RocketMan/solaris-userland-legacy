@@ -1,13 +1,14 @@
 Solaris 11.3 does not have arc4random(3), so we use getentropy(2)
 
---- rustc-1.84.0-src/library/std/src/sys/random/mod.rs.~1~	2025-01-09 16:46:52.279256314 +0000
-+++ rustc-1.84.0-src/library/std/src/sys/random/mod.rs	2025-01-09 16:57:47.227182714 +0000
-@@ -18,12 +18,14 @@
+--- rustc-1.90.0-src/library/std/src/sys/random/mod.rs.~1~	2025-10-01 18:18:57.623933672 +0000
++++ rustc-1.90.0-src/library/std/src/sys/random/mod.rs	2025-10-01 18:21:36.936315872 +0000
+@@ -18,13 +18,15 @@
          target_os = "netbsd",
          target_os = "openbsd",
          target_os = "rtems",
 -        target_os = "solaris",
          target_os = "vita",
+         target_os = "nuttx",
      ))] {
          mod arc4random;
          pub use arc4random::fill_bytes;
