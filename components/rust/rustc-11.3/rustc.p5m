@@ -46,6 +46,7 @@ set name=info.upstream-url value=$(COMPONENT_PROJECT_URL)
 set name=org.opensolaris.arc-caseid value=PSARC/2018/120
 set name=org.opensolaris.consolidation value=$(CONSOLIDATION)
 #
+file path=etc/target-spec-json-schema.json
 file path=usr/bin/rust-gdb
 file path=usr/bin/rust-gdbgui
 file path=usr/bin/rustc

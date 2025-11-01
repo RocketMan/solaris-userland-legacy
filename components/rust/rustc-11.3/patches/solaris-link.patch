@@ -44,9 +44,9 @@
  
          ..Default::default()
      }
---- rustc-1.90.0-src/src/bootstrap/src/core/builder/cargo.rs.~1~	2025-10-01 18:23:17.271126531 +0000
-+++ rustc-1.90.0-src/src/bootstrap/src/core/builder/cargo.rs	2025-10-01 18:27:13.287095008 +0000
-@@ -254,16 +254,20 @@
+--- rustc-1.91.0-src/src/bootstrap/src/core/builder/cargo.rs.~1~	2025-10-31 19:09:10.903162327 +0000
++++ rustc-1.91.0-src/src/bootstrap/src/core/builder/cargo.rs	2025-10-31 19:11:10.099136509 +0000
+@@ -279,16 +279,20 @@
                  && !target.contains("aix")
                  && !target.contains("xous")
              {
@@ -66,6 +66,6 @@
 +        // as llvm cannot read the linked SHT_SYMTAB_SHNDX
 +        self.rustflags.arg("-Clink-arg=-Wl,-znoldynsym");
 +
-         // We use the snapshot compiler when building host code (build scripts/proc macros) of
-         // `Mode::Std` tools, so we need to determine the current stage here to pass the proper
-         // linker args (e.g. -C vs -Z).
+         for arg in linker_args(builder, compiler.host, LldThreads::Yes) {
+             self.hostflags.arg(&arg);
+         }
