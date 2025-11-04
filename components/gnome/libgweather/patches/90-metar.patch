@@ -1,19 +1,23 @@
---- a/libgweather/weather-metar.c	2019-10-08 09:57:31.000000000 +0000
-+++ b/libgweather/weather-metar.c	2020-05-29 10:34:31.441046282 +0000
-@@ -652,7 +652,7 @@
+--- libgweather-40.0/libgweather/weather-metar.c.~1~	2021-03-24 21:30:58.819069000 +0000
++++ libgweather-40.0/libgweather/weather-metar.c	2025-11-04 19:12:53.592806168 +0000
+@@ -592,7 +592,7 @@
+     g_debug ("METAR data for %s", loc->code);
+     g_debug ("%s", msg->response_body->data);
+ 
+-    searchkey = g_strdup_printf ("<raw_text>%s ", loc->code);
++    searchkey = g_strdup_printf ("<raw_text>METAR %s ", loc->code);
+     p = strstr (msg->response_body->data, searchkey);
+ 
+     if (p) {
+@@ -641,9 +641,9 @@
      if (!loc->latlon_valid)
          return;
  
 -    g_debug ("metar_start_open, requesting: https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&fields=raw_text&stationString=%s", loc->code);
-+    g_debug ("metar_start_open, requesting: https://www.aviationweather.gov/adds/dataserver_current/httpparam?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&stationString=%s", loc->code);
++    g_debug ("metar_start_open, requesting: https://www.aviationweather.gov/api/data/dataserver?dataSource=metars&requestType=retrieve&format=xml&hoursBeforeNow=3&mostRecent=true&fields=raw_text&stationString=%s", loc->code);
      msg = soup_form_request_new (
- 	"GET", "https://www.aviationweather.gov/adds/dataserver_current/httpparam",
+-	"GET", "https://www.aviationweather.gov/adds/dataserver_current/httpparam",
++	"GET", "https://www.aviationweather.gov/api/data/dataserver",
  	"dataSource", "metars",
-@@ -660,7 +660,6 @@
+ 	"requestType", "retrieve",
  	"format", "xml",
- 	"hoursBeforeNow", "3",
- 	"mostRecent", "true",
--	"fields", "raw_text",
- 	"stationString", loc->code,
- 	NULL);
-     _gweather_info_begin_request (info, msg);
