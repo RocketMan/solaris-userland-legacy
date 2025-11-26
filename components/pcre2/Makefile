@@ -84,6 +84,9 @@ CONFIGURE_OPTIONS+=	--enable-rebuild-chartables
 CONFIGURE_OPTIONS+=	--disable-stack-for-recursion
 CONFIGURE_OPTIONS+=	--enable-pcre2grep-libz
 CONFIGURE_OPTIONS+=	--enable-pcre2grep-libbz2
+ifeq ($(MACH), i386)
+CONFIGURE_OPTIONS+=	--enable-jit
+endif
 CONFIGURE_OPTIONS+=	--with-link-size=4
 CONFIGURE_OPTIONS+=	--with-match-limit=10000000
 CONFIGURE_OPTIONS+=	--with-pic
