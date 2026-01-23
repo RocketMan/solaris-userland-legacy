@@ -8,11 +8,11 @@
          unsafe extern "C" {}
      } else if #[cfg(target_os = "illumos")] {
          #[link(name = "socket")]
---- rustc-1.83.0-src/compiler/rustc_target/src/spec/base/solaris.rs.~1~	2024-11-26 10:12:09.000000000 +0000
-+++ rustc-1.83.0-src/compiler/rustc_target/src/spec/base/solaris.rs	2024-11-28 17:24:14.405334800 +0000
+--- rustc-1.93.0-src/compiler/rustc_target/src/spec/base/solaris.rs.~1~	2026-01-19 16:34:28.000000000 +0000
++++ rustc-1.93.0-src/compiler/rustc_target/src/spec/base/solaris.rs	2026-01-23 16:04:48.035736426 +0000
 @@ -1,6 +1,23 @@
--use crate::spec::{Cc, LinkerFlavor, TargetOptions, cvs};
-+use crate::spec::{LinkArgs, FramePointer, Cc, LinkerFlavor, TargetOptions, cvs};
+-use crate::spec::{Cc, LinkerFlavor, Os, TargetOptions, cvs};
++use crate::spec::{LinkArgs, FramePointer, Cc, LinkerFlavor, Os, TargetOptions, cvs};
  
  pub(crate) fn opts() -> TargetOptions {
 +    let mut late_link_args = LinkArgs::new();
@@ -33,7 +33,7 @@
 +    );
 +
      TargetOptions {
-         os: "solaris".into(),
+         os: Os::Solaris,
          dynamic_linking: true,
 @@ -10,6 +27,8 @@
          linker_flavor: LinkerFlavor::Unix(Cc::Yes),
