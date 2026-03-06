@@ -34,6 +34,7 @@ GCC_ROOT =	/usr/gcc/13
 
 COMPONENT_NAME =	rustc
 COMPONENT_VERSION =	1.93.0
+PLATNUM =		2
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
@@ -93,6 +94,7 @@ COMPONENT_INSTALL_ENV += OPENSSL_INCLUDE_DIR=$(OPENSSL_INCLUDE_DIR)
 # From rust 1.76.0, it is not picking up OPENSSL_LIB_DIR, so we force it
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
+       $(GCC_ROOT)/bin/gcc -shared -o libxpgshim.so -fPIC xpgshim.c ; \
        $(GCC_ROOT)/bin/gcc -shared -DDEBUG=0 -o libepoll.so -fPIC -c epoll.c ; \
        $(GCC_ROOT)/bin/gcc -DDEBUG=0 -fPIC -c compat.c ; \
        ar rcs libcompat.a compat.o ; \
@@ -103,6 +105,7 @@ COMPONENT_PRE_CONFIGURE_ACTION += \
 CLEAN_PATHS += epoll/compat.o
 CLEAN_PATHS += epoll/libcompat.a
 CLEAN_PATHS += epoll/libepoll.so
+CLEAN_PATHS += epoll/libxpgshim.so
 CLEAN_PATHS += epoll/gcc
 
 VENDORED_SOURCES_ENFORCE = \

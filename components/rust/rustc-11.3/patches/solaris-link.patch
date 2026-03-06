@@ -10,7 +10,7 @@
          #[link(name = "socket")]
 --- rustc-1.93.0-src/compiler/rustc_target/src/spec/base/solaris.rs.~1~	2026-01-19 16:34:28.000000000 +0000
 +++ rustc-1.93.0-src/compiler/rustc_target/src/spec/base/solaris.rs	2026-01-23 16:04:48.035736426 +0000
-@@ -1,6 +1,23 @@
+@@ -1,6 +1,27 @@
 -use crate::spec::{Cc, LinkerFlavor, Os, TargetOptions, cvs};
 +use crate::spec::{LinkArgs, FramePointer, Cc, LinkerFlavor, Os, TargetOptions, cvs};
  
@@ -19,6 +19,10 @@
 +    late_link_args.insert(
 +        LinkerFlavor::Unix(Cc::Yes),
 +        vec![
++            // Rust crates (via libc) may expect various XPG entry points;
++            // on Solaris 11.3, we redirect via shims.
++            "-lxpgshim".into(),
++
 +            // LLVM will insert calls to the stack protector functions
 +            // "__stack_chk_fail" and "__stack_chk_guard" into code in native
 +            // object files.  Some platforms include these symbols directly in

@@ -50,6 +50,7 @@ file path=etc/target-spec-json-schema.json
 file path=usr/bin/rust-gdb
 file path=usr/bin/rust-gdbgui
 file path=usr/bin/rustc
+file epoll/libxpgshim.so path=usr/lib/$(MACH64)/libxpgshim.so
 file path=usr/lib/rustlib/components
 file path=usr/lib/rustlib/etc/gdb_load_rust_pretty_printers.py
 file path=usr/lib/rustlib/etc/gdb_lookup.py
