@@ -1,0 +1,24 @@
+Fixes RPATH in binaries so that it correspond to our --libdir configure
+option.
+
+Not suitable to upstream.
+
+--- rustc-1.94.0-src/src/bootstrap/src/core/builder/cargo.rs.~2~	2026-03-09 15:53:49.523729252 +0000
++++ rustc-1.94.0-src/src/bootstrap/src/core/builder/cargo.rs	2026-03-09 15:54:54.064789675 +0000
+@@ -297,7 +297,15 @@
+                 && !target.contains("xous")
+             {
+                 self.rustflags.arg("-Clink-arg=-Wl,-z,origin");
+-                Some(format!("-Wl,-rpath,$ORIGIN/../{libdir}"))
++                if target.contains("solaris") {
++                    if target.contains("sparcv9") {
++                        Some(format!("-Wl,-rpath,$ORIGIN/../{libdir}/sparcv9"))
++                    } else {
++                        Some(format!("-Wl,-rpath,$ORIGIN/../{libdir}/amd64"))
++                    }
++                } else {
++                    Some(format!("-Wl,-rpath,$ORIGIN/../{libdir}"))
++                }
+             } else {
+                 None
+             };

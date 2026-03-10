@@ -10,7 +10,7 @@
          #[link(name = "socket")]
 --- rustc-1.93.0-src/compiler/rustc_target/src/spec/base/solaris.rs.~1~	2026-01-19 16:34:28.000000000 +0000
 +++ rustc-1.93.0-src/compiler/rustc_target/src/spec/base/solaris.rs	2026-01-23 16:04:48.035736426 +0000
-@@ -1,6 +1,27 @@
+@@ -1,6 +1,38 @@
 -use crate::spec::{Cc, LinkerFlavor, Os, TargetOptions, cvs};
 +use crate::spec::{LinkArgs, FramePointer, Cc, LinkerFlavor, Os, TargetOptions, cvs};
  
@@ -36,15 +36,27 @@
 +        ],
 +    );
 +
++    let mut late_link_args_dynamic = LinkArgs::new();
++    late_link_args_dynamic.insert(
++        LinkerFlavor::Unix(Cc::Yes),
++        vec![
++            // For shared libraries, we force resolution so the resulting
++            // .so receives a DT_NEEDED entry for libxpgshim.
++            "-Wl,-u,__sysconf_xpg7".into(),
++            "-lxpgshim".into(),
++        ],
++    );
++
      TargetOptions {
          os: Os::Solaris,
          dynamic_linking: true,
-@@ -10,6 +27,8 @@
+@@ -10,6 +27,9 @@
          linker_flavor: LinkerFlavor::Unix(Cc::Yes),
          limit_rdylib_exports: false, // Linker doesn't support this
          eh_frame_header: false,
 +        frame_pointer: FramePointer::Always,
 +        late_link_args,
++        late_link_args_dynamic,
  
          ..Default::default()
      }

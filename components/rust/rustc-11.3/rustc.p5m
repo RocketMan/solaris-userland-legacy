@@ -33,10 +33,6 @@
 set name=pkg.fmri \
     value=pkg:/developer/rust/rustc@$(IPS_COMPONENT_VERSION),$(BUILD_VERSION)
 set name=pkg.summary value="Rust compiler"
-# Everything here is 64-bit, but we don't attempt to put anything into a
-# 64-bit directory. Silence the warnings and errors we get because of it.
-set name=pkg.linted.userland.action001.2 value=true
-set name=pkg.linted.userland.action001.3 value=true
 set name=com.oracle.info.description \
     value="The Rust compiler and standard libraries"
 set name=info.classification \
@@ -51,15 +47,14 @@ file path=usr/bin/rust-gdb
 file path=usr/bin/rust-gdbgui
 file path=usr/bin/rustc
 file epoll/libxpgshim.so path=usr/lib/$(MACH64)/libxpgshim.so
-file path=usr/lib/rustlib/components
-file path=usr/lib/rustlib/etc/gdb_load_rust_pretty_printers.py
-file path=usr/lib/rustlib/etc/gdb_lookup.py
-file path=usr/lib/rustlib/etc/gdb_providers.py
-file path=usr/lib/rustlib/etc/lldb_commands
-file path=usr/lib/rustlib/etc/lldb_lookup.py
-file path=usr/lib/rustlib/etc/lldb_providers.py
-file path=usr/lib/rustlib/etc/rust_types.py
-file path=usr/lib/rustlib/rust-installer-version
+file path=usr/lib/$(MACH64)/rustlib/etc/gdb_load_rust_pretty_printers.py
+file path=usr/lib/$(MACH64)/rustlib/etc/gdb_lookup.py
+file path=usr/lib/$(MACH64)/rustlib/etc/gdb_providers.py
+file path=usr/lib/$(MACH64)/rustlib/etc/lldb_commands
+file path=usr/lib/$(MACH64)/rustlib/etc/lldb_lookup.py
+file path=usr/lib/$(MACH64)/rustlib/etc/lldb_providers.py
+file path=usr/lib/$(MACH64)/rustlib/etc/rust_types.py
+file path=usr/lib/$(MACH64)/rustlib/x86_64-pc-solaris/bin/rust-objcopy
 file path=usr/share/doc/cargo/LICENSE-APACHE
 file path=usr/share/doc/cargo/LICENSE-MIT
 file path=usr/share/doc/cargo/LICENSE-THIRD-PARTY

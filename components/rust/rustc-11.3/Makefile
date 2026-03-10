@@ -34,7 +34,7 @@ GCC_ROOT =	/usr/gcc/13
 
 COMPONENT_NAME =	rustc
 COMPONENT_VERSION =	1.94.0
-PLATNUM =		1
+PLATNUM =		2
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
@@ -64,6 +64,7 @@ RUST_PLATFORM = $(MACH64:amd64=x86_64)-pc-solaris
 # The configure Rust uses isn't autoconf; it's hand-rolled, and doesn't
 # recognize all the autoconf options, so we start from scratch.
 CONFIGURE_OPTIONS =	--prefix=$(CONFIGURE_PREFIX)
+CONFIGURE_OPTIONS +=	--libdir=$(USRLIBDIR64)
 CONFIGURE_OPTIONS +=	--default-linker=gcc
 CONFIGURE_OPTIONS +=	--enable-local-rust
 CONFIGURE_OPTIONS +=	--disable-llvm-static-stdcpp
@@ -95,16 +96,10 @@ COMPONENT_INSTALL_ENV += OPENSSL_INCLUDE_DIR=$(OPENSSL_INCLUDE_DIR)
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
        $(GCC_ROOT)/bin/gcc -shared -o libxpgshim.so -fPIC xpgshim.c ; \
-       $(GCC_ROOT)/bin/gcc -shared -DDEBUG=0 -o libepoll.so -fPIC -c epoll.c ; \
-       $(GCC_ROOT)/bin/gcc -DDEBUG=0 -fPIC -c compat.c ; \
-       ar rcs libcompat.a compat.o ; \
        echo "\#!/bin/sh" > gcc ; \
-       echo "$(GCC_ROOT)/bin/gcc -L$(OPENSSL_LIB_DIR) \$$@ -L$(COMPONENT_DIR)/epoll -lepoll -lcompat" >> gcc ; \
+       echo "$(GCC_ROOT)/bin/gcc -L$(OPENSSL_LIB_DIR) \$$@" >> gcc ; \
        chmod a+x gcc ) ;
 
-CLEAN_PATHS += epoll/compat.o
-CLEAN_PATHS += epoll/libcompat.a
-CLEAN_PATHS += epoll/libepoll.so
 CLEAN_PATHS += epoll/libxpgshim.so
 CLEAN_PATHS += epoll/gcc
 
@@ -135,9 +130,9 @@ endif
 # Therefore library list need to be created to be included into p5m file.
 COMPONENT_POST_INSTALL_ACTION += \
 	(cd $(PROTO_DIR); \
-	ls -1 usr/lib/lib* \
-	  usr/lib/rustlib/$(MACH64:amd64=x86_64)-pc-solaris/codegen-backends/lib* \
-	  usr/lib/rustlib/$(MACH64:amd64=x86_64)-pc-solaris/lib/lib* | \
+	ls -1 usr/lib/$(MACH64)/lib* \
+	  usr/lib/$(MACH64)/rustlib/$(MACH64:amd64=x86_64)-pc-solaris/codegen-backends/lib* \
+	  usr/lib/$(MACH64)/rustlib/$(MACH64:amd64=x86_64)-pc-solaris/lib/lib* | \
 	  awk '{ print "file path="$$1 " variant.arch=$(MACH)" }' > ../../libraries-hashed.$(MACH64); )
 
 # pkg-report requires *.p5m files to be processed by pkgmogrify. Since the
