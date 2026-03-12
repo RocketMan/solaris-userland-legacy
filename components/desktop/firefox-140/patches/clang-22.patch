@@ -1,0 +1,37 @@
+Backport of fixs to build with clang 22
+
+See https://bugzilla.mozilla.org/show_bug.cgi?id=1977771#c1
+
+
+--- firefox-140.8.0/third_party/rust/bindgen/clang.rs.orig	2026-02-17 13:37:40.000000000 +0000
++++ firefox-140.8.0/third_party/rust/bindgen/clang.rs	2026-03-09 11:12:53.278840281 +0000
+@@ -1210,11 +1210,11 @@
+ 
+     /// Get a cursor pointing to this type's declaration.
+     pub(crate) fn declaration(&self) -> Cursor {
+-        unsafe {
+-            Cursor {
+-                x: clang_getTypeDeclaration(self.x),
+-            }
+-        }
++        let decl = Cursor {
++            x: unsafe { clang_getTypeDeclaration(self.x) },
++        };
++        // Prior to clang 22, the declaration pointed to the definition.
++        decl.definition().unwrap_or(decl)
+     }
+ 
+     /// Get the canonical declaration of this type, if it is available.
+--- firefox-140.8.0/gfx/skia/skia/modules/skcms/src/Transform_inl.h~	2026-02-17 13:37:24.000000000 +0000
++++ firefox-140.8.0/gfx/skia/skia/modules/skcms/src/Transform_inl.h	2026-03-09 14:03:00.607377307 +0000
+@@ -156,8 +156,8 @@
+ #elif defined(USING_AVX512F)
+     return (F)_mm512_cvtph_ps((__m256i)half);
+ #elif defined(USING_AVX_F16C)
+-    typedef int16_t __attribute__((vector_size(16))) I16;
+-    return __builtin_ia32_vcvtph2ps256((I16)half);
++    typedef _Float16 __attribute__((vector_size(16))) F16;
++    return __builtin_convertvector((F16)half, F);
+ #else
+     U32 wide = cast<U32>(half);
+     // A half is 1-5-10 sign-exponent-mantissa, with 15 exponent bias.
