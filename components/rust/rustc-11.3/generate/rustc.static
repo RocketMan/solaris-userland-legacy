@@ -1,1 +1,1 @@
-file epoll/libxpgshim.so path=usr/lib/$(MACH64)/libxpgshim.so
+file epoll/librustshim.so path=usr/lib/$(MACH64)/librustshim.so

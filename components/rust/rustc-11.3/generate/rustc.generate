@@ -30,7 +30,6 @@
 <transform path=usr/lib/\$\(MACH64\)/rustlib/(sparcv9-sun|x86_64-pc)-solaris/lib.* -> drop>
 
 # no need to package these
-<transform path=usr/lib/\$\(MACH64\)/rustlib/components -> drop>
 <transform path=usr/lib/\$\(MACH64\)/rustlib/uninstall.sh -> drop>
 <transform path=usr/lib/\$\(MACH64\)/rustlib/install.log -> drop>
 <transform path=usr/lib/\$\(MACH64\)/rustlib/manifest-.* -> drop>

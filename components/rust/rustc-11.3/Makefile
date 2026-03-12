@@ -34,7 +34,7 @@ GCC_ROOT =	/usr/gcc/13
 
 COMPONENT_NAME =	rustc
 COMPONENT_VERSION =	1.94.0
-PLATNUM =		2
+PLATNUM =		3
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
@@ -64,7 +64,7 @@ RUST_PLATFORM = $(MACH64:amd64=x86_64)-pc-solaris
 # The configure Rust uses isn't autoconf; it's hand-rolled, and doesn't
 # recognize all the autoconf options, so we start from scratch.
 CONFIGURE_OPTIONS =	--prefix=$(CONFIGURE_PREFIX)
-CONFIGURE_OPTIONS +=	--libdir=$(USRLIBDIR64)
+CONFIGURE_OPTIONS +=	--libdir=lib/$(MACH64)
 CONFIGURE_OPTIONS +=	--default-linker=gcc
 CONFIGURE_OPTIONS +=	--enable-local-rust
 CONFIGURE_OPTIONS +=	--disable-llvm-static-stdcpp
@@ -95,12 +95,16 @@ COMPONENT_INSTALL_ENV += OPENSSL_INCLUDE_DIR=$(OPENSSL_INCLUDE_DIR)
 # From rust 1.76.0, it is not picking up OPENSSL_LIB_DIR, so we force it
 COMPONENT_PRE_CONFIGURE_ACTION += \
        ( cd $(COMPONENT_DIR)/epoll; \
-       $(GCC_ROOT)/bin/gcc -shared -o libxpgshim.so -fPIC xpgshim.c ; \
+       $(GCC_ROOT)/bin/gcc -fPIC -c xpgshim.c ; \
+       $(GCC_ROOT)/bin/gcc -shared -o librustshim.so xpgshim.o ; \
+       ar rcs libcompat.a xpgshim.o ; \
        echo "\#!/bin/sh" > gcc ; \
-       echo "$(GCC_ROOT)/bin/gcc -L$(OPENSSL_LIB_DIR) \$$@" >> gcc ; \
+       echo "$(GCC_ROOT)/bin/gcc -L$(OPENSSL_LIB_DIR) \$$@ -L$(COMPONENT_DIR)/epoll -lcompat" >> gcc ; \
        chmod a+x gcc ) ;
 
-CLEAN_PATHS += epoll/libxpgshim.so
+CLEAN_PATHS += epoll/xpgshim.o
+CLEAN_PATHS += epoll/libcompat.a
+CLEAN_PATHS += epoll/librustshim.so
 CLEAN_PATHS += epoll/gcc
 
 VENDORED_SOURCES_ENFORCE = \
