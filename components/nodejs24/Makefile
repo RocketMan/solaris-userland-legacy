@@ -23,7 +23,7 @@
 # Copyright (c) 2019, 2026, Oracle and/or its affiliates.
 #
 
-COMPILER=		gcc
+COMPILER=		clang
 BUILD_BITS=		64
 BUILD_ARCH=		i386
 CTF_MODE =		off	# Has no effect
@@ -63,12 +63,13 @@ CONFIGURE_PREFIX=	/usr/nodejs/$(NODE_MAJOR_VERSION)
 
 CONFIGURE_OPTIONS+=	--shared-nghttp2
 CONFIGURE_OPTIONS+=	--shared-openssl
-CONFIGURE_OPTIONS+=	--openssl-is-fips
 CONFIGURE_OPTIONS+=	--shared-zlib
-CONFIGURE_OPTIONS+=	--with-intl=system-icu
-CONFIGURE_OPTIONS+=	--shared-cares
-CONFIGURE_OPTIONS+=	--shared-libuv
+CONFIGURE_OPTIONS+=	--with-intl=small-icu
 CONFIGURE_OPTIONS+=	--shared
+
+CFLAGS += -D_XPG6
+CXXFLAGS += -I/usr/openssl/3/include
+LDFLAGS += -L/usr/openssl/3/lib/64/ -lssl -lcrypto
 
 #CC_PIC_MODE = $(CC_PIC_DISABLE)
 #LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
@@ -103,7 +104,7 @@ COMPONENT_PRE_CONFIGURE_ACTION= \
 # found in standard directories.
 #
 LINK.OPENSSL3=		\
-	"$(GCC_ROOT)/bin/g++ $(shell PKG_CONFIG_PATH=$(PKG_CONFIG_PATH) \
+	"$(CXX) $(shell PKG_CONFIG_PATH=$(PKG_CONFIG_PATH) \
 	pkg-config --libs-only-L --libs-only-other openssl)"
 
 COMPONENT_BUILD_ARGS+=	LINK=$(LINK.OPENSSL3)
@@ -112,7 +113,7 @@ COMPONENT_INSTALL_ARGS+=LINK=$(LINK.OPENSSL3)
 COMPONENT_TEST_TARGETS=	test-only
 # The node-gyp sometimes rebuilds packages during 'gmake test'. It needs to
 # know which compiler and linker to use. Pass the information via environment.
-COMPONENT_TEST_ARGS+=	CC=gcc CXX=g++ LINK=$(LINK.OPENSSL3)
+COMPONENT_TEST_ARGS+=	CC=$(CC) CXX=$(CXX) LINK=$(LINK.OPENSSL3)
 # add /usr/sbin to PATH for dtrace
 # add openssl-3 to PATH, some tests can't speak to s_client from other versions
 COMPONENT_TEST_ENV+=	PATH=$(BINDIR.OPENSSL3):$(GNUBIN):$(PATH):/usr/sbin \

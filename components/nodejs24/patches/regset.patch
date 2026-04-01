@@ -1,0 +1,12 @@
+--- node-24.13.0/deps/ada/ada.cpp~	2026-01-09 21:29:17.000000000 +0000
++++ node-24.13.0/deps/ada/ada.cpp	2026-03-31 17:19:00.197854088 +0000
+@@ -8213,6 +8213,9 @@
+ #include <algorithm>
+ #include <string_view>
+ 
++#undef CS
++#undef ES
++
+ namespace ada::idna {
+ 
+ enum direction : uint8_t {

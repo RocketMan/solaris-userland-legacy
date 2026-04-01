@@ -1,0 +1,33 @@
+--- node-24.13.0/deps/uv/CMakeLists.txt~	2026-01-09 21:29:17.000000000 +0000
++++ node-24.13.0/deps/uv/CMakeLists.txt	2026-03-31 11:03:47.995117224 +0000
+@@ -402,7 +402,7 @@
+     list(APPEND uv_defines SUNOS_NO_IFADDRS)
+     list(APPEND uv_libraries rt)
+   endif()
+-  list(APPEND uv_defines __EXTENSIONS__ _XOPEN_SOURCE=500 _REENTRANT)
++  list(APPEND uv_defines __EXTENSIONS__ _XOPEN_SOURCE=500 _XPG6 _REENTRANT)
+   list(APPEND uv_libraries kstat nsl sendfile socket)
+   list(APPEND uv_sources
+        src/unix/no-proctitle.c
+--- node-24.13.0/deps/uv/uv.gyp~	2026-01-09 21:29:17.000000000 +0000
++++ node-24.13.0/deps/uv/uv.gyp	2026-03-31 11:09:06.046787036 +0000
+@@ -306,6 +306,7 @@
+           'defines': [
+             '__EXTENSIONS__',
+             '_XOPEN_SOURCE=500',
++            '_XPG6',
+             '_REENTRANT',
+           ],
+           'link_settings': {
+--- node-24.13.0/deps/cares/cares.gyp~	2026-01-09 21:29:17.000000000 +0000
++++ node-24.13.0/deps/cares/cares.gyp	2026-03-31 14:14:57.779679634 +0000
+@@ -160,7 +160,8 @@
+       ['OS=="solaris"', {
+         'defines': [
+           '__EXTENSIONS__',
+-          '_XOPEN_SOURCE=500'
++          '_XOPEN_SOURCE=500',
++          '_XPG6'
+         ]
+       }]
+     ]

@@ -1,0 +1,29 @@
+--- node-24.13.0/deps/cares/config/sunos/ares_config.h.~1~	2026-01-09 21:29:17.000000000 +0000
++++ node-24.13.0/deps/cares/config/sunos/ares_config.h	2026-04-01 18:01:32.501037004 +0000
+@@ -44,7 +44,7 @@
+ #define HAVE_AF_INET6 1
+ 
+ /* Define to 1 if you have `arc4random_buf` */
+-#define HAVE_ARC4RANDOM_BUF 1
++/* #undef HAVE_ARC4RANDOM_BUF */
+ 
+ /* Define to 1 if you have the <arpa/inet.h> header file. */
+ #define HAVE_ARPA_INET_H 1
+@@ -89,7 +89,7 @@
+ #define HAVE_DLFCN_H 1
+ 
+ /* Define to 1 if you have `epoll_{create1,ctl,wait}` */
+-#define HAVE_EPOLL 1
++/* #undef HAVE_EPOLL */
+ 
+ /* Define to 1 if you have the <errno.h> header file. */
+ #define HAVE_ERRNO_H 1
+@@ -212,7 +212,7 @@
+ #define HAVE_PIPE 1
+ 
+ /* Define to 1 if you have `pipe2` */
+-#define HAVE_PIPE2 1
++/* #undef HAVE_PIPE2 */
+ 
+ /* Define to 1 if you have `poll` */
+ #define HAVE_POLL 1

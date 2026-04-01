@@ -1,0 +1,23 @@
+--- node-24.13.0/common.gypi~	2026-01-09 21:29:17.000000000 +0000
++++ node-24.13.0/common.gypi	2026-03-31 12:43:33.689553773 +0000
+@@ -515,9 +515,10 @@
+           '-fno-exceptions',
+           '-fno-strict-aliasing',
+           '-std=gnu++20',
++          '-I/usr/openssl/3/include',
+         ],
+         'defines': [ '__STDC_FORMAT_MACROS' ],
+-        'ldflags': [ '-rdynamic' ],
++        'ldflags': [ '-rdynamic', '-L/usr/openssl/3/lib/64/', '-lssl',  '-lcrypto', '-latomic' ],
+         'target_conditions': [
+           # The 1990s toolchain on SmartOS can't handle thin archives.
+           ['_type=="static_library" and OS=="solaris"', {
+@@ -580,8 +581,6 @@
+         ],
+         'conditions': [
+           [ 'OS=="solaris"', {
+-            'cflags': [ '-pthreads' ],
+-            'ldflags': [ '-pthreads' ],
+             'cflags!': [ '-pthread' ],
+             'ldflags!': [ '-pthread' ],
+           }],
