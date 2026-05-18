@@ -1,10 +1,59 @@
+--- firefox-140.11.0/third_party/aom/av1/decoder/grain_synthesis.c-	2026-05-15 16:11:01.000000000 +0000
++++ firefox-140.11.0/third_party/aom/av1/decoder/grain_synthesis.c	2026-05-18 17:00:15.139487937 +0000
+@@ -23,6 +23,9 @@
+ #include "aom_mem/aom_mem.h"
+ #include "av1/decoder/grain_synthesis.h"
+ 
++// static_assert is a C++ keyword; _Static_assert is appropriate for C11
++#define static_assert(a,b) _Static_assert(a,b)
++
+ // Samples with Gaussian distribution in the range of [-2048, 2047] (12 bits)
+ // with zero mean and standard deviation of about 512.
+ // should be divided by 4 for 10-bit range and 16 for 8-bit range.
+--- firefox-140.11.0/media/ffvpx/libavcodec/avcodec.c~	2026-05-15 16:10:52.000000000 +0000
++++ firefox-140.11.0/media/ffvpx/libavcodec/avcodec.c	2026-05-18 18:27:05.295289509 +0000
+@@ -47,6 +47,9 @@
+ #include "internal.h"
+ #include "libavutil/refstruct.h"
+ 
++// static_assert is a C++ keyword; _Static_assert is appropriate for C11
++#define static_assert(a,b) _Static_assert(a,b)
++
+ /**
+  * Maximum size in bytes of extradata.
+  * This value was chosen such that every bit of the buffer is
+--- firefox-140.11.0/media/ffvpx/libavcodec/encode.c~	2026-05-15 16:10:51.000000000 +0000
++++ firefox-140.11.0/media/ffvpx/libavcodec/encode.c	2026-05-18 18:36:59.412211615 +0000
+@@ -36,6 +36,9 @@
+ #include "frame_thread_encoder.h"
+ #include "internal.h"
+ 
++// static_assert is a C++ keyword; _Static_assert is appropriate for C11
++#define static_assert(a,b) _Static_assert(a,b)
++
+ typedef struct EncodeContext {
+     AVCodecInternal avci;
+ 
+--- firefox-140.11.0/media/ffvpx/libavcodec/parsers.c~	2026-05-15 16:10:52.000000000 +0000
++++ firefox-140.11.0/media/ffvpx/libavcodec/parsers.c	2026-05-18 18:45:05.885932548 +0000
+@@ -26,6 +26,9 @@
+ #include <assert.h>
+ #include <stddef.h>
+ 
++// static_assert is a C++ keyword; _Static_assert is appropriate for C11
++#define static_assert(a,b) _Static_assert(a,b)
++
+ FF_DISABLE_DEPRECATION_WARNINGS
+ #define CHECK_OFFSET(field, public_prefix) static_assert(offsetof(FFCodecParser, field) == offsetof(FFCodecParser, p.public_prefix ## field), "Wrong offsets")
+ CHECK_OFFSET(codec_ids,);
 --- firefox-140.0/media/ffvpx/libavcodec/version.c~	2025-06-17 17:15:19.000000000 +0000
 +++ firefox-140.0/media/ffvpx/libavcodec/version.c	2025-06-24 22:50:37.534430038 +0000
-@@ -29,6 +29,8 @@
+@@ -29,6 +29,9 @@
  #include "libavutil/ffversion.h"
  const char av_codec_ffversion[] = "FFmpeg version " FFMPEG_VERSION;
  
-+#define static_assert(x, y)
++// static_assert is a C++ keyword; _Static_assert is appropriate for C11
++#define static_assert(a,b) _Static_assert(a,b)
 +
  unsigned avcodec_version(void)
  {
