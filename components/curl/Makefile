@@ -32,6 +32,7 @@ COMPONENT_NAME=		curl
 COMPONENT_VERSION=	8.6.0
 COMPONENT_ARCHIVE_HASH=	sha256:b4785f2d8877fa92c0e45d7155cf8cc6750dbda961f4b1a45bcbec990cf2fa9b
 COMPONENT_BAID=		158375
+PLATNUM=		1
 COMPONENT_PROJECT_URL=	http://curl.haxx.se/
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.bz2
 COMPONENT_ARCHIVE_URL=	https://curl.se/download/$(COMPONENT_ARCHIVE)
@@ -66,10 +67,12 @@ LDFLAGS	+= $(LD_Z_DEFS)
 ADIHEAP_MODE =	$(ADIHEAP_ENABLE)
 ADISTACK_MODE =	$(ADISTACK_ENABLE)
 
+OPENSSL3 = 1
+
 # Automatically detect OpenSSL 3 headers and libs.
 ifneq ($(strip $(OPENSSL3)),)
+# OpenSSL3 is supported only on 64-bit to avoid breaking IPS on 11.3
 SSL_PKG_CONFIG_PATH.64 = /usr/openssl/3/lib/64/pkgconfig
-SSL_PKG_CONFIG_PATH.32 = /usr/openssl/3/lib/pkgconfig
 PKG_CONFIG_PATHS += $(SSL_PKG_CONFIG_PATH.$(BITS))
 endif
 
@@ -88,7 +91,8 @@ CONFIGURE_OPTIONS += --with-random=/dev/urandom
 CONFIGURE_OPTIONS += --with-zlib
 CONFIGURE_OPTIONS += --with-gssapi
 ifneq ($(strip $(OPENSSL3)),)
-CONFIGURE_OPTIONS += --with-openssl=/usr/openssl/3
+CONFIGURE_OPTIONS.64 += --with-openssl=/usr/openssl/3
+CONFIGURE_OPTIONS.32 += --with-ssl
 else
 CONFIGURE_OPTIONS += --with-ssl
 endif
@@ -150,11 +154,8 @@ REQUIRED_PACKAGES += library/brotli
 REQUIRED_PACKAGES += library/libidn2
 REQUIRED_PACKAGES += library/libssh2
 REQUIRED_PACKAGES += library/nghttp2
-ifneq ($(strip $(OPENSSL3)),)
 REQUIRED_PACKAGES += library/security/openssl-3
-else
 REQUIRED_PACKAGES += library/security/openssl
-endif
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += security/kerberos-5
 REQUIRED_PACKAGES += shell/ksh93
