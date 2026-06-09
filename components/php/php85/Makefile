@@ -53,7 +53,9 @@ include $(PHP_TOP_DIR)/php.mk
 CC_PIC_MODE = $(CC_PIC_DISABLE)
 LD_Z_PIE_MODE = $(LD_Z_PIE_DISABLE)
 
-PKG_MACROS+= MAJOR_VERSION=$(MAJOR_VERSION)
+PHPVER = $(subst .,,$(MAJOR_VERSION))
+
+PKG_MACROS+= MAJOR_VERSION=$(MAJOR_VERSION) PHPVER=$(PHPVER)
 PKG_MACROS+= EXTENSIONS=no-debug-zts-20250925
 
 # NOTES: See http://php.net/manual/en/install.unix.apache2.php
@@ -75,6 +77,7 @@ COMPONENT_PREP_ACTION += (cd $(SOURCE_DIR) ; autoreconf) ;
 include enable-extensions.mk
 
 CONFIGURE_OPTIONS += --enable-dtrace
+CONFIGURE_OPTIONS += --enable-zts
 
 # Without this, the build seems to interrogate GCC for potential library
 # search path information and then embed it into the RUNPATH of selected ELF
@@ -96,6 +99,9 @@ CONFIGURE_OPTIONS +=	--with-pear=$(VARPHPDIR)/pear
 CONFIGURE_OPTIONS +=	--disable-phpdbg
 CONFIGURE_OPTIONS +=	--disable-phpdbg-debug
 
+# for 11.3
+CONFIGURE_OPTIONS +=	--without-sodium
+
 # if debug is desired do this
 # https://bugs.php.net/bugs-generating-backtrace.php
 ifdef DEBUG
@@ -103,9 +109,10 @@ CONFIGURE_OPTIONS +=    --enable-debug
 endif
 
 # Use openldap
-LDFLAGS += -lldap
+CPPFLAGS += -I$(USRINCDIR)/openldap
+LDFLAGS += -lldap_r
 # but ensure "make" gets the point
-COMPONENT_BUILD_ARGS += LDAP_SHARED_LIBADD="-lldap"
+COMPONENT_BUILD_ARGS += LDAP_SHARED_LIBADD="-lldap_r"
 
 CFLAGS += -std=gnu99
 
@@ -117,10 +124,19 @@ PROTOUSRPHPVERDIR = $(PROTO_DIR)/$(CONFIGURE_PREFIX)
 
 COMPONENT_PRE_CONFIGURE_ACTION += $(MKDIR) $(BUILD_DIR)/temp;
 
+OPENSSL3 = 1
+
+ifeq ($(strip $(OPENSSL3)),)
+PKG_CONFIG_PATHS += /usr/openssl/1.1/pkgconfig/64
+LDFLAGS += -L/usr/openssl/1.1/lib/amd64
+else
+PKG_CONFIG_PATHS += /usr/openssl/3/lib/64/pkgconfig
+
 # Remove unnecessary default library path which breaks OpenSSL 3 linking.
 COMPONENT_POST_CONFIGURE_ACTION += \
 	$(GSED) -i '/L\/usr\/openssl\/3\/lib/s/-L\/usr\/lib\/$(MACH64)//' \
 	    $(BUILD_DIR_64)/Makefile ;
+endif
 
 COMPONENT_BUILD_ENV += TMPDIR=$(BUILD_DIR)/temp
 CONFIGURE_ENV += TMPDIR=$(BUILD_DIR)/temp
@@ -239,12 +255,18 @@ REQUIRED_PACKAGES += developer/icu
 REQUIRED_PACKAGES += library/gd
 REQUIRED_PACKAGES += library/libxml2
 REQUIRED_PACKAGES += library/oniguruma
+REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/pcre2
+ifneq ($(strip $(OPENSSL3)),)
 REQUIRED_PACKAGES += library/security/openssl-3
+else
+REQUIRED_PACKAGES += library/security/openssl-11
+endif
+REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/dtrace
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/gcc/gcc-c++-runtime
 REQUIRED_PACKAGES += system/library/math
 REQUIRED_PACKAGES += system/management/snmp/net-snmp
-REQUIRED_PACKAGES += system/network/ldap/openldap
+REQUIRED_PACKAGES += system/network
 REQUIRED_PACKAGES += text/gnu-sed
