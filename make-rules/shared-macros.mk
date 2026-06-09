@@ -40,6 +40,7 @@ DEFAULT_CONFIG_FILE ?= /etc/userland
 # you want to configure CANONICAL_REPO the line in DEFAULT_CONFIG_FILE should
 # be:
 # DEFAULT_CANONICAL_REPO=http://.....
+CANONICAL_REPO=file:/build/userland/i386/repo
 define read-config
 	$(eval $(1)?=$(shell bash -c '[ -r "$(DEFAULT_CONFIG_FILE)" ] && . "$(DEFAULT_CONFIG_FILE)"; echo $${DEFAULT_$(1):-$(2)}'))
 endef
