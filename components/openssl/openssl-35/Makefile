@@ -24,6 +24,7 @@ $(SOLARIS_11_3_ONLY)PATH=/usr/gnu/bin:/usr/bin:/usr/perl5/$(PERL_VERSION)/bin
 
 COMPONENT_NAME=			openssl
 COMPONENT_VERSION=		3.5.7
+PLATNUM=			1
 COMPONENT_PROJECT_URL=		https://openssl-library.org/
 COMPONENT_SRC=			$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE=		$(COMPONENT_SRC).tar.gz
@@ -58,6 +59,13 @@ CONFIG_SHELL =
 CONFIGURE_OPTIONS += --openssldir=$(OPENSSL_ETCDIR)
 CONFIGURE_OPTIONS += --prefix=$(OPENSSL_PREFIX)
 
+# build FIPS capable library
+CONFIGURE_OPTIONS += enable-fips
+# disabled engines
+CONFIGURE_OPTIONS += no-afalgeng
+CONFIGURE_OPTIONS += no-capieng
+CONFIGURE_OPTIONS += no-padlockeng
+
 # Define compiler and linker option sets.
 # See Configurations/10-main.conf for more information.
 CONFIGURE_OPTIONS32_i386 =	solaris-x86-gcc
@@ -82,6 +90,10 @@ $(BUILD_DIR_32)/.installed: COMPONENT_INSTALL_TARGETS = install_dev install_engi
 # Save includes installed during the 32-bit build
 COMPONENT_POST_INSTALL_ACTION.32 += \
 	$(MV) $(PROTO_DIR)/$(OPENSSL_INCDIR) $(PROTO_DIR)/$(OPENSSL_INCDIR)-32 ;
+
+# ensure 32-bit fips module is installed
+COMPONENT_POST_INSTALL_ACTION.32 += \
+	$(CP) $(BUILD_DIR_32)/providers/fips.so $(PROTO_DIR)/$(OPENSSL_LIBDIR.32)/ossl-modules/fips.so ;
 
 # Merge includes for 32-bit and 64-bit.  When a file differs create a wrapper.
 COMPONENT_POST_INSTALL_ACTION.64 += \
@@ -167,4 +179,5 @@ COMPONENT_TEST_TRANSFORMS += '-e "/^make\[/d"'			# delete make logs
 
 # Auto-generated dependencies
 REQUIRED_PACKAGES += runtime/perl-$(PERL_VERSION_NODOT)
+REQUIRED_PACKAGES += system/core-os
 REQUIRED_PACKAGES += system/library
