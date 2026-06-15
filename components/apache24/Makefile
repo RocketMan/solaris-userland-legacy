@@ -28,12 +28,12 @@ COMPILER=clang
 include ../../make-rules/shared-macros.mk
 
 COMPONENT_NAME=		apache2
-COMPONENT_VERSION=	2.4.63
+COMPONENT_VERSION=	2.4.68
 COMPONENT_BAID=		152891
 COMPONENT_PROJECT_URL=	https://httpd.apache.org/
 COMPONENT_SRC_NAME=	httpd
 COMPONENT_ARCHIVE_HASH=	\
-    sha256:1fdf1667ebe313a04e9f4d35ea9f043a4e0ebb62ba5a3047abcad824224c3867
+    sha256:ed9a9d4500fb48bb28eaffb3ba71d06ccf86d498fa13ab9f781da010cc488498
 COMPONENT_ARCHIVE_URL=	https://archive.apache.org/dist/httpd/$(COMPONENT_ARCHIVE)
 #COMPONENT_SIG_URL=	$(COMPONENT_ARCHIVE_URL).asc
 COMPONENT_BUGDB=	utility/apache
@@ -81,12 +81,22 @@ CONFIGURE_OPTIONS +=	--enable-http2
 CONFIGURE_OPTIONS +=	--with-suexec-caller=webservd
 CONFIGURE_OPTIONS +=	--with-apr=$(USRDIR)/apr/1/bin/$(MACH64)/apr-1-config
 CONFIGURE_OPTIONS +=	--with-apr-util=$(USRDIR)/apr-util/1/bin/$(MACH64)/apu-1-config
-ifneq ($(strip $(OPENSSL3)),)
+ifeq ($(strip $(OPENSSL3)),)
+CONFIGURE_OPTIONS +=	--with-ssl=/usr/openssl/1.1
+CFLAGS +=	-I/usr/openssl/1.1/include
+CFLAGS +=	-L/usr/openssl/1.1/lib/64	# for libtool
+LDFLAGS +=	-L/usr/openssl/1.1/lib/64
+else
 CONFIGURE_OPTIONS +=	--with-ssl=/usr/openssl/3
+CFLAGS +=	-I/usr/openssl/3/include
+CFLAGS +=	-L/usr/openssl/3/lib/64		# for libtool
+LDFLAGS +=	-L/usr/openssl/3/lib/64
 endif
 $(SOLARIS_11_4_5_ONLY)CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS)"
 $(SOLARIS_11_3_ONLY)CONFIGURE_OPTIONS +=	CFLAGS="$(CFLAGS) $(XPG6MODE)"
 CONFIGURE_OPTIONS +=	LTFLAGS="--silent --tag=CC"
+
+CONFIGURE_OPTIONS +=	LDFLAGS="$(LDFLAGS)"
 
 ifeq   ($(strip $(PARFAIT_BUILD)),yes)
 PATH=$(PARFAIT_TOOLS):$(SPRO_VROOT)/bin:$(USRBINDIR):$(GNUBIN)
@@ -105,7 +115,7 @@ REQUIRED_PACKAGES += library/nghttp2
 REQUIRED_PACKAGES += library/openldap
 REQUIRED_PACKAGES += library/pcre2
 ifeq ($(strip $(OPENSSL3)),)
-REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += library/security/openssl-11
 #REQUIRED_PACKAGES += library/security/openssl/openssl-fips-140
 else
 REQUIRED_PACKAGES += library/security/openssl-3
