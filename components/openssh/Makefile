@@ -44,6 +44,7 @@ COMPONENT_ANITYA_ID=	2565
 #   OpenSSH <x>.<y>p<n>     => IPS <x>.<y>.0.<n>
 #   OpenSSH <x>.<y>.<z>p<n> => IPS <x>.<y>.<z>.<n>
 IPS_COMPONENT_VERSION=	8.4.0.1
+PLATNUM=1
 
 COMPONENT_PROJECT_URL=	https://www.openssh.com/
 COMPONENT_ARCHIVE_HASH=	sha256:5a01d22e407eb1c05ba8a8f7c654d388a13e9f226e4ed33bd38748dafa1d2b24
@@ -110,6 +111,7 @@ CONFIGURE_OPTIONS += --sysconfdir=$(ETCDIR)/ssh
 CONFIGURE_OPTIONS += --disable-lastlog
 CONFIGURE_OPTIONS += --without-hardening
 CONFIGURE_OPTIONS += --disable-security-key
+CONFIGURE_OPTIONS += --without-openssl-header-check
 
 # Copy the sftp dtrace provider file and the header file to source directory
 COMPONENT_PRE_BUILD_ACTION = \

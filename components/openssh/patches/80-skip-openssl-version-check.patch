@@ -1,0 +1,12 @@
+--- openssh-8.4p1/configure.ac.~6~	2026-06-17 09:45:13.568250310 +0000
++++ openssh-8.4p1/configure.ac	2026-06-17 09:49:08.755683149 +0000
+@@ -2794,7 +2794,9 @@
+ 			200*)   ;; # LibreSSL
+ 			300*)   ;; # OpenSSL development branch.
+ 		        *)
++			if test "x$openssl_check_nonfatal" = "x"; then
+ 				AC_MSG_ERROR([Unknown/unsupported OpenSSL version ("$ssl_library_ver")])
++			fi
+ 		                ;;
+ 			esac
+ 			AC_MSG_RESULT([$ssl_library_ver])
