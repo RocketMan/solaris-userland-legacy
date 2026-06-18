@@ -32,7 +32,7 @@ COMPONENT_NAME=		curl
 COMPONENT_VERSION=	8.6.0
 COMPONENT_ARCHIVE_HASH=	sha256:b4785f2d8877fa92c0e45d7155cf8cc6750dbda961f4b1a45bcbec990cf2fa9b
 COMPONENT_BAID=		158375
-PLATNUM=		1
+PLATNUM=		2
 COMPONENT_PROJECT_URL=	http://curl.haxx.se/
 COMPONENT_ARCHIVE=	$(COMPONENT_SRC).tar.bz2
 COMPONENT_ARCHIVE_URL=	https://curl.se/download/$(COMPONENT_ARCHIVE)
@@ -91,7 +91,7 @@ CONFIGURE_OPTIONS += --with-random=/dev/urandom
 CONFIGURE_OPTIONS += --with-zlib
 CONFIGURE_OPTIONS += --with-gssapi
 ifneq ($(strip $(OPENSSL3)),)
-CONFIGURE_OPTIONS.64 += --with-openssl=/usr/openssl/3
+CONFIGURE_OPTIONS.64 += --with-wolfssl
 CONFIGURE_OPTIONS.32 += --with-ssl
 else
 CONFIGURE_OPTIONS += --with-ssl
@@ -103,6 +103,8 @@ CONFIGURE_OPTIONS += --with-libidn2
 CONFIGURE_OPTIONS += --with-pic
 CONFIGURE_OPTIONS += --with-libssh2
 CONFIGURE_OPTIONS += --with-nghttp2
+CONFIGURE_OPTIONS.64 += --with-nghttp3
+CONFIGURE_OPTIONS.64 += --with-ngtcp2
 CONFIGURE_OPTIONS += --without-libpsl
 CONFIGURE_OPTIONS += --without-zstd
 CONFIGURE_OPTIONS += "curl_disallow_getifaddrs=yes"
@@ -154,8 +156,11 @@ REQUIRED_PACKAGES += library/brotli
 REQUIRED_PACKAGES += library/libidn2
 REQUIRED_PACKAGES += library/libssh2
 REQUIRED_PACKAGES += library/nghttp2
+REQUIRED_PACKAGES += library/nghttp3
+REQUIRED_PACKAGES += library/ngtcp2
 REQUIRED_PACKAGES += library/security/openssl-3
 REQUIRED_PACKAGES += library/security/openssl
+REQUIRED_PACKAGES += library/security/wolfssl
 REQUIRED_PACKAGES += library/zlib
 REQUIRED_PACKAGES += security/kerberos-5
 REQUIRED_PACKAGES += shell/ksh93
