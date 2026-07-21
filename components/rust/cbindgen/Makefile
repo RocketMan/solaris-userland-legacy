@@ -28,18 +28,18 @@ COMPILER =	gcc
 include ../../../make-rules/shared-macros.mk
 
 COMPONENT_NAME =	cbindgen
-COMPONENT_VERSION =	0.29.0
+COMPONENT_VERSION =	0.29.4
 COMPONENT_BAID =	164728
 COMPONENT_PROJECT_URL =	https://github.com/eqrion/cbindgen
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.gz
 COMPONENT_ARCHIVE_HASH = \
-    sha256:6697f449d4a15d814d991249a611af961c97e36d9344c7ced6df35c5c25b40cc
+    sha256:9b5757e915cf8be523d3aca282b9b5651bafa112e14bf1ba488562ba282807d6
 COMPONENT_ARCHIVE_URL =	https://github.com/eqrion/cbindgen/archive/v$(COMPONENT_VERSION).tar.gz
 
 # hash for vendored sources
 COMPONENT_ARCHIVE_HASH_crates = \
-    sha256:17a077fc47315e3f743e183866a8fca12ff52db08da9f8e02e4adbfdc3f00178
+    sha256:9e2ee4ced11d000691ec3bebb644af15483c54b8eb5690f409717d28e46eb86f
 
 COMPONENT_BUGDB =	utility/rust
 COMPONENT_ANITYA_ID =	16690
@@ -50,6 +50,9 @@ include $(WS_MAKE_RULES)/common.mk
 
 # Tests don't like "cloney".
 CLONEY=$(CP) -r $(SOURCE_DIR)/* $(BUILD_DIR_64); echo
+
+COMPONENT_BUILD_ENV += RUSTFLAGS="-lrustshim"
+COMPONENT_INSTALL_ENV += RUSTFLAGS="-lrustshim"
 
 # Tests need to be run in single thread to get reproducible results.
 COMPONENT_TEST_TARGETS += -- --test-threads=1
@@ -64,5 +67,6 @@ COMPONENT_TEST_TRANSFORMS += \
 	'-e "/^test result:/s; finished in .*;;" ' \
 	'-e "/Running /s;-................)$$;-xxxxxxxxxxxxxxxx);" '
 
+REQUIRED_PACKAGES += developer/rust/rustc
 REQUIRED_PACKAGES += system/library/gcc/gcc-c-runtime
 REQUIRED_PACKAGES += system/library/math
