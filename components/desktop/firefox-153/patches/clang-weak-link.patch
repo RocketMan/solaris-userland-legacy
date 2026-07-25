@@ -1,0 +1,11 @@
+--- firefox-153.0/toolkit/components/protobuf/src/google/protobuf/port_def.inc~	2026-07-16 17:13:59.000000000 +0000
++++ firefox-153.0/toolkit/components/protobuf/src/google/protobuf/port_def.inc	2026-07-22 16:57:51.782751686 +0000
+@@ -561,7 +561,7 @@
+ #endif
+ #if defined(__GNUC__) && defined(__clang__) && !defined(__APPLE__) && \
+     !defined(_MSC_VER) && !defined(_WIN32) && !defined(__wasm__) &&   \
+-    !defined(__EMSCRIPTEN__)
++    !defined(__EMSCRIPTEN__) && !defined(__sun)
+ #define PROTOBUF_DESCRIPTOR_WEAK_MESSAGES_ALLOWED
+ #endif
+ 

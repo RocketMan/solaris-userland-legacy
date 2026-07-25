@@ -1,0 +1,13 @@
+Solaris 11.3 has no pipe2(2)
+
+--- firefox-140.0/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc~	2025-06-17 17:15:14.000000000 +0000
++++ firefox-140.0/ipc/chromium/src/chrome/common/process_watcher_posix_sigchld.cc	2025-06-24 21:42:46.774583747 +0000
+@@ -37,7 +37,7 @@
+ #  error Unsupported OS
+ #endif
+ 
+-#if !defined(XP_DARWIN)
++#if !defined(XP_DARWIN) && !defined(__sun)
+ // Linux, {Free,Net,Open}BSD, and Solaris; but not macOS, yet.
+ #  define HAVE_PIPE2 1
+ #endif

@@ -1,0 +1,21 @@
+--- firefox-153.0/gfx/skia/skia/src/core/SkMeshPriv.h~	2026-07-16 17:13:41.000000000 +0000
++++ firefox-153.0/gfx/skia/skia/src/core/SkMeshPriv.h	2026-07-22 12:21:01.408667986 +0000
+@@ -8,6 +8,8 @@
+ #ifndef SkMeshPriv_DEFINED
+ #define SkMeshPriv_DEFINED
+ 
++#undef FS // as it's coming from Solaris regset.h
++
+ #include "include/core/SkData.h"
+ #include "include/core/SkMesh.h"
+ #include "src/core/SkSLTypeShared.h"
+--- firefox-153.0/gfx/angle/checkout/src/common/debug.h~	2026-07-16 17:59:07.000000000 +0000
++++ firefox-153.0/gfx/angle/checkout/src/common/debug.h	2026-07-22 12:06:59.002302531 +0000
+@@ -268,6 +268,7 @@
+ 
+ #define INFO() ANGLE_LOG(INFO)
+ #define WARN() ANGLE_LOG(WARN)
++#undef ERR // as it's coming from Solaris regset.h
+ #define ERR() ANGLE_LOG(ERR)
+ #define FATAL() ANGLE_LOG(FATAL)
+ 

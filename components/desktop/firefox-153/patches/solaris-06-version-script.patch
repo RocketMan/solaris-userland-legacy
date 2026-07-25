@@ -1,0 +1,11 @@
+--- firefox-153.0/python/mozbuild/mozbuild/frontend/data.py~	2026-07-16 17:13:47.000000000 +0000
++++ firefox-153.0/python/mozbuild/mozbuild/frontend/data.py	2026-07-22 15:40:26.549756185 +0000
+@@ -895,7 +895,7 @@
+                 )
+             elif os_target == "SunOS":
+                 self.symbols_link_arg = (
+-                    "-z gnu-version-script-compat -Wl,--version-script,"
++                    "-Wl,-M,"
+                     + self.symbols_file
+                 )
+             elif os_target == "WINNT":

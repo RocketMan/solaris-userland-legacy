@@ -1,0 +1,11 @@
+--- firefox-153.0/modules/libjar/nsZipArchive.cpp-	2026-07-16 17:59:08.000000000 +0000
++++ firefox-153.0/modules/libjar/nsZipArchive.cpp	2026-07-22 12:59:19.038153531 +0000
+@@ -218,7 +218,7 @@
+ #if defined(XP_UNIX)
+   // Prefetch the archive into the page cache ahead of the ZIP directory scan
+   // and entry reads at startup.
+-  madvise(buf, (size_t)size, MADV_WILLNEED);
++  madvise(reinterpret_cast<caddr_t>(buf), (size_t)size, MADV_WILLNEED);
+ #  if defined(XP_LINUX)
+   // Exclude large archive mappings from core dumps; the file is on disk.
+   madvise(buf, (size_t)size, MADV_DONTDUMP);

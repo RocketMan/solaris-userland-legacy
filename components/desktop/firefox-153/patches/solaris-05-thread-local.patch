@@ -1,0 +1,45 @@
+Due to strict TLS validation in Solaris ld, using `static thread_local`
+variables inside header-only functions can result in linker errors:
+
+    fatal: symbol <name> (STT_TLS) is defined in a non-SHF_TLS section
+
+Clang often emits function-local `static thread_local` variables into COMDAT
+sections to allow deduplication across translation units.  Unfortunately,
+Solaris ld requires that any STT_TLS symbol reside in a properly marked
+TLS section (i.e. with SHF_TLS), and COMDAT-wrapped TLS symbols may not be.
+
+In the opentelemetry-cpp header-only codebase, we cannot relocate the
+variable definition into a .cpp file to avoid multiple instantiations,
+and using thread_local inline (even with pointer indirection) may still
+emit TLS symbols.
+
+As an alternative, we use POSIX-compliant pthread_key_t to effect
+thread-local storage without relying on compiler-emitted TLS sections.
+
+
+--- firefox-153.0/third_party/opentelemetry-cpp/api/include/opentelemetry/context/runtime_context.h.~1~	2026-07-21 10:46:29.012422379 +0000
++++ firefox-153.0/third_party/opentelemetry-cpp/api/include/opentelemetry/context/runtime_context.h	2026-07-21 10:49:31.783188829 +0000
+@@ -384,8 +384,21 @@
+ 
+   OPENTELEMETRY_API_SINGLETON Stack &GetStack()
+   {
+-    static thread_local Stack stack_{};
+-    return stack_;
++    static pthread_key_t key;
++    static pthread_once_t once = PTHREAD_ONCE_INIT;
++
++    pthread_once(&once, []() {
++      pthread_key_create(&key, [](void* ptr) {
++        delete static_cast<Stack*>(ptr); // automatic cleanup on thread exit
++      });
++    });
++
++    Stack* stack = static_cast<Stack*>(pthread_getspecific(key));
++    if (!stack) {
++      stack = new Stack();
++      pthread_setspecific(key, stack);
++    }
++    return *stack;
+   }
+ };
+ 

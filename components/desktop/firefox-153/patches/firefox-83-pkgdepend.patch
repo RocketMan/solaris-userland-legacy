@@ -1,0 +1,16 @@
+pkgdepend fails when there is no RPATH as /usr/lib/firefox/ isn't
+default search path for libraries.
+
+Note that it's not problem for Firefox itself which can cope with it.
+
+--- firefox-140.0/build/moz.configure/flags.configure.old	2025-06-23 14:01:26.962088627 -0400
++++ firefox-140.0/build/moz.configure/flags.configure	2025-06-23 14:02:43.240362730 -0400
+@@ -430,7 +430,7 @@
+ @imports(_from="os", _import="environ")
+ def moz_fix_link_paths(target, build_env):
+     dist = build_env.dist
+-    flags = [f"-Wl,-rpath-link,{dist}/bin"]
++    flags = [f"-Wl,-rpath-link,{dist}/bin -Wl,-R,'\$ORIGIN"]
+     if target.kernel == "Darwin":
+         return []
+     if target.kernel == "WINNT":

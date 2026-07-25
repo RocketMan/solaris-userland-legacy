@@ -1,0 +1,43 @@
+   Compiling webrender v0.62.0 (/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/firefox-153.0/gfx/wr/webrender)
+     Running `CARGO=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/.rust_up/toolchains/1.94.0-x86_64-pc-solaris/bin/cargo CARGO_CRATE_NAME=build_script_build CARGO_MANIFEST_DIR=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/firefox-153.0/gfx/wr/webrender CARGO_MANIFEST_PATH=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/firefox-153.0/gfx/wr/webrender/Cargo.toml CARGO_PKG_AUTHORS='Glenn Watson <gw@intuitionlibrary.com>' CARGO_PKG_DESCRIPTION='A GPU accelerated 2D renderer for web content' CARGO_PKG_HOMEPAGE='' CARGO_PKG_LICENSE=MPL-2.0 CARGO_PKG_LICENSE_FILE='' CARGO_PKG_NAME=webrender CARGO_PKG_README='' CARGO_PKG_REPOSITORY='https://github.com/servo/webrender' CARGO_PKG_RUST_VERSION='' CARGO_PKG_VERSION=0.62.0 CARGO_PKG_VERSION_MAJOR=0 CARGO_PKG_VERSION_MINOR=62 CARGO_PKG_VERSION_PATCH=0 CARGO_PKG_VERSION_PRE='' LD_LIBRARY_PATH=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/deps /datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/.rust_up/toolchains/1.94.0-x86_64-pc-solaris/bin/rustc --crate-name build_script_build --edition=2018 gfx/wr/webrender/build.rs --error-format=json --json=diagnostic-rendered-ansi,artifacts,future-incompat --crate-type bin --emit=dep-info,link -C opt-level=1 -C embed-bitcode=no --cfg 'feature="capture"' --cfg 'feature="firefox-on-glean"' --cfg 'feature="gecko"' --cfg 'feature="glean"' --cfg 'feature="ron"' --cfg 'feature="serde"' --cfg 'feature="serialize_program"' --cfg 'feature="sw_compositor"' --cfg 'feature="swgl"' --check-cfg 'cfg(docsrs,test)' --check-cfg 'cfg(feature, values("base64", "capture", "debugger", "default", "display_list_stats", "dynamic_freetype", "firefox-on-glean", "gecko", "glean", "http-body-util", "hyper", "hyper-util", "leak_checks", "libloading", "png", "profiler", "replay", "ron", "serde", "serde_json", "serialize_program", "sha1", "static_freetype", "sw_compositor", "swgl", "tokio", "url"))' -C metadata=454a857af28690a6 -C extra-filename=-df0e24277d5371e6 --out-dir /datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/build/webrender-df0e24277d5371e6 -C linker=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/firefox-153.0/build/cargo-linker -C strip=debuginfo -L dependency=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/deps --extern build_parallel=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/deps/libbuild_parallel-b7ffdac85e5eda4d.rlib --extern glslopt=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/deps/libglslopt-895f4bcb0930a5ed.rlib --extern webrender_build=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/deps/libwebrender_build-83abad40cf21bad5.rlib -L native=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/build/glslopt-4c83646c9fce8ead/out -L native=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/build/glslopt-4c83646c9fce8ead/out -L native=/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/build/glslopt-4c83646c9fce8ead/out`
+error: linking with `/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/firefox-153.0/build/cargo-linker` failed: exit status: 1
+  |
+  = note:  "/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/firefox-153.0/build/cargo-linker" "-m64" "/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/build/webrender-df0e24277d5371e6/rustcaNmpBc/symbols.o" "<13 object files omitted>" "-Wl,-z,ignore" "-Wl,-Bstatic" "/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/deps/{libglslopt-895f4bcb0930a5ed,libbuild_parallel-b7ffdac85e5eda4d,libnum_cpus-79a32dd6e6c33028,libjobserver-d21330d5e32b44ec,liblibc-ab3bd7ab745729f2,libcrossbeam_utils-26f9ea5daccea97b,libwebrender_build-83abad40cf21bad5,libserde-08508bda00251a1e,libserde_core-b55052debd7d8fd4,liblazy_static-3b8f3a99b41e7e02,libbitflags-380794ffbe7da3a2}.rlib" "<sysroot>/lib/rustlib/x86_64-pc-solaris/lib/{libstd-*,libpanic_unwind-*,libobject-*,libmemchr-*,libaddr2line-*,libgimli-*,libcfg_if-*,librustc_demangle-*,libstd_detect-*,libhashbrown-*,librustc_std_workspace_alloc-*,libminiz_oxide-*,libadler2-*,libunwind-*,liblibc-*,librustc_std_workspace_core-*,liballoc-*,libcore-*,libcompiler_builtins-*}.rlib" "-Wl,-Bdynamic" "-lstdc++" "-lsendfile" "-llgrp" "-lsocket" "-lposix4" "-lpthread" "-lresolv" "-lgcc_s" "-lc" "-lm" "-lrt" "-lpthread" "-lsendfile" "-llgrp" "-L" "/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/build/webrender-df0e24277d5371e6/rustcaNmpBc/raw-dylibs" "-L" "/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/build/glslopt-4c83646c9fce8ead/out" "-o" "/datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/build/webrender-df0e24277d5371e6/build_script_build-df0e24277d5371e6" "-nodefaultlibs"
+  = note: some arguments are omitted. use `--verbose` to show all linker arguments
+  = note: Undefined                     first referenced
+           symbol                           in file
+          __stack_chk_fail                    /datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/deps/libglslopt-895f4bcb0930a5ed.rlib(187e0526823b2a5e-glsl_parser_extras.o)
+          __stack_chk_guard                   /datapool/share/repo/userland/solaris-userland/components/desktop/firefox-153/build/amd64/release/deps/libglslopt-895f4bcb0930a5ed.rlib(187e0526823b2a5e-glsl_parser_extras.o)
+          ld: fatal: symbol referencing errors
+          collect2: error: ld returned 1 exit status
+          
+
+error: could not compile `webrender` (build script) due to 1 previous error
+
+
+--- firefox-153.0/build/moz.configure/toolchain.configure.~1~	2026-07-16 12:59:07.000000000 -0400
++++ firefox-153.0/build/moz.configure/toolchain.configure	2026-07-19 10:54:49.704169234 -0400
+@@ -2710,23 +2710,6 @@
+             flags.append("-U_FORTIFY_SOURCE")
+             flags.append("-D_FORTIFY_SOURCE=2")
+ 
+-        # fstack-protector ------------------------------------
+-        # Enable only if hardening is not disabled and ASAN is
+-        # not on as ASAN will catch the crashes for us
+-        if compiler_is_gccish and not asan:
+-            flags.append("-fstack-protector-strong")
+-            ldflags.append("-fstack-protector-strong")
+-
+-            if (
+-                c_compiler.type == "clang"
+-                and target.os not in ("WINNT", "OSX", "OpenBSD", "iOS")
+-                and ((c_compiler.version >= "11.0.1" and target.cpu in ("x86", "x86_64", "ppc64", "s390x"))
+-                    or
+-                     (c_compiler.version >= "18.1.0" and target.cpu == "aarch64"))
+-            ):
+-                flags.append("-fstack-clash-protection")
+-                ldflags.append("-fstack-clash-protection")
+-
+         # ftrivial-auto-var-init ------------------------------
+         # Initialize local variables with a 0xAA pattern in clang builds.
+         # Linux32 fails some xpcshell tests with -ftrivial-auto-var-init

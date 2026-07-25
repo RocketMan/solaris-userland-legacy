@@ -1,0 +1,16 @@
+This is a hack to work around the apparent lack of definition
+of EVENT__SIZEOF_TIME_T on Solaris.  The constant *is* defined, but
+somehow it is not being found.
+
+
+--- firefox-102.0/ipc/chromium/src/base/message_pump_libevent.cc~	2022-06-23 08:11:29.000000000 +0000
++++ firefox-102.0/ipc/chromium/src/base/message_pump_libevent.cc	2022-06-27 17:43:17.403699524 +0000
+@@ -42,7 +42,7 @@
+ CHECK_EVENT_SIZEOF(PTHREAD_T, pthread_t);
+ CHECK_EVENT_SIZEOF(SHORT, short);
+ CHECK_EVENT_SIZEOF(SIZE_T, size_t);
+-CHECK_EVENT_SIZEOF(TIME_T, time_t);
++//CHECK_EVENT_SIZEOF(TIME_T, time_t);
+ CHECK_EVENT_SIZEOF(VOID_P, void*);
+ 
+ // Lifecycle of struct event
