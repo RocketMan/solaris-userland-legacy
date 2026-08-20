@@ -1,0 +1,11 @@
+--- firefox-153.1.0/intl/icu/source/i18n/measunit_extra.cpp-	2026-08-12 00:17:53.000000000 +0000
++++ firefox-153.1.0/intl/icu/source/i18n/measunit_extra.cpp	2026-08-20 14:04:18.493230854 +0000
+@@ -694,7 +694,7 @@
+         // Check if the value is integer.
+         uint64_t int_result = static_cast<uint64_t>(double_result);
+         const double kTolerance = 1e-9;
+-        if (abs(double_result - int_result) > kTolerance) {
++        if (abs(static_cast<long>(double_result - int_result)) > kTolerance) {
+             status = kUnitIdentifierSyntaxError;
+             return 0;
+         }

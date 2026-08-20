@@ -1,12 +1,14 @@
 --- firefox-153.0/media/libaom/config/linux/x64/config/aom_config.h~	2026-07-16 17:59:07.000000000 +0000
 +++ firefox-153.0/media/libaom/config/linux/x64/config/aom_config.h	2026-07-21 23:02:30.339458746 +0000
-@@ -99,4 +99,7 @@
+@@ -99,4 +99,9 @@
  #define HAVE_VSX 0
  #define HAVE_WXWIDGETS 0
  #define STATIC_LINK_JXL 0
 +
++#ifndef __cplusplus
 +// static_assert is a C++ keyword; _Static_assert is appropriate for C11
 +#define static_assert(a,b) _Static_assert(a,b)
++#endif
  #endif /* AOM_CONFIG_H_ */
 --- firefox-153.0/media/ffvpx/config.h~	2026-07-16 17:13:45.000000000 +0000
 +++ firefox-153.0/media/ffvpx/config.h	2026-07-22 16:07:05.973000166 +0000
@@ -14,7 +16,7 @@
  #ifndef MOZ_FFVPX_CONFIG_H
  #define MOZ_FFVPX_CONFIG_H
  
-+#ifndef static_assert
++#ifndef __cplusplus
 +// static_assert is a C++ keyword; _Static_assert is appropriate for C11
 +#define static_assert(a,b) _Static_assert(a,b)
 +#endif
