@@ -55,7 +55,6 @@ file path=usr/lib/rustlib/components
 file path=usr/lib/rustlib/etc/gdb_load_rust_pretty_printers.py
 file path=usr/lib/rustlib/etc/gdb_lookup.py
 file path=usr/lib/rustlib/etc/gdb_providers.py
-file path=usr/lib/rustlib/etc/lldb_commands
 file path=usr/lib/rustlib/etc/lldb_lookup.py
 file path=usr/lib/rustlib/etc/lldb_providers.py
 file path=usr/lib/rustlib/etc/rust_types.py

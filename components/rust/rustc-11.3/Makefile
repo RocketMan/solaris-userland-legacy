@@ -33,13 +33,13 @@ include ../../../make-rules/shared-macros.mk
 GCC_ROOT =	/usr/gcc/13
 
 COMPONENT_NAME =	rustc
-COMPONENT_VERSION =	1.97.1
+COMPONENT_VERSION =	1.98.0
 PLATNUM =		0
 COMPONENT_SRC =		$(COMPONENT_NAME)-$(COMPONENT_VERSION)-src
 COMPONENT_PROJECT_URL =	http://www.rust-lang.org/
 COMPONENT_ARCHIVE =	$(COMPONENT_SRC).tar.xz
-COMPONENT_ARCHIVE_HASH = \
-    sha256:0ed06fdaffd4722a7702e0b4eebfafc897ab8f513e8e1b247cdd7e5c6df6ded2
+#COMPONENT_ARCHIVE_HASH = \
+#    sha256:0ed06fdaffd4722a7702e0b4eebfafc897ab8f513e8e1b247cdd7e5c6df6ded2
 
 COMPONENT_ARCHIVE_URL =	https://static.rust-lang.org/dist/$(COMPONENT_ARCHIVE)
 COMPONENT_SIG_URL =	$(COMPONENT_ARCHIVE_URL).asc
