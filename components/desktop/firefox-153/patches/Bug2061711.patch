@@ -1,0 +1,15 @@
+Fix compile error with clang 23.1.0
+
+See https://bugzilla.mozilla.org/show_bug.cgi?id=2061711
+
+
+--- firefox-153.2.0/gfx/harfbuzz/src/hb.hh~	2026-08-26 18:02:37.000000000 +0000
++++ firefox-153.2.0/gfx/harfbuzz/src/hb.hh	2026-09-02 16:02:25.704275279 +0000
+@@ -151,6 +151,7 @@
+ #pragma GCC diagnostic ignored "-Wrange-loop-analysis" // https://github.com/harfbuzz/harfbuzz/issues/2834
+ #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+ #pragma GCC diagnostic ignored "-Wtype-limits"
++#pragma GCC diagnostic ignored "-Wunused-template"
+ #pragma GCC diagnostic ignored "-Wc++11-compat" // only gcc raises it
+ #endif
+ 
