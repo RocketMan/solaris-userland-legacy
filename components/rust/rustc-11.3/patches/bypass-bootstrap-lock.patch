@@ -1,0 +1,19 @@
+Version 1.91.0 and later use std lock in bootstrap.  Unfortunately,
+`flock` is unspported on Solaris.  As such, we need to supply a
+`--bypass-bootstrap-lock` flag, but I cannot sort out exactly how to
+specify this in our build process, or if it is even possible.  The
+result is this patch, which always excludes bootstrap locking on
+Solaris.
+
+
+--- rustc-1.99.0-src/src/bootstrap/src/cli_main.rs~	2026-09-28 19:24:15.000000000 +0000
++++ rustc-1.99.0-src/src/bootstrap/src/cli_main.rs	2026-10-01 19:13:24.014434568 +0000
+@@ -71,7 +71,7 @@
+ 
+     let mut build_lock;
+ 
+-    if !config.bypass_bootstrap_lock {
++    if cfg!(not(target_os = "solaris")) && !config.bypass_bootstrap_lock {
+         // Display PID of process holding the lock
+         // PID will be stored in a lock file
+         let lock_path = config.out.join("lock");
